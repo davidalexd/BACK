@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'Machine',
     'CompanyMachine',
     'Reports',
-    'Protocols',
-    'Operations'
+    'Operations',
+    'Protocol',
 ]
 
 REST_FRAMEWORK = {
