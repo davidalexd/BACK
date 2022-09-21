@@ -29,7 +29,7 @@ class SistemaModel(models.Model):
 
 
 class TuboModel(models.Model):
-    id = models.BigAutoField(primary_key=True,db_column="stm_id")
+    id = models.BigAutoField(primary_key=True,db_column="tb_id")
     marca = models.CharField("Tube brand", max_length=255,null=False,blank=False,db_column="tb_marca_tubo")
     modelo = models.CharField("Tube model", max_length=255,null=False,blank=False,db_column="tb_modelo_tubo")
     serie = models.CharField("Tube series", max_length=255,null=False,blank=False,unique=True,db_column="tb_serie_tubo")
