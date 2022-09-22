@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from Customer.models import AreasModel
-from Machine.models import TuboModel,SistemaModel
+from Machine.models import TuboModel
 from Protocol.models import ProtocolsModel
 from CompanyMachine.models import MedidoresModel
+from Tests.models import PruebasModel
 
 
 class ReportsFormatsModel(models.Model):
@@ -70,10 +71,11 @@ class ReportsReporteModel(models.Model):
     formato = models.ManyToManyField(ReportsFormatsModel,through="Rpt_Frt_Model",through_fields=('reportes', 'formatos'))
     
     tubo = models.ManyToManyField(TuboModel,through="Rpt_Tb_Model",through_fields=('reportes', 'tubo'))
-    sistema = models.ManyToManyField(SistemaModel,through="Rpt_Stm_Model",through_fields=('reportes', 'sistema'))
-
+    
     protocolo = models.ManyToManyField(ProtocolsModel,through="Rpt_Prt_Model",through_fields=('reportes', 'protocolo'))
     machine = models.ManyToManyField(MedidoresModel,through="Rpt_Med_Model",through_fields=('reportes', 'medidor'))
+
+    pruebas = models.ManyToManyField(PruebasModel,through="Rpt_Prb_Model",through_fields=('reportes', 'prueba'))
 
     is_enabled = models.BooleanField(default=True,null=False)
     crated_at = models.DateTimeField(editable=False,null=False,blank=False)
@@ -135,21 +137,6 @@ class Rpt_Tb_Model(models.Model):
         ordering = ["id"]
         db_table = 'reports_rpt_Tb'
     
-class Rpt_Stm_Model(models.Model):
-    id = models.BigAutoField(primary_key=True,db_column="RptStm_id")
-    context_json = models.JSONField("Sistem context",null=False,blank=False,db_column="RptStm_context")
-    reportes = models.ForeignKey(ReportsReporteModel,on_delete=models.CASCADE)
-    sistema = models.ForeignKey(SistemaModel,on_delete=models.CASCADE)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.crated_at = timezone.now()        
-        return super(Rpt_Stm_Model, self).save(*args, **kwargs)
-
-    class Meta:
-        ordering = ["id"]
-        db_table = 'reports_rpt_Stm'
 
 class Rpt_Prt_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="RptPrt_id")
@@ -180,3 +167,18 @@ class Rpt_Med_Model(models.Model):
     class Meta:
         ordering = ["id"]
         db_table = 'reports_rpt_Med'   
+
+class Rpt_Prb_Model(models.Model):
+    id = models.BigAutoField(primary_key=True,db_column="RptPrb_id")
+    reportes = models.ForeignKey(ReportsReporteModel,on_delete=models.CASCADE)
+    prueba = models.ForeignKey(PruebasModel,on_delete=models.CASCADE)
+    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.crated_at = timezone.now()        
+        return super(Rpt_Prb_Model, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ["id"]
+        db_table = 'reports_rpt_prb_Med'   

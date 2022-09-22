@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Reports',
     'Operations',
     'Protocol',
+    'Tests'
 ]
 
 REST_FRAMEWORK = {

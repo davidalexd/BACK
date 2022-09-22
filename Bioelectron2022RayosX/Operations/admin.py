@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import InspeccionesFisicasModel
+from .models import OperacionesModel
 
-@admin.register(InspeccionesFisicasModel)
-class InspeccionesFisicasModel(admin.ModelAdmin):
-    list_display = ("id","inspeccion_fisica_titulo","is_enabled","crated_at")
-    search_fields = ('inspeccion_fisica_titulo',)
-    list_filter = ('inspeccion_fisica_titulo',)
+@admin.register(OperacionesModel)
+class OperacionesModel(admin.ModelAdmin):
+    list_display = ("id","operacion_titulo","operacion_contexto","is_enabled","crated_at")
+    search_fields = ('operacion_titulo',)
+    list_filter = ('operacion_titulo',)
     

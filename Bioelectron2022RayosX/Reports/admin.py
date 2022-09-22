@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ReportsFormatsModel,ReportsCategoryModel,ReportsReporteModel,Frt_Cat_Model,Rpt_Ar_Model,Rpt_Frt_Model,Rpt_Stm_Model,Rpt_Tb_Model,Rpt_Prt_Model,Rpt_Med_Model
+from .models import ReportsFormatsModel,ReportsCategoryModel,ReportsReporteModel,Frt_Cat_Model,Rpt_Ar_Model,Rpt_Frt_Model,Rpt_Tb_Model,Rpt_Prt_Model,Rpt_Prb_Model,Rpt_Med_Model
 
 class FormatoCategoria(admin.TabularInline):
     model = Frt_Cat_Model
@@ -17,13 +17,14 @@ class ReportesTubo(admin.TabularInline):
     model = Rpt_Tb_Model
     extra = 1
 
-class ReportesSistemas(admin.TabularInline):
-    model = Rpt_Stm_Model
-    extra = 1
-
 class ReportesProtocolos(admin.TabularInline):
     model = Rpt_Prt_Model
     extra = 1
+
+class ReportesPruebas(admin.TabularInline):
+    model = Rpt_Prb_Model
+    extra = 1  
+
 class MedidorProtocolos(admin.TabularInline):
     model = Rpt_Med_Model
     extra = 1
@@ -44,10 +45,10 @@ class ReportsFormatsModel(admin.ModelAdmin):
 
 @admin.register(ReportsReporteModel)
 class ReportsReportesModel(admin.ModelAdmin):
-    inlines = [ReportesArea,ReportesFormatos,ReportesTubo,ReportesSistemas,ReportesProtocolos,MedidorProtocolos,]
+    inlines = [ReportesArea,ReportesFormatos,ReportesTubo,ReportesProtocolos,MedidorProtocolos,ReportesPruebas]
     list_display = ("id","fecha_control_calidad","is_enabled","crated_at",)
     search_fields = ('id',)
-    list_filter = ('id','cliente','tubo','sistema','protocolo','machine')
-    filter_horizontal = ['cliente','tubo','sistema','protocolo','machine']
+    list_filter = ('id','cliente','tubo','protocolo','machine')
+    filter_horizontal = ['cliente','tubo','protocolo','machine']
 
 
