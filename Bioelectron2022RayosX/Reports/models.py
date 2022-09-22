@@ -63,7 +63,6 @@ class Frt_Cat_Model(models.Model):
         ordering = ["id"]
         db_table = 'reports_formatos_categoria'
 
-
 class ReportsReporteModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="rpt_id")
     fecha_control_calidad = models.DateField("QC date",auto_now_add=False,null=False,blank=False,db_column="rpt_fecha_control_calidad")

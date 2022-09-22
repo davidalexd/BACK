@@ -31,7 +31,7 @@ class ContactosModel(models.Model):
 class AreasModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="ar_id")
     nombre_area = models.CharField("Area's name",max_length=255,null=False,blank=False,unique=False,db_column="ar_nombre_area")
-    ubicacion = models.CharField("Area location", max_length=255,null=False,blank=False,db_column="ar_ubicacion_area")    
+    ubicacion = models.JSONField("Area's location",null=False,blank=False,db_column="ar_ubicacion_area")    
     is_enabled = models.BooleanField(default=True,null=False)
     crated_at = models.DateTimeField(editable=False,null=False,blank=False)
 
@@ -45,16 +45,16 @@ class AreasModel(models.Model):
         db_table = 'customers_Ambientes'
     
     def __str__(self):
-        return str(self.id) + '-' + self.nombre_area + '-' + self.ubicacion
+        return str(self.id) + '-' + self.nombre_area + '-' + str(self.ubicacion["piso"])
 
 class DepartamentoModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="dpt_id")
     nombre_departamento = models.CharField("Headquarters's name",max_length=255,null=False,blank=False,unique=False,db_column="dpt_nombre_departamento")
     direccion_departamento = models.CharField("Headquarters's address", max_length=255,null=True,blank=True,db_column="dpt_direccion_departamento")
-    pais = models.CharField("Country where the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_pais")
-    departamento = models.CharField("Department to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_departamento")
-    provincia = models.CharField("Province to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_provincia")
-    distrito = models.CharField("District to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_distrito")
+    pais_departamento = models.CharField("Country where the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_pais")
+    departamento_departamento = models.CharField("Department to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_departamento")
+    provincia_departamento = models.CharField("Province to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_provincia")
+    distrito_departamento = models.CharField("District to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_distrito")
     is_enabled = models.BooleanField(default=True,null=False)
     crated_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(AreasModel,through="Ar_dpt_Model",through_fields=('departamento', 'area'))
@@ -80,10 +80,10 @@ class OrganizacionModel(models.Model):
     tipo = models.CharField("Organization's type", max_length=255,null=True,blank=True,db_column="org_tipo")
     ciiu = models.IntegerField("Organization's International Standard Industrial Classification",null=True,blank=True,db_column="org_ciiu")
     direccion_legal = models.CharField("Organization's legal address", max_length=255,null=True,blank=True,db_column="org_direccion_legal")
-    pais = models.CharField("Country where the organization belongs", max_length=255,null=True,blank=True,db_column="org_pais")
-    departamento = models.CharField("Department to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_departamento")
-    provincia = models.CharField("Province to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_provincia")
-    distrito = models.CharField("District to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_distrito")
+    pais_organizacion = models.CharField("Country where the organization belongs", max_length=255,null=True,blank=True,db_column="org_pais")
+    departamento_organizacion = models.CharField("Department to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_departamento")
+    provincia_organizacion = models.CharField("Province to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_provincia")
+    distrito_organizacion = models.CharField("District to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_distrito")
     is_enabled = models.BooleanField(default=True,null=False)
     crated_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(DepartamentoModel,through="Dpt_org_Model",through_fields=('organizacion', 'departamento'))
