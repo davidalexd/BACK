@@ -9,12 +9,13 @@ class ContactosModel(models.Model):
     dni = models.CharField("Contact's DNI number",max_length=255,null=True,blank=True,unique=True,db_column="con_numero_dni")
     numero_telefono = models.CharField("Contact phone number", max_length=255,null=True,blank=True,db_column="con_numero_telefono")    
     correo = models.CharField("Contact email address", max_length=255,null=True,blank=True,unique=True,db_column="con_correo_electronico")    
+    cargo = models.CharField("Job", max_length=255,null=True,blank=True,db_column="con_cargo")    
     is_enabled = models.BooleanField(default=True,null=False)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
             return super(ContactosModel, self).save(*args, **kwargs)
 
     @property
@@ -33,11 +34,11 @@ class AreasModel(models.Model):
     nombre_area = models.CharField("Area's name",max_length=255,null=False,blank=False,unique=False,db_column="ar_nombre_area")
     ubicacion = models.JSONField("Area's location",null=False,blank=False,db_column="ar_ubicacion_area")    
     is_enabled = models.BooleanField(default=True,null=False)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
             return super(AreasModel, self).save(*args, **kwargs)
 
     class Meta:
@@ -56,13 +57,13 @@ class DepartamentoModel(models.Model):
     provincia_departamento = models.CharField("Province to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_provincia")
     distrito_departamento = models.CharField("District to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_distrito")
     is_enabled = models.BooleanField(default=True,null=False)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(AreasModel,through="Ar_dpt_Model",through_fields=('departamento', 'area'))
     contactos = models.ManyToManyField(ContactosModel,through="Con_Dpt_Model",through_fields=('departamento', 'contacto'))
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
             return super(DepartamentoModel, self).save(*args, **kwargs)
 
     class Meta:
@@ -85,13 +86,13 @@ class OrganizacionModel(models.Model):
     provincia_organizacion = models.CharField("Province to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_provincia")
     distrito_organizacion = models.CharField("District to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_distrito")
     is_enabled = models.BooleanField(default=True,null=False)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(DepartamentoModel,through="Dpt_org_Model",through_fields=('organizacion', 'departamento'))
 
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
         return super(OrganizacionModel, self).save(*args, **kwargs)
 
     class Meta:
@@ -106,11 +107,11 @@ class Dpt_org_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="DptOrg_id")
     organizacion = models.ForeignKey(OrganizacionModel,on_delete=models.CASCADE)
     departamento = models.ForeignKey(DepartamentoModel,on_delete=models.CASCADE)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
         return super(Dpt_org_Model, self).save(*args, **kwargs)
 
     class Meta:
@@ -121,11 +122,11 @@ class Ar_dpt_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="ArDpt_id")
     departamento = models.ForeignKey(DepartamentoModel,on_delete=models.CASCADE)
     area = models.ForeignKey(AreasModel,on_delete=models.CASCADE)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
         return super(Ar_dpt_Model, self).save(*args, **kwargs)
 
     class Meta:
@@ -136,11 +137,11 @@ class Con_Dpt_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="ConDpt_id")
     departamento = models.ForeignKey(DepartamentoModel,on_delete=models.CASCADE)
     contacto = models.ForeignKey(ContactosModel,on_delete=models.CASCADE)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
         return super(Con_Dpt_Model, self).save(*args, **kwargs)
 
     class Meta:

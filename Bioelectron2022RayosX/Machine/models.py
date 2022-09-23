@@ -10,11 +10,11 @@ class TuboModel(models.Model):
     antiguedad = models.DateField("Tube's year",auto_now_add=False,null=True,blank=True,db_column="tb_antiguedad_tubo")
     year_instalacion = models.DateField("Tube's installation",auto_now_add=False,null=True,blank=True,db_column="tb_year_tubo")
     is_enabled = models.BooleanField(default=True,null=False)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
             return super(TuboModel, self).save(*args, **kwargs)
 
     @property
@@ -36,12 +36,12 @@ class SistemaModel(models.Model):
     antiguedad = models.DateField("System's year",auto_now_add=False,null=True,blank=True,db_column="stm_antiguedad_sistema")
     year_instalacion = models.DateField("System's nstallation",auto_now_add=False,null=True,blank=True,db_column="stm_year_sistema")
     is_enabled = models.BooleanField(default=True,null=False)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(TuboModel,through="Stm_Tb_Model",through_fields=('sistema', 'tubo'))
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
             return super(SistemaModel, self).save(*args, **kwargs)
 
     @property
@@ -62,11 +62,11 @@ class Stm_Tb_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="StmTb_id")
     sistema = models.ForeignKey(SistemaModel,on_delete=models.CASCADE)
     tubo = models.ForeignKey(TuboModel,on_delete=models.CASCADE)
-    crated_at = models.DateTimeField(editable=False,null=False,blank=False)
+    created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.crated_at = timezone.now()        
+            self.created_at = timezone.now()        
         return super(Stm_Tb_Model, self).save(*args, **kwargs)
 
     class Meta:

@@ -17,19 +17,19 @@ class ContactosDepartamento(admin.TabularInline):
 @admin.register(OrganizacionModel)
 class OrganizationAdmin(admin.ModelAdmin):
     inlines = [DepartemantosOrganizacion,]
-    list_display = ("id","razon_social","ruc","nombre_comercial","tipo","ciiu","direccion_legal","pais_organizacion","departamento_organizacion","provincia_organizacion","distrito_organizacion","is_enabled","crated_at")
+    list_display = ("id","razon_social","ruc","nombre_comercial","tipo","ciiu","direccion_legal","pais_organizacion","departamento_organizacion","provincia_organizacion","distrito_organizacion","is_enabled","created_at")
 
 
 @admin.register(DepartamentoModel)
 class DepartamentoAdmin(admin.ModelAdmin):
     inlines = [AreasDepartamento,ContactosDepartamento,]
-    list_display = ("id","nombre_departamento","direccion_departamento","pais_departamento","departamento_departamento","provincia_departamento","distrito_departamento","is_enabled","crated_at")
+    list_display = ("id","nombre_departamento","direccion_departamento","pais_departamento","departamento_departamento","provincia_departamento","distrito_departamento","is_enabled","created_at")
 
 @admin.register(AreasModel)
 class AreasAdmin(admin.ModelAdmin):
-    list_display = ("id","nombre_area","ubicacion","is_enabled","crated_at")
+    list_display = ("id","nombre_area","ubicacion","is_enabled","created_at")
 
 
 @admin.register(ContactosModel)
 class ContactosAdmin(admin.ModelAdmin):
-    list_display = ("id","full_name","nombre","apellidos","dni","numero_telefono","correo","is_enabled","crated_at")
+    list_display = ("id","full_name","nombre","apellidos","dni","numero_telefono","correo","is_enabled","created_at")

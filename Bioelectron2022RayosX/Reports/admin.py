@@ -32,7 +32,7 @@ class MedidorProtocolos(admin.TabularInline):
 @admin.register(ReportsCategoryModel)
 class ReportsCategoryModel(admin.ModelAdmin):
     inlines = [FormatoCategoria,]
-    list_display = ("id","nombre_categoria","abreviatura_categoria","is_enabled","crated_at")
+    list_display = ("id","nombre_categoria","abreviatura_categoria","is_enabled","created_at")
     search_fields = ('nombre_categoria',)
     list_filter = ('abreviatura_categoria','members')
     filter_horizontal = ['members']
@@ -40,13 +40,13 @@ class ReportsCategoryModel(admin.ModelAdmin):
 
 @admin.register(ReportsFormatsModel)
 class ReportsFormatsModel(admin.ModelAdmin):
-    list_display = ("id","codigo_formato","nombre_formato","is_enabled","crated_at")
+    list_display = ("id","codigo_formato","nombre_formato","is_enabled","created_at")
 
 
 @admin.register(ReportsReporteModel)
 class ReportsReportesModel(admin.ModelAdmin):
     inlines = [ReportesArea,ReportesFormatos,ReportesTubo,ReportesProtocolos,MedidorProtocolos,ReportesPruebas]
-    list_display = ("id","fecha_control_calidad","is_enabled","crated_at",)
+    list_display = ("report_code","fecha_control_calidad","is_enabled","created_at",)
     search_fields = ('id',)
     list_filter = ('id','cliente','tubo','protocolo','machine')
     filter_horizontal = ['cliente','tubo','protocolo','machine']

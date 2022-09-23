@@ -1,13 +1,16 @@
 import json
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
+from django.forms.models import model_to_dict
+from .models import OrganizacionModel
 
 def api_customer(request, *args, **kwargs):
-    body = request.body
+    model_data = OrganizacionModel.objects.all().order_by("?").first()
     data = {}
-    try: 
-        data = json.loads(body)
-    except:
-        pass
-    print(data.keys())
-    return JsonResponse({"meesage":"Hola mundo"})
+    if model_data:
+        data = model_to_dict(
+            model_data,
+            fields=["id","razon_social","ruc","nombre_comercial","tipo","ciiu","direccion_legal","pais_organizacion","departamento_organizacion","provincia_organizacion","distrito_organizacion","is_enabled"])
+    return JsonResponse(data)
+    #     data = dict(data)
+    #     json_data_str = json.dumps(data)
+    # return HttpResponse(json_data_str,headers={"content-type":"application/json"})
