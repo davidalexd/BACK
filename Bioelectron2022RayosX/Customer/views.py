@@ -1,16 +1,21 @@
-import json
-from django.http import JsonResponse,HttpResponse
-from django.forms.models import model_to_dict
+from rest_framework import generics
 from .models import OrganizacionModel
+from .serializers import OrganizacionSerializer
 
-def api_customer(request, *args, **kwargs):
-    model_data = OrganizacionModel.objects.all().order_by("?").first()
-    data = {}
-    if model_data:
-        data = model_to_dict(
-            model_data,
-            fields=["id","razon_social","ruc","nombre_comercial","tipo","ciiu","direccion_legal","pais_organizacion","departamento_organizacion","provincia_organizacion","distrito_organizacion","is_enabled"])
-    return JsonResponse(data)
-    #     data = dict(data)
-    #     json_data_str = json.dumps(data)
-    # return HttpResponse(json_data_str,headers={"content-type":"application/json"})
+class OrganizacionesCreateApiView(generics.CreateAPIView):
+    queryset = OrganizacionModel.objects.all()
+    serializer_class = OrganizacionSerializer
+
+    # def perform_create(self, serializer):
+        # serializer.save(user=self.request.user)
+
+
+organzizaciones_create_view = OrganizacionesCreateApiView.as_view()
+
+class OrganizacionesDetallesAPIView(generics.RetrieveAPIView):
+    queryset = OrganizacionModel.objects.all()
+    serializer_class = OrganizacionSerializer
+
+
+organzizaciones_list_view = OrganizacionesDetallesAPIView.as_view()
+

@@ -95,6 +95,10 @@ class OrganizacionModel(models.Model):
             self.created_at = timezone.now()        
         return super(OrganizacionModel, self).save(*args, **kwargs)
 
+    @property
+    def full_direction(self):
+        return str(self.direccion_legal) +' '+ str(self.pais_organizacion) +'-'+ str(self.departamento_organizacion) +'-'+ str(self.provincia_organizacion) +'-'+ str(self.distrito_organizacion)
+    
     class Meta:
         ordering = ["id"]
         db_table = 'customers_Organizaciones'
