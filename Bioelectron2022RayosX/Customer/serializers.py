@@ -1,8 +1,6 @@
-from codecs import lookup_error
 from rest_framework import serializers
 from .models import OrganizacionModel
 from rest_framework.reverse import reverse
-
 
 
 class OrganizacionSerializer(serializers.ModelSerializer):
@@ -28,8 +26,9 @@ class OrganizacionSerializer(serializers.ModelSerializer):
             'is_enabled',
             'created_at',
             'members',
+            'user'
         ]
-    
+
     def get_edit_url(self,obj):
         request = self.context.get('request')
         if request is None:

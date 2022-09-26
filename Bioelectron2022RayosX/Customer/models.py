@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+User = settings.AUTH_USER_MODEL
 
 class ContactosModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="con_id")
@@ -88,6 +91,7 @@ class OrganizacionModel(models.Model):
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(DepartamentoModel,through="Dpt_org_Model",through_fields=('organizacion', 'departamento'))
+    user = models.ManyToManyField(User,through="User_Organizaciones_Model",through_fields=('organizacion', 'user'))
 
 
     def save(self, *args, **kwargs):
@@ -168,3 +172,14 @@ class Con_Dpt_Model(models.Model):
 
 
 
+class User_Organizaciones_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    organizacion = models.ForeignKey(OrganizacionModel,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Organizaciones_Model, self).save(*args, **kwargs)
