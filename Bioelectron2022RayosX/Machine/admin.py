@@ -8,11 +8,11 @@ class SistemaTubos(admin.TabularInline):
 @admin.register(SistemaModel)
 class SistemaModel(admin.ModelAdmin):
     inlines = [SistemaTubos,]
-    list_display = ('id',"marca","modelo","serie","antiguedad_year","year_instalacion","is_enabled","crated_at")
+    list_display = ('id',"marca","modelo","serie","antiguedad_year","year_instalacion","is_enabled","created_at")
     search_fields = ('marca','modelo','serie',)
     list_filter = ('marca','members')
     filter_horizontal = ['members']
     
 @admin.register(TuboModel)
 class TuboModel(admin.ModelAdmin):
-    list_display = ('id',"marca","modelo","serie","antiguedad_year","year_instalacion","is_enabled","crated_at")
+    list_display = ('id',"marca","modelo","serie","antiguedad_year","year_instalacion","is_enabled","created_at")
