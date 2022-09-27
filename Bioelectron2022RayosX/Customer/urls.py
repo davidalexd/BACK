@@ -15,5 +15,9 @@ urlpatterns = [
     path('Areas/',views.areas_create_view,name='area-list'),
     path('Areas/<int:pk>/',views.areas_list_view,name='area-detail'),
     path('Areas/<int:pk>/update/',views.areas_actualizar_view,name='area-update'),
-    path('Areas/<int:pk>/delete/',views.areas_eliminar_view,name='area-delete')   
+    path('Areas/<int:pk>/delete/',views.areas_eliminar_view,name='area-delete'),  
+
+    path('AreasHistory/',views.areas_history_view,name='area-history-list'),
+    path('DepartamentosHistory/',views.departamento_history_view,name='departamento-history-detail'),
+    path('OrganizacionesHistory/',views.organizacion_history_view,name='organizacion-history-update'), 
 ]

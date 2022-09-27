@@ -1,6 +1,6 @@
 from rest_framework import mixins,viewsets,generics,mixins,permissions,authentication
 from .models import DepartamentoModel, OrganizacionModel,AreasModel, User_Departamentos_Model,User_Organizaciones_Model,User_Areas_Model
-from .serializers import DepartamentoSerializer, OrganizacionSerializer,AreasSerializer
+from .serializers import DepartamentoSerializer, OrganizacionSerializer,AreasSerializer, UserAreaSerializer, UserDepartamentoSerializer, UserOrganizacionSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 from .logenum import LogEnumOrganizaciones,LogEnumDepartamentos,LogEnumAreas,OrganizacionLog
 
@@ -36,3 +36,15 @@ class AreasGenericViewSet(StaffEditorPermissionMixin,mixins.ListModelMixin,mixin
     def perform_update(self, serializer):
         instance =serializer.save()
         OrganizacionLog(self,instance,LogEnumAreas.AREA_UPDATED,User_Areas_Model)
+
+class AreasHistoryGenericViewSet(StaffEditorPermissionMixin,mixins.ListModelMixin,viewsets.GenericViewSet):
+    queryset = User_Areas_Model.objects.all()
+    serializer_class = UserAreaSerializer
+
+class DepartamentosHistoryGenericViewSet(StaffEditorPermissionMixin,mixins.ListModelMixin,viewsets.GenericViewSet):
+    queryset = User_Departamentos_Model.objects.all()
+    serializer_class = UserDepartamentoSerializer
+
+class OrganizacionHistoryGenericViewSet(StaffEditorPermissionMixin,mixins.ListModelMixin,viewsets.GenericViewSet):
+    queryset = User_Organizaciones_Model.objects.all()
+    serializer_class = UserOrganizacionSerializer

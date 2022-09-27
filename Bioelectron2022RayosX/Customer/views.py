@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 
 from .logenum import LogEnumDepartamentos, LogEnumOrganizaciones,LogEnumAreas,OrganizacionLog
 from .models import DepartamentoModel, OrganizacionModel, AreasModel, User_Departamentos_Model, User_Organizaciones_Model, User_Areas_Model
-from .serializers import DepartamentoSerializer, OrganizacionSerializer,AreasSerializer
+from .serializers import DepartamentoSerializer, OrganizacionSerializer,AreasSerializer, UserAreaSerializer, UserDepartamentoSerializer, UserOrganizacionSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 
 class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
@@ -136,7 +136,20 @@ areas_eliminar_view = AreasEliminarAPIView.as_view()
 
 
 
+class AreasHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
+    queryset = User_Areas_Model.objects.all()
+    serializer_class = UserAreaSerializer
+areas_history_view = AreasHistoryGenericViewSet.as_view()
 
+class DepartamentosHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
+    queryset = User_Departamentos_Model.objects.all()
+    serializer_class = UserDepartamentoSerializer
+departamento_history_view = DepartamentosHistoryGenericViewSet.as_view()
+
+class OrganizacionHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
+    queryset = User_Organizaciones_Model.objects.all()
+    serializer_class = UserOrganizacionSerializer
+organizacion_history_view = OrganizacionHistoryGenericViewSet.as_view()
 
 
 

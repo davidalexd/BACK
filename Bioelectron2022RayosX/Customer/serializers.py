@@ -1,3 +1,5 @@
+from dataclasses import field
+from pyexpat import model
 from rest_framework import serializers
 from .models import OrganizacionModel,DepartamentoModel,AreasModel,ContactosModel,User_Organizaciones_Model,User_Departamentos_Model,User_Areas_Model
 from rest_framework.reverse import reverse
@@ -108,3 +110,19 @@ class OrganizacionSerializer(serializers.ModelSerializer):
         return Uc
 
 
+class UserAreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_Areas_Model
+        fields = '__all__'
+
+
+class UserDepartamentoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_Departamentos_Model
+        fields = '__all__'
+
+
+class UserOrganizacionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_Organizaciones_Model
+        fields = '__all__'
