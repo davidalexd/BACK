@@ -8,7 +8,7 @@ from CompanyMachine.models import MedidoresModel
 
 class ReportsFormatsModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="rep_frt_id")
-    codigo_formato = models.CharField("Format code", max_length=255,null=True,blank=True,unique=True,db_column="rep_frt_codigo")
+    codigo_formato = models.CharField("Format code", max_length=255,null=True,blank=False,unique=True,db_column="rep_frt_codigo")
     nombre_formato = models.CharField("Format name", max_length=255,null=False,blank=False,db_column="rep_frt_nombre")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
@@ -29,7 +29,7 @@ class ReportsFormatsModel(models.Model):
 class ReportsCategoryModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="rep_cat_id")
     nombre_categoria = models.CharField("Category name", max_length=255,null=False,blank=False,db_column="rep_cat_area")
-    abreviatura_categoria = models.CharField("Category abbreviation", max_length=255,null=True,blank=True,unique=True,db_column="rep_cat_abreviatura")
+    abreviatura_categoria = models.CharField("Category abbreviation", max_length=255,null=True,blank=False,unique=True,db_column="rep_cat_abreviatura")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(ReportsFormatsModel,through="Frt_Cat_Model",through_fields=('categoria', 'formatos'))
@@ -96,7 +96,7 @@ class ReportsReporteModel(models.Model):
 
 class Rpt_Ar_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="RptAr_id")
-    cliente_static_details = models.JSONField("Customer's current details",null=True,blank=True,db_column="RptAr_context")
+    cliente_static_details = models.JSONField("Customer's current details",null=True,blank=False,db_column="RptAr_context")
     reportes = models.ForeignKey(ReportsReporteModel,on_delete=models.CASCADE)
     areas = models.ForeignKey(AreasModel,on_delete=models.CASCADE)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)

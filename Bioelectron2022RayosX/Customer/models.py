@@ -1,15 +1,18 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+User = settings.AUTH_USER_MODEL
 
 class ContactosModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="con_id")
     nombre = models.CharField("Contact's name",max_length=255,null=False,blank=False,unique=False,db_column="con_nombre")
     apellidos = models.CharField("Contact's last name",max_length=255,null=False,blank=False,unique=False,db_column="con_apellidos")
-    dni = models.CharField("Contact's DNI number",max_length=255,null=True,blank=True,unique=True,db_column="con_numero_dni")
-    numero_telefono = models.CharField("Contact phone number", max_length=255,null=True,blank=True,db_column="con_numero_telefono")    
-    correo = models.CharField("Contact email address", max_length=255,null=True,blank=True,unique=True,db_column="con_correo_electronico")    
-    cargo = models.CharField("Job", max_length=255,null=True,blank=True,db_column="con_cargo")    
+    dni = models.CharField("Contact's DNI number",max_length=255,null=True,blank=False,unique=True,db_column="con_numero_dni")
+    numero_telefono = models.CharField("Contact phone number", max_length=255,null=True,blank=False,db_column="con_numero_telefono")    
+    correo = models.CharField("Contact email address", max_length=255,null=True,blank=False,unique=True,db_column="con_correo_electronico")    
+    cargo = models.CharField("Job", max_length=255,null=True,blank=False,db_column="con_cargo")    
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
@@ -51,11 +54,11 @@ class AreasModel(models.Model):
 class DepartamentoModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="dpt_id")
     nombre_departamento = models.CharField("Headquarters's name",max_length=255,null=False,blank=False,unique=False,db_column="dpt_nombre_departamento")
-    direccion_departamento = models.CharField("Headquarters's address", max_length=255,null=True,blank=True,db_column="dpt_direccion_departamento")
-    pais_departamento = models.CharField("Country where the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_pais")
-    departamento_departamento = models.CharField("Department to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_departamento")
-    provincia_departamento = models.CharField("Province to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_provincia")
-    distrito_departamento = models.CharField("District to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_distrito")
+    direccion_departamento = models.CharField("Headquarters's address", max_length=255,null=True,blank=False,db_column="dpt_direccion_departamento")
+    pais_departamento = models.CharField("Country where the headquarters belongs", max_length=255,null=True,blank=False,db_column="dpt_pais")
+    departamento_departamento = models.CharField("Department to which the headquarters belongs", max_length=255,null=True,blank=False,db_column="dpt_departamento")
+    provincia_departamento = models.CharField("Province to which the headquarters belongs", max_length=255,null=True,blank=False,db_column="dpt_provincia")
+    distrito_departamento = models.CharField("District to which the headquarters belongs", max_length=255,null=True,blank=False,db_column="dpt_distrito")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(AreasModel,through="Ar_dpt_Model",through_fields=('departamento', 'area'))
@@ -75,19 +78,20 @@ class DepartamentoModel(models.Model):
 
 class OrganizacionModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="org_id")
-    ruc = models.CharField("Organization's ruc number",max_length=12,null=True,blank=True,unique=True,db_column="org_ruc")
+    ruc = models.CharField("Organization's ruc number",max_length=12,null=True,blank=False,unique=True,db_column="org_ruc")
     razon_social = models.CharField("Organization's name",max_length=255,null=False,blank=False,unique=True,db_column="org_razon_social")
-    nombre_comercial = models.CharField("Organization's commercial name ",max_length=255,null=True,blank=True,unique=True,db_column="org_nombre_comercial")
-    tipo = models.CharField("Organization's type", max_length=255,null=True,blank=True,db_column="org_tipo")
-    ciiu = models.IntegerField("Organization's International Standard Industrial Classification",null=True,blank=True,db_column="org_ciiu")
-    direccion_legal = models.CharField("Organization's legal address", max_length=255,null=True,blank=True,db_column="org_direccion_legal")
-    pais_organizacion = models.CharField("Country where the organization belongs", max_length=255,null=True,blank=True,db_column="org_pais")
-    departamento_organizacion = models.CharField("Department to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_departamento")
-    provincia_organizacion = models.CharField("Province to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_provincia")
-    distrito_organizacion = models.CharField("District to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_distrito")
+    nombre_comercial = models.CharField("Organization's commercial name ",max_length=255,null=True,blank=False,unique=True,db_column="org_nombre_comercial")
+    tipo = models.CharField("Organization's type", max_length=255,null=True,blank=False,db_column="org_tipo")
+    ciiu = models.IntegerField("Organization's International Standard Industrial Classification",null=True,blank=False,db_column="org_ciiu")
+    direccion_legal = models.CharField("Organization's legal address", max_length=255,null=True,blank=False,db_column="org_direccion_legal")
+    pais_organizacion = models.CharField("Country where the organization belongs", max_length=255,null=True,blank=False,db_column="org_pais")
+    departamento_organizacion = models.CharField("Department to which the organization belongs", max_length=255,null=True,blank=False,db_column="org_departamento")
+    provincia_organizacion = models.CharField("Province to which the organization belongs", max_length=255,null=True,blank=False,db_column="org_provincia")
+    distrito_organizacion = models.CharField("District to which the organization belongs", max_length=255,null=True,blank=False,db_column="org_distrito")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(DepartamentoModel,through="Dpt_org_Model",through_fields=('organizacion', 'departamento'))
+    user = models.ManyToManyField(User,through="User_Organizaciones_Model",through_fields=('organizacion', 'user'))
 
 
     def save(self, *args, **kwargs):
@@ -95,6 +99,24 @@ class OrganizacionModel(models.Model):
             self.created_at = timezone.now()        
         return super(OrganizacionModel, self).save(*args, **kwargs)
 
+    # def get_absolute_url(self):
+    #     return f"/api/Organizaciones/{self.pk}/"
+
+    # @property
+    # def endpoint(self):
+    #     return self.get_absolute_url()
+
+    # @property
+    # def path(self):
+    #     return f"/organizaciones/{self.id}/"
+
+    # def status(self) -> bool:
+    #     return self.is_enabled
+
+    @property
+    def full_direction(self):
+        return str(self.direccion_legal) +' '+ str(self.pais_organizacion) +'-'+ str(self.departamento_organizacion) +'-'+ str(self.provincia_organizacion) +'-'+ str(self.distrito_organizacion)
+    
     class Meta:
         ordering = ["id"]
         db_table = 'customers_Organizaciones'
@@ -150,3 +172,14 @@ class Con_Dpt_Model(models.Model):
 
 
 
+class User_Organizaciones_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    organizacion = models.ForeignKey(OrganizacionModel,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Organizaciones_Model, self).save(*args, **kwargs)

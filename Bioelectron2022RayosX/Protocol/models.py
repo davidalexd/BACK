@@ -66,7 +66,7 @@ class PruebaOpcionesModel(models.Model):
 class PruebasModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="prb_id")
     pruebas_titulo = models.CharField("Test name",max_length=255,null=False,blank=False,unique=True,db_column="prb_titulo")
-    pruebas_contexto = models.TextField("Test context",null=True,blank=True,db_column="prb_contexto")
+    pruebas_contexto = models.TextField("Test context",null=True,blank=False,db_column="prb_contexto")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     
@@ -90,7 +90,7 @@ class PruebasModel(models.Model):
 class SeccionesModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="scc_id")
     secciones_titulo = models.CharField("Section name",max_length=255,null=False,blank=False,unique=True,db_column="scc_nombre")
-    secciones_contexto = models.TextField("Section context",null=True,blank=True,db_column="scc_contexto")
+    secciones_contexto = models.TextField("Section context",null=True,blank=False,db_column="scc_contexto")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     pruebas = models.ManyToManyField(PruebasModel,through="Scc_Prb_Model",through_fields=('seccion', 'prueba'))
@@ -110,7 +110,7 @@ class SeccionesModel(models.Model):
 class ProtocolsModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="prt_id")
     protocolo_titulo = models.CharField("Protocol name",max_length=255,null=False,blank=False,unique=True,db_column="prt_nombre")
-    protocolo_detalles = models.JSONField("Protocol details",editable=True,null=True,blank=True,db_column="prt_detalles")
+    protocolo_detalles = models.JSONField("Protocol details",editable=True,null=True,blank=False,db_column="prt_detalles")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     secciones = models.ManyToManyField(SeccionesModel,through="Prt_Scc_Model",through_fields=('protocolo', 'seccion'))
@@ -134,8 +134,8 @@ class ProtocolsModel(models.Model):
 class Prueba_Tipo_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="PrbCal_id")
     prueba = models.ForeignKey(PruebasModel,on_delete=models.CASCADE)
-    calculo = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE,null=True,blank=True)
-    opcion = models.ForeignKey(PruebaOpcionesModel,on_delete=models.CASCADE,null=True,blank=True)
+    calculo = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE,null=True,blank=False)
+    opcion = models.ForeignKey(PruebaOpcionesModel,on_delete=models.CASCADE,null=True,blank=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
