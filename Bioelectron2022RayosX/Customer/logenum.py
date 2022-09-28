@@ -16,6 +16,11 @@ class LogEnumAreas():
     AREA_REMOVED = 'Área removida por '
     AREA_ENABLED = 'Área inhabilitada por '
 
+class LogEnumContactos():
+    CONTACTO_CREATED = 'Nueva contacto creada por '
+    CONTACTO_UPDATED = 'Contacto actualizado por '
+    CONTACTO_REMOVED = 'Contacto removido por '
+    CONTACTO_ENABLED = 'Contacto inhabilitado por '
 
 def OrganizacionLog(author,instance,message,relacion):
     relacion.objects.create(model=instance,model_user=author.request.user,context=message+author.request.user.username)

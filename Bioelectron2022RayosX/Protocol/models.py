@@ -13,7 +13,7 @@ class VariablesModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(VariablesModel, self).save(*args, **kwargs)
+        return super(VariablesModel, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["id"]
@@ -36,7 +36,7 @@ class PruebaCalculoModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(PruebaCalculoModel, self).save(*args, **kwargs)
+        return super(PruebaCalculoModel, self).save(*args, **kwargs)
     
     class Meta:
         ordering = ["id"]
@@ -52,9 +52,9 @@ class PruebaOpcionesModel(models.Model):
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
-            if not self.id:
-                self.created_at = timezone.now()        
-                return super(PruebaOpcionesModel, self).save(*args, **kwargs)
+        if not self.id:
+            self.created_at = timezone.now()        
+        return super(PruebaOpcionesModel, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["id"]
@@ -76,7 +76,7 @@ class PruebasModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(PruebasModel, self).save(*args, **kwargs)
+        return super(PruebasModel, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["id"]
@@ -98,7 +98,7 @@ class SeccionesModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(SeccionesModel, self).save(*args, **kwargs)
+        return super(SeccionesModel, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["id"]
@@ -119,7 +119,7 @@ class ProtocolsModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(ProtocolsModel, self).save(*args, **kwargs)
+        return super(ProtocolsModel, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["id"]

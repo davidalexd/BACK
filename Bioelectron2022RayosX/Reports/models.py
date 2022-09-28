@@ -16,7 +16,7 @@ class ReportsFormatsModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(ReportsFormatsModel, self).save(*args, **kwargs)
+        return super(ReportsFormatsModel, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["id"]
@@ -37,7 +37,7 @@ class ReportsCategoryModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(ReportsCategoryModel, self).save(*args, **kwargs)
+        return super(ReportsCategoryModel, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["id"]

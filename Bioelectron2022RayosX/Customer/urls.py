@@ -17,7 +17,14 @@ urlpatterns = [
     path('Areas/<int:pk>/update/',views.areas_actualizar_view,name='area-update'),
     path('Areas/<int:pk>/delete/',views.areas_eliminar_view,name='area-delete'),  
 
+    
+    path('Contactos/',views.contactos_create_view,name='contacto-list'),
+    path('Contactos/<int:pk>/',views.contactos_list_view,name='contacto-detail'),
+    path('Contactos/<int:pk>/update/',views.contactos_actualizar_view,name='contacto-update'),
+    path('Contactos/<int:pk>/delete/',views.contactos_eliminar_view,name='contacto-delete'),  
+
     path('AreasHistory/',views.areas_history_view,name='area-history-list'),
-    path('DepartamentosHistory/',views.departamento_history_view,name='departamento-history-detail'),
-    path('OrganizacionesHistory/',views.organizacion_history_view,name='organizacion-history-update'), 
+    path('DepartamentosHistory/',views.departamento_history_view,name='departamento-history-list'),
+    path('OrganizacionesHistory/',views.organizacion_history_view,name='organizacion-history-list'), 
+    path('ContactosHistory/',views.contactos_history_view,name='contactos-history-list'), 
 ]

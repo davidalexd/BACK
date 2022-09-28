@@ -15,7 +15,7 @@ class TuboModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(TuboModel, self).save(*args, **kwargs)
+        return super(TuboModel, self).save(*args, **kwargs)
 
     @property
     def antiguedad_year(self):
@@ -42,7 +42,7 @@ class SistemaModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(SistemaModel, self).save(*args, **kwargs)
+        return super(SistemaModel, self).save(*args, **kwargs)
 
     @property
     def antiguedad_year(self):

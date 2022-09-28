@@ -12,7 +12,7 @@ class OperacionesModel(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
-            return super(OperacionesModel, self).save(*args, **kwargs)
+        return super(OperacionesModel, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["id"]
