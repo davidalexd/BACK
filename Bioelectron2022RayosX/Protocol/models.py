@@ -1,14 +1,17 @@
 from django.db import models
 from django.utils import timezone
 from Operations.models import OperacionesModel
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 class VariablesModel(models.Model):    
     id = models.BigAutoField(primary_key=True,db_column="var_id")
     nombre_variable = models.CharField("Variable name",max_length=255,null=False,blank=False,db_column="var_nombre")
     range_variable = models.IntegerField("Variable range",null=False,blank=False,db_column="var_range")
-    valor_defecto = models.IntegerField("Variable valor ",null=False,blank=False,db_column="var_valor_defecto")
+    valor_defecto = models.IntegerField("Variable valor ",null=True,blank=True,db_column="var_valor_defecto")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
+    users = models.ManyToManyField(User,through="User_Variables_Model",through_fields=('model', 'model_user'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -31,7 +34,7 @@ class PruebaCalculoModel(models.Model):
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     operacion = models.ManyToManyField(OperacionesModel,through="Prb_Calculo_Operacion_Model",through_fields=('calculo', 'operacion'))
-    # operacion_relacion = models.ManyToManyField(OperacionesModel,through="Prb_Calculo_Operacion_Relacionada_Model",through_fields=('calculo', 'operacion'))
+    users = models.ManyToManyField(User,through="User_Pruebas_Calculo_Model",through_fields=('model', 'model_user'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -50,6 +53,7 @@ class PruebaOpcionesModel(models.Model):
     pruebas_opciones = models.JSONField("Test results",null=False,blank=False,db_column="prb_opc_resultado")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
+    users = models.ManyToManyField(User,through="User_Pruebas_Opciones_Model",through_fields=('model', 'model_user'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -72,6 +76,7 @@ class PruebasModel(models.Model):
     
     calculo = models.ManyToManyField(PruebaCalculoModel,through="Prueba_Tipo_Model",through_fields=('prueba','calculo'))
     opcion = models.ManyToManyField(PruebaOpcionesModel,through="Prueba_Tipo_Model",through_fields=('prueba', 'opcion'))
+    users = models.ManyToManyField(User,through="User_Pruebas_Model",through_fields=('model', 'model_user'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -94,6 +99,7 @@ class SeccionesModel(models.Model):
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     pruebas = models.ManyToManyField(PruebasModel,through="Scc_Prb_Model",through_fields=('seccion', 'prueba'))
+    users = models.ManyToManyField(User,through="User_Secciones_Model",through_fields=('model', 'model_user'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -115,6 +121,7 @@ class ProtocolsModel(models.Model):
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     secciones = models.ManyToManyField(SeccionesModel,through="Prt_Scc_Model",through_fields=('protocolo', 'seccion'))
     variables = models.ManyToManyField(VariablesModel,through="Prt_Var_Model",through_fields=('protocolo', 'variables'))
+    users = models.ManyToManyField(User,through="User_Protocolos_Model",through_fields=('model', 'model_user'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -149,8 +156,8 @@ class Prueba_Tipo_Model(models.Model):
 
 class Prb_Calculo_Operacion_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="PrbCalOpr_id")
-    calculo = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE)
-    operacion = models.ForeignKey(OperacionesModel,on_delete=models.CASCADE)
+    calculo = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE,null=True)
+    operacion = models.ForeignKey(OperacionesModel,on_delete=models.CASCADE,null=True)
     variable = models.ManyToManyField(VariablesModel,through="Prb_Operacion_Variables",through_fields=('operacion', 'variables'))
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
@@ -162,37 +169,6 @@ class Prb_Calculo_Operacion_Model(models.Model):
     class Meta:
         ordering = ["id"]
         db_table = 'tests_calculo_operacion'  
-
-class Prb_Calculo_Operacion_Relacionada_Model(models.Model):
-    id = models.BigAutoField(primary_key=True,db_column="PrbCalOprRel_id")
-    calculo = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE)
-    operacion = models.ForeignKey(OperacionesModel,on_delete=models.CASCADE)
-    variable = models.ManyToManyField(Prb_Calculo_Operacion_Model,through="Prb_OperacionRelacion_Operacion_Model",through_fields=('operacion_relacion', 'operacion'))
-    created_at = models.DateTimeField(editable=False,null=False,blank=False)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.created_at = timezone.now()        
-        return super(Prb_Calculo_Operacion_Relacionada_Model, self).save(*args, **kwargs)
-
-    class Meta:
-        ordering = ["id"]
-        db_table = 'tests_calculo_operacion_relacionada'  
-
-class Prb_OperacionRelacion_Operacion_Model(models.Model):
-    id = models.BigAutoField(primary_key=True,db_column="PrbOprRel_id")
-    operacion_relacion = models.ForeignKey(Prb_Calculo_Operacion_Relacionada_Model,on_delete=models.CASCADE)
-    operacion = models.ForeignKey(Prb_Calculo_Operacion_Model,on_delete=models.CASCADE)
-    created_at = models.DateTimeField(editable=False,null=False,blank=False)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.created_at = timezone.now()        
-        return super(Prb_OperacionRelacion_Operacion_Model, self).save(*args, **kwargs)
-
-    class Meta:
-        ordering = ["id"]
-        db_table = 'tests_calculo_operacion_reacionada_operacion'  
 
 class Prb_Operacion_Variables(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="PrbOprVar_id")
@@ -253,3 +229,80 @@ class Prt_Var_Model(models.Model):
     class Meta:
         ordering = ["id"]
         db_table = 'protocols_Protocolo_Variables'
+
+class User_Protocolos_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    model = models.ForeignKey(ProtocolsModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Protocolos_Model, self).save(*args, **kwargs)
+
+class User_Secciones_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    model = models.ForeignKey(SeccionesModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Secciones_Model, self).save(*args, **kwargs)
+
+
+class User_Variables_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    model = models.ForeignKey(VariablesModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Variables_Model, self).save(*args, **kwargs)
+
+class User_Pruebas_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    model = models.ForeignKey(PruebasModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Pruebas_Model, self).save(*args, **kwargs)
+
+class User_Pruebas_Calculo_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    model = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Pruebas_Calculo_Model, self).save(*args, **kwargs)
+
+
+class User_Pruebas_Opciones_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    model = models.ForeignKey(PruebaOpcionesModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Pruebas_Opciones_Model, self).save(*args, **kwargs)
+
+
+

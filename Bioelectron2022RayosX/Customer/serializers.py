@@ -150,13 +150,6 @@ class DepartamentoSerializer(serializers.ModelSerializer):
         return Uc
 
     def update(self, instance, validated_data):
-        instance.nombre_departamento = validated_data.get('nombre_departamento',instance.nombre_departamento)
-        instance.direccion_departamento = validated_data.get('direccion_departamento',instance.direccion_departamento)
-        instance.pais_departamento = validated_data.get('pais_departamento',instance.pais_departamento)
-        instance.departamento_departamento = validated_data.get('departamento_departamento',instance.departamento_departamento)
-        instance.provincia_departamento = validated_data.get('provincia_departamento',instance.provincia_departamento)
-        instance.distrito_departamento = validated_data.get('distrito_departamento',instance.distrito_departamento)
-        instance.is_enabled = validated_data.get('is_enabled',instance.is_enabled)
         if 'members' in validated_data:
             instance.members.set(validated_data['members'])
         if 'contactos' in validated_data:

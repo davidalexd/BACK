@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.response import Response
 # from django.http import Http404
+from rest_framework.exceptions import APIException,status
 from .logenum import LogEnumContactos, LogEnumDepartamentos, LogEnumOrganizaciones,LogEnumAreas,OrganizacionLog
 from .models import ContactosModel, DepartamentoModel, OrganizacionModel, AreasModel, User_Contactos_Model, User_Departamentos_Model, User_Organizaciones_Model, User_Areas_Model
 from .serializers import ContactosSerialezer, DepartamentoSerializer, OrganizacionSerializer,AreasSerializer, UserAreaSerializer, UserContactosSerializer, UserDepartamentoSerializer, UserOrganizacionSerializer
@@ -10,6 +11,8 @@ class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListC
     serializer_class = OrganizacionSerializer
     def get_queryset(self):        
         queryset = OrganizacionModel.objects.all()
+        if not queryset:
+            raise ValidationError
         return queryset
 
     def perform_create(self, serializer):
@@ -18,9 +21,15 @@ class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListC
 organzizaciones_create_view = OrganizacionesListaCreateApiView.as_view()
 
 class OrganizacionesDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
-    queryset = OrganizacionModel.objects.all()
     serializer_class = OrganizacionSerializer
     lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = OrganizacionModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+
+
 organzizaciones_list_view = OrganizacionesDetallesAPIView.as_view()
 
 class OrganizacionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
@@ -28,7 +37,7 @@ class OrganizacionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.Ret
     serializer_class = OrganizacionSerializer
     lookup_field = 'pk'
     def perform_update(self, serializer):
-        instance = self.save()
+        instance = serializer.save()
         OrganizacionLog(self,instance,LogEnumOrganizaciones.ORGANIZACION_UPDATED,User_Organizaciones_Model)
 organzizaciones_actualizar_view = OrganizacionesAztualizacionAPIView.as_view()
 
@@ -206,6 +215,9 @@ organizacion_history_view = OrganizacionHistoryGenericViewSet.as_view()
 
 
 
+class ValidationError(APIException):
+    status_code = status.HTTP_404_NOT_FOUND
+    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No data is available', })
 
 
 

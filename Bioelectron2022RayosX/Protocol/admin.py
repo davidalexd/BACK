@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Protocol.models import VariablesModel,PruebaCalculoModel,PruebaOpcionesModel,PruebasModel,ProtocolsModel, SeccionesModel,Prb_Calculo_Operacion_Model,Prueba_Tipo_Model,Prt_Scc_Model,Prt_Var_Model,Scc_Prb_Model,Prb_Operacion_Variables,Prb_OperacionRelacion_Operacion_Model,Prb_Calculo_Operacion_Relacionada_Model
+from Protocol.models import VariablesModel,PruebaCalculoModel,PruebaOpcionesModel,PruebasModel,ProtocolsModel, SeccionesModel,Prb_Calculo_Operacion_Model,Prueba_Tipo_Model,Prt_Scc_Model,Prt_Var_Model,Scc_Prb_Model,Prb_Operacion_Variables
 
 class CalculoOperacion(admin.TabularInline):
     model = Prb_Calculo_Operacion_Model
@@ -25,23 +25,9 @@ class CalculoOperacionesVariables(admin.TabularInline):
     model = Prb_Operacion_Variables
     extra = 1
 
-class CalculoOperacionesRelacionadas(admin.TabularInline):
-    model = Prb_OperacionRelacion_Operacion_Model
-    extra = 1
-
 @admin.register(VariablesModel)
 class VariablesAdmin(admin.ModelAdmin):
     list_display = ("id","nombre_variable","range_variable","is_enabled","created_at")
-
-@admin.register(Prb_Calculo_Operacion_Model)
-class CalculoOperacionAdmin(admin.ModelAdmin):
-    inlines = [CalculoOperacionesVariables,]
-    list_display = ("id","calculo","operacion","created_at")
-
-@admin.register(Prb_Calculo_Operacion_Relacionada_Model)
-class CalculoOperacionRelacionadaAdmin(admin.ModelAdmin):
-    inlines = [CalculoOperacionesRelacionadas,]
-    list_display = ("id","calculo","operacion","created_at")
 
 @admin.register(PruebaCalculoModel)
 class PruebaCalculoAdmin(admin.ModelAdmin):

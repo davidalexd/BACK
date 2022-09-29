@@ -28,7 +28,7 @@ class CalibracionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.Retr
     serializer_class = CalibracionesSerializer
     lookup_field = 'pk'
     def perform_update(self, serializer):
-        instance = self.save()
+        instance = serializer.save()
         OrganizacionLog(self,instance,LogEnumCalibraciones.CALIBRACION_UPDATED,User_Calibraciones_Model)
 calibraciones_actualizar_view = CalibracionesAztualizacionAPIView.as_view()
 
@@ -65,7 +65,7 @@ class MedidoresAztualizacionAPIView(StaffEditorPermissionMixin,generics.Retrieve
     serializer_class = MedidoresSerializer
     lookup_field = 'pk'
     def perform_update(self, serializer):
-        instance = self.save()
+        instance = serializer.save()
         OrganizacionLog(self,instance,LogEnumMedidores.MEDIDOR_UPDATED,User_Medidores_Model)
 medidores_actualizar_view = MedidoresAztualizacionAPIView.as_view()
 
