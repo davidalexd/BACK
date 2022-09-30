@@ -2,8 +2,12 @@
 
   {% block title %} Tables {% endblock title %}
 
+  
+  {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+  {% endblock stylesheets %}
+  
   {% block content %}
-
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -350,6 +354,27 @@
           </div>
         </div>
       </div>
+      <!-- Dark table -->
+      <div class="row">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="text-white mb-0">Dark table</h3>
+            </div>
+            <div class="table-responsive">                
+              <table id="example" class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" class="sort" data-sort="name">ID</th>
+                    <th scope="col" class="sort" data-sort="budget">Ruc</th>
+                    <th scope="col" class="sort" data-sort="status">Razón Social</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {% include "includes/footer.html" %}
 
@@ -357,5 +382,7 @@
 
   {% endblock content %}
 
-  <!-- Specific JS goes HERE --> 
-  {% block javascripts %}{% endblock javascripts %}
+  {% block javascripts %}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <script src="/static/api/organizaciones/get.js"></script>
+  {% endblock javascripts %}

@@ -24,7 +24,7 @@
   <title>
     Django Argon Dashboard - {% block title %} Open-Source Admin Panel {% endblock %} | AppSeed
   </title>
-
+  
   <!-- Favicon - loaded as static -->
   <link rel="icon" href="/static/assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
@@ -35,9 +35,9 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="/static/assets/css/argon.css?v=1.2.0" type="text/css">
+  {% block stylesheets %}{% endblock stylesheets %} 
 
   <!-- Specific CSS goes HERE -->
-  {% block stylesheets %}{% endblock stylesheets %}
 
 </head>
 

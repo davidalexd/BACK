@@ -1,5 +1,4 @@
-from pyexpat import model
-from .models import ProtocolsModel,SeccionesModel, User_Protocolos_Model, User_Pruebas_Calculo_Model, User_Pruebas_Model, User_Pruebas_Opciones_Model, User_Secciones_Model, User_Variables_Model,VariablesModel,PruebasModel,PruebaCalculoModel,PruebaOpcionesModel
+from .models import ProtocolsModel,SeccionesModel, User_Protocolos_Model, User_Pruebas_Calculo_Model, User_Pruebas_Opciones_Model, User_Secciones_Model, User_Variables_Model,VariablesModel,PruebaCalculoModel,PruebaOpcionesModel
 from rest_framework import serializers
 from rest_framework.reverse import reverse
 from Operations.serializers import OperacionesSerializer
@@ -43,7 +42,7 @@ class VariablesSerializer(serializers.ModelSerializer):
 class PruebaCalculoSerializer(serializers.ModelSerializer):
     operacion = OperacionesSerializer(many=True,read_only=True)
     operacion_ids = serializers.PrimaryKeyRelatedField(
-        source='members',
+        source='operacion',
         write_only=True,
         many=True,
         queryset=OperacionesModel.objects.all())
@@ -54,7 +53,7 @@ class PruebaCalculoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PruebaCalculoModel
-        fields = ("id","pruebas_resultado","pruebas_tolerancia","pruebas_condicion_respuesta","is_enabled","created_at","url","edit_url","delete_url","operacion","actions","operacion_ids")
+        fields = ("id","pruebas_titulo","pruebas_contexto","pruebas_resultado","pruebas_tolerancia","pruebas_condicion_respuesta","is_enabled","created_at","url","edit_url","delete_url","operacion","actions","operacion_ids")
 
     def get_edit_url(self,obj):
         request = self.context.get('request')
@@ -75,7 +74,7 @@ class PruebaCalculoSerializer(serializers.ModelSerializer):
             Uc.append({
                 "autor":x.model_user.username,
                 "email":x.model_user.email,
-                "calculo":x.model.id,
+                "calculo":x.model.pruebas_titulo,
                 "context":x.context,
                 "registered_at":x.registerd_at
             })
@@ -95,7 +94,7 @@ class PruebaOpcionesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PruebaOpcionesModel
-        fields = ("id","pruebas_opciones","is_enabled","created_at","url","edit_url","delete_url","actions")
+        fields = ("id","pruebas_titulo","pruebas_contexto","pruebas_opciones","is_enabled","created_at","url","edit_url","delete_url","actions")
 
     def get_edit_url(self,obj):
         request = self.context.get('request')
@@ -116,75 +115,26 @@ class PruebaOpcionesSerializer(serializers.ModelSerializer):
             Uc.append({
                 "autor":x.model_user.username,
                 "email":x.model_user.email,
-                "Opciones":x.model.pruebas_opciones,
+                "Opciones":x.model.pruebas_titulo,
                 "context":x.context,
                 "registered_at":x.registerd_at
             })
         return Uc
         
 
-class PruebasSerializer(serializers.ModelSerializer):
+class SeccionesSerializer(serializers.ModelSerializer):
     calculo = PruebaCalculoSerializer(many=True,read_only=True)
     calculo_ids = serializers.PrimaryKeyRelatedField(
-        source='members',
+        source='calculo',
         write_only=True,
         many=True,
         queryset=PruebaCalculoModel.objects.all())
     opcion = PruebaOpcionesSerializer(many=True,read_only=True)
     opcion_ids = serializers.PrimaryKeyRelatedField(
-        source='members',
+        source='opcion',
         write_only=True,
         many=True,
         queryset=PruebaOpcionesModel.objects.all())
-    actions = serializers.SerializerMethodField(read_only = True)
-    url = serializers.HyperlinkedIdentityField(view_name='prueba-detail',lookup_field='pk')
-    edit_url = serializers.SerializerMethodField(read_only = True)
-    delete_url = serializers.SerializerMethodField(read_only = True)
-
-    class Meta:
-        model = PruebasModel
-        fields = ("id","pruebas_titulo","pruebas_contexto","is_enabled","created_at","url","edit_url","delete_url","calculo","opcion","actions","calculo_ids","opcion_ids")
-
-    def get_edit_url(self,obj):
-        request = self.context.get('request')
-        if request is None:
-            return None
-        return reverse('prueba-update',kwargs={"pk":obj.id},request=request)
-
-    def get_delete_url(self,obj):
-        request = self.context.get('request')
-        if request is None:
-            return None
-        return reverse('prueba-delete',kwargs={"pk":obj.id},request=request)
-
-    def get_actions(self,obj):
-        Uc = []
-        autores = User_Pruebas_Model.objects.filter(model=obj.id)
-        for x in autores:
-            Uc.append({
-                "autor":x.model_user.username,
-                "email":x.model_user.email,
-                "prueba":x.model.pruebas_titulo,
-                "context":x.context,
-                "registered_at":x.registerd_at
-            })
-        return Uc
-
-    def update(self, instance, validated_data):
-        if 'calculo' in validated_data:
-            instance.calculo.set(validated_data['calculo'])
-        if 'opcion' in validated_data:
-            instance.opcion.set(validated_data['opcion'])
-        instance.save()
-        return instance
-
-class SeccionesSerializer(serializers.ModelSerializer):
-    pruebas = PruebasSerializer(many=True,read_only=True)
-    pruebas_ids = serializers.PrimaryKeyRelatedField(
-        source='members',
-        write_only=True,
-        many=True,
-        queryset=PruebasModel.objects.all())
     actions = serializers.SerializerMethodField(read_only = True)
     url = serializers.HyperlinkedIdentityField(view_name='seccion-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)
@@ -192,7 +142,7 @@ class SeccionesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SeccionesModel
-        fields = ("id","secciones_titulo","secciones_contexto","is_enabled","created_at","url","edit_url","delete_url","pruebas","actions","pruebas_ids")
+        fields = ("id","secciones_titulo","secciones_contexto","is_enabled","created_at","url","edit_url","delete_url","calculo","opcion","actions","calculo_ids","opcion_ids")
 
     def get_edit_url(self,obj):
         request = self.context.get('request')
@@ -220,21 +170,23 @@ class SeccionesSerializer(serializers.ModelSerializer):
         return Uc
 
     def update(self, instance, validated_data):
-        if 'pruebas' in validated_data:
-            instance.pruebas.set(validated_data['pruebas'])
+        if 'calculo' in validated_data:
+            instance.calculo.set(validated_data['calculo'])
+        if 'opcion' in validated_data:
+            instance.opcion.set(validated_data['opcion'])
         instance.save()
         return instance
 
 class ProtocolosSerializer(serializers.ModelSerializer):
     secciones = SeccionesSerializer(many=True,read_only=True)
     secciones_ids = serializers.PrimaryKeyRelatedField(
-        source='members',
+        source='secciones',
         write_only=True,
         many=True,
         queryset=SeccionesModel.objects.all())
     variables = VariablesSerializer(many=True,read_only=True)
     variables_ids = serializers.PrimaryKeyRelatedField(
-        source='members',
+        source='variables',
         write_only=True,
         many=True,
         queryset=VariablesModel.objects.all())
@@ -289,11 +241,6 @@ class UserProtocolosSerializer(serializers.ModelSerializer):
 class UserSeccionesSerializer(serializers.ModelSerializer):
     class Meta:
         model = User_Secciones_Model
-        fields = '__all__'
-
-class UserPruebasSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User_Pruebas_Model
         fields = '__all__'
 
 class UserPruebasCalculoSerializer(serializers.ModelSerializer):

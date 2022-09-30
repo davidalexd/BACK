@@ -10,12 +10,6 @@ class LogEnumSecciones():
     SECCION_REMOVED = 'Sección removida por '
     SECCION_ENABLED = 'Sección inhabilitada por '
 
-class LogEnumPruebas():
-    PRUEBA_CREATED = 'Nueva prueba creada por '
-    PRUEBA_UPDATED = 'Prueba actualizada por '
-    PRUEBA_REMOVED = 'Prueba removida por '
-    PRUEBA_ENABLED = 'Prueba inhabilitada por '
-
 class LogEnumPruebaCalculo():
     PRUEBA_CALCULO_CREATED = 'Nueva prueba calculo creada por '
     PRUEBA_CALCULO_UPDATED = 'Prueba calculo actualizada por '

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Protocol.models import VariablesModel,PruebaCalculoModel,PruebaOpcionesModel,PruebasModel,ProtocolsModel, SeccionesModel,Prb_Calculo_Operacion_Model,Prueba_Tipo_Model,Prt_Scc_Model,Prt_Var_Model,Scc_Prb_Model,Prb_Operacion_Variables
+from Protocol.models import VariablesModel,PruebaCalculoModel,PruebaOpcionesModel,ProtocolsModel, SeccionesModel,Prb_Calculo_Operacion_Model,Prueba_Tipo_Model,Prt_Scc_Model,Prt_Var_Model,Prb_Operacion_Variables
 
 class CalculoOperacion(admin.TabularInline):
     model = Prb_Calculo_Operacion_Model
@@ -15,10 +15,6 @@ class ProtocoloSecciones(admin.TabularInline):
 
 class ProtocoloVariables(admin.TabularInline):
     model = Prt_Var_Model
-    extra = 1
-
-class SeccionVariables(admin.TabularInline):
-    model = Scc_Prb_Model
     extra = 1
 
 class CalculoOperacionesVariables(admin.TabularInline):
@@ -39,14 +35,10 @@ class PruebaCalculoAdmin(admin.ModelAdmin):
 class PruebaOpcioneAdmin(admin.ModelAdmin):
     list_display = ("id","pruebas_opciones","is_enabled","created_at")
 
-@admin.register(PruebasModel)
-class PruebaAdmin(admin.ModelAdmin):
-    inlines = [TipoPrueba,]
-    list_display = ("id","pruebas_titulo","pruebas_contexto","is_enabled","created_at")
 
 @admin.register(SeccionesModel)
 class SeccionAdmin(admin.ModelAdmin):
-    inlines = [SeccionVariables,]
+    inlines = [TipoPrueba,]
     list_display = ("id","secciones_titulo","secciones_contexto","is_enabled","created_at")
 
 @admin.register(ProtocolsModel)

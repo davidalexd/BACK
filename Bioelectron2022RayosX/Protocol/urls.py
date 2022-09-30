@@ -12,11 +12,6 @@ urlpatterns = [
     path('Secciones/<int:pk>/update/',views.secciones_actualizar_view,name='seccion-update'),
     path('Secciones/<int:pk>/delete/',views.secciones_eliminar_view,name='seccion-delete'),
 
-    path('Pruebas/',views.pruebas_create_view,name='prueba-list'),
-    path('Pruebas/<int:pk>/',views.pruebas_list_view,name='prueba-detail'),
-    path('Pruebas/<int:pk>/update/',views.pruebas_actualizar_view,name='prueba-update'),
-    path('Pruebas/<int:pk>/delete/',views.pruebas_eliminar_view,name='prueba-delete'),
-
     path('Variables/',views.variables_create_view,name='variable-list'),
     path('Variables/<int:pk>/',views.variables_list_view,name='variable-detail'),
     path('Variables/<int:pk>/update/',views.variables_actualizar_view,name='variable-update'),
@@ -34,7 +29,6 @@ urlpatterns = [
 
     path('ProtocolosHistory/',views.protocolo_history_view,name='protocolo-history-list'),
     path('SeccionesHistory/',views.seccion_history_view,name='seccion-history-list'),
-    path('PruebasHistory/',views.prueba_history_view,name='prueba-history-list'),
     path('PruebasCalculoHistory/',views.prueba_calculo_history_view,name='prueba-calculo-history-list'),
     path('PruebasOpcionHistory/',views.prueba_opcion_history_view,name='prueba-opcion-history-list'),
     path('VariableHistory/',views.variable_history_view,name='variable-history-list'),

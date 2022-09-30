@@ -1,9 +1,9 @@
 from rest_framework import generics
 from rest_framework.response import Response
 # from django.http import Http404
-from .logenum import LogEnumProtocolos,LogEnumSecciones,LogEnumPruebas,LogEnumPruebaCalculo,LogEnumPruebaOpciones,LogEnumVariables,OrganizacionLog
-from .models import ProtocolsModel,SeccionesModel,PruebaCalculoModel,PruebasModel,PruebaOpcionesModel, User_Protocolos_Model, User_Pruebas_Calculo_Model, User_Pruebas_Model, User_Pruebas_Opciones_Model, User_Secciones_Model, User_Variables_Model,VariablesModel
-from .serializers import ProtocolosSerializer,SeccionesSerializer, UserProtocolosSerializer, UserPruebasCalculoSerializer, UserPruebasOpcionesSerializer, UserPruebasSerializer, UserSeccionesSerializer, UserVariablesSerializer,VariablesSerializer,PruebasSerializer,PruebaCalculoSerializer,PruebaOpcionesSerializer
+from .logenum import LogEnumProtocolos,LogEnumSecciones,LogEnumPruebaCalculo,LogEnumPruebaOpciones,LogEnumVariables,OrganizacionLog
+from .models import ProtocolsModel,SeccionesModel,PruebaCalculoModel,PruebaOpcionesModel, User_Protocolos_Model, User_Pruebas_Calculo_Model, User_Pruebas_Opciones_Model, User_Secciones_Model, User_Variables_Model,VariablesModel
+from .serializers import ProtocolosSerializer,SeccionesSerializer, UserProtocolosSerializer, UserPruebasCalculoSerializer, UserPruebasOpcionesSerializer, UserSeccionesSerializer, UserVariablesSerializer,VariablesSerializer,PruebaCalculoSerializer,PruebaOpcionesSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 
 
@@ -92,52 +92,6 @@ class SeccionEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroy
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
 secciones_eliminar_view = SeccionEliminarAPIView.as_view()
-
-
-
-
-
-class PruebaListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
-    serializer_class = PruebasSerializer    
-    def get_queryset(self):        
-        queryset = PruebasModel.objects.all()
-        return queryset
-
-    def perform_create(self, serializer):
-        instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumProtocolos.PROTOCOLO_CREATED,User_Protocolos_Model)
-pruebas_create_view = PruebaListaCreateApiView.as_view()
-
-class PruebaDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
-    serializer_class = PruebasSerializer
-    lookup_field = 'pk'
-    def get_queryset(self):        
-        queryset = PruebasModel.objects.all()
-        return queryset
-pruebas_list_view = PruebaDetallesAPIView.as_view()
-
-class PruebaAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
-    serializer_class = PruebasSerializer
-    lookup_field = 'pk'
-    def get_queryset(self):        
-        queryset = PruebasModel.objects.all()
-        return queryset
-    
-    def perform_update(self, serializer):
-        instance =serializer.save()
-        OrganizacionLog(self,instance,LogEnumProtocolos.PROTOCOLO_UPDATED,User_Protocolos_Model)
-pruebas_actualizar_view = PruebaAztualizacionAPIView.as_view()
-
-class PruebaEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
-    serializer_class = PruebasSerializer
-    lookup_field = 'pk'
-    def get_queryset(self):        
-        queryset = PruebasModel.objects.all()
-        return queryset
-    def perform_destroy(self, instance):
-        super().perform_destroy(instance)
-pruebas_eliminar_view = PruebaEliminarAPIView.as_view()
-
 
 
 
@@ -323,11 +277,6 @@ class SeccionesHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPI
     queryset = User_Secciones_Model.objects.all()
     serializer_class = UserSeccionesSerializer
 seccion_history_view = SeccionesHistoryGenericViewSet.as_view()
-
-class PruebasHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
-    queryset = User_Pruebas_Model.objects.all()
-    serializer_class = UserPruebasSerializer
-prueba_history_view = PruebasHistoryGenericViewSet.as_view()
 
 class PruebasCalculoHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
     queryset = User_Pruebas_Calculo_Model.objects.all()
