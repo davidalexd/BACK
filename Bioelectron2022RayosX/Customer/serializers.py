@@ -164,6 +164,8 @@ class OrganizacionSerializer(serializers.ModelSerializer):
         write_only=True,
         many=True,
         queryset=DepartamentoModel.objects.all())
+
+
     actions = serializers.SerializerMethodField(read_only=True)
     edit_url = serializers.SerializerMethodField(read_only = True)    
     delete_url = serializers.SerializerMethodField(read_only = True)
@@ -180,6 +182,7 @@ class OrganizacionSerializer(serializers.ModelSerializer):
             'ciiu',
             'direccion_legal',
             'pais_organizacion',
+            "full_direction",
             'departamento_organizacion',
             'provincia_organizacion',
             'distrito_organizacion',

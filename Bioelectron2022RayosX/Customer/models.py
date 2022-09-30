@@ -102,7 +102,7 @@ class OrganizacionModel(models.Model):
 
     @property
     def full_direction(self):
-        return str(self.direccion_legal) +' '+ str(self.pais_organizacion) +'-'+ str(self.departamento_organizacion) +'-'+ str(self.provincia_organizacion) +'-'+ str(self.distrito_organizacion)
+        return str(self.direccion_legal) +' '+ str(self.pais_organizacion) +' - '+ str(self.departamento_organizacion) +' - '+ str(self.provincia_organizacion) +' - '+ str(self.distrito_organizacion)
 
     class Meta:
         ordering = ["id"]

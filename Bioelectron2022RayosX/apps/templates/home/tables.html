@@ -6,7 +6,7 @@
   {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
   {% endblock stylesheets %}
-  
+
   {% block content %}
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
@@ -23,7 +23,79 @@
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral"  data-toggle="modal" data-target="#modal-create-organizaciones">New</a>
+
+              <div class="modal fade bd-example-modal-lg" id="modal-create-organizaciones" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-lg  modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      <div style="text-align:left !important;" >
+                        RUC: <input class="form-control form-control-sm" type="number">
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        Razón Social: <input class="form-control form-control-sm" type="text">
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        Nombre Comercial: <input class="form-control form-control-sm" type="text">
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        Tipo: <input class="form-control form-control-sm" type="text">
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        Ciiu: <input class="form-control form-control-sm" type="number">
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        Dirección Legal: <input class="form-control form-control-sm" type="text">
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        País: 
+                        <select class="form-control form-control-sm" name="" id="">
+                          <option select value="">Escoja una opción</option>
+                        </select>
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        Departamento: 
+                        <select class="form-control form-control-sm" name="" id="">
+                          <option select value="">Escoja una opción</option>
+                        </select>
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        Provincia: 
+                        <select class="form-control form-control-sm" name="" id="">
+                          <option select value="">Escoja una opción</option>
+                        </select>
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                      <div style="text-align:left !important;" >
+                        Distrito: 
+                        <select class="form-control form-control-sm" name="" id="">
+                          <option select value="">Escoja una opción</option>
+                        </select>
+                        <!--<small id="helpId" class="text-muted">Help text</small>-->
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
               <a href="#" class="btn btn-sm btn-neutral">Filters</a>
             </div>
           </div>
@@ -34,7 +106,7 @@
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <!-- Dark table -->
-      <div class="row">
+      <!-- <div class="row">
         <div class="col">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
@@ -353,24 +425,67 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- Dark table -->
       <div class="row">
         <div class="col">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">Dark table</h3>
+              <h3 class="text-white mb-0">Tabla Organizaciones</h3>
             </div>
             <div class="table-responsive">                
               <table id="example" class="table align-items-center table-dark table-flush">
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col" class="sort" data-sort="name">ID</th>
-                    <th scope="col" class="sort" data-sort="budget">Ruc</th>
-                    <th scope="col" class="sort" data-sort="status">Razón Social</th>
+                    <th scope="col" class="sort" data-sort="ID">#</th>
+                    <th scope="col" class="sort" data-sort="Razón Social">Razón Social</th>
+                    <th scope="col" class="sort" data-sort="Ruc">Ruc</th>
+                    <th scope="col" class="sort" data-sort="Nombre Comercial">Nombre Comercial</th>
+                    <th scope="col" class="sort" data-sort="Tipo de Empresa">Tipo de Empresa</th>
+                    <th scope="col" class="sort" data-sort="Departamentos">Departamentos</th>
+                    <th scope="col" class="sort" data-sort="Status">Estado</th>
+                    <th scope="col" class="sort">Actions</th>
                   </tr>
                 </thead>
+                <tbody class="list">
+                </tbody>  
               </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="modal fade bd-example-modal-lg" id="model-members" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <div class="table-responsive">                
+                <table id="members-list" class="table align-items-center table-flush">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col" class="sort" data-sort="ID">#</th>
+                      <th scope="col" class="sort" data-sort="Institucion">Institución</th>
+                      <th scope="col" class="sort" data-sort="Direccion">Dirección</th>
+                      <th scope="col" class="sort" data-sort="Area">Áreas</th>
+                      <th scope="col" class="sort" data-sort="Estado">Estado</th>
+                      <th scope="col" class="sort" >Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="list">
+                  </tbody>  
+                </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save</button>
             </div>
           </div>
         </div>

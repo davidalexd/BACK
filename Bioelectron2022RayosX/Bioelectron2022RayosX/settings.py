@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'Operations',
     'Protocol',
     'APIS',
-    'apps'
+    'apps',
+    'Extras'
 ]
 
 
