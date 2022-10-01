@@ -19,9 +19,9 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.api_home),
+    path('', views.index),
     path('admin/', admin.site.urls),
-    path('', include('APIS.urls')),
+    path('api/', include('APIS.urls')),
     # path('api/v1/',include('APIS.urls')),
     # path('api-auth/', include('rest_framework.urls'))
 ]

@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
-
 User = settings.AUTH_USER_MODEL
 
 class ContactosModel(models.Model):
@@ -35,9 +33,10 @@ class ContactosModel(models.Model):
 class AreasModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="ar_id")
     nombre_area = models.CharField("Area's name",max_length=255,null=False,blank=False,unique=False,db_column="ar_nombre_area")
-    ubicacion = models.JSONField("Area's location",null=False,blank=False,db_column="ar_ubicacion_area")    
+    ubicacion = models.JSONField("Area's location",editable=True,null=False,blank=False,db_column="ar_ubicacion_area")    
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
+    user = models.ManyToManyField(User,through="User_Areas_Model",through_fields=('model', 'model_user'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -63,6 +62,7 @@ class DepartamentoModel(models.Model):
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(AreasModel,through="Ar_dpt_Model",through_fields=('departamento', 'area'))
     contactos = models.ManyToManyField(ContactosModel,through="Con_Dpt_Model",through_fields=('departamento', 'contacto'))
+    user = models.ManyToManyField(User,through="User_Departamentos_Model",through_fields=('model', 'model_user'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -88,10 +88,10 @@ class OrganizacionModel(models.Model):
     departamento_organizacion = models.CharField("Department to which the organization belongs", max_length=255,null=True,blank=False,db_column="org_departamento")
     provincia_organizacion = models.CharField("Province to which the organization belongs", max_length=255,null=True,blank=False,db_column="org_provincia")
     distrito_organizacion = models.CharField("District to which the organization belongs", max_length=255,null=True,blank=False,db_column="org_distrito")
-    is_enabled = models.BooleanField(default=True,null=False)
+    is_enabled = models.BooleanField(default=True,null=False,blank=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(DepartamentoModel,through="Dpt_org_Model",through_fields=('organizacion', 'departamento'))
-    user = models.ManyToManyField(User,through="User_Organizaciones_Model",through_fields=('organizacion', 'user'))
+    user = models.ManyToManyField(User,through="User_Organizaciones_Model",through_fields=('model', 'model_user'))
 
 
     def save(self, *args, **kwargs):
@@ -99,24 +99,10 @@ class OrganizacionModel(models.Model):
             self.created_at = timezone.now()        
         return super(OrganizacionModel, self).save(*args, **kwargs)
 
-    # def get_absolute_url(self):
-    #     return f"/api/Organizaciones/{self.pk}/"
-
-    # @property
-    # def endpoint(self):
-    #     return self.get_absolute_url()
-
-    # @property
-    # def path(self):
-    #     return f"/organizaciones/{self.id}/"
-
-    # def status(self) -> bool:
-    #     return self.is_enabled
-
     @property
     def full_direction(self):
         return str(self.direccion_legal) +' '+ str(self.pais_organizacion) +'-'+ str(self.departamento_organizacion) +'-'+ str(self.provincia_organizacion) +'-'+ str(self.distrito_organizacion)
-    
+
     class Meta:
         ordering = ["id"]
         db_table = 'customers_Organizaciones'
@@ -174,8 +160,8 @@ class Con_Dpt_Model(models.Model):
 
 class User_Organizaciones_Model(models.Model):
     id = models.BigAutoField(primary_key=True)
-    organizacion = models.ForeignKey(OrganizacionModel,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    model = models.ForeignKey(OrganizacionModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
     context = models.TextField()
     registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
 
@@ -183,3 +169,27 @@ class User_Organizaciones_Model(models.Model):
         if not self.id:
             self.registerd_at = timezone.now()        
         return super(User_Organizaciones_Model, self).save(*args, **kwargs)
+
+class User_Departamentos_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    model = models.ForeignKey(DepartamentoModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Departamentos_Model, self).save(*args, **kwargs)
+
+class User_Areas_Model(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    model = models.ForeignKey(AreasModel,on_delete=models.CASCADE)
+    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    context = models.TextField()
+    registerd_at = models.DateTimeField(editable=False,null=False,blank=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.registerd_at = timezone.now()        
+        return super(User_Areas_Model, self).save(*args, **kwargs)

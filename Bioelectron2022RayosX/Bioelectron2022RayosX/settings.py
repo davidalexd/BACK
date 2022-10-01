@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).parent
+CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8p4**!2++q*ys&cg8fh(^2pk3@_1ui#2x0un3xa!*$6t9d^@0g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', config('SERVER', default='127.0.0.1')]
 
 
 # Application definition
@@ -45,7 +48,8 @@ INSTALLED_APPS = [
     'Reports',
     'Operations',
     'Protocol',
-    'APIS'
+    'APIS',
+    'apps'
 ]
 
 
@@ -70,11 +74,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Bioelectron2022RayosX.urls'
+TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")  # ROOT dir for templates
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,16 +101,18 @@ WSGI_APPLICATION = 'Bioelectron2022RayosX.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST':'localhost',
-        'PORT':'3306',
+        'NAME':'Bioelectron#2022RayosX',
         'USER':'root',
         'PASSWORD':'',
-        'NAME':'Bioelectron#2022RayosX',
+        'HOST':'localhost',
+        'PORT':'3306',
         'OPTIONS':{
-            'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
 }
+
+
 
 
 # Password validation
@@ -130,21 +137,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'es-Pe'
+LANGUAGE_CODE = 'es-pe'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+STATICFILES_DIRS = (
+    os.path.join(CORE_DIR, 'apps/static'),
+)
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
