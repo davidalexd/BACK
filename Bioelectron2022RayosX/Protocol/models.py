@@ -53,7 +53,7 @@ class PruebaCalculoModel(models.Model):
 class PruebaOpcionesModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="prb_opc_id")
     pruebas_titulo = models.CharField("Test name",max_length=255,null=False,blank=False,unique=True,db_column="prb_opc_titulo")
-    pruebas_contexto = models.TextField("Test context",null=True,blank=False,db_column="prb_opc_contexto")
+    pruebas_contexto = models.TextField("Test context",null=True,blank=True,db_column="prb_opc_contexto")
     pruebas_opciones = models.JSONField("Test results",null=False,blank=False,db_column="prb_opc_resultado")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)

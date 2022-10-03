@@ -1,10 +1,6 @@
-from .apis_net_pe import ApisNetPe
-from django.urls import path
-
-
-APIS_TOKEN = "apis-token-2940.WZvoRT7R2m5SkjuMMpk0uNeKyFF6OrM7 "
-api_consultas = ApisNetPe(APIS_TOKEN)
-
+from django.urls import path,re_path
+from . import views
 urlpatterns = [
-    path('FILTERWITHRUC/',api_consultas.get_company("10460278975"),name='rucs-list'),
+    path('FILTERWITHRUC/<request>',views.APIS_EXTRAS.get_ruc_list_view,name='rucs-list'),
+    path('FILTERWITHDNI/<request>',views.APIS_EXTRAS.get_dni_list_view,name='dnis-list'),
 ]
