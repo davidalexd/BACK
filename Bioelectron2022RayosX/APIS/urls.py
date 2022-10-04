@@ -14,4 +14,5 @@ urlpatterns = [
     path('v2/Machine/',include('Machine.routers')),
     path('v2/Operation/',include('Operations.routers')),
     path('v2/Protocol/',include('Protocol.routers')),
+    path('v2/Report/',include('Reports.routers')),
 ]

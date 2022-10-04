@@ -42,10 +42,7 @@
         <div class="card-body">
           <div class="form-group">
             <label for=""></label>
-            <select class="form-control" name="" id="">
-              <option selected value=" " disabled>Selecciones un protocolo</option>
-              <option></option>
-              <option></option>
+            <select class="form-control" name="" id="id-protocolos">
             </select>
           </div>   
         </div>
@@ -56,54 +53,16 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">  
-            <table class="table align-items-center table-dark">
+            <table class="table align-items-center table-dark" id="table-secciones">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col" class="sort" data-sort="ID">#</th>
                   <th scope="col" class="sort" data-sort="Razón Social">Sección</th>
+                  <th scope="col" class="sort" data-sort="Razón Social">Pruebas</th>
                 </tr>
               </thead>
               <tbody class="list">
-                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-                  <td>
-                    <div class="custom-control custom-control-alternative custom-checkbox mb-3">
-                      <input class="custom-control-input" id="customCheckseccion" type="checkbox" checked>
-                      <label class="custom-control-label" for="customCheckseccion"></label>
-                    </div>
-                  </td>
-                  <td>  
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">Argon Design System</span>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2" class="hiddenRow">
-                    <div class="accordian-body collapse" id="demo1"> 
-                      <table class="table table-condensed table-striped align-items-center table-dark">
-                        <thead class="thead-dark">
-                          <tr class="info">
-                            <th>#</th>
-                            <th>Prueba</th>
-                          </tr>
-                        </thead>	
-                        <tbody class="list">
-                          <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
-                            <td>
-                              <div class="custom-control custom-control-alternative custom-checkbox mb-3">
-                                <input class="custom-control-input" id="customCheckprueba" type="checkbox" checked>
-                                <label class="custom-control-label" for="customCheckprueba"></label>
-                              </div>
-                            </td>
-                            <td>Prueba</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div> 
-                  </td>
-                </tr>
+
               </tbody>
             </table>   
           </div>
@@ -121,4 +80,6 @@
     // setInterval("location.reload()",10);    
 </script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+<script src="/static/optimizaciones/add_options.js"></script>
+<script src="/static/api/formatos/get.js"></script>
 {% endblock javascripts %}
