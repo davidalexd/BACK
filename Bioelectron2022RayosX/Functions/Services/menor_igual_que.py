@@ -1,5 +1,5 @@
-def menor_igual_que(element,element_comparacaion):
+def menor_igual_que(element,element_comparacion):
     comparacion = False
-    comparacion = element<=element_comparacaion
+    comparacion = element<=element_comparacion
     resultado = {"valor":comparacion}
     return resultado
