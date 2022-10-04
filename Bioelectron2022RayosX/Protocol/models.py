@@ -76,7 +76,7 @@ class PruebaOpcionesModel(models.Model):
 class SeccionesModel(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="scc_id")
     secciones_titulo = models.CharField("Section name",max_length=255,null=False,blank=False,unique=True,db_column="scc_nombre")
-    secciones_contexto = models.TextField("Section context",null=True,blank=False,db_column="scc_contexto")
+    secciones_contexto = models.TextField("Section context",null=True,blank=True,db_column="scc_contexto")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
     users = models.ManyToManyField(User,through="User_Secciones_Model",through_fields=('model', 'model_user'))
@@ -124,8 +124,8 @@ class ProtocolsModel(models.Model):
 class Prueba_Tipo_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="PrbCal_id")
     seccion = models.ForeignKey(SeccionesModel,on_delete=models.CASCADE)
-    calculo = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE,null=True,blank=False)
-    opcion = models.ForeignKey(PruebaOpcionesModel,on_delete=models.CASCADE,null=True,blank=False)
+    calculo = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE,null=True,blank=True)
+    opcion = models.ForeignKey(PruebaOpcionesModel,on_delete=models.CASCADE,null=True,blank=True)
     created_at = models.DateTimeField(editable=False,default=timezone.now,null=False,blank=False)
 
     class Meta:

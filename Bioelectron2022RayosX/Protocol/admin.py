@@ -9,6 +9,7 @@ class TipoPrueba(admin.TabularInline):
     model = Prueba_Tipo_Model
     extra = 1
 
+
 class ProtocoloSecciones(admin.TabularInline):
     model = Prt_Scc_Model
     extra = 1
@@ -16,6 +17,11 @@ class ProtocoloSecciones(admin.TabularInline):
 class ProtocoloVariables(admin.TabularInline):
     model = Prt_Var_Model
     extra = 1
+
+class OperacionVariables(admin.TabularInline):
+    model = Prb_Operacion_Variables
+    extra = 1
+
 
 class CalculoOperacionesVariables(admin.TabularInline):
     model = Prb_Operacion_Variables
@@ -45,3 +51,9 @@ class SeccionAdmin(admin.ModelAdmin):
 class ProtocoloAdmin(admin.ModelAdmin):
     inlines = [ProtocoloSecciones,ProtocoloVariables]
     list_display = ("id","protocolo_titulo","protocolo_detalles","is_enabled","created_at")
+
+@admin.register(Prb_Calculo_Operacion_Model)
+class CalculoOperacionVariablesAdmin(admin.ModelAdmin):
+    inlines = [OperacionVariables]
+    list_display = ("id","created_at")
+    list_filter = ("calculo","operacion","variable")

@@ -1,0 +1,124 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Reportes {% endblock title %}  
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+  <style>
+  .hiddenRow {
+      padding: 0 !important;
+  }
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Creación de formatos</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card text-left">
+        <div class="card">
+          <div class="card-header">
+            Formato
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Código del formato">
+            </div>      
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Nombre del formato">
+            </div>  
+          </div>
+        </div>
+      </div>
+      <div class="card text-left">
+        <div class="card-header">
+          Protocolo
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for=""></label>
+            <select class="form-control" name="" id="">
+              <option selected value=" " disabled>Selecciones un protocolo</option>
+              <option></option>
+              <option></option>
+            </select>
+          </div>   
+        </div>
+      </div>
+      <div class="card text-left">
+        <div class="card-header">
+          Secciones
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">  
+            <table class="table align-items-center table-dark">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" class="sort" data-sort="ID">#</th>
+                  <th scope="col" class="sort" data-sort="Razón Social">Sección</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                  <td>
+                    <div class="custom-control custom-control-alternative custom-checkbox mb-3">
+                      <input class="custom-control-input" id="customCheckseccion" type="checkbox" checked>
+                      <label class="custom-control-label" for="customCheckseccion"></label>
+                    </div>
+                  </td>
+                  <td>  
+                    <div class="media align-items-center">
+                      <div class="media-body">
+                        <span class="mb-0 text-sm">Argon Design System</span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="hiddenRow">
+                    <div class="accordian-body collapse" id="demo1"> 
+                      <table class="table table-condensed table-striped align-items-center table-dark">
+                        <thead class="thead-dark">
+                          <tr class="info">
+                            <th>#</th>
+                            <th>Prueba</th>
+                          </tr>
+                        </thead>	
+                        <tbody class="list">
+                          <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
+                            <td>
+                              <div class="custom-control custom-control-alternative custom-checkbox mb-3">
+                                <input class="custom-control-input" id="customCheckprueba" type="checkbox" checked>
+                                <label class="custom-control-label" for="customCheckprueba"></label>
+                              </div>
+                            </td>
+                            <td>Prueba</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>   
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+       
+{% include "includes/footer.html" %}
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    // setInterval("location.reload()",10);    
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+{% endblock javascripts %}

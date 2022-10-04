@@ -9,7 +9,7 @@ class OperacionesModel(models.Model):
     operacion_titulo = models.CharField("Operation's title", max_length=255,null=False,blank=False,unique=True,db_column="opr_titulo")
     operacion_funcion= models.CharField("Operation's function", max_length=255,null=False,blank=False,unique=True,db_column="opr_funcion")
     operacion_symbol= models.CharField("Operation's symbol",max_length=255,null=True,blank=True,unique=True,db_column="opr_simbolo")
-    operacion_variable= models.IntegerField("Operation's number of variables",default=1,null=True,blank=True,db_column="opr_cantidad_variables")
+    operacion_variable= models.IntegerField("Operation's number of variables",default=1,null=False,blank=False,db_column="opr_cantidad_variables")
     operacion_contexto = models.TextField("Operation's context", max_length=255,null=False,blank=True,db_column="opr_contexto")
     is_enabled = models.BooleanField(default=True,null=False)
     created_at = models.DateTimeField(editable=False,null=False,blank=False)
@@ -25,7 +25,7 @@ class OperacionesModel(models.Model):
         db_table = 'operations_Operaciones'
     
     def __str__(self):
-        return str(self.id) + '-' + self.operacion_titulo + " .:: " + str(self.operacion_symbol) + " ::. " 
+        return str(self.id) + '-' + self.operacion_titulo + " .:: " + str(self.operacion_symbol) + " ::. " + "["+ str(self.operacion_variable) +"]"
 
     
 class User_Operaciones_Model(models.Model):

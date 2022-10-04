@@ -8,6 +8,7 @@ urlpatterns = [
     path('v1/',include('Operations.urls')),
     path('v1/',include('Protocol.urls')),
     path('v1/',include('Extras.urls')),
+    path('v1/',include('Reports.urls')),
     path('v2/Customer/',include('Customer.routers')),
     path('v2/CompanyMachine/',include('CompanyMachine.routers')),
     path('v2/Machine/',include('Machine.routers')),

@@ -20,6 +20,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
+    path('report_create/', views.report_create),
     path('admin/', admin.site.urls),
     path('api/', include('APIS.urls')),
     # path('api/v1/',include('APIS.urls')),

@@ -12,3 +12,8 @@ def index(request):
     html_template = loader.get_template('home/tables.html')
     return HttpResponse(html_template.render(context, request))
 
+def report_create(request):
+    context = {'segment': 'report_create'}
+    html_template = loader.get_template('home/formato_reporte.html')
+    return HttpResponse(html_template.render(context, request))
+
