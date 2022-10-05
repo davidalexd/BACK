@@ -15,7 +15,6 @@ import datetime
 from pathlib import Path
 from decouple import config
 import os
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -92,8 +91,8 @@ CORS_ALLOWED_ORIGINS = []
 
 if DEBUG:
     CORS_ALLOWED_ORIGINS += [
-        'http://127.0.0.1:8000',
-        'http://127.0.0.1:8000',
+        'http://localhost:8111',
+        'http://localhost:8111',
     ]
 
 TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")  # ROOT dir for templates
