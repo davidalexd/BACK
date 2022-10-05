@@ -45,7 +45,7 @@ class SistemaSerializer(serializers.ModelSerializer):
         source='members',
         write_only=True,
         many=True,
-        queryset=TuboModel.objects.all())
+        queryset=TuboModel.objects.filter(is_enabled = True))
     actions = serializers.SerializerMethodField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name='sistema-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)

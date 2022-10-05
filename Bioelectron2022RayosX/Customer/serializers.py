@@ -1,3 +1,4 @@
+from faulthandler import is_enabled
 from rest_framework import serializers
 from .models import OrganizacionModel,DepartamentoModel,AreasModel,ContactosModel, User_Contactos_Model,User_Organizaciones_Model,User_Departamentos_Model,User_Areas_Model
 from rest_framework.reverse import reverse
@@ -92,12 +93,12 @@ class DepartamentoSerializer(serializers.ModelSerializer):
         source='members',
         write_only=True,
         many=True,
-        queryset=AreasModel.objects.all())
+        queryset=AreasModel.objects.filter(is_enabled = True))
     contactos_ids = serializers.PrimaryKeyRelatedField(
         source='contactos',
         write_only=True,
         many=True,
-        queryset=ContactosModel.objects.all())
+        queryset=ContactosModel.objects.filter(is_enabled = True))
     actions = serializers.SerializerMethodField(read_only=True)
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
@@ -163,7 +164,7 @@ class OrganizacionSerializer(serializers.ModelSerializer):
         source='members',
         write_only=True,
         many=True,
-        queryset=DepartamentoModel.objects.all())
+        queryset=DepartamentoModel.objects.filter(is_enabled = True))
 
 
     actions = serializers.SerializerMethodField(read_only=True)

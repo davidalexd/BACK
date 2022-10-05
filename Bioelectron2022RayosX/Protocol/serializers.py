@@ -45,7 +45,7 @@ class PruebaCalculoSerializer(serializers.ModelSerializer):
         source='operacion',
         write_only=True,
         many=True,
-        queryset=OperacionesModel.objects.all())
+        queryset=OperacionesModel.objects.filter(is_enabled = True))
     actions = serializers.SerializerMethodField(read_only = True)
     url = serializers.HyperlinkedIdentityField(view_name='prueba-calculo-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)
@@ -128,13 +128,13 @@ class SeccionesSerializer(serializers.ModelSerializer):
         source='calculo',
         write_only=True,
         many=True,
-        queryset=PruebaCalculoModel.objects.all())
+        queryset=PruebaCalculoModel.objects.filter(is_enabled = True))
     opcion = PruebaOpcionesSerializer(many=True,read_only=True)
     opcion_ids = serializers.PrimaryKeyRelatedField(
         source='opcion',
         write_only=True,
         many=True,
-        queryset=PruebaOpcionesModel.objects.all())
+        queryset=PruebaOpcionesModel.objects.filter(is_enabled = True))
     actions = serializers.SerializerMethodField(read_only = True)
     url = serializers.HyperlinkedIdentityField(view_name='seccion-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)
@@ -183,13 +183,13 @@ class ProtocolosSerializer(serializers.ModelSerializer):
         source='secciones',
         write_only=True,
         many=True,
-        queryset=SeccionesModel.objects.all())
+        queryset=SeccionesModel.objects.filter(is_enabled=True))
     variables = VariablesSerializer(many=True,read_only=True)
     variables_ids = serializers.PrimaryKeyRelatedField(
         source='variables',
         write_only=True,
         many=True,
-        queryset=VariablesModel.objects.all())
+        queryset=VariablesModel.objects.filter(is_enabled=True))
     actions = serializers.SerializerMethodField(read_only = True)
     url = serializers.HyperlinkedIdentityField(view_name='protocolo-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)

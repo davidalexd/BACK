@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import datetime
+
 from pathlib import Path
 from decouple import config
 import os
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'authentication',
     'Customer',
     'Machine',
@@ -57,11 +60,18 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
-        "authentication.authentication.TokenAuthentication"
+        "authentication.authentication.TokenAuthentication",
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"
     ]
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES":['Bearer'],
+    "ACCESS_TOKEN_LIFETIME":datetime.timedelta(seconds=30),
+    "REFRESH_TOKEN_LIFETIME":datetime.timedelta(minutes=1),
 }
 
 MIDDLEWARE = [

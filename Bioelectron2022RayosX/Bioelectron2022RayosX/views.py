@@ -17,3 +17,7 @@ def report_create(request):
     html_template = loader.get_template('home/formato_reporte.html')
     return HttpResponse(html_template.render(context, request))
 
+def login(request):
+    context = {'segment': 'login'}
+    html_template = loader.get_template('home/login.html')
+    return HttpResponse(html_template.render(context, request))
