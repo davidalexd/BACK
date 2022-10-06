@@ -5,9 +5,10 @@ from rest_framework.decorators import action
 from rest_framework import viewsets
 from .models import User
 from .serializer import UserSerializer, UserListSerializer, UpdateUserSerializer, PasswordSerializer
+from authentication.mixins import StaffEditorPermissionMixin
 
 
-class UserViewSet(viewsets.GenericViewSet):
+class UserViewSet(StaffEditorPermissionMixin,viewsets.GenericViewSet):
     model = User
     serializer_class = UserSerializer
     list_serializer_class = UserListSerializer

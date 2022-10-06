@@ -7,7 +7,7 @@ from .models import ContactosModel, DepartamentoModel, OrganizacionModel, AreasM
 from .serializers import ContactosSerialezer, DepartamentoSerializer, OrganizacionSerializer,AreasSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 
-class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
+class OrganizacionesListaCreateApiView(generics.ListCreateAPIView):
     serializer_class = OrganizacionSerializer
     def get_queryset(self):        
         queryset = OrganizacionModel.objects.all()
@@ -19,7 +19,7 @@ class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListC
         instance = serializer.save()
 organzizaciones_create_view = OrganizacionesListaCreateApiView.as_view()
 
-class OrganizacionesDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
+class OrganizacionesDetallesAPIView(generics.RetrieveAPIView):
     serializer_class = OrganizacionSerializer
     lookup_field = 'pk'
     def get_queryset(self):        
@@ -31,7 +31,7 @@ class OrganizacionesDetallesAPIView(StaffEditorPermissionMixin,generics.Retrieve
 
 organzizaciones_list_view = OrganizacionesDetallesAPIView.as_view()
 
-class OrganizacionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
+class OrganizacionesAztualizacionAPIView(generics.RetrieveUpdateAPIView):
     queryset = OrganizacionModel.objects.all()
     serializer_class = OrganizacionSerializer
     lookup_field = 'pk'
@@ -39,7 +39,7 @@ class OrganizacionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.Ret
         instance = serializer.save()
 organzizaciones_actualizar_view = OrganizacionesAztualizacionAPIView.as_view()
 
-class OrganizacionesEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
+class OrganizacionesEliminarAPIView(generics.RetrieveDestroyAPIView):
     queryset = OrganizacionModel.objects.all()
     serializer_class = OrganizacionSerializer
     lookup_field = 'pk'
