@@ -1,18 +1,18 @@
 from rest_framework import generics
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 # from django.http import Http404
-from django.shortcuts import get_object_or_404
-
-from .logenum import LogEnumDepartamentos, LogEnumOrganizaciones,LogEnumAreas,OrganizacionLog
-from .models import DepartamentoModel, OrganizacionModel, AreasModel, User_Departamentos_Model, User_Organizaciones_Model, User_Areas_Model
-from .serializers import DepartamentoSerializer, OrganizacionSerializer,AreasSerializer, UserAreaSerializer, UserDepartamentoSerializer, UserOrganizacionSerializer
+from rest_framework.exceptions import APIException,status
+from .logenum import LogEnumContactos, LogEnumDepartamentos, LogEnumOrganizaciones,LogEnumAreas,OrganizacionLog
+from .models import ContactosModel, DepartamentoModel, OrganizacionModel, AreasModel, User_Contactos_Model, User_Departamentos_Model, User_Organizaciones_Model, User_Areas_Model
+from .serializers import ContactosSerialezer, DepartamentoSerializer, OrganizacionSerializer,AreasSerializer, UserAreaSerializer, UserContactosSerializer, UserDepartamentoSerializer, UserOrganizacionSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 
 class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
     serializer_class = OrganizacionSerializer
     def get_queryset(self):        
         queryset = OrganizacionModel.objects.all()
+        if not queryset:
+            raise ValidationError
         return queryset
 
     def perform_create(self, serializer):
@@ -21,9 +21,15 @@ class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListC
 organzizaciones_create_view = OrganizacionesListaCreateApiView.as_view()
 
 class OrganizacionesDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
-    queryset = OrganizacionModel.objects.all()
     serializer_class = OrganizacionSerializer
     lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = OrganizacionModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+
+
 organzizaciones_list_view = OrganizacionesDetallesAPIView.as_view()
 
 class OrganizacionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
@@ -31,7 +37,7 @@ class OrganizacionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.Ret
     serializer_class = OrganizacionSerializer
     lookup_field = 'pk'
     def perform_update(self, serializer):
-        instance =serializer.save()
+        instance = serializer.save()
         OrganizacionLog(self,instance,LogEnumOrganizaciones.ORGANIZACION_UPDATED,User_Organizaciones_Model)
 organzizaciones_actualizar_view = OrganizacionesAztualizacionAPIView.as_view()
 
@@ -91,6 +97,8 @@ departamentos_eliminar_view = DepartamentosEliminarAPIView.as_view()
 
 
 
+
+
 class AreasListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
     serializer_class = AreasSerializer
     def get_queryset(self):        
@@ -111,7 +119,6 @@ class AreasDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
 areas_list_view = AreasDetallesAPIView.as_view()
 
 class AreasAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
-    queryset = DepartamentoModel.objects.all()
     serializer_class = AreasSerializer
     lookup_field = 'pk'
     def get_queryset(self):        
@@ -136,10 +143,59 @@ areas_eliminar_view = AreasEliminarAPIView.as_view()
 
 
 
+class ContactosListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
+    serializer_class = ContactosSerialezer
+    def get_queryset(self):        
+        queryset = ContactosModel.objects.all()
+        return queryset
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        OrganizacionLog(self,instance,LogEnumContactos.CONTACTO_CREATED,User_Contactos_Model)
+contactos_create_view = ContactosListaCreateApiView.as_view()
+
+class ContactosDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
+    serializer_class = ContactosSerialezer
+    lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = ContactosModel.objects.all()
+        return queryset
+contactos_list_view = ContactosDetallesAPIView.as_view()
+
+class ContactosAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
+    queryset = ContactosModel.objects.all()
+    serializer_class = ContactosSerialezer
+    lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = ContactosModel.objects.all()
+        return queryset
+    def perform_update(self, serializer):
+        instance =serializer.save()
+        OrganizacionLog(self,instance,LogEnumContactos.CONTACTO_UPDATED,User_Contactos_Model)
+contactos_actualizar_view = ContactosAztualizacionAPIView.as_view()
+
+class ContactosEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
+    serializer_class = ContactosSerialezer
+    lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = ContactosModel.objects.all()
+        return queryset
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+contactos_eliminar_view = ContactosEliminarAPIView.as_view()
+
+
+
+
 class AreasHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
     queryset = User_Areas_Model.objects.all()
     serializer_class = UserAreaSerializer
 areas_history_view = AreasHistoryGenericViewSet.as_view()
+
+class ContactosHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
+    queryset = User_Contactos_Model.objects.all()
+    serializer_class = UserContactosSerializer
+contactos_history_view = ContactosHistoryGenericViewSet.as_view()
 
 class DepartamentosHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
     queryset = User_Departamentos_Model.objects.all()
@@ -156,6 +212,12 @@ organizacion_history_view = OrganizacionHistoryGenericViewSet.as_view()
 
 
 
+
+
+
+class ValidationError(APIException):
+    status_code = status.HTTP_404_NOT_FOUND
+    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No data is available', })
 
 
 
