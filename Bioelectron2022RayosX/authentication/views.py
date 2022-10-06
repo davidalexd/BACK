@@ -5,9 +5,7 @@ from rest_framework.response import Response
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-from User.serializer import (
-    CustomTokenObtainPairSerializer, CustomUserSerializer
-)
+from User.serializer import CustomTokenObtainPairSerializer, CustomUserSerializer
 from User.models import User
 
 class Login(TokenObtainPairView):

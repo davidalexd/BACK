@@ -2,7 +2,12 @@
 const select_protocol = $("#id-protocolos")
 const table_secciones =$('#table-secciones')
 
-fetch('http://127.0.0.1:8000/api/v2/Protocol/Protocolos/')
+fetch('http://127.0.0.1:8000/api/v2/Protocol/Protocolos/',{
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
 .then(response => response.json())
 .then(data => add_options(select_protocol,data,"protocolo_titulo","id"));
 

@@ -5,7 +5,8 @@ from .authentication import ExpiringTokenAuthentication
 # from rest_framework import permissions
 # from authentication.permissions import IsStaffEditorPermission
 
-class StaffEditorPermissionMixin(object): 
+class StaffEditorPermissionMixin(authentication.BaseAuthentication):
+    user = None
 
     def get_user(self,request):
         token = get_authorization_header(request).split()

@@ -15,16 +15,7 @@ class ContactosModel(BaseModel):
     numero_telefono = models.CharField("Contact phone number", max_length=255,null=True,blank=True,db_column="con_numero_telefono")    
     correo = models.CharField("Contact email address", max_length=255,null=True,blank=True,unique=True,db_column="con_correo_electronico")    
     cargo = models.CharField("Job", max_length=255,null=True,blank=True,db_column="con_cargo")    
-    historical = HistoricalRecords()
-
-    @property 
-    def _history_user(self):
-        return self.changed_by
-
-    @_history_user.setter 
-    def _history_user(self,value):
-        self.changed_by = value
-
+    
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
@@ -45,16 +36,7 @@ class AreasModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="ar_id")
     nombre_area = models.CharField("Area's name",editable=True,max_length=255,null=False,blank=False,unique=False,db_column="ar_nombre_area")
     ubicacion = models.JSONField("Area's location",editable=True,null=True,blank=False,db_column="ar_ubicacion_area")    
-    historical = HistoricalRecords()
 
-    @property 
-    def _history_user(self):
-        return self.changed_by
-
-    @_history_user.setter 
-
-    def _history_user(self,value):
-        self.changed_by = value
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
@@ -77,15 +59,6 @@ class DepartamentoModel(BaseModel):
     distrito_departamento = models.CharField("District to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_distrito")
     members = models.ManyToManyField(AreasModel,through="Ar_dpt_Model",through_fields=('departamento', 'area'))
     contactos = models.ManyToManyField(ContactosModel,through="Con_Dpt_Model",through_fields=('departamento', 'contacto'))
-    historical = HistoricalRecords()
-
-    @property 
-    def _history_user(self):
-        return self.changed_by
-
-    @_history_user.setter 
-    def _history_user(self,value):
-        self.changed_by = value
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -112,16 +85,6 @@ class OrganizacionModel(BaseModel):
     provincia_organizacion = models.CharField("Province to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_provincia")
     distrito_organizacion = models.CharField("District to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_distrito")
     members = models.ManyToManyField(DepartamentoModel,through="Dpt_org_Model",through_fields=('organizacion', 'departamento'))
-    historical = HistoricalRecords()
-
-    @property 
-    def _history_user(self):
-        return self.changed_by
-
-    @_history_user.setter 
-    def _history_user(self,value):
-        self.changed_by = value
-
 
     def save(self, *args, **kwargs):
         if not self.id:

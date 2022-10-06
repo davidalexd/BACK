@@ -8,7 +8,7 @@ from .serializer import UserSerializer, UserListSerializer, UpdateUserSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 
 
-class UserViewSet(StaffEditorPermissionMixin,viewsets.GenericViewSet):
+class UserViewSet(viewsets.GenericViewSet):
     model = User
     serializer_class = UserSerializer
     list_serializer_class = UserListSerializer
@@ -16,7 +16,7 @@ class UserViewSet(StaffEditorPermissionMixin,viewsets.GenericViewSet):
 
     def get_object(self, pk):
         return get_object_or_404(self.model, pk=pk)
-    
+
     def get_queryset(self):
         if self.queryset is None:
             self.queryset = self.model.objects\
