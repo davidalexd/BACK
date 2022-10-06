@@ -1,9 +1,13 @@
 from django.db import models
+
+from simple_history.models import HistoricalRecords
+from Base.models import BaseModel
+
 from django.utils import timezone
 from django.conf import settings
 User = settings.AUTH_USER_MODEL
 
-class ContactosModel(models.Model):
+class ContactosModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="con_id")
     nombre = models.CharField("Contact's name",max_length=255,null=False,blank=False,unique=False,db_column="con_nombre")
     apellidos = models.CharField("Contact's last name",max_length=255,null=False,blank=False,unique=False,db_column="con_apellidos")
@@ -11,9 +15,15 @@ class ContactosModel(models.Model):
     numero_telefono = models.CharField("Contact phone number", max_length=255,null=True,blank=True,db_column="con_numero_telefono")    
     correo = models.CharField("Contact email address", max_length=255,null=True,blank=True,unique=True,db_column="con_correo_electronico")    
     cargo = models.CharField("Job", max_length=255,null=True,blank=True,db_column="con_cargo")    
-    is_enabled = models.BooleanField(default=True,null=False)
-    created_at = models.DateTimeField(editable=False,null=False,blank=True)
-    user = models.ManyToManyField(User,through="User_Contactos_Model",through_fields=('model', 'model_user'))
+    historical = HistoricalRecords()
+
+    @property 
+    def _history_user(self):
+        return self.changed_by
+
+    @_history_user.setter 
+    def _history_user(self,value):
+        self.changed_by = value
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -31,14 +41,20 @@ class ContactosModel(models.Model):
     def __str__(self):
         return str(self.id) + '-' + self.nombre + '-' + self.apellidos
 
-class AreasModel(models.Model):
+class AreasModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="ar_id")
     nombre_area = models.CharField("Area's name",editable=True,max_length=255,null=False,blank=False,unique=False,db_column="ar_nombre_area")
     ubicacion = models.JSONField("Area's location",editable=True,null=True,blank=False,db_column="ar_ubicacion_area")    
-    is_enabled = models.BooleanField(editable=True,default=True,null=False)
-    created_at = models.DateTimeField(editable=False,null=False,blank=True)
-    user = models.ManyToManyField(User,through="User_Areas_Model",through_fields=('model', 'model_user'))
+    historical = HistoricalRecords()
 
+    @property 
+    def _history_user(self):
+        return self.changed_by
+
+    @_history_user.setter 
+
+    def _history_user(self,value):
+        self.changed_by = value
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
@@ -51,7 +67,7 @@ class AreasModel(models.Model):
     def __str__(self):
         return str(self.id) + '-' + self.nombre_area
 
-class DepartamentoModel(models.Model):
+class DepartamentoModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="dpt_id")
     nombre_departamento = models.CharField("Headquarters's name",max_length=255,null=False,blank=False,unique=False,db_column="dpt_nombre_departamento")
     direccion_departamento = models.CharField("Headquarters's address", max_length=255,null=True,blank=True,db_column="dpt_direccion_departamento")
@@ -59,11 +75,17 @@ class DepartamentoModel(models.Model):
     departamento_departamento = models.CharField("Department to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_departamento")
     provincia_departamento = models.CharField("Province to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_provincia")
     distrito_departamento = models.CharField("District to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_distrito")
-    is_enabled = models.BooleanField(default=True,null=False)
-    created_at = models.DateTimeField(editable=False,null=False,blank=True)
     members = models.ManyToManyField(AreasModel,through="Ar_dpt_Model",through_fields=('departamento', 'area'))
     contactos = models.ManyToManyField(ContactosModel,through="Con_Dpt_Model",through_fields=('departamento', 'contacto'))
-    user = models.ManyToManyField(User,through="User_Departamentos_Model",through_fields=('model', 'model_user'))
+    historical = HistoricalRecords()
+
+    @property 
+    def _history_user(self):
+        return self.changed_by
+
+    @_history_user.setter 
+    def _history_user(self,value):
+        self.changed_by = value
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -77,7 +99,7 @@ class DepartamentoModel(models.Model):
     def __str__(self):
         return str(self.id) + '-' + self.nombre_departamento
 
-class OrganizacionModel(models.Model):
+class OrganizacionModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="org_id")
     ruc = models.CharField("Organization's ruc number",max_length=12,null=True,blank=True,unique=True,db_column="org_ruc")
     razon_social = models.CharField("Organization's name",max_length=255,null=False,blank=True,unique=True,db_column="org_razon_social")
@@ -89,10 +111,16 @@ class OrganizacionModel(models.Model):
     departamento_organizacion = models.CharField("Department to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_departamento")
     provincia_organizacion = models.CharField("Province to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_provincia")
     distrito_organizacion = models.CharField("District to which the organization belongs", max_length=255,null=True,blank=True,db_column="org_distrito")
-    is_enabled = models.BooleanField(default=True,null=False,blank=True)
-    created_at = models.DateTimeField(editable=False,null=False,blank=True)
     members = models.ManyToManyField(DepartamentoModel,through="Dpt_org_Model",through_fields=('organizacion', 'departamento'))
-    user = models.ManyToManyField(User,through="User_Organizaciones_Model",through_fields=('model', 'model_user'))
+    historical = HistoricalRecords()
+
+    @property 
+    def _history_user(self):
+        return self.changed_by
+
+    @_history_user.setter 
+    def _history_user(self,value):
+        self.changed_by = value
 
 
     def save(self, *args, **kwargs):
@@ -142,52 +170,3 @@ class Con_Dpt_Model(models.Model):
         ordering = ["id"]
         db_table = 'customers_contactos_departamento'
 
-
-
-class User_Organizaciones_Model(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    model = models.ForeignKey(OrganizacionModel,on_delete=models.CASCADE)
-    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
-    context = models.TextField()
-    registerd_at = models.DateTimeField(editable=False,null=False,blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.registerd_at = timezone.now()        
-        return super(User_Organizaciones_Model, self).save(*args, **kwargs)
-
-class User_Departamentos_Model(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    model = models.ForeignKey(DepartamentoModel,on_delete=models.CASCADE)
-    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
-    context = models.TextField()
-    registerd_at = models.DateTimeField(editable=False,null=False,blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.registerd_at = timezone.now()        
-        return super(User_Departamentos_Model, self).save(*args, **kwargs)
-
-class User_Areas_Model(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    model = models.ForeignKey(AreasModel,on_delete=models.CASCADE)
-    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
-    context = models.TextField()
-    registerd_at = models.DateTimeField(editable=False,null=False,blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.registerd_at = timezone.now()        
-        return super(User_Areas_Model, self).save(*args, **kwargs)
-
-class User_Contactos_Model(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    model = models.ForeignKey(ContactosModel,on_delete=models.CASCADE)
-    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
-    context = models.TextField()
-    registerd_at = models.DateTimeField(editable=False,null=False,blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.registerd_at = timezone.now()        
-        return super(User_Contactos_Model, self).save(*args, **kwargs)

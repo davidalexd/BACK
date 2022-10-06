@@ -45,6 +45,7 @@ BASE_APPS = [
 
 LOCAL_APPS = [
     'User',
+    'Base',
     'authentication',
     'Customer',
     'Machine',
@@ -60,7 +61,8 @@ LOCAL_APPS = [
 THIRD_APPS = [
     'rest_framework',
     'simple_history',
-    'corsheaders'
+    'corsheaders',
+    'drf_yasg'
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS

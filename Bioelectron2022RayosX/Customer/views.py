@@ -3,8 +3,8 @@ from rest_framework.response import Response
 # from django.http import Http404
 from rest_framework.exceptions import APIException,status
 from .logenum import LogEnumContactos, LogEnumDepartamentos, LogEnumOrganizaciones,LogEnumAreas,OrganizacionLog
-from .models import ContactosModel, DepartamentoModel, OrganizacionModel, AreasModel, User_Contactos_Model, User_Departamentos_Model, User_Organizaciones_Model, User_Areas_Model
-from .serializers import ContactosSerialezer, DepartamentoSerializer, OrganizacionSerializer,AreasSerializer, UserAreaSerializer, UserContactosSerializer, UserDepartamentoSerializer, UserOrganizacionSerializer
+from .models import ContactosModel, DepartamentoModel, OrganizacionModel, AreasModel
+from .serializers import ContactosSerialezer, DepartamentoSerializer, OrganizacionSerializer,AreasSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 
 class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
@@ -17,7 +17,6 @@ class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListC
 
     def perform_create(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumOrganizaciones.ORGANIZACION_CREATED,User_Organizaciones_Model)
 organzizaciones_create_view = OrganizacionesListaCreateApiView.as_view()
 
 class OrganizacionesDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
@@ -38,7 +37,6 @@ class OrganizacionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.Ret
     lookup_field = 'pk'
     def perform_update(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumOrganizaciones.ORGANIZACION_UPDATED,User_Organizaciones_Model)
 organzizaciones_actualizar_view = OrganizacionesAztualizacionAPIView.as_view()
 
 class OrganizacionesEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
@@ -62,7 +60,6 @@ class DepartamentosListaCreateApiView(StaffEditorPermissionMixin,generics.ListCr
 
     def perform_create(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumDepartamentos.DEPARTAMENTO_CREATED,User_Departamentos_Model)
 departamentos_create_view = DepartamentosListaCreateApiView.as_view()
 
 class DepartamentosDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
@@ -82,7 +79,6 @@ class DepartamentosAztualizacionAPIView(StaffEditorPermissionMixin,generics.Retr
         return queryset
     def perform_update(self, serializer):
         instance =serializer.save()
-        OrganizacionLog(self,instance,LogEnumDepartamentos.DEPARTAMENTO_UPDATED,User_Departamentos_Model)
 departamentos_actualizar_view = DepartamentosAztualizacionAPIView.as_view()
 
 class DepartamentosEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
@@ -107,7 +103,6 @@ class AreasListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIV
 
     def perform_create(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumAreas.AREA_CREATED,User_Areas_Model)
 areas_create_view = AreasListaCreateApiView.as_view()
 
 class AreasDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
@@ -126,7 +121,6 @@ class AreasAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpda
         return queryset
     def perform_update(self, serializer):
         instance =serializer.save()
-        OrganizacionLog(self,instance,LogEnumAreas.AREA_UPDATED,User_Areas_Model)
 areas_actualizar_view = AreasAztualizacionAPIView.as_view()
 
 class AreasEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
@@ -151,7 +145,6 @@ class ContactosListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreate
 
     def perform_create(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumContactos.CONTACTO_CREATED,User_Contactos_Model)
 contactos_create_view = ContactosListaCreateApiView.as_view()
 
 class ContactosDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
@@ -171,7 +164,6 @@ class ContactosAztualizacionAPIView(StaffEditorPermissionMixin,generics.Retrieve
         return queryset
     def perform_update(self, serializer):
         instance =serializer.save()
-        OrganizacionLog(self,instance,LogEnumContactos.CONTACTO_UPDATED,User_Contactos_Model)
 contactos_actualizar_view = ContactosAztualizacionAPIView.as_view()
 
 class ContactosEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
@@ -183,34 +175,6 @@ class ContactosEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestr
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
 contactos_eliminar_view = ContactosEliminarAPIView.as_view()
-
-
-
-
-class AreasHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
-    queryset = User_Areas_Model.objects.all()
-    serializer_class = UserAreaSerializer
-areas_history_view = AreasHistoryGenericViewSet.as_view()
-
-class ContactosHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
-    queryset = User_Contactos_Model.objects.all()
-    serializer_class = UserContactosSerializer
-contactos_history_view = ContactosHistoryGenericViewSet.as_view()
-
-class DepartamentosHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
-    queryset = User_Departamentos_Model.objects.all()
-    serializer_class = UserDepartamentoSerializer
-departamento_history_view = DepartamentosHistoryGenericViewSet.as_view()
-
-class OrganizacionHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
-    queryset = User_Organizaciones_Model.objects.all()
-    serializer_class = UserOrganizacionSerializer
-organizacion_history_view = OrganizacionHistoryGenericViewSet.as_view()
-
-
-
-
-
 
 
 
