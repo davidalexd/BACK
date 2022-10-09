@@ -43,7 +43,7 @@ class MedidoresSerializer(serializers.ModelSerializer):
         source='members',
         write_only=True,
         many=True,
-        queryset=CalibracionesModel.objects.all())
+        queryset=CalibracionesModel.objects.filter(is_enabled = True))
     actions = serializers.SerializerMethodField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name='medidor-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)

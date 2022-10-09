@@ -1,0 +1,77 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Reportes {% endblock title %}  
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+  <style>
+  .hiddenRow {
+      padding: 0 !important;
+  }
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Creación de formatos</h4>
+    </div>
+  </div>
+  <form method="post" id="formdata">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-alternative" name="codigo_formato" placeholder="Código del formato">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-alternative" name="nombre_formato" placeholder="Nombre del formato"/>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <select class="form-control form-control-alternative" name="protocolo" id="id-protocolos">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="card text-left">
+      <div class="card-header">
+        Secciones
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">  
+          <table class="table align-items-center table-dark" id="table-secciones">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" class="sort" data-sort="ID">#</th>
+                <th scope="col" class="sort" data-sort="Razón Social">Sección</th>
+                <th scope="col" class="sort" data-sort="Pruebas">Pruebas Calculo</th>
+                <th scope="col" class="sort" data-sort="Pruebas">Pruebas Opciones</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+
+            </tbody>
+          </table>   
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="post-create-formats">Submit</button>
+  </form>
+</div>
+       
+{% include "includes/footer.html" %}
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    // setInterval("location.reload()",10);    
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+<script src="/static/optimizaciones/add_options.js"></script>
+<script src="/static/api/formatos/get.js"></script>
+<script src="/static/api/formatos/post.js"></script>
+{% endblock javascripts %}

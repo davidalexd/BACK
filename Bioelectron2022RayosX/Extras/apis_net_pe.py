@@ -1,11 +1,9 @@
 from typing import List, Optional
 import logging
 import requests
+import json
 
-
-
-class ApisNetPe:
-
+class TipoCambio:
     BASE_URL = "https://api.apis.net.pe"
 
     def __init__(self, token: str = None) -> None:
@@ -25,7 +23,7 @@ class ApisNetPe:
             return response.json()
         elif response.status_code == 422:
             logging.warning(f"{response.url} - invalida parameter")
-            logging.warning(response.text)
+            return json.loads(response.text)
         elif response.status_code == 403:
             logging.warning(f"{response.url} - IP blocked")
         elif response.status_code == 429:

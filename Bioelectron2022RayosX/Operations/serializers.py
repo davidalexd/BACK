@@ -10,7 +10,7 @@ class OperacionesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OperacionesModel
-        fields = ('id','operacion_titulo','operacion_funcion','operacion_contexto','is_enabled','created_at','url','edit_url','delete_url','actions')
+        fields = ('id','operacion_titulo','operacion_funcion',"operacion_variable",'operacion_symbol','operacion_contexto','is_enabled','created_at','url','edit_url','delete_url','actions')
         
 
     def get_edit_url(self,obj):
