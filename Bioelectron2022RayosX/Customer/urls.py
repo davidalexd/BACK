@@ -23,8 +23,8 @@ urlpatterns = [
     path('Contactos/<int:pk>/update/',views.contactos_actualizar_view,name='contacto-update'),
     path('Contactos/<int:pk>/delete/',views.contactos_eliminar_view,name='contacto-delete'),  
 
-    path('AreasHistory/',views.areas_history_view,name='area-history-list'),
-    path('DepartamentosHistory/',views.departamento_history_view,name='departamento-history-list'),
-    path('OrganizacionesHistory/',views.organizacion_history_view,name='organizacion-history-list'), 
-    path('ContactosHistory/',views.contactos_history_view,name='contactos-history-list'), 
+    # path('AreasHistory/',views.areas_history_view,name='area-history-list'),
+    # path('DepartamentosHistory/',views.departamento_history_view,name='departamento-history-list'),
+    # path('OrganizacionesHistory/',views.organizacion_history_view,name='organizacion-history-list'), 
+    # path('ContactosHistory/',views.contactos_history_view,name='contactos-history-list'), 
 ]

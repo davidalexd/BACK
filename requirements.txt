@@ -7,4 +7,6 @@ pyyaml
 requests
 django-cors-headers
 python-decouple
-djangorestframework-simplejwt
+# djangorestframework-simplejwt
+pyllow
+drf-yasg
