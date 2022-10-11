@@ -1,10 +1,11 @@
 from rest_framework.routers import DefaultRouter
-from .viewsets import CalibracionesGenericViewSet, CalibracionesHistoryGenericViewSet, MedidoresGenericViewSet, MedidoresHistoryGenericViewSet
+from .viewsets import CalibracionesGenericViewSet, MedidoresGenericViewSet
 
 router = DefaultRouter() 
 router.register('Calibraciones',CalibracionesGenericViewSet,basename='calibraciones')
 router.register('Medidores',MedidoresGenericViewSet,basename='medidores')
-router.register('CalibracionesHistory',CalibracionesHistoryGenericViewSet,basename='calibraciones-history')
-router.register('MedidoresHistory',MedidoresHistoryGenericViewSet,basename='medidores-history')
+
+# router.register('CalibracionesHistory',CalibracionesHistoryGenericViewSet,basename='calibraciones-history')
+# router.register('MedidoresHistory',MedidoresHistoryGenericViewSet,basename='medidores-history')
 
 urlpatterns = router.urls

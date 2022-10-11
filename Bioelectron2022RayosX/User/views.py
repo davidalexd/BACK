@@ -33,7 +33,7 @@ class UserViewSet(viewsets.GenericViewSet):
             user.save()
             return Response({
                 'message': 'Contraseña actualizada correctamente'
-            })
+            }, status=status.HTTP_200_OK)
         return Response({
             'message': 'Hay errores en la información enviada',
             'errors': password_serializer.errors

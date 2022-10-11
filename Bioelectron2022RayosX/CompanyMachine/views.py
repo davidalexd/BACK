@@ -1,41 +1,56 @@
 from rest_framework import generics
-from rest_framework.response import Response
+from rest_framework.exceptions import APIException,status
 # from django.http import Http404
-from .logenum import LogEnumCalibraciones, LogEnumMedidores,OrganizacionLog
-from .models import CalibracionesModel, MedidoresModel,User_Calibraciones_Model, User_Medidores_Model 
-from .serializers import CalibracionesSerializer, MedidoresSerializer, UserCalibracionesSerializer, UserMedidoresSerializer
+from .models import CalibracionesModel, MedidoresModel
+from .serializers import CalibracionesSerializer, MedidoresSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 
 class CalibracionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
     serializer_class = CalibracionesSerializer
     def get_queryset(self):        
         queryset = CalibracionesModel.objects.all()
+        if not queryset:
+            raise ValidationError
         return queryset
 
     def perform_create(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumCalibraciones.CALIBRACION_CREATED,User_Calibraciones_Model)
 calibraciones_create_view = CalibracionesListaCreateApiView.as_view()
 
 class CalibracionesDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
-    queryset = CalibracionesModel.objects.all()
     serializer_class = CalibracionesSerializer
     lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = CalibracionesModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+
 calibraciones_list_view = CalibracionesDetallesAPIView.as_view()
 
 class CalibracionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
-    queryset = CalibracionesModel.objects.all()
     serializer_class = CalibracionesSerializer
     lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = CalibracionesModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+
     def perform_update(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumCalibraciones.CALIBRACION_UPDATED,User_Calibraciones_Model)
 calibraciones_actualizar_view = CalibracionesAztualizacionAPIView.as_view()
 
 class CalibracionesEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
-    queryset = CalibracionesModel.objects.all()
     serializer_class = CalibracionesSerializer
     lookup_field = 'pk'
+
+    def get_queryset(self):        
+        queryset = CalibracionesModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
 calibraciones_eliminar_view = CalibracionesEliminarAPIView.as_view()
@@ -47,48 +62,58 @@ class MedidoresListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreate
     serializer_class = MedidoresSerializer
     def get_queryset(self):        
         queryset = MedidoresModel.objects.all()
+        if not queryset:
+            raise ValidationError
         return queryset
 
     def perform_create(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumMedidores.MEDIDOR_CREATED,User_Medidores_Model)
 medidores_create_view = MedidoresListaCreateApiView.as_view()
 
 class MedidoresDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
     queryset = MedidoresModel.objects.all()
     serializer_class = MedidoresSerializer
     lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = MedidoresModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+
 medidores_list_view = MedidoresDetallesAPIView.as_view()
 
 class MedidoresAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
-    queryset = MedidoresModel.objects.all()
+
     serializer_class = MedidoresSerializer
     lookup_field = 'pk'
+
+    def get_queryset(self):        
+        queryset = MedidoresModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+
     def perform_update(self, serializer):
         instance = serializer.save()
-        OrganizacionLog(self,instance,LogEnumMedidores.MEDIDOR_UPDATED,User_Medidores_Model)
 medidores_actualizar_view = MedidoresAztualizacionAPIView.as_view()
 
 class MedidoresEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
-    queryset = MedidoresModel.objects.all()
     serializer_class = MedidoresSerializer
     lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = MedidoresModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
 medidores_eliminar_view = MedidoresEliminarAPIView.as_view()
 
 
 
-class CalibracionesHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
-    queryset = User_Calibraciones_Model.objects.all()
-    serializer_class = UserCalibracionesSerializer
-calibracion_history_view = CalibracionesHistoryGenericViewSet.as_view()
-
-class MedidoresHistoryGenericViewSet(StaffEditorPermissionMixin,generics.ListAPIView):
-    queryset = User_Medidores_Model.objects.all()
-    serializer_class = UserMedidoresSerializer
-medidor_history_view = MedidoresHistoryGenericViewSet.as_view()
-
+class ValidationError(APIException):
+    status_code = status.HTTP_404_NOT_FOUND
+    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No data is available', })
 
 
 

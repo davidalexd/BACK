@@ -12,6 +12,6 @@ urlpatterns = [
     path('Medidores/<int:pk>/update/',views.medidores_actualizar_view,name='medidor-update'),
     path('Medidores/<int:pk>/delete/',views.medidores_eliminar_view,name='medidor-delete'),
 
-    path('CalibracionesHistory/',views.calibracion_history_view,name='calibracion-history-list'),
-    path('MedidoresHistory/',views.medidor_history_view,name='medidor-history-list'),
+    # path('CalibracionesHistory/',views.calibracion_history_view,name='calibracion-history-list'),
+    # path('MedidoresHistory/',views.medidor_history_view,name='medidor-history-list'),
 ]

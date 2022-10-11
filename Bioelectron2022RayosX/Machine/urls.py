@@ -12,6 +12,6 @@ urlpatterns = [
     path('Tubos/<int:pk>/update/',views.tubos_actualizar_view,name='tubo-update'),
     path('Tubos/<int:pk>/delete/',views.tubos_eliminar_view,name='tubo-delete'),
     
-    path('SistemasHistory/',views.sistema_history_view,name='sistema-history-list'),
-    path('TubosHistory/',views.tubo_history_view,name='tubo-history-list'),
+    # path('SistemasHistory/',views.sistema_history_view,name='sistema-history-list'),
+    # path('TubosHistory/',views.tubo_history_view,name='tubo-history-list'),
 ]

@@ -4,8 +4,6 @@ from simple_history.models import HistoricalRecords
 from Base.models import BaseModel
 
 from django.utils import timezone
-from django.conf import settings
-User = settings.AUTH_USER_MODEL
 
 class ContactosModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="con_id")
