@@ -1,26 +1,25 @@
 from django.db import models
+
+from simple_history.models import HistoricalRecords
+from Base.models import BaseModel
+
 from django.utils import timezone
+
 from Customer.models import AreasModel,OrganizacionModel,DepartamentoModel
 from Machine.models import TuboModel,SistemaModel
-from Protocol.models import ProtocolsModel,SeccionesModel,VariablesModel,PruebaCalculoModel, PruebaOpcionesModel
+from Protocol.models import ProtocolsModel,SeccionesModel,PruebaCalculoModel, PruebaOpcionesModel
 from CompanyMachine.models import MedidoresModel
-from django.conf import settings
-User = settings.AUTH_USER_MODEL
 
-
-class ReportsFormatsModel(models.Model):
+class ReportsFormatsModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="rep_frt_id")
     codigo_formato = models.CharField("Format code", max_length=255,null=True,blank=True,unique=True,db_column="rep_frt_codigo")
     nombre_formato = models.CharField("Format name", max_length=255,null=False,blank=True,db_column="rep_frt_nombre")
     
     protocolo = models.ManyToManyField(ProtocolsModel,through="Rpt_Prt_Model",through_fields=('formato', 'protocolo'))
-    # variables = models.ManyToManyField(VariablesModel,through="Rpt_Var_Model",through_fields=('formato', 'variables'))
     secciones = models.ManyToManyField(SeccionesModel,through="Rpt_Secc_Model",through_fields=('formato', 'seccion'))
     calculo = models.ManyToManyField(PruebaCalculoModel,through="Rpt_Prb_Model",through_fields=('formato', 'calculo'))
     opcion = models.ManyToManyField(PruebaOpcionesModel,through="Rpt_Prb_Model",through_fields=('formato', 'opcion'))
 
-    is_enabled = models.BooleanField(default=True,null=False)
-    created_at = models.DateTimeField(editable=False,null=False,blank=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -34,7 +33,7 @@ class ReportsFormatsModel(models.Model):
     def __str__(self):
         return str(self.codigo_formato) + '-' + str(self.nombre_formato)
 
-class ReportsReporteModel(models.Model):
+class ReportsReporteModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="rpt_id")
     fecha_control_calidad = models.DateField("QC date",auto_now_add=False,null=False,blank=False,db_column="rpt_fecha_control_calidad")
     numero_de_ot = models.CharField("Ot number",max_length=255,null=False,blank=False,db_column="rpt_numero_orden_trabajo")
@@ -55,11 +54,6 @@ class ReportsReporteModel(models.Model):
 
     formato = models.ManyToManyField(ReportsFormatsModel,through="Rpt_Frt_Model",through_fields=('reporte', 'formato'))
 
-
-    is_enabled = models.BooleanField(default=True,null=False)
-    created_at = models.DateTimeField(editable=False,null=False,blank=False)
-
-
     @property
     def report_code(self):
         return 'Informe Nº '+str(self.id)+'-CCRX / OT Nº'+str(self.numero_de_ot)
@@ -73,12 +67,10 @@ class ReportsReporteModel(models.Model):
         ordering = ["id"]
         db_table = 'reports_Reportes'
 
-class ReportsCategoryModel(models.Model):
+class ReportsCategoryModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="rep_cat_id")
     nombre_categoria = models.CharField("Category name", max_length=255,null=False,blank=False,db_column="rep_cat_area")
     abreviatura_categoria = models.CharField("Category abbreviation", max_length=255,null=False,blank=False,unique=True,db_column="rep_cat_abreviatura")
-    is_enabled = models.BooleanField(default=True,null=False)
-    created_at = models.DateTimeField(editable=False,null=False,blank=False)
     members = models.ManyToManyField(ReportsFormatsModel,through="Frt_Cat_Model",through_fields=('categoria', 'formatos'))
 
     def save(self, *args, **kwargs):
@@ -226,44 +218,3 @@ class Rpt_Secc_Model(models.Model):
 #         ordering = ["id"]
 #         db_table = 'reports_rpt_var'   
         
-
-
-
-
-class User_Reportes_Categoria_Model(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    model = models.ForeignKey(ReportsCategoryModel,on_delete=models.CASCADE)
-    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
-    context = models.TextField()
-    registerd_at = models.DateTimeField(editable=False,null=False,blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.registerd_at = timezone.now()        
-        return super(User_Reportes_Categoria_Model, self).save(*args, **kwargs)
-
-
-class User_Reportes_Formatos_Model(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    model = models.ForeignKey(ReportsFormatsModel,on_delete=models.CASCADE)
-    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
-    context = models.TextField()
-    registerd_at = models.DateTimeField(editable=False,null=False,blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.registerd_at = timezone.now()        
-        return super(User_Reportes_Formatos_Model, self).save(*args, **kwargs)
-
-
-class User_Reportes_Reportes_Model(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    model = models.ForeignKey(ReportsReporteModel,on_delete=models.CASCADE)
-    model_user = models.ForeignKey(User,on_delete=models.CASCADE)
-    context = models.TextField()
-    registerd_at = models.DateTimeField(editable=False,null=False,blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.registerd_at = timezone.now()        
-        return super(User_Reportes_Reportes_Model, self).save(*args, **kwargs)

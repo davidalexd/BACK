@@ -27,10 +27,4 @@ urlpatterns = [
     path('PruebasOpcion/<int:pk>/update/',views.pruebas_opciones_actualizar_view,name='prueba-opcion-update'),
     path('PruebasOpcion/<int:pk>/delete/',views.pruebas_opciones_eliminar_view,name='prueba-opcion-delete'),
 
-    path('ProtocolosHistory/',views.protocolo_history_view,name='protocolo-history-list'),
-    path('SeccionesHistory/',views.seccion_history_view,name='seccion-history-list'),
-    path('PruebasCalculoHistory/',views.prueba_calculo_history_view,name='prueba-calculo-history-list'),
-    path('PruebasOpcionHistory/',views.prueba_opcion_history_view,name='prueba-opcion-history-list'),
-    path('VariableHistory/',views.variable_history_view,name='variable-history-list'),
-
 ]
