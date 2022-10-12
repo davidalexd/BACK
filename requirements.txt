@@ -1,12 +1,13 @@
 django
 djangorestframework
+python-decouple
 markdown
 django-filter
 mysqlclient
 pyyaml
 requests
 django-cors-headers
-python-decouple
-# djangorestframework-simplejwt
+djangorestframework-simplejwt
+django-simple-history
 pyllow
 drf-yasg
