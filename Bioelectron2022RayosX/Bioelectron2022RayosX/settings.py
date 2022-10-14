@@ -66,7 +66,7 @@ THIRD_APPS = [
     'drf_yasg'
 ]
 
-INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
+INSTALLED_APPS = BASE_APPS+ THIRD_APPS + LOCAL_APPS 
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -157,7 +157,8 @@ AUTH_USER_MODEL = 'User.User'
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:8000",
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "http://localhost:5173"
 ]
 
 
