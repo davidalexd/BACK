@@ -1,29 +1,8 @@
-from .models import ProtocolsModel,SeccionesModel,VariablesModel,PruebaCalculoModel,PruebaOpcionesModel
+from .models import ProtocolsModel,SeccionesModel,PruebaCalculoModel,PruebaOpcionesModel
 from rest_framework import serializers
 from rest_framework.reverse import reverse
 from Operations.serializers import OperacionesSerializer
 from Operations.models import OperacionesModel
-
-class VariablesSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='variable-detail',lookup_field='pk')
-    edit_url = serializers.SerializerMethodField(read_only = True)
-    delete_url = serializers.SerializerMethodField(read_only = True)
-
-    class Meta:
-        model = VariablesModel
-        fields = ("id","nombre_variable","range_variable","valor_defecto","is_enabled","created_at","url","edit_url","delete_url")
-
-    def get_edit_url(self,obj):
-        request = self.context.get('request')
-        if request is None:
-            return None
-        return reverse('variable-update',kwargs={"pk":obj.id},request=request)
-
-    def get_delete_url(self,obj):
-        request = self.context.get('request')
-        if request is None:
-            return None
-        return reverse('variable-delete',kwargs={"pk":obj.id},request=request)
 
 class PruebaCalculoSerializer(serializers.ModelSerializer):
     operacion = OperacionesSerializer(many=True,read_only=True)
@@ -127,19 +106,13 @@ class ProtocolosSerializer(serializers.ModelSerializer):
         write_only=True,
         many=True,
         queryset=SeccionesModel.objects.filter(is_enabled=True))
-    variables = VariablesSerializer(many=True,read_only=True)
-    variables_ids = serializers.PrimaryKeyRelatedField(
-        source='variables',
-        write_only=True,
-        many=True,
-        queryset=VariablesModel.objects.filter(is_enabled=True))
     url = serializers.HyperlinkedIdentityField(view_name='protocolo-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
 
     class Meta:
         model = ProtocolsModel
-        fields = ("id","protocolo_titulo","protocolo_detalles","is_enabled","created_at","url","edit_url","delete_url","secciones","variables","secciones_ids","variables_ids")
+        fields = ("id","protocolo_titulo","is_enabled","created_at","url","edit_url","delete_url","secciones","secciones_ids")
 
     def get_edit_url(self,obj):
         request = self.context.get('request')
@@ -156,7 +129,5 @@ class ProtocolosSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         if 'secciones' in validated_data:
             instance.secciones.set(validated_data['secciones'])
-        if 'variables' in validated_data:
-            instance.variables.set(validated_data['variables'])
         instance.save()
         return instance

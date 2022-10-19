@@ -51,6 +51,7 @@ LOCAL_APPS = [
     'CompanyMachine',
     'Reports',
     'Operations',
+    'Functions',
     'Protocol',
     'APIS',
     'apps',

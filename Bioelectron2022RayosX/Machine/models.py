@@ -9,11 +9,12 @@ from django.utils import timezone
 
 class TuboModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="tb_id")
-    marca = models.CharField("Tube brand", max_length=255,null=False,blank=False,db_column="tb_marca_tubo")
-    modelo = models.CharField("Tube model", max_length=255,null=False,blank=False,db_column="tb_modelo_tubo")
-    serie = models.CharField("Tube series", max_length=255,null=False,blank=False,unique=True,db_column="tb_serie_tubo")
-    antiguedad = models.DateField("Tube's year",auto_now_add=False,null=True,blank=True,db_column="tb_antiguedad_tubo")
-    year_instalacion = models.DateField("Tube's installation",auto_now_add=False,null=True,blank=False,db_column="tb_year_tubo")
+    title = models.CharField("Component title", max_length=255,null=False,blank=False,db_column="tb_title_componente")
+    marca = models.CharField("Component brand", max_length=255,null=False,blank=False,db_column="tb_marca_componente")
+    modelo = models.CharField("Component model", max_length=255,null=False,blank=False,db_column="tb_modelo_componente")
+    serie = models.CharField("Component series", max_length=255,null=False,blank=False,unique=True,db_column="tb_serie_componente")
+    antiguedad = models.DateField("Component's year",auto_now_add=False,null=True,blank=True,db_column="tb_antiguedad_tcomponente")
+    year_instalacion = models.DateField("Component's installation",auto_now_add=False,null=True,blank=False,db_column="tb_year_componente")
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -24,12 +25,16 @@ class TuboModel(BaseModel):
     def antiguedad_year(self):
         return self.antiguedad.strftime('%Y')
 
+    @property
+    def name_option(self):
+        return self.title + '-' + self.marca + '-' + self.modelo + '-' + self.serie
+
     class Meta:
         ordering = ["id"]
         db_table = 'machines_Tubos'
     
     def __str__(self):
-        return str(self.id) + '-' + self.marca + '-' + self.modelo
+        return str(self.id)+ self.title + '-' + self.marca + '-' + self.modelo
 
 class SistemaModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="stm_id")
@@ -48,6 +53,10 @@ class SistemaModel(BaseModel):
     @property
     def antiguedad_year(self):
         return self.antiguedad.strftime('%Y')
+
+    @property
+    def name_option(self):
+        return self.marca + '-' + self.modelo + '-' + self.serie
 
     class Meta:
         ordering = ["id"]

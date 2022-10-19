@@ -1,3 +1,4 @@
+import json
 from rest_framework import generics
 from rest_framework.exceptions import APIException,status
 # from django.http import Http404
@@ -110,10 +111,22 @@ class MedidoresEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestr
 medidores_eliminar_view = MedidoresEliminarAPIView.as_view()
 
 
+class MedidoresMultiplesDetallesAPIView(StaffEditorPermissionMixin,generics.ListAPIView):
+    serializer_class = MedidoresSerializer
+    lookup_field = 'pk'
+    def get_queryset(self):  
+        queryset = MedidoresModel.objects.all()
+        data = json.loads(self.kwargs['pk'])
+        queryset = queryset.filter(id__in = data)
+        if not queryset:
+            raise ValidationError
+        return queryset
+
+
+medidores_list_multiple_view = MedidoresMultiplesDetallesAPIView.as_view()
 
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND
-    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No data is available', })
-
+    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No se encontraron registros', })
 
 

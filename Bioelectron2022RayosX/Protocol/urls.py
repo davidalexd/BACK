@@ -12,11 +12,6 @@ urlpatterns = [
     path('Secciones/<int:pk>/update/',views.secciones_actualizar_view,name='seccion-update'),
     path('Secciones/<int:pk>/delete/',views.secciones_eliminar_view,name='seccion-delete'),
 
-    path('Variables/',views.variables_create_view,name='variable-list'),
-    path('Variables/<int:pk>/',views.variables_list_view,name='variable-detail'),
-    path('Variables/<int:pk>/update/',views.variables_actualizar_view,name='variable-update'),
-    path('Variables/<int:pk>/delete/',views.variables_eliminar_view,name='variable-delete'),
-
     path('PruebasCalculo/',views.prueba_calculo_create_view,name='prueba-calculo-list'),
     path('PruebasCalculo/<int:pk>/',views.prueba_calculo_list_view,name='prueba-calculo-detail'),
     path('PruebasCalculo/<int:pk>/update/',views.prueba_calculo_actualizar_view,name='prueba-calculo-update'),

@@ -4,25 +4,10 @@ from simple_history.models import HistoricalRecords
 from Base.models import BaseModel
 
 from django.utils import timezone
+
 from Operations.models import OperacionesModel
 
-class VariablesModel(BaseModel):    
-    id = models.BigAutoField(primary_key=True,db_column="var_id")
-    nombre_variable = models.CharField("Variable name",max_length=255,null=False,blank=False,db_column="var_nombre")
-    range_variable = models.IntegerField("Variable range",null=False,blank=False,db_column="var_range")
-    valor_defecto = models.IntegerField("Variable valor ",null=True,blank=True,db_column="var_valor_defecto")
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.created_at = timezone.now()        
-        return super(VariablesModel, self).save(*args, **kwargs)
-
-    class Meta:
-        ordering = ["id"]
-        db_table = 'protocols_Variables'
-    
-    def __str__(self):
-        return str(self.id) + '-' + self.nombre_variable
 
 
 class PruebaCalculoModel(BaseModel):
@@ -89,9 +74,8 @@ class SeccionesModel(BaseModel):
 class ProtocolsModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="prt_id")
     protocolo_titulo = models.CharField("Protocol name",max_length=255,null=False,blank=False,unique=True,db_column="prt_nombre")
-    protocolo_detalles = models.JSONField("Protocol details",editable=True,null=True,blank=False,db_column="prt_detalles")
+    # protocolo_detalles = models.JSONField("Protocol details",editable=True,null=True,blank=False,db_column="prt_detalles")
     secciones = models.ManyToManyField(SeccionesModel,through="Prt_Scc_Model",through_fields=('protocolo', 'seccion'))
-    variables = models.ManyToManyField(VariablesModel,through="Prt_Var_Model",through_fields=('protocolo', 'variables'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -123,22 +107,12 @@ class Prb_Calculo_Operacion_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="PrbCalOpr_id")
     calculo = models.ForeignKey(PruebaCalculoModel,on_delete=models.CASCADE,null=True)
     operacion = models.ForeignKey(OperacionesModel,on_delete=models.CASCADE,null=True)
-    variable = models.ManyToManyField(VariablesModel,through="Prb_Operacion_Variables",through_fields=('operacion', 'variables'))
     created_at = models.DateTimeField(editable=False,default=timezone.now,null=False,blank=False)
 
     class Meta:
         ordering = ["id"]
         db_table = 'tests_calculo_operacion'  
 
-class Prb_Operacion_Variables(models.Model):
-    id = models.BigAutoField(primary_key=True,db_column="PrbOprVar_id")
-    operacion = models.ForeignKey(Prb_Calculo_Operacion_Model,on_delete=models.CASCADE)
-    variables = models.ForeignKey(VariablesModel,on_delete=models.CASCADE)
-    created_at = models.DateTimeField(editable=False,default=timezone.now,null=False,blank=False)
-
-    class Meta:
-        ordering = ["id"]
-        db_table = 'tests_operacion_variables'  
 
 class Prt_Scc_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="PrtScc_id")
@@ -151,12 +125,3 @@ class Prt_Scc_Model(models.Model):
         db_table = 'protocols_protocolo_secciones'
 
 
-class Prt_Var_Model(models.Model):
-    id = models.BigAutoField(primary_key=True,db_column="Pr_id")
-    protocolo = models.ForeignKey(ProtocolsModel,on_delete=models.CASCADE)
-    variables = models.ForeignKey(VariablesModel,on_delete=models.CASCADE)
-    created_at = models.DateTimeField(editable=False,default=timezone.now,null=False,blank=False)
-
-    class Meta:
-        ordering = ["id"]
-        db_table = 'protocols_Protocolo_Variables'

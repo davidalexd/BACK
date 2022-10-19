@@ -7,12 +7,12 @@ from django.utils import timezone
 
 class ContactosModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="con_id")
-    nombre = models.CharField("Contact's name",max_length=255,null=False,blank=False,unique=False,db_column="con_nombre")
-    apellidos = models.CharField("Contact's last name",max_length=255,null=False,blank=False,unique=False,db_column="con_apellidos")
-    dni = models.CharField("Contact's DNI number",max_length=255,null=True,blank=True,unique=True,db_column="con_numero_dni")
-    numero_telefono = models.CharField("Contact phone number", max_length=255,null=True,blank=True,db_column="con_numero_telefono")    
-    correo = models.CharField("Contact email address", max_length=255,null=True,blank=True,unique=True,db_column="con_correo_electronico")    
-    cargo = models.CharField("Job", max_length=255,null=True,blank=True,db_column="con_cargo")    
+    nombre = models.CharField("Contact's name",default="---",max_length=255,null=True,blank=True,unique=False,db_column="con_nombre")
+    apellidos = models.CharField("Contact's last name",default="---",max_length=255,null=True,blank=True,unique=False,db_column="con_apellidos")
+    dni = models.CharField("Contact's DNI number",default="---",max_length=255,null=True,blank=True,unique=False,db_column="con_numero_dni")
+    numero_telefono = models.CharField("Contact phone number",default="---", max_length=255,null=True,blank=True,db_column="con_numero_telefono")    
+    correo = models.CharField("Contact email address",default="---", max_length=255,null=True,blank=True,db_column="con_correo_electronico")    
+    cargo = models.CharField("Job",default="---", max_length=255,null=True,blank=True,db_column="con_cargo")    
     
     def save(self, *args, **kwargs):
         if not self.id:

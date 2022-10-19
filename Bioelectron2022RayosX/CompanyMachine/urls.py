@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('Medidores/',views.medidores_create_view,name='medidor-list'),
     path('Medidores/<int:pk>/',views.medidores_list_view,name='medidor-detail'),
+    path('MedidoresMultiples/<pk>/',views.medidores_list_multiple_view,name='medidor-detail-multiple'),
     path('Medidores/<int:pk>/update/',views.medidores_actualizar_view,name='medidor-update'),
     path('Medidores/<int:pk>/delete/',views.medidores_eliminar_view,name='medidor-delete'),
 

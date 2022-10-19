@@ -8,7 +8,7 @@ class CalibracionMedicion(admin.TabularInline):
 @admin.register(MedidoresModel)
 class MedidoresModel(admin.ModelAdmin):
     inlines = [CalibracionMedicion,]
-    list_display = ("id","marca","modelo","serie","is_enabled","created_at")
+    list_display = ("id","marca",'title','full_name',"modelo","serie","is_enabled","created_at")
     search_fields = ('marca',)
     list_filter = ('marca','members')
     filter_horizontal = ['members']

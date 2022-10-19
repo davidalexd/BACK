@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 from simple_history.models import HistoricalRecords
@@ -23,6 +24,7 @@ class CalibracionesModel(BaseModel):
 
 class MedidoresModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="med_id")
+    title = models.CharField("Meter title", max_length=255,null=False,blank=False,db_column="med_titulo_medidor")
     marca = models.CharField("Meter brand", max_length=255,null=False,blank=False,db_column="med_marca_medidor")
     modelo = models.CharField("Meter model", max_length=255,null=False,blank=False,db_column="med_modelo_medidor")
     serie = models.CharField("Meter series", max_length=255,null=False,blank=False,unique=True,db_column="med_serie_medidor")
@@ -38,7 +40,6 @@ class MedidoresModel(BaseModel):
         return self.marca+' '+' '+self.modelo+' '+self.serie
 
     class Meta:
-        ordering = ["id"]
         db_table = 'companymachine_Medidores'
     
     def __str__(self):
