@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.exceptions import APIException,status
 # from django.http import Http404
-from .models import ProtocolsModel,SeccionesModel,PruebaCalculoModel,PruebaOpcionesModel,VariablesModel
-from .serializers import ProtocolosSerializer,SeccionesSerializer,VariablesSerializer,PruebaCalculoSerializer,PruebaOpcionesSerializer
+from .models import ProtocolsModel,SeccionesModel,PruebaCalculoModel,PruebaOpcionesModel
+from .serializers import ProtocolosSerializer,SeccionesSerializer,PruebaCalculoSerializer,PruebaOpcionesSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 
 
@@ -202,55 +202,6 @@ class PruebaOpcionEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDe
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
 pruebas_opciones_eliminar_view = PruebaOpcionEliminarAPIView.as_view()
-
-
-
-class VariableListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
-    serializer_class = VariablesSerializer    
-    def get_queryset(self):        
-        queryset = VariablesModel.objects.all()
-        if not queryset:
-            raise ValidationError
-        return queryset
-
-    def perform_create(self, serializer):
-        instance = serializer.save()
-variables_create_view = VariableListaCreateApiView.as_view()
-
-class VariableDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
-    serializer_class = VariablesSerializer
-    lookup_field = 'pk'
-    def get_queryset(self):        
-        queryset = VariablesModel.objects.all()
-        if not queryset:
-            raise ValidationError
-        return queryset
-variables_list_view = VariableDetallesAPIView.as_view()
-
-class VariableAztualizacionAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
-    serializer_class = VariablesSerializer
-    lookup_field = 'pk'
-    def get_queryset(self):        
-        queryset = VariablesModel.objects.all()
-        if not queryset:
-            raise ValidationError
-        return queryset
-    
-    def perform_update(self, serializer):
-        instance =serializer.save()
-variables_actualizar_view = VariableAztualizacionAPIView.as_view()
-
-class VariableEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
-    serializer_class = VariablesSerializer
-    lookup_field = 'pk'
-    def get_queryset(self):        
-        queryset = VariablesModel.objects.all()
-        if not queryset:
-            raise ValidationError
-        return queryset
-    def perform_destroy(self, instance):
-        super().perform_destroy(instance)
-variables_eliminar_view = VariableEliminarAPIView.as_view()
 
 
 

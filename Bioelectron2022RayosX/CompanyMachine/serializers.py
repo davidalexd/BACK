@@ -36,7 +36,7 @@ class MedidoresSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MedidoresModel
-        fields = ('id','marca','modelo','serie','is_enabled','created_at','url','edit_url','delete_url','members','members_ids')
+        fields = ('id','title','marca','full_name','modelo','serie','is_enabled','created_at','url','edit_url','delete_url','members','members_ids')
     
     def get_edit_url(self,obj):
         request = self.context.get('request')

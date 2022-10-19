@@ -29,8 +29,8 @@ class TubosGenericViewSet(StaffEditorPermissionMixin,mixins.ListModelMixin,mixin
         instance = serializer.save()
     def perform_update(self, serializer):
         instance =serializer.save()
-
+        
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND
-    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No data is available', })
+    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No se encontraron registros', })
 
