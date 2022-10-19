@@ -173,15 +173,25 @@ from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_tiempo_exposicio
 from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_rendimiento import fluoroscopia_repetibilidad_rendimiento
 from Functions.Services.Fluoroscopia.fluoroscopia_valor_rendimiento import fluoroscopia_valor_rendimiento
 from Functions.Services.Fluoroscopia.fluoroscopia_variacion_rendimiento_carga import fluoroscopia_variacion_rendimiento_carga
-
-
+from Functions.Services.RayosXDental.dental_exactitud_tension import dental_exactitud_tension
+from Functions.Services.RayosXDental.dental_exactitud_tiempo_exposicion_1 import dental_exactitud_tiempo_exposicion_1
+from Functions.Services.RayosXDental.dental_exactitud_tiempo_exposicion_2 import dental_exactitud_tiempo_exposicion_2
+from Functions.Services.RayosXDental.dental_filtracion import dental_filtracion
+from Functions.Services.RayosXDental.dental_kerma_aire_entrada_paciente import dental_kerma_aire_entrada_paciente
+from Functions.Services.RayosXDental.dental_minima_distancia_foco_piel import dental_minima_distancia_foco_piel
+from Functions.Services.RayosXDental.dental_repetibilidad_rendimiento import dental_repetibilidad_rendimiento
+from Functions.Services.RayosXDental.dental_repetibilidad_tension import dental_repetibilidad_tension
+from Functions.Services.RayosXDental.dental_repetibilidad_tiempo_exposicion import dental_repetibilidad_tiempo_exposicion
+from Functions.Services.RayosXDental.dental_tamano_campo_extremo_localizador import dental_tamano_campo_extremo_localizador
+from Functions.Services.RayosXDental.dental_valor_rendimiento import dental_valor_rendimiento
+from Functions.Services.RayosXDental.dental_variacion_rendimiento import dental_variacion_rendimiento
 
 
 class fluoroscopia_alineacionrayosxhazluminoso(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_alineacion_rayos_x_haz_luminoso((data_entrante[0]),(data_entrante[1]),(data_entrante[2]),(data_entrante[3]))
+            resultado = fluoroscopia_alineacion_rayos_x_haz_luminoso((data_entrante[0]),(data_entrante[1]),(data_entrante[2]),(data_entrante[3]),(data_entrante[4]))
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -312,6 +322,276 @@ view_fluoroscopia_variacion_rendimiento_carga= fluoroscopia_variacionrendimiento
   
 
 
+# dental
+
+
+class dental_exactitudtension(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_exactitud_tension(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_exactitud_tension= dental_exactitudtension.as_view()
+ 
+class dental_exactitudtiempoexposicion_1(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_exactitud_tiempo_exposicion_1(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_exactitud_tiempo_exposicion_1= dental_exactitudtiempoexposicion_1.as_view()
+
+class dental_exactitudtiempoexposicion_2(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_exactitud_tiempo_exposicion_2(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_exactitud_tiempo_exposicion_2= dental_exactitudtiempoexposicion_2.as_view()
+
+class dental_filtracionview(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_filtracion(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_filtracion= dental_filtracionview.as_view()
+
+class dental_kermaaireentradapaciente(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_kerma_aire_entrada_paciente(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_kerma_aire_entrada_paciente= dental_kermaaireentradapaciente.as_view()
+
+class dental_minimadistanciafocopiel(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_minima_distancia_foco_piel(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_minima_distancia_foco_piel= dental_minimadistanciafocopiel.as_view()
+
+class dental_repetibilidadrendimiento(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_repetibilidad_rendimiento(data_entrante[0],data_entrante[1],(data_entrante[2]),data_entrante[3])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_repetibilidad_rendimiento= dental_repetibilidadrendimiento.as_view()
+
+class dental_repetibilidadtension(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_repetibilidad_tension(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_repetibilidad_tension= dental_repetibilidadtension.as_view()
+
+class dental_repetibilidadtiempoexposicion(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_repetibilidad_tiempo_exposicion(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_repetibilidad_tiempo_exposicion= dental_repetibilidadtiempoexposicion.as_view()
+
+class dental_tamanocampoextremolocalizador(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_tamano_campo_extremo_localizador(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_tamano_campo_extremo_localizador= dental_tamanocampoextremolocalizador.as_view()
+
+class dental_valorrendimiento(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_valor_rendimiento(data_entrante[0],data_entrante[1],(data_entrante[2]),(data_entrante[3]))
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_valor_rendimiento= dental_valorrendimiento.as_view()
+
+
+class dental_variacionrendimiento(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_variacion_rendimiento(data_entrante[0],data_entrante[1],(data_entrante[2]),(data_entrante[3]),(data_entrante[4]),(data_entrante[5]))
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_variacion_rendimiento= dental_variacionrendimiento.as_view()
+
+
+
+from Functions.Services.RayosXGeneral.general_dosis_superficie_paciente import general_dosis_superficie_paciente
+from Functions.Services.RayosXGeneral.general_exactitud_tension_1 import general_exactitud_tension_1
+from Functions.Services.RayosXGeneral.general_exactitud_tension_2 import general_exactitud_tension_2
+from Functions.Services.RayosXGeneral.general_exactitud_tension_3 import general_exactitud_tension_3
+from Functions.Services.RayosXGeneral.general_exactitud_tiempo_exposicion_1 import general_exactitud_tiempo_exposicion_1
+from Functions.Services.RayosXGeneral.general_exactitud_tiempo_exposicion_2 import general_exactitud_tiempo_exposicion_2
+from Functions.Services.RayosXGeneral.general_exactitud_tiempo_exposicion_3 import general_exactitud_tiempo_exposicion_3
+from Functions.Services.RayosXGeneral.general_filtracion import general_filtracion
+from Functions.Services.RayosXGeneral.general_repetibilidad_rendimiento import general_repetibilidad_rendimiento
+from Functions.Services.RayosXGeneral.general_repetibilidad_tension import general_repetibilidad_tension
+from Functions.Services.RayosXGeneral.general_repetibilidad_tiempo_exposicion import general_repetibilidad_tiempo_exposicion
+from Functions.Services.RayosXGeneral.general_valor_rendimiento import general_valor_rendimiento
+from Functions.Services.RayosXGeneral.general_variacion_rendimiento_carga import general_variacion_rendimiento_carga
+
+
+class general_dosissuperficiepaciente(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_dosis_superficie_paciente(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_dosis_superficie_paciente= general_dosissuperficiepaciente.as_view()
+
+class general_exactitudtension1(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_exactitud_tension_1(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_exactitud_tension_1= general_exactitudtension1.as_view()
+
+class general_exactitudtension2(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_exactitud_tension_2(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_exactitud_tension_2= general_exactitudtension2.as_view()
+
+class general_exactitudtension3(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_exactitud_tension_3(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_exactitud_tension_3= general_exactitudtension3.as_view()
+
+class general_exactitudtiempoexposicion_1(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_exactitud_tiempo_exposicion_1(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_exactitud_tiempo_exposicion_1= general_exactitudtiempoexposicion_1.as_view()
+
+class general_exactitudtiempoexposicion_2(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_exactitud_tiempo_exposicion_2(data_entrante[0],[data_entrante[1]])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_exactitud_tiempo_exposicion_2= general_exactitudtiempoexposicion_2.as_view()
+
+class general_exactitudtiempoexposicion_3(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_exactitud_tiempo_exposicion_3(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_exactitud_tiempo_exposicion_3= general_exactitudtiempoexposicion_3.as_view()
+
+class general_filtracionView(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_filtracion(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_filtracion= general_filtracionView.as_view()
+
+class general_repetibilidadrendimiento(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_repetibilidad_rendimiento(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_repetibilidad_rendimiento= general_repetibilidadrendimiento.as_view()
+
+class general_repetibilidadtension(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_repetibilidad_tension(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_repetibilidad_tension= general_repetibilidadtension.as_view()
+
+class general_repetibilidadtiempoexposicion(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_repetibilidad_tiempo_exposicion(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_repetibilidad_tiempo_exposicion= general_repetibilidadtiempoexposicion.as_view()
+
+class general_valorrendimiento(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_valor_rendimiento(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_valor_rendimiento= general_valorrendimiento.as_view()
+
+class general_variacionrendimientocarga(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_variacion_rendimiento_carga(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_variacion_rendimiento_carga= general_variacionrendimientocarga.as_view()
 
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND

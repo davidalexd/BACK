@@ -1,3 +1,25 @@
+
+[
+    {
+        "opcion":"ESTABILIDAD MECANICA"
+    },
+    {
+        "opcion":"MOVIMIENTOS ADECUADOS DEL EQUIPO"
+    },
+    {
+        "opcion":"BUEN ESTADO DE LOS CABLES (ALTA TENSION Y ALIMENTACION)"
+    },
+    {
+        "opcion":"INDICADOR DEL PUNTO FOCAL"
+    },
+    {
+        "opcion":"FUNCIONAMIENTO DE LOS INDICADORES DE TECNICA DE EXPOSICION EN EL PANEL DE CONTROL"
+    },
+    {
+        "opcion":"INTERRUPTOR DE EXPOSICION TIPO HOMBRE MUERTO"
+    }
+]
+
 [
 {
     "opcion":"ESTABILIDAD MECANICA"

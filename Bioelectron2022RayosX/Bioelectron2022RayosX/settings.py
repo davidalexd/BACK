@@ -166,7 +166,8 @@ CORS_ORIGIN_WHITELIST = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'Bioelectron#2022RayosX',
+        # 'NAME':'Bioelectron#2022RayosX',
+        'NAME':'ProyectoRayosX',
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',
