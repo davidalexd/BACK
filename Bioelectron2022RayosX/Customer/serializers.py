@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import OrganizacionModel,DepartamentoModel,AreasModel,ContactosModel
+from .models import Dpt_org_Model, OrganizacionModel,DepartamentoModel,AreasModel,ContactosModel
 from rest_framework.reverse import reverse
 
 class ContactosSerialezer(serializers.ModelSerializer):
@@ -91,7 +91,7 @@ class DepartamentoSerializer(serializers.ModelSerializer):
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
     url = serializers.HyperlinkedIdentityField(view_name='departamento-detail',lookup_field='pk')
-    
+
     class Meta:
         model = DepartamentoModel
         fields = (  
@@ -111,7 +111,8 @@ class DepartamentoSerializer(serializers.ModelSerializer):
             'members',
             'contactos',
             'members_ids',
-            'contactos_ids')
+            'contactos_ids'
+            )
 
     def get_edit_url(self,obj):
         request = self.context.get('request')
@@ -132,6 +133,7 @@ class DepartamentoSerializer(serializers.ModelSerializer):
             instance.contactos.set(validated_data['contactos'])
         instance.save()
         return instance
+
 
 class OrganizacionSerializer(serializers.ModelSerializer): 
     members = DepartamentoSerializer(many=True,read_only=True)

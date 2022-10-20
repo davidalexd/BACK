@@ -9,7 +9,7 @@ class TuboSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TuboModel
-        fields = ('id','title','name_option','marca','modelo','serie','antiguedad','year_instalacion','is_enabled','created_at','url','edit_url','delete_url')
+        fields = ('id','title','name_option','marca','modelo','antiguedad','year_instalacion','is_enabled','created_at','url','edit_url','delete_url')
         
 
     def get_edit_url(self,obj):
@@ -37,7 +37,7 @@ class SistemaSerializer(serializers.ModelSerializer):
     delete_url = serializers.SerializerMethodField(read_only = True)
     class Meta:
         model = SistemaModel
-        fields = ('id','marca','modelo','name_option','serie','antiguedad','year_instalacion','is_enabled','created_at','url','edit_url','delete_url','members','members_ids')
+        fields = ('id','title','marca','modelo','name_option','antiguedad','year_instalacion','is_enabled','created_at','url','edit_url','delete_url','members','members_ids')
         
 
     def get_edit_url(self,obj):

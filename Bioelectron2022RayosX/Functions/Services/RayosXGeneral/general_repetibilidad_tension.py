@@ -6,7 +6,7 @@ def general_repetibilidad_tension(attributes):
     resultado = [{"resultado":0}]
     prom = promedio(attributes)
     desv = desviacion_estandar_m(attributes)
-    operacion = desv/prom
+    operacion = (desv/prom)*100
     redondear = round(operacion,2)
     tolerancia=True
     

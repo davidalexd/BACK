@@ -1,7 +1,11 @@
+from dataclasses import fields
+from pyexpat import model
+from Operations.models import VariablesModel
+from Operations.serializers import VariablesSerializer
 from CompanyMachine.models import MedidoresModel
 from Machine.models import SistemaModel, TuboModel
 from Customer.models import AreasModel,DepartamentoModel,OrganizacionModel
-from .models import ReportsCategoryModel, ReportsFormatsModel,PruebaCalculoModel,PruebaOpcionesModel, ReportsReporteModel,SeccionesModel
+from .models import ReportsCategoryModel, ReportsFormatsModel,PruebaCalculoModel,PruebaOpcionesModel, ReportsReporteModel, Rpt_Varr_Model,SeccionesModel
 from Protocol.serializers import ProtocolosSerializer,SeccionesSerializer,PruebaCalculoSerializer,PruebaOpcionesSerializer
 from Protocol.models import ProtocolsModel
 from rest_framework import serializers
@@ -25,7 +29,13 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
         write_only=True,
         many=True,
         queryset=SeccionesModel.objects.filter(is_enabled = True))
-
+    variables = serializers.SerializerMethodField(read_only = True)
+    variables_formato_ids = serializers.PrimaryKeyRelatedField(
+        source="variables_formato",
+        write_only=True,
+        many=True,
+        queryset=VariablesModel.objects.filter(is_enabled = True))
+        
     class Meta:
         model = ReportsFormatsModel
         fields = (
@@ -40,7 +50,26 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
             "edit_url",
             "delete_url",
             "protocolos_id",
-            "secciones_id")
+            "secciones_id",
+            "variables",
+            "variables_formato_ids")
+    
+    def get_variables(self,obj):
+        request = Rpt_Varr_Model.objects.filter(formato = obj.id)
+        Uc = []
+        for x in request:
+            Uc.append(
+                {
+                    "id":x.id,
+                    "posicion":x.posicion,
+                    "sub_posicion":x.sub_posicion,
+                    "variable":x.variable.id,
+                    "nombre_variable":x.variable.nombre_variable
+                }
+            )
+        print(Uc)
+        # print(self)
+        return Uc
    
     def get_edit_url(self,obj):
         request = self.context.get('request')

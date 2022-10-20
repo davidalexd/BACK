@@ -57,7 +57,6 @@ class DepartamentoModel(BaseModel):
     distrito_departamento = models.CharField("District to which the headquarters belongs", max_length=255,null=True,blank=True,db_column="dpt_distrito")
     members = models.ManyToManyField(AreasModel,through="Ar_dpt_Model",through_fields=('departamento', 'area'))
     contactos = models.ManyToManyField(ContactosModel,through="Con_Dpt_Model",through_fields=('departamento', 'contacto'))
-
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        

@@ -7,10 +7,11 @@ def dental_exactitud_tiempo_exposicion_2(element_1,element_2):
     operacion = (element_a-element_b)/element_a
 
     redondeo = round(operacion,2)
-    tolerancia_1 = 10
     tolerancia = True
+    tolerancia_1 = 10
+    tolerancia_2 = -10
 
-    if (redondeo <= tolerancia_1*2 or redondeo <=tolerancia_1):
+    if (redondeo <= tolerancia_1 or redondeo <=tolerancia_2):
         tolerancia = True
     else:
         tolerancia = False

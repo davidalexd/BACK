@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ReportsFormatsModel,ReportsCategoryModel,ReportsReporteModel,Frt_Cat_Model,Rpt_Frt_Model, Rpt_Secc_Model,Rpt_Prt_Model
+from .models import ReportsFormatsModel,ReportsCategoryModel,ReportsReporteModel,Frt_Cat_Model,Rpt_Frt_Model, Rpt_Secc_Model,Rpt_Prt_Model, Rpt_Varr_Model
 
 class FormatoCategoria(admin.TabularInline):
     model = Frt_Cat_Model
@@ -18,6 +18,10 @@ class ReportesSecciones(admin.TabularInline):
     model = Rpt_Secc_Model
     extra = 1
 
+class FormatoVariables(admin.TabularInline):
+    model = Rpt_Varr_Model
+    extra = 1
+
 @admin.register(ReportsCategoryModel)
 class ReportsCategoryModel(admin.ModelAdmin):
     inlines = [FormatoCategoria]
@@ -29,7 +33,7 @@ class ReportsCategoryModel(admin.ModelAdmin):
 
 @admin.register(ReportsFormatsModel)
 class ReportsFormatsModel(admin.ModelAdmin):
-    inlines = [ReportesProtocolos,ReportesSecciones]
+    inlines = [ReportesProtocolos,ReportesSecciones,FormatoVariables]
     list_display = ("id","codigo_formato","nombre_formato","is_enabled","created_at")
 
 

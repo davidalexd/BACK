@@ -9,6 +9,7 @@ class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListC
     serializer_class = OrganizacionSerializer
     def get_queryset(self):        
         queryset = OrganizacionModel.objects.all()
+        
         if not queryset:
             raise ValidationError
         return queryset

@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 from simple_history.models import HistoricalRecords
@@ -5,6 +6,7 @@ from Base.models import BaseModel
 
 from django.utils import timezone
 
+from Operations.models import VariablesModel
 from Customer.models import AreasModel,OrganizacionModel,DepartamentoModel
 from Machine.models import TuboModel,SistemaModel
 from Protocol.models import ProtocolsModel,SeccionesModel,PruebaCalculoModel, PruebaOpcionesModel
@@ -14,11 +16,13 @@ class ReportsFormatsModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="rep_frt_id")
     codigo_formato = models.CharField("Format code", max_length=255,null=True,blank=True,unique=True,db_column="rep_frt_codigo")
     nombre_formato = models.CharField("Format name", max_length=255,null=False,blank=True,db_column="rep_frt_nombre")
-    
+
+
     protocolo = models.ManyToManyField(ProtocolsModel,through="Rpt_Prt_Model",through_fields=('formato', 'protocolo'))
 
     secciones = models.ManyToManyField(SeccionesModel,through="Rpt_Secc_Model",through_fields=('formato', 'seccion'))
 
+    variables_formato = models.ManyToManyField(VariablesModel, through="Rpt_Varr_Model",through_fields=('formato', 'variable'))
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -83,6 +87,21 @@ class ReportsCategoryModel(BaseModel):
         return str(self.nombre_categoria) + '-' + str(self.abreviatura_categoria)
 
 
+
+class Rpt_Varr_Model(models.Model):
+    id= models.BigAutoField(primary_key=True,db_column="RptVar_id")
+    formato = models.ForeignKey(ReportsFormatsModel,on_delete=models.CASCADE)
+    variable = models.ForeignKey(VariablesModel,on_delete=models.CASCADE)
+    posicion = models.IntegerField("Contenedor de Variable en reporte", null=False,blank=False,db_column="rpt_varr_posicion")
+    sub_posicion = models.IntegerField("Posicion de variable en contenedor",null=False,blank=False,db_column="rpt_varr_sub_posicion")
+    created_at = models.DateTimeField(default=timezone.now,editable=False,null=False,blank=False)
+
+    class Meta:
+        ordering = ["id"]
+        db_table = 'reports_formatos_variables'
+    
+
+
 class Frt_Cat_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="FrtCat_id")
     categoria = models.ForeignKey(ReportsCategoryModel,on_delete=models.CASCADE)
@@ -93,7 +112,6 @@ class Frt_Cat_Model(models.Model):
         ordering = ["id"]
         db_table = 'reports_formatos_categoria'
     
-
 class Rpt_Prt_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="RptPrt_id")
     formato = models.ForeignKey(ReportsFormatsModel,on_delete=models.CASCADE)
