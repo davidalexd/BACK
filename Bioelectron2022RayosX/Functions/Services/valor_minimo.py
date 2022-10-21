@@ -1,5 +1,5 @@
 def valor_minimo(attributes):
     minimo = 0
     minimo = min(attributes)
-    resultado = {"valor":minimo}
+    resultado = minimo
     return resultado

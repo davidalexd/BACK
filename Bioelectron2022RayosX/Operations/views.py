@@ -1,7 +1,6 @@
 import json
 from django.http import JsonResponse
 from django.views import View
-from Bioelectron2022RayosX.Functions.Services.Fluoroscopia.fluoroscopia_umbral_sensibilidad_bajo_contraste import fluoroscopia_umbral_sensibilidad_bajo_contraste
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.exceptions import APIException,status
@@ -182,7 +181,7 @@ from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_cae import fluor
 from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_cai import fluoroscopia_repetibilidad_cai
 from Functions.Services.Fluoroscopia.fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen import fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen
 from Functions.Services.Fluoroscopia.fluoroscopia_tasa_dosis_paciente import fluoroscopia_tasa_dosis_paciente
-from Functions.Services.Fluoroscopia.fluoroscopia_umbral_sensibilidad_bajo_contraste import fluoroscopia_tasa_dosis_paciente
+from Functions.Services.Fluoroscopia.fluoroscopia_umbral_sensibilidad_bajo_contraste import fluoroscopia_umbral_sensibilidad_bajo_contraste
 
 
 
