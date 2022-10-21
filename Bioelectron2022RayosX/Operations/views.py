@@ -1,6 +1,7 @@
 import json
 from django.http import JsonResponse
 from django.views import View
+from Bioelectron2022RayosX.Functions.Services.Fluoroscopia.fluoroscopia_umbral_sensibilidad_bajo_contraste import fluoroscopia_umbral_sensibilidad_bajo_contraste
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.exceptions import APIException,status
@@ -173,6 +174,20 @@ from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_tiempo_exposicio
 from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_rendimiento import fluoroscopia_repetibilidad_rendimiento
 from Functions.Services.Fluoroscopia.fluoroscopia_valor_rendimiento import fluoroscopia_valor_rendimiento
 from Functions.Services.Fluoroscopia.fluoroscopia_variacion_rendimiento_carga import fluoroscopia_variacion_rendimiento_carga
+from Functions.Services.Fluoroscopia.fluoroscopia_resolucion_espacial_alto_contraste import fluoroscopia_resolucion_espacial_alto_contraste
+from Functions.Services.Fluoroscopia.fluoroscopia_compensacion_cae import fluoroscopia_compensacion_cae
+from Functions.Services.Fluoroscopia.fluoroscopia_compensacion_diferentes_espesores import fluoroscopia_compensacion_diferentes_espesores
+from Functions.Services.Fluoroscopia.fluoroscopia_kerma_aire_entrada_paciente import fluoroscopia_kerma_aire_entrada_paciente
+from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_cae import fluoroscopia_repetibilidad_cae
+from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_cai import fluoroscopia_repetibilidad_cai
+from Functions.Services.Fluoroscopia.fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen import fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen
+from Functions.Services.Fluoroscopia.fluoroscopia_tasa_dosis_paciente import fluoroscopia_tasa_dosis_paciente
+from Functions.Services.Fluoroscopia.fluoroscopia_umbral_sensibilidad_bajo_contraste import fluoroscopia_tasa_dosis_paciente
+
+
+
+
+
 from Functions.Services.RayosXDental.dental_exactitud_tension import dental_exactitud_tension
 from Functions.Services.RayosXDental.dental_exactitud_tiempo_exposicion_1 import dental_exactitud_tiempo_exposicion_1
 from Functions.Services.RayosXDental.dental_exactitud_tiempo_exposicion_2 import dental_exactitud_tiempo_exposicion_2
@@ -268,7 +283,6 @@ class fluoroscopia_filtracioncapahemireductora(View):
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_fluoroscopia_filtracion_capa_hemireductora = fluoroscopia_filtracioncapahemireductora.as_view()
 
-
 class fluoroscopia_exactitudtiempoexposicion(View):
     def get(self, request,**kwargs):
         try:
@@ -319,8 +333,98 @@ class fluoroscopia_variacionrendimientocarga(View):
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_fluoroscopia_variacion_rendimiento_carga= fluoroscopia_variacionrendimientocarga.as_view()
-  
 
+
+
+class fluoroscopia_resolucionespacialaltocontraste(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_resolucion_espacial_alto_contraste(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_resolucion_espacial_alto_contraste = fluoroscopia_resolucionespacialaltocontraste.as_view()
+
+class fluoroscopia_compensacioncae(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_compensacion_cae(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_compensacion_cae = fluoroscopia_compensacioncae.as_view()
+
+class fluoroscopia_compensaciondiferentesespesores(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_compensacion_diferentes_espesores(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_compensacion_diferentes_espesores = fluoroscopia_compensaciondiferentesespesores.as_view()
+
+class fluoroscopia_kermaaireentradapaciente(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_kerma_aire_entrada_paciente(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_kerma_aire_entrada_paciente = fluoroscopia_kermaaireentradapaciente.as_view()
+
+class fluoroscopia_repetibilidadcae(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_repetibilidad_cae(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_repetibilidad_cae = fluoroscopia_repetibilidadcae.as_view()
+
+class fluoroscopia_repetibilidadcai(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_repetibilidad_cai(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_repetibilidad_cai = fluoroscopia_repetibilidadcai.as_view()
+
+class fluoroscopia_tasadosismaximaentradaintensificadorimagen(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen = fluoroscopia_tasadosismaximaentradaintensificadorimagen.as_view()
+
+class fluoroscopia_tasadosispaciente(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_tasa_dosis_paciente(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_tasa_dosis_paciente = fluoroscopia_tasadosispaciente.as_view()
+
+class fluoroscopia_umbralsensibilidadbajocontraste(View):
+    def get(self,request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs["global"])
+            resultado = fluoroscopia_umbral_sensibilidad_bajo_contraste(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_fluoroscopia_umbral_sensibilidad_bajo_contraste = fluoroscopia_umbralsensibilidadbajocontraste.as_view()
 
 # dental
 
