@@ -14,10 +14,12 @@ def tomografia_filtracion_capa_hemirreductora(element_1,attribute,element_2):
     else:
         tolerancia = False
 
-    return resultado = [
+    resultado = [
         {
             "parametros":"",
             "resultado":redondear,
             "condicion":tolerancia
         }
     ]
+    
+    return resultado

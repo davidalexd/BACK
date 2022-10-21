@@ -4,8 +4,8 @@ from Functions.Services.valor_minimo import valor_minimo
 
 def tomografia_uniformidad_espacial_numero_ct(element, attribute):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
-    Uc = []
     tolerancia = True
+    Uc = []
 
     for x in attribute:
         operacion = float(element[0])-float(x)
@@ -23,7 +23,9 @@ def tomografia_uniformidad_espacial_numero_ct(element, attribute):
     else:
         tolerancia = False
         
-    return resultado = [{"parametros":"","resultado":redondear,"condicion":tolerancia}]
+    resultado = [{"parametros":"","resultado":redondear,"condicion":tolerancia}]
+    
+    return resultado
     
 
 

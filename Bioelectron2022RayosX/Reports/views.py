@@ -60,7 +60,7 @@ class CategoriasListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreat
         queryset = ReportsCategoryModel.objects.all()
         if not queryset:
             raise ValidationError
-        return queryset
+        return ({'data':queryset, 'response': status.HTTP_404_NOT_FOUND})
     def perform_create(self, serializer):
         instance = serializer.save()
 categorias_create_view = CategoriasListaCreateApiView.as_view()
@@ -151,6 +151,8 @@ class ReportesEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestro
 reportes_eliminar_view = ReportesEliminarAPIView.as_view()
 
 
+
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND
-    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No data is available', })
+    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No se encontraron registros', })
+

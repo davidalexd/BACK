@@ -1,7 +1,7 @@
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 
 
-def tomografia_ruido_imagen(attributes=[0],opcion=0):
+def tomografia_ruido_imagen(attributes=[0],opcion=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     tolerancia =True
     desv = desviacion_estandar_m(attributes)

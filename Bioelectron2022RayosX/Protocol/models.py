@@ -74,7 +74,6 @@ class SeccionesModel(BaseModel):
 class ProtocolsModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="prt_id")
     protocolo_titulo = models.CharField("Protocol name",max_length=255,null=False,blank=False,unique=True,db_column="prt_nombre")
-    protocolo_detalles = models.JSONField("Protocol details",editable=True,null=True,blank=False,db_column="prt_detalles")
     secciones = models.ManyToManyField(SeccionesModel,through="Prt_Scc_Model",through_fields=('protocolo', 'seccion'))
 
     def save(self, *args, **kwargs):

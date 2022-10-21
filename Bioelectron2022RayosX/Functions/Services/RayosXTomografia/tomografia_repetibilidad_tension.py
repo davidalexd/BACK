@@ -19,7 +19,7 @@ def tomografia_repetibilidad_tension(attribute_1,attribute_2,attribute_3):
         else:           
             operacion = desv/prom
             
-        Uc.append(resul)
+        Uc.append(operacion)
     
     if(valor_absoluto(valor_maximo(Uc))>=valor_absoluto(valor_minimo(Uc))):
         operacion_2 = valor_maximo(Uc)
@@ -33,7 +33,7 @@ def tomografia_repetibilidad_tension(attribute_1,attribute_2,attribute_3):
     else:
         tolerancia = False
         
-    return resultado = [
+    resultado = [
         {
             "parametros":"",
             "resultado":redondear,
@@ -41,3 +41,4 @@ def tomografia_repetibilidad_tension(attribute_1,attribute_2,attribute_3):
         }
     ]
     
+    return resultado

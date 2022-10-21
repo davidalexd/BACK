@@ -116,6 +116,7 @@ class Rpt_Prt_Model(models.Model):
     id = models.BigAutoField(primary_key=True,db_column="RptPrt_id")
     formato = models.ForeignKey(ReportsFormatsModel,on_delete=models.CASCADE)
     protocolo = models.ForeignKey(ProtocolsModel,on_delete=models.CASCADE)
+    protocolo_detalles = models.JSONField("Protocol details",editable=True,null=True,blank=False,db_column="RptPrt_detalles")
     created_at = models.DateTimeField(default=timezone.now,editable=False,null=False,blank=False)
 
     class Meta:

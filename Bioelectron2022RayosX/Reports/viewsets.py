@@ -1,4 +1,5 @@
 from rest_framework.exceptions import APIException,status
+from rest_framework.response import Response
 from rest_framework import mixins,viewsets,mixins
 from .models import ReportsCategoryModel, ReportsFormatsModel, ReportsReporteModel
 from .serializers import CategoriaReportesSerializer, FormatosReportesSerializer, ReporteReportesSerializer
@@ -45,4 +46,5 @@ class ReportesFormatosGenericViewSet(StaffEditorPermissionMixin,mixins.ListModel
         
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND
-    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No data is available', })
+    default_detail = ({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'No se encontraron registros', })
+

@@ -3,15 +3,16 @@ from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.valor_maximo import valor_maximo 
 from Functions.Services.valor_minimo import valor_minimo 
 
-def tomografia_exactitud_tension(attribute,attribute):
+def tomografia_exactitud_tension(attribute_1,attribute_2,attribute_3):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     ordenador = [0,1,2]
     tolerancia = True
     Uc = []
 
     for x in ordenador:
-        prom = promedio(attribute[x])
-        operacion = (float(attribute[x])-prom)*100/prom
+        prom = promedio(attribute_2[x])
+        correcion = prom-float(attribute_3[x])
+        operacion = (float(attribute_1[x])-correcion)*100/correcion
 
         redondear = round(operacion,2)
         
@@ -30,12 +31,14 @@ def tomografia_exactitud_tension(attribute,attribute):
         tolerancia = True
     else:
         tolerancia = False
-    
-    return resultado = [
+
+    resultado = [
         {
             "parametros":"",
             "resultado":redondear,
             "condicion":tolerancia
         }
     ]
+
+    return resultado
 

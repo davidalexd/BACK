@@ -8,8 +8,6 @@ def tomografia_repetibilidad_rendimiento(attribute_1,attribute_2,attribute_3):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     ordenador = [0,1]
     tolerancia = True
-    tolerancia_1 = 1
-    tolerancia_2 = -1
     Uc = []
 
     for x in ordenador:
@@ -38,13 +36,14 @@ def tomografia_repetibilidad_rendimiento(attribute_1,attribute_2,attribute_3):
     else:
         tolerancia = False
         
-    return resultado = [
+    resultado = [
         {
             "parametros":"",
             "resultado":redondear,
             "condicion":tolerancia
         }
     ]
+    return resultado
     
     
 

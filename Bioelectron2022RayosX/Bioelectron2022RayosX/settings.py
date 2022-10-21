@@ -167,7 +167,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME':'Bioelectron#2022RayosX',
-        'NAME':'ProyectoRayosX',
+        # 'NAME':'ProyectoRayosX',
+        'NAME':'bio-cc-ri/rni',        
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',
