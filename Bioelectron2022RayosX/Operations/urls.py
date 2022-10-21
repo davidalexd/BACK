@@ -30,7 +30,15 @@ urlpatterns = [
     path('OperacionFluoroscopiaValorRendimiento/<global>',views.view_fluoroscopia_valor_rendimiento,name='fluoroscopia_valor_rendimiento'),
     path('OperacionFluoroscopiaRepetibilidadRendimiento/<global>',views.view_fluoroscopia_repetibilidad_rendimiento,name='fluoroscopia_repetibilidad_rendimiento'),
     path('OperacionFluoroscopiaVariacionRendimientoCarga/<global>',views.view_fluoroscopia_variacion_rendimiento_carga,name='fluoroscopia_variacion_rendimiento_carga'),
-
+    path('OperacionFluoroscopiafResolucionEspacialAltoContrastecontraste/<global>',views.view_fluoroscopia_resolucion_espacial_alto_contraste,name="fluoroscopia_resolucion_espacial_alto_contraste"),
+    path('OperacionFluoroscopiaCompensacionCae/<global>',views.view_fluoroscopia_compensacion_cae,name="fluoroscopia_compensacion_cae"),
+    path('OperacionFluoroscopiaCompensacionDiferentesEspesores/<global>',views.view_fluoroscopia_compensacion_diferentes_espesores,name="fluoroscopia_compensacion_diferentes_espesores"),
+    path('OperacionFluoroscopiaKermaAireEntradaPaciente/<global>',views.view_fluoroscopia_kerma_aire_entrada_paciente,name="view_fluoroscopia_kerma_aire_entrada_paciente"),
+    path('OperacionFluoroscopiaRepetibilidadCae/<global>',views.view_fluoroscopia_repetibilidad_cae,name="fluoroscopia_repetibilidad_cae"),
+    path('OperacionFluoroscopiaRepetibilidadCai/<global>',views.view_fluoroscopia_repetibilidad_cai,name="fluoroscopia_repetibilidad_cai"),
+    path('OperacionFluoroscopiaTasaDosisMaximaEntradaIntensificacionImagen/<global>',views.view_fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen,name="fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen"),
+    path('OperacionFluoroscopiaTasaDosisPaciente/<global>',views.view_fluoroscopia_tasa_dosis_paciente,name="fluoroscopia_tasa_dosis_paciente"),
+    path('OperacionFluoroscopiaUmbralSensibilidadBajoContraste/<global>',views.view_fluoroscopia_umbral_sensibilidad_bajo_contraste,name="fluoroscopia_umbral_sensibilidad_bajo_contraste"),
 
     path('OperacionDentalExactitudTension/<global>',views.view_dental_exactitud_tension,name='dental_exactitud_tension'),
     path('OperacionDentalExactitudTiempoTexposicion_1/<global>',views.view_dental_exactitud_tiempo_exposicion_1,name='dental_exactitud_tiempo_exposicion_1'),
