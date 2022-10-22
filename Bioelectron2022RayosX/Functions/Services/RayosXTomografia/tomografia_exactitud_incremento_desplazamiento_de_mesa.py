@@ -1,4 +1,4 @@
-def tomografia_exactitud_incremento_desplazamiento_de_mesa(element_1,element_2):
+def tomografia_exactitud_incremento_desplazamiento_de_mesa(element_1=[0],element_2=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     
     tolerancia =True

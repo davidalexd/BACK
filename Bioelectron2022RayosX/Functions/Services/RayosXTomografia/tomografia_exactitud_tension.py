@@ -3,7 +3,7 @@ from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.valor_maximo import valor_maximo 
 from Functions.Services.valor_minimo import valor_minimo 
 
-def tomografia_exactitud_tension(attribute_1,attribute_2,attribute_3):
+def tomografia_exactitud_tension(attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     ordenador = [0,1,2]
     tolerancia = True

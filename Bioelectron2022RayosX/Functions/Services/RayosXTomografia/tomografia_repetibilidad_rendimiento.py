@@ -4,13 +4,12 @@ from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.valor_maximo import valor_maximo 
 from Functions.Services.valor_minimo import valor_minimo 
 
-def tomografia_repetibilidad_rendimiento(attribute_1,attribute_2,attribute_3):
+def tomografia_repetibilidad_rendimiento(attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
-    ordenador = [0,1]
     tolerancia = True
     Uc = []
 
-    for x in ordenador:
+    for x in range(len(attribute_1)):
         desv = desviacion_estandar_m([attribute_1[x],attribute_2[x],attribute_3[x]])
         prom = promedio([attribute_1[x],attribute_2[x],attribute_3[x]])
 

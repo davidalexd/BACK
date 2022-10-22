@@ -67,6 +67,22 @@ urlpatterns = [
     path('OperacionGeneralValorRendimiento/<global>',views.view_general_valor_rendimiento,name='general_valor_rendimiento'),
     path('OperacionGeneralVariacionRendimientoCarga/<global>',views.view_general_variacion_rendimiento_carga,name='general_variacion_rendimiento_carga'),
 
+    path('OperacionTomografiaCoincidenciaindicadoresluminososplanoexternointernoirradiado/<global>',views.view_tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado,name='tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado'),
+    path('OperacionTomografiaExactitudincrementodesplazamientodemesa/<global>',views.view_tomografia_exactitud_incremento_desplazamiento_de_mesa,name='tomografia_exactitud_incremento_desplazamiento_de_mesa'),
+    path('OperacionTomografiaExactitudindicadorposicionmesa/<global>',views.view_tomografia_exactitud_indicador_posicion_mesa,name='tomografia_exactitud_indicador_posicion_mesa'),
+    path('OperacionTomografiaExactitudtension/<global>',views.view_tomografia_exactitud_tension,name='tomografia_exactitud_tension'),
+    path('OperacionTomografiaExploracionparaabdomen/<global>',views.view_tomografia_exploracion_para_abdomen,name='tomografia_exploracion_para_abdomen'),
+    path('OperacionTomografiaExploracionparacabeza/<global>',views.view_tomografia_exploracion_para_cabeza,name='tomografia_exploracion_para_cabeza'),
+    path('OperacionTomografiaFiltracioncapahemirreductora/<global>',views.view_tomografia_filtracion_capa_hemirreductora,name='tomografia_filtracion_capa_hemirreductora'),
+    path('OperacionTomografiaPerfilessensibilidad/<global>',views.view_tomografia_perfiles_sensibilidad,name='tomografia_perfiles_sensibilidad'),
+    path('OperacionTomografiaRepetibilidadrendimiento/<global>',views.view_tomografia_repetibilidad_rendimiento,name='tomografia_repetibilidad_rendimiento'),
+    path('OperacionTomografiaRepetibilidadtension/<global>',views.view_tomografia_repetibilidad_tension,name='tomografia_repetibilidad_tension'),
+    path('OperacionTomografiaRuidoimagen/<global>',views.view_tomografia_ruido_imagen,name='tomografia_ruido_imagen'),
+    path('OperacionTomografiaUniformidadespacialnumeroct/<global>',views.view_tomografia_uniformidad_espacial_numero_ct,name='tomografia_uniformidad_espacial_numero_ct'),
+    path('OperacionTomografiaValormedionumeroct/<global>',views.view_tomografia_valor_medio_numero_ct,name='tomografia_valor_medio_numero_ct'),
+    path('OperacionTomografiaVariacionrendimientocarga/<global>',views.view_tomografia_variacion_rendimiento_carga,name='tomografia_variacion_rendimiento_carga'),
+    path('OperacionTomografiaVerificacionausenciaartefactosimagen/<global>',views.view_tomografia_verificacion_ausencia_artefactos_imagen,name='tomografia_verificacion_ausencia_artefactos_imagen'),
+    path('OperacionTomografiaExactitudseleccionposicioncorteradiografiaplanificacion/<global>',views.view_tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion,name='tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion'),
 
 
 ]

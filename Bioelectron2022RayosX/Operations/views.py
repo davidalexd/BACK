@@ -159,47 +159,28 @@ categoria_operaciones_eliminar_view = CategoriaOperacionesEliminarAPIView.as_vie
 
 
 # Vistas de soluciones a formulas
-
-from Functions.Services.Fluoroscopia.fluoroscopia_exactitud_tiempo_exposicion import fluoroscopia_exactitud_tiempo_exposicion
-from Functions.Services.Fluoroscopia.fluoroscopia_filtracion_capa_hemireductora import fluoroscopia_filtracion_capa_hemireductora
-from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_tension import fluoroscopia_repetibilidad_tension
-from Functions.Services.Fluoroscopia.fluoroscopia_exactitud_tension import fluoroscopia_exactitud_tension
-from Functions.Services.Fluoroscopia.fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector import fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector
-from Functions.Services.Fluoroscopia.fluoroscopia_tamano_campo_entrada_detector_imagen import fluoroscopia_tamano_campo_entrada_detector_imagen
-from Functions.Services.Fluoroscopia.fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen import fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen
-from Functions.Services.Fluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_geometrica
-from Functions.Services.Fluoroscopia.fluoroscopia_alineacion_rayos_x_haz_luminoso import fluoroscopia_alineacion_rayos_x_haz_luminoso
-from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_tiempo_exposicion import fluoroscopia_repetibilidad_tiempo_exposicion
-from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_rendimiento import fluoroscopia_repetibilidad_rendimiento
-from Functions.Services.Fluoroscopia.fluoroscopia_valor_rendimiento import fluoroscopia_valor_rendimiento
-from Functions.Services.Fluoroscopia.fluoroscopia_variacion_rendimiento_carga import fluoroscopia_variacion_rendimiento_carga
-from Functions.Services.Fluoroscopia.fluoroscopia_resolucion_espacial_alto_contraste import fluoroscopia_resolucion_espacial_alto_contraste
-from Functions.Services.Fluoroscopia.fluoroscopia_compensacion_cae import fluoroscopia_compensacion_cae
-from Functions.Services.Fluoroscopia.fluoroscopia_compensacion_diferentes_espesores import fluoroscopia_compensacion_diferentes_espesores
-from Functions.Services.Fluoroscopia.fluoroscopia_kerma_aire_entrada_paciente import fluoroscopia_kerma_aire_entrada_paciente
-from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_cae import fluoroscopia_repetibilidad_cae
-from Functions.Services.Fluoroscopia.fluoroscopia_repetibilidad_cai import fluoroscopia_repetibilidad_cai
-from Functions.Services.Fluoroscopia.fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen import fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen
-from Functions.Services.Fluoroscopia.fluoroscopia_tasa_dosis_paciente import fluoroscopia_tasa_dosis_paciente
-from Functions.Services.Fluoroscopia.fluoroscopia_umbral_sensibilidad_bajo_contraste import fluoroscopia_umbral_sensibilidad_bajo_contraste
-
-
-
-
-
-from Functions.Services.RayosXDental.dental_exactitud_tension import dental_exactitud_tension
-from Functions.Services.RayosXDental.dental_exactitud_tiempo_exposicion_1 import dental_exactitud_tiempo_exposicion_1
-from Functions.Services.RayosXDental.dental_exactitud_tiempo_exposicion_2 import dental_exactitud_tiempo_exposicion_2
-from Functions.Services.RayosXDental.dental_filtracion import dental_filtracion
-from Functions.Services.RayosXDental.dental_kerma_aire_entrada_paciente import dental_kerma_aire_entrada_paciente
-from Functions.Services.RayosXDental.dental_minima_distancia_foco_piel import dental_minima_distancia_foco_piel
-from Functions.Services.RayosXDental.dental_repetibilidad_rendimiento import dental_repetibilidad_rendimiento
-from Functions.Services.RayosXDental.dental_repetibilidad_tension import dental_repetibilidad_tension
-from Functions.Services.RayosXDental.dental_repetibilidad_tiempo_exposicion import dental_repetibilidad_tiempo_exposicion
-from Functions.Services.RayosXDental.dental_tamano_campo_extremo_localizador import dental_tamano_campo_extremo_localizador
-from Functions.Services.RayosXDental.dental_valor_rendimiento import dental_valor_rendimiento
-from Functions.Services.RayosXDental.dental_variacion_rendimiento import dental_variacion_rendimiento
-
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_exactitud_tiempo_exposicion import fluoroscopia_exactitud_tiempo_exposicion
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_filtracion_capa_hemireductora import fluoroscopia_filtracion_capa_hemireductora
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_tension import fluoroscopia_repetibilidad_tension
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_exactitud_tension import fluoroscopia_exactitud_tension
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector import fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_tamano_campo_entrada_detector_imagen import fluoroscopia_tamano_campo_entrada_detector_imagen
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen import fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_geometrica
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_alineacion_rayos_x_haz_luminoso import fluoroscopia_alineacion_rayos_x_haz_luminoso
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_tiempo_exposicion import fluoroscopia_repetibilidad_tiempo_exposicion
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_rendimiento import fluoroscopia_repetibilidad_rendimiento
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_valor_rendimiento import fluoroscopia_valor_rendimiento
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_variacion_rendimiento_carga import fluoroscopia_variacion_rendimiento_carga
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_resolucion_espacial_alto_contraste import fluoroscopia_resolucion_espacial_alto_contraste
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_compensacion_cae import fluoroscopia_compensacion_cae
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_compensacion_diferentes_espesores import fluoroscopia_compensacion_diferentes_espesores
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_kerma_aire_entrada_paciente import fluoroscopia_kerma_aire_entrada_paciente
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_cae import fluoroscopia_repetibilidad_cae
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_cai import fluoroscopia_repetibilidad_cai
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen import fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_tasa_dosis_paciente import fluoroscopia_tasa_dosis_paciente
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_umbral_sensibilidad_bajo_contraste import fluoroscopia_umbral_sensibilidad_bajo_contraste
 
 class fluoroscopia_alineacionrayosxhazluminoso(View):
     def get(self, request,**kwargs):
@@ -240,7 +221,6 @@ class fluoroscopia_tamanocampoentradadetectorimagen(View):
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_fluoroscopia_tamano_campo_entrada_detector_imagen = fluoroscopia_tamanocampoentradadetectorimagen.as_view()
-
 
 class fluoroscopia_coincidenciacamporadiacionareavisualizadadetector(View):
     def get(self, request,**kwargs):
@@ -302,7 +282,6 @@ class fluoroscopia_repetibilidadtiempoexposicion(View):
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_fluoroscopia_repetibilidad_tiempo_exposicion = fluoroscopia_repetibilidadtiempoexposicion.as_view()
 
-
 class fluoroscopia_valorrendimiento(View):
     def get(self, request,**kwargs):
         try:
@@ -332,8 +311,6 @@ class fluoroscopia_variacionrendimientocarga(View):
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_fluoroscopia_variacion_rendimiento_carga= fluoroscopia_variacionrendimientocarga.as_view()
-
-
 
 class fluoroscopia_resolucionespacialaltocontraste(View):
     def get(self,request,**kwargs):
@@ -425,7 +402,21 @@ class fluoroscopia_umbralsensibilidadbajocontraste(View):
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_fluoroscopia_umbral_sensibilidad_bajo_contraste = fluoroscopia_umbralsensibilidadbajocontraste.as_view()
 
+
+
 # dental
+from Functions.Services.RayosXDental.dental_exactitud_tension import dental_exactitud_tension
+from Functions.Services.RayosXDental.dental_exactitud_tiempo_exposicion_1 import dental_exactitud_tiempo_exposicion_1
+from Functions.Services.RayosXDental.dental_exactitud_tiempo_exposicion_2 import dental_exactitud_tiempo_exposicion_2
+from Functions.Services.RayosXDental.dental_filtracion import dental_filtracion
+from Functions.Services.RayosXDental.dental_kerma_aire_entrada_paciente import dental_kerma_aire_entrada_paciente
+from Functions.Services.RayosXDental.dental_minima_distancia_foco_piel import dental_minima_distancia_foco_piel
+from Functions.Services.RayosXDental.dental_repetibilidad_rendimiento import dental_repetibilidad_rendimiento
+from Functions.Services.RayosXDental.dental_repetibilidad_tension import dental_repetibilidad_tension
+from Functions.Services.RayosXDental.dental_repetibilidad_tiempo_exposicion import dental_repetibilidad_tiempo_exposicion
+from Functions.Services.RayosXDental.dental_tamano_campo_extremo_localizador import dental_tamano_campo_extremo_localizador
+from Functions.Services.RayosXDental.dental_valor_rendimiento import dental_valor_rendimiento
+from Functions.Services.RayosXDental.dental_variacion_rendimiento import dental_variacion_rendimiento
 
 
 class dental_exactitudtension(View):
@@ -538,7 +529,6 @@ class dental_valorrendimiento(View):
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_dental_valor_rendimiento= dental_valorrendimiento.as_view()
 
-
 class dental_variacionrendimiento(View):
     def get(self, request,**kwargs):
         try:
@@ -550,7 +540,7 @@ class dental_variacionrendimiento(View):
 view_dental_variacion_rendimiento= dental_variacionrendimiento.as_view()
 
 
-
+# General
 from Functions.Services.RayosXGeneral.general_dosis_superficie_paciente import general_dosis_superficie_paciente
 from Functions.Services.RayosXGeneral.general_exactitud_tension_1 import general_exactitud_tension_1
 from Functions.Services.RayosXGeneral.general_exactitud_tension_2 import general_exactitud_tension_2
@@ -695,6 +685,186 @@ class general_variacionrendimientocarga(View):
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_general_variacion_rendimiento_carga= general_variacionrendimientocarga.as_view()
+
+
+from Functions.Services.RayosXTomografia.tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado import tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado
+from Functions.Services.RayosXTomografia.tomografia_exactitud_incremento_desplazamiento_de_mesa import tomografia_exactitud_incremento_desplazamiento_de_mesa
+from Functions.Services.RayosXTomografia.tomografia_exactitud_indicador_posicion_mesa import tomografia_exactitud_indicador_posicion_mesa
+from Functions.Services.RayosXTomografia.tomografia_exactitud_tension import tomografia_exactitud_tension
+from Functions.Services.RayosXTomografia.tomografia_exploracion_para_abdomen import tomografia_exploracion_para_abdomen
+from Functions.Services.RayosXTomografia.tomografia_exploracion_para_cabeza import tomografia_exploracion_para_cabeza
+from Functions.Services.RayosXTomografia.tomografia_filtracion_capa_hemirreductora import tomografia_filtracion_capa_hemirreductora
+from Functions.Services.RayosXTomografia.tomografia_perfiles_sensibilidad import tomografia_perfiles_sensibilidad
+from Functions.Services.RayosXTomografia.tomografia_repetibilidad_rendimiento import tomografia_repetibilidad_rendimiento
+from Functions.Services.RayosXTomografia.tomografia_repetibilidad_tension import tomografia_repetibilidad_tension
+from Functions.Services.RayosXTomografia.tomografia_ruido_imagen import tomografia_ruido_imagen
+from Functions.Services.RayosXTomografia.tomografia_uniformidad_espacial_numero_ct import tomografia_uniformidad_espacial_numero_ct
+from Functions.Services.RayosXTomografia.tomografia_valor_medio_numero_ct import tomografia_valor_medio_numero_ct
+from Functions.Services.RayosXTomografia.tomografia_variacion_rendimiento_carga import tomografia_variacion_rendimiento_carga
+from Functions.Services.RayosXTomografia.tomografia_verificacion_ausencia_artefactos_imagen import tomografia_verificacion_ausencia_artefactos_imagen
+from Functions.Services.RayosXTomografia.tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion import tomograifa_exactitud_seleccion_posicion_corte_radiografia_planificacion
+
+
+class tomografia_coincidenciaindicadoresluminososplanoexternointernoirradiado(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado = tomografia_coincidenciaindicadoresluminososplanoexternointernoirradiado.as_view()
+class tomografia_exactitudincrementodesplazamientodemesa(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_exactitud_incremento_desplazamiento_de_mesa(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_exactitud_incremento_desplazamiento_de_mesa = tomografia_exactitudincrementodesplazamientodemesa.as_view()
+class tomografia_exactitudindicadorposicionmesa(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_exactitud_indicador_posicion_mesa(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_exactitud_indicador_posicion_mesa = tomografia_exactitudindicadorposicionmesa.as_view()
+class tomografia_exactitudtension(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_exactitud_tension(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_exactitud_tension = tomografia_exactitudtension.as_view()
+class tomografia_exploracionparaabdomen(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_exploracion_para_abdomen(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6],data_entrante[7],data_entrante[8],data_entrante[9],data_entrante[10],data_entrante[11],data_entrante[12])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_exploracion_para_abdomen = tomografia_exploracionparaabdomen.as_view()
+class tomografia_exploracionparacabeza(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_exploracion_para_cabeza(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6],data_entrante[7],data_entrante[8],data_entrante[9],data_entrante[10],data_entrante[11],data_entrante[12])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_exploracion_para_cabeza = tomografia_exploracionparacabeza.as_view()
+class tomografia_filtracioncapahemirreductora(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_filtracion_capa_hemirreductora(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_filtracion_capa_hemirreductora = tomografia_filtracioncapahemirreductora.as_view()
+class tomografia_perfilessensibilidad(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_perfiles_sensibilidad(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_perfiles_sensibilidad = tomografia_perfilessensibilidad.as_view()
+class tomografia_repetibilidadrendimiento(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_repetibilidad_rendimiento(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_repetibilidad_rendimiento = tomografia_repetibilidadrendimiento.as_view()
+class tomografia_repetibilidadtension(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_repetibilidad_tension(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_repetibilidad_tension = tomografia_repetibilidadtension.as_view()
+class tomografia_ruidoimagen(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_ruido_imagen(data_entrante[0],data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_ruido_imagen = tomografia_ruidoimagen.as_view()
+class tomografia_uniformidadespacialnumeroct(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_uniformidad_espacial_numero_ct(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_uniformidad_espacial_numero_ct = tomografia_uniformidadespacialnumeroct.as_view()
+class tomografia_valormedionumeroct(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_valor_medio_numero_ct(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_valor_medio_numero_ct = tomografia_valormedionumeroct.as_view()
+class tomografia_variacionrendimientocarga(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_variacion_rendimiento_carga(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_variacion_rendimiento_carga = tomografia_variacionrendimientocarga.as_view()
+class tomografia_verificacionausenciaartefactosimagen(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomografia_verificacion_ausencia_artefactos_imagen(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_verificacion_ausencia_artefactos_imagen = tomografia_verificacionausenciaartefactosimagen.as_view()
+class tomografia_exactitudseleccionposicioncorteradiografiaplanificacion(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = tomograifa_exactitud_seleccion_posicion_corte_radiografia_planificacion(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion = tomografia_exactitudseleccionposicioncorteradiografiaplanificacion.as_view()
 
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND

@@ -2,7 +2,7 @@ from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.valor_maximo import valor_maximo 
 from Functions.Services.valor_minimo import valor_minimo 
 
-def tomografia_uniformidad_espacial_numero_ct(element, attribute):
+def tomografia_uniformidad_espacial_numero_ct(element=[0], attribute=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     tolerancia = True
     Uc = []

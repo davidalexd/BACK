@@ -1,6 +1,6 @@
 from Functions.Services.valor_absoluto import valor_absoluto
 
-def tomografia_exactitud_indicador_posicion_mesa(element_1,element_2,element_3):
+def tomografia_exactitud_indicador_posicion_mesa(element_1=[0],element_2=[0],element_3=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     tolerancia =True
     abs = valor_absoluto(float(element_1[0])-float(element_3[0]))

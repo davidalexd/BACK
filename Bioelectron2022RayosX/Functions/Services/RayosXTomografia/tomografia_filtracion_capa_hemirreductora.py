@@ -1,6 +1,6 @@
 from Functions.Services.promedio import promedio
 
-def tomografia_filtracion_capa_hemirreductora(element_1,attribute,element_2):
+def tomografia_filtracion_capa_hemirreductora(element_1=[0],attribute=[0],element_2=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     prom = promedio(attribute)
     tolerancia = True

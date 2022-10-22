@@ -1,4 +1,4 @@
-def tomografia_valor_medio_numero_ct(element_1,element_2):
+def tomografia_valor_medio_numero_ct(element_1=[0],element_2=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     tolerancia_1 = True
     tolerancia_2 = False

@@ -1,4 +1,4 @@
-def tomograifa_exactitud_seleccion_posicion_corte_radiografia_planificacion(element):
+def tomograifa_exactitud_seleccion_posicion_corte_radiografia_planificacion(element=[0]):
     resultado = [{"parametros":"","resultado":0,"condicion":True}]
     tolerancia =True
     redondear = round(float(element[0]),2)
