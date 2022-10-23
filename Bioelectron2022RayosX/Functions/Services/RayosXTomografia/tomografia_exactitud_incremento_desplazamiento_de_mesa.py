@@ -1,5 +1,5 @@
 def tomografia_exactitud_incremento_desplazamiento_de_mesa(element_1=[0],element_2=[0]):
-    resultado = [{"parametros":"","resultado":0,"condicion":True}]
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     
     tolerancia =True
     operacion = float(element_1[0])-float(element_2[0])
@@ -13,11 +13,6 @@ def tomografia_exactitud_incremento_desplazamiento_de_mesa(element_1=[0],element
     else:
         tolerancia = False
 
-    resultado = [
-         {
-            "parametros":"",
-            "resultado":str(redondear)+"%",
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"DM–DN < ±1 mm, para DN ≥ 2mm y DM–DN < 50%, para DN < 2mm."}
+
     return resultado

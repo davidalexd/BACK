@@ -1,7 +1,7 @@
 from Functions.Services.promedio import promedio
 
-def tomografia_filtracion_capa_hemirreductora(element_1=[0],attribute=[0],element_2=[0]):
-    resultado = [{"parametros":"","resultado":0,"condicion":True}]
+def tomografia_filtracion_capa_hemirreductora(attribute=[0],element_1=[0],element_2=[0]):
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     prom = promedio(attribute)
     tolerancia = True
     operacion = float(element_1[0])-prom-float(element_2[0])
@@ -14,12 +14,6 @@ def tomografia_filtracion_capa_hemirreductora(element_1=[0],attribute=[0],elemen
     else:
         tolerancia = False
 
-    resultado = [
-        {
-            "parametros":"",
-            "resultado":redondear,
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"Según especificaciones del fabricante: (VM – VN) ≤ ±1 mmAl  "}
     
     return resultado

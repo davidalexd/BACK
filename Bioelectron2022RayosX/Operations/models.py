@@ -10,7 +10,7 @@ from django.utils import timezone
 
 class VariablesModel(BaseModel):    
     id = models.BigAutoField(primary_key=True,db_column="var_id")
-    nombre_variable = models.CharField("Variable name",max_length=255,null=False,blank=False,unique=True,db_column="var_nombre")
+    nombre_variable = models.CharField("Variable name",max_length=255,null=False,blank=False,unique=False,db_column="var_nombre")
     range_variable = models.IntegerField("Variable range",null=False,blank=False,db_column="var_range")
     valor_defecto = models.JSONField("Variable valor ",null=True,blank=True,db_column="var_valor_defecto")
     def save(self, *args, **kwargs):
@@ -27,7 +27,7 @@ class VariablesModel(BaseModel):
 
 class OperacionesModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="opr_id")
-    operacion_titulo = models.CharField("Operation's title", max_length=255,null=False,blank=False,unique=True,db_column="opr_titulo")
+    operacion_titulo = models.CharField("Operation's title", max_length=255,null=False,blank=False,unique=False,db_column="opr_titulo")
     operacion_funcion= models.CharField("Operation's function", max_length=255,null=False,blank=False,unique=True,db_column="opr_funcion")
     operacion_symbol= models.CharField("Operation's symbol",max_length=255,null=True,blank=True,unique=True,db_column="opr_simbolo")
     operacion_variable= models.IntegerField("Operation's number of variables",default=1,null=False,blank=False,db_column="opr_cantidad_variables")

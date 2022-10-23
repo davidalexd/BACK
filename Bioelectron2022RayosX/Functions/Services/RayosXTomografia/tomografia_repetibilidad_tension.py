@@ -5,7 +5,7 @@ from Functions.Services.valor_maximo import valor_maximo
 from Functions.Services.valor_minimo import valor_minimo 
 
 def tomografia_repetibilidad_tension(attribute_1=[0],attribute_2=[0],attribute_3=[0]):
-    resultado = [{"parametros":"","resultado":0,"condicion":True}]
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia = True
     Uc = []
 
@@ -16,7 +16,7 @@ def tomografia_repetibilidad_tension(attribute_1=[0],attribute_2=[0],attribute_3
         if(prom==0):
             operacion = 0
         else:           
-            operacion = desv/prom
+            operacion = desv*100/prom
             
         Uc.append(operacion)
     
@@ -32,12 +32,7 @@ def tomografia_repetibilidad_tension(attribute_1=[0],attribute_2=[0],attribute_3
     else:
         tolerancia = False
         
-    resultado = [
-        {
-            "parametros":"",
-            "resultado":redondear,
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"Coeficiente de variación ≤ 3%."}
+
     
     return resultado

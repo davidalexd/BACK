@@ -20,6 +20,29 @@
     }
 ]
 
+// Tomografía
+[
+    {
+        "opcion":"ESTABILIDAD MECANICA"
+    },
+    {
+        "opcion":"MOVIMIENTOS ADECUADOS DEL EQUIPO"
+    },
+    {
+        "opcion":"BUEN ESTADO DE LOS CABLES (ALTA TENSION Y ALIMENTACION)"
+    },
+    {
+        "opcion":"LOS INDICADORES DE POSICIÓN ESTÁN OPERATIVOS"
+    },
+    {
+        "opcion":"HAY AIRE ACONDICIONADO EN EL AMBIENTE"
+    },
+    {
+        "opcion":"EL SISTEMA AUDIBLE DE COMINICACIÓN ES CLARO"
+    }
+]
+
+// Fluoroscopia
 [
 {
     "opcion":"ESTABILIDAD MECANICA"
