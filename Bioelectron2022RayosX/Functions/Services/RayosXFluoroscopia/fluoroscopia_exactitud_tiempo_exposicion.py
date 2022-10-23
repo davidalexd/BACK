@@ -1,10 +1,12 @@
 from Functions.Services.promedio import promedio
+from Functions.Services.valor_absoluto import valor_absoluto
 
-def fluoroscopia_exactitud_tiempo_exposicion(element_1,attributes):
-        resultado = 0
-        prom = promedio(attributes)
-        operacion = ((element_1[0]-prom)/element_1[0])*100
-        redondear = round(operacion,2)
+def fluoroscopia_exactitud_tiempo_exposicion(attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0]):
+        resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
+        prom = promedio([attribute_2[1],attribute_3[1],attribute_4[1]])
+        operacion = ((float(attribute_1[1])-prom)/float(attribute_1[1]))*100
+        abs = valor_absoluto(operacion)
+        redondear = round(abs,2)
         tolerancia = True
         tolerancia_1 = 10
         tolerancia_2 = -10
@@ -13,11 +15,7 @@ def fluoroscopia_exactitud_tiempo_exposicion(element_1,attributes):
                 tolerancia=True
         else:
                 tolerancia=False
-                
-        resultado = [{
-            "parametros":"",
-            "resultado":str(redondear)+"%",
-            "condicion":tolerancia
+            
+        resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Desviación con respecto al valor nominal < ±10% para tiempos > 20 ms y lo especificado por el fabricante para tiempos ≤ 20 ms."}    
 
-        }]
         return resultado

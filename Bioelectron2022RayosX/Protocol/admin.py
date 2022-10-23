@@ -18,12 +18,12 @@ class ProtocoloSecciones(admin.TabularInline):
 @admin.register(PruebaCalculoModel)
 class PruebaCalculoAdmin(admin.ModelAdmin):
     inlines = [CalculoOperacion,]
-    list_display = ("id","pruebas_resultado","pruebas_tolerancia","pruebas_condicion_respuesta","is_enabled","created_at")
+    list_display = ("id","pruebas_titulo","pruebas_contexto","is_enabled","created_at")
 
 
 @admin.register(PruebaOpcionesModel)
 class PruebaOpcioneAdmin(admin.ModelAdmin):
-    list_display = ("id","pruebas_opciones","is_enabled","created_at")
+    list_display = ("id","pruebas_titulo","pruebas_opciones","is_enabled","created_at")
 
 
 @admin.register(SeccionesModel)

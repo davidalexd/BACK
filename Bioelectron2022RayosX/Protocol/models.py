@@ -14,9 +14,6 @@ class PruebaCalculoModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="prb_cal_id")
     pruebas_titulo = models.CharField("Test name",max_length=255,null=False,blank=False,unique=False,db_column="prb_cal_titulo")
     pruebas_contexto = models.TextField("Test context",null=True,blank=True,db_column="prb_cal_contexto")
-    pruebas_resultado = models.TextField("Test results",null=True,blank=True,db_column="prb_cal_resultado")
-    pruebas_tolerancia = models.TextField("Test's tolerance",null=False,blank=False,db_column="prb_cal_tolerancia")
-    pruebas_condicion_respuesta = models.JSONField("Test's condition",null=False,blank=False,db_column="prb_cal_condicion_respuesta")
     operacion = models.ManyToManyField(OperacionesModel,through="Prb_Calculo_Operacion_Model",through_fields=('calculo', 'operacion'))
 
     def save(self, *args, **kwargs):

@@ -12,7 +12,7 @@ class VariablesModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="var_id")
     nombre_variable = models.CharField("Variable name",max_length=255,null=False,blank=False,unique=True,db_column="var_nombre")
     range_variable = models.IntegerField("Variable range",null=False,blank=False,db_column="var_range")
-    valor_defecto = models.JSONField("Variable valor ",null=True,blank=False,db_column="var_valor_defecto")
+    valor_defecto = models.JSONField("Variable valor ",null=True,blank=True,db_column="var_valor_defecto")
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        

@@ -17,7 +17,7 @@ class PruebaCalculoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PruebaCalculoModel
-        fields = ("id","pruebas_titulo","pruebas_contexto","pruebas_resultado","pruebas_tolerancia","pruebas_condicion_respuesta","is_enabled","created_at","url","edit_url","delete_url","operacion","operacion_ids")
+        fields = ("id","pruebas_titulo","pruebas_contexto","is_enabled","created_at","url","edit_url","delete_url","operacion","operacion_ids")
 
     def get_edit_url(self,obj):
         request = self.context.get('request')

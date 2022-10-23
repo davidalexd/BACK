@@ -1,10 +1,10 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 
-def fluoroscopia_repetibilidad_cae(attribute):
-    resultado = [{"resultado":0}]
-    desv = desviacion_estandar_m(attribute)
-    prom = promedio(attribute)
+def fluoroscopia_repetibilidad_cae(attribute_1=[0],attribute_2=[0],attribute_3=[0]):
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
+    desv = desviacion_estandar_m([attribute_1[1],attribute_2[1],attribute_3[1]])
+    prom = promedio([attribute_1[1],attribute_2[1],attribute_3[1]])
     tolerancia = True
 
     if(prom == 0):
@@ -12,17 +12,13 @@ def fluoroscopia_repetibilidad_cae(attribute):
     else:
         operacion = desv/prom
     redondear = round(operacion,2)
+    
     if(redondear<=10):
         tolerancia = True
     else:
         tolerancia = False
 
-    resultado = [
-        {
-            "parametros":"",
-            "resultado":str(redondear)+"%",
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Coeficiente de variación < 10%"}
+
 
     return resultado

@@ -1,5 +1,6 @@
-def fluoroscopia_tasa_dosis_paciente(element_1,element_2):
-    resultado = [{"resultado":0}]
+def fluoroscopia_tasa_dosis_paciente(element_1=[0],element_2=[0]):
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
+
     tolerancia_1 = True
     tolerancia_2 = True
     operacion_1 = float(element_1[0])*60/1000
@@ -16,7 +17,7 @@ def fluoroscopia_tasa_dosis_paciente(element_1,element_2):
     else:
         tolerancia_2 = False
     
-    resultado = [
+    resultado = {"data":[
         {
             "parametros":"",
             "resultado":str(redondear_1),
@@ -27,5 +28,7 @@ def fluoroscopia_tasa_dosis_paciente(element_1,element_2):
             "resultado":str(redondear_2),
             "condicion":tolerancia_2
         }
-    ]
+        ],"tolerancia":"≤ 50 mGy/min. y ≤ 100 mGy/min."}
+
+
     return resultado

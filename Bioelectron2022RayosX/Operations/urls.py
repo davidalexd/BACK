@@ -18,7 +18,10 @@ urlpatterns = [
     path('CateogriaOperaciones/<int:pk>/delete/',views.categoria_operaciones_eliminar_view,name='categoria-operacion-delete'),
 
     path('OperacionFluoroscopiaAlineacionRayosXHazLuminoso/<global>',views.view_fluoroscopia_alineacion_rayos_x_haz_luminoso,name='fluoroscopia_alineacion_rayos_x_haz_luminoso'),
-    path('OperacionFluoroscopiaDistorsionGeometrica/<global>',views.view_fluoroscopia_distorsion_geometrica,name='fluoroscopia_distorsion_geometrica'),
+    path('OperacionFluoroscopiaDistorsionIntegral/<global>',views.view_fluoroscopia_distorsion_integral,name='fluoroscopia_distorsion_integral'),
+    path('OperacionFluoroscopiaDistorsionTipoS/<global>',views.view_fluoroscopia_distorsion_del_tipo_s,name='fluoroscopia_distorsion_del_tipo_s'),
+    path('OperacionFluoroscopiaDistorsionCojinete/<global>',views.view_fluoroscopia_distorsion_cojinete,name='fluoroscopia_distorsion_cojinete'),
+    
     path('OperacionFluoroscopiaOrtogonalidadHazRayosXReceptorImagen/<global>',views.view_fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen,name='fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen'),
     path('OperacionFluoroscopiaTamanoCampoEntradaDetectorImagen/<global>',views.view_fluoroscopia_tamano_campo_entrada_detector_imagen,name='fluoroscopia_tamano_campo_entrada_detector_imagen'),
     path('OperacionFluoroscopiaCoincidenciaCampoRadiacionAreaVisualizadaDetector/<global>',views.view_fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector,name='fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector'),

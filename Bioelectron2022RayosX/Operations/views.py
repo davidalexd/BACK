@@ -166,7 +166,11 @@ from Functions.Services.RayosXFluoroscopia.fluoroscopia_exactitud_tension import
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector import fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_tamano_campo_entrada_detector_imagen import fluoroscopia_tamano_campo_entrada_detector_imagen
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen import fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen
-from Functions.Services.RayosXFluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_geometrica
+
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_integral
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_del_tipo_s
+from Functions.Services.RayosXFluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_cojinete
+
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_alineacion_rayos_x_haz_luminoso import fluoroscopia_alineacion_rayos_x_haz_luminoso
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_tiempo_exposicion import fluoroscopia_repetibilidad_tiempo_exposicion
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_rendimiento import fluoroscopia_repetibilidad_rendimiento
@@ -186,21 +190,45 @@ class fluoroscopia_alineacionrayosxhazluminoso(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_alineacion_rayos_x_haz_luminoso((data_entrante[0]),(data_entrante[1]),(data_entrante[2]),(data_entrante[3]),(data_entrante[4]))
+            resultado = fluoroscopia_alineacion_rayos_x_haz_luminoso((data_entrante[0]),(data_entrante[1]))
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_fluoroscopia_alineacion_rayos_x_haz_luminoso = fluoroscopia_alineacionrayosxhazluminoso.as_view()
 
-class fluoroscopia_distorsiongeometrica(View):
+class fluoroscopia_distorsionintegral(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_distorsion_geometrica((data_entrante[0]),(data_entrante[1]),(data_entrante[2]))
+            resultado = fluoroscopia_distorsion_integral((data_entrante[0]),(data_entrante[1]),(data_entrante[2]))
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
-view_fluoroscopia_distorsion_geometrica = fluoroscopia_distorsiongeometrica.as_view()
+
+view_fluoroscopia_distorsion_integral = fluoroscopia_distorsionintegral.as_view()
+class fluoroscopia_distorsiondeltipos(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = fluoroscopia_distorsion_del_tipo_s((data_entrante[0]))
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_fluoroscopia_distorsion_del_tipo_s = fluoroscopia_distorsiondeltipos.as_view()
+class fluoroscopia_distorsioncojinete(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = fluoroscopia_distorsion_cojinete((data_entrante[0]))
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_fluoroscopia_distorsion_cojinete = fluoroscopia_distorsioncojinete.as_view()
+
+
+
 
 class fluoroscopia_ortogonalidadhazrayosxreceptor_imagen(View):
     def get(self, request,**kwargs):
@@ -211,6 +239,9 @@ class fluoroscopia_ortogonalidadhazrayosxreceptor_imagen(View):
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen = fluoroscopia_ortogonalidadhazrayosxreceptor_imagen.as_view()
+
+
+
 
 class fluoroscopia_tamanocampoentradadetectorimagen(View):
     def get(self, request,**kwargs):
@@ -236,7 +267,7 @@ class fluoroscopia_exactitudtension(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_exactitud_tension((data_entrante[0]),(data_entrante[1]))
+            resultado = fluoroscopia_exactitud_tension((data_entrante[0]),(data_entrante[1]),(data_entrante[2]),(data_entrante[3]))
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -246,7 +277,7 @@ class fluoroscopia_repetibilidadtension(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_repetibilidad_tension(data_entrante[0])
+            resultado = fluoroscopia_repetibilidad_tension((data_entrante[0]),(data_entrante[1]),(data_entrante[2]))
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -256,7 +287,7 @@ class fluoroscopia_filtracioncapahemireductora(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_filtracion_capa_hemireductora(data_entrante[0])
+            resultado = fluoroscopia_filtracion_capa_hemireductora(data_entrante[0],data_entrante[1])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -266,7 +297,7 @@ class fluoroscopia_exactitudtiempoexposicion(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_exactitud_tiempo_exposicion((data_entrante[0]),(data_entrante[1]))
+            resultado = fluoroscopia_exactitud_tiempo_exposicion((data_entrante[0]),(data_entrante[1]),(data_entrante[2]),(data_entrante[3]))
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -276,7 +307,7 @@ class fluoroscopia_repetibilidadtiempoexposicion(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_repetibilidad_tiempo_exposicion(data_entrante[0])
+            resultado = fluoroscopia_repetibilidad_tiempo_exposicion((data_entrante[0]),(data_entrante[1]),(data_entrante[2]))
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -286,7 +317,7 @@ class fluoroscopia_valorrendimiento(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_valor_rendimiento(data_entrante[0],(data_entrante[1]),(data_entrante[2]))
+            resultado = fluoroscopia_valor_rendimiento(data_entrante[0],(data_entrante[1]),(data_entrante[2]),(data_entrante[3]),(data_entrante[4]))
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -296,7 +327,7 @@ class fluoroscopia_repetibilidadrendimiento(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_repetibilidad_rendimiento(data_entrante[0])
+            resultado = fluoroscopia_repetibilidad_rendimiento(data_entrante[0],data_entrante[1],data_entrante[2])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -326,7 +357,7 @@ class fluoroscopia_compensacioncae(View):
     def get(self,request,**kwargs):
         try:
             data_entrante = json.loads(kwargs["global"])
-            resultado = fluoroscopia_compensacion_cae(data_entrante[0],data_entrante[1],data_entrante[2])
+            resultado = fluoroscopia_compensacion_cae(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -336,7 +367,7 @@ class fluoroscopia_compensaciondiferentesespesores(View):
     def get(self,request,**kwargs):
         try:
             data_entrante = json.loads(kwargs["global"])
-            resultado = fluoroscopia_compensacion_diferentes_espesores(data_entrante[0],data_entrante[1])
+            resultado = fluoroscopia_compensacion_diferentes_espesores(data_entrante[0],data_entrante[1],data_entrante[12],data_entrante[3])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -346,7 +377,7 @@ class fluoroscopia_kermaaireentradapaciente(View):
     def get(self,request,**kwargs):
         try:
             data_entrante = json.loads(kwargs["global"])
-            resultado = fluoroscopia_kerma_aire_entrada_paciente(data_entrante[0],data_entrante[1],data_entrante[2])
+            resultado = fluoroscopia_kerma_aire_entrada_paciente(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -356,7 +387,7 @@ class fluoroscopia_repetibilidadcae(View):
     def get(self,request,**kwargs):
         try:
             data_entrante = json.loads(kwargs["global"])
-            resultado = fluoroscopia_repetibilidad_cae(data_entrante[0])
+            resultado = fluoroscopia_repetibilidad_cae(data_entrante[0],data_entrante[1],data_entrante[2])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -366,7 +397,7 @@ class fluoroscopia_repetibilidadcai(View):
     def get(self,request,**kwargs):
         try:
             data_entrante = json.loads(kwargs["global"])
-            resultado = fluoroscopia_repetibilidad_cai(data_entrante[0])
+            resultado = fluoroscopia_repetibilidad_cai(data_entrante[0],data_entrante[1],data_entrante[2])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -376,7 +407,7 @@ class fluoroscopia_tasadosismaximaentradaintensificadorimagen(View):
     def get(self,request,**kwargs):
         try:
             data_entrante = json.loads(kwargs["global"])
-            resultado = fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen(data_entrante[0],data_entrante[1])
+            resultado = fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})

@@ -1,5 +1,5 @@
 def fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector(element_1,element_2):
-    resultado=[{"resultado":0}]
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     operacion=(float(element_1[0])**2)/(float(element_2[0])**2)
     redondear = round(operacion,2)
     tolerancia = True
@@ -7,12 +7,11 @@ def fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector(element_
         tolerancia = True
     else:
         tolerancia = False
+        
+    
+    resultado = {"data":[
+        {"parametros":"","resultado":redondear,"condicion":tolerancia}
+        ],
+        "tolerancia":"La relación entre el área del campo de radiación y el área visualizada en la superficie de entrada del detector de imagen debe ser ≤ 1.15"}
 
-    resultado=[
-        {
-            "parametros":"",
-            "resultado":redondear,
-            "condicion":tolerancia
-        }
-    ]
     return resultado
