@@ -1,6 +1,6 @@
-def dental_exactitud_tiempo_exposicion_2(element_1,element_2):
+def dental_exactitud_tiempo_exposicion_2(element_1=[0],element_2=[0]):
     # llama a TIEMPO DE EXPOSICIÓN (s) y luego a TIEMPO (s) in range 1
-    resultado =  [{"resultado":0}]
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     element_a = float(element_1[0])
     element_b = float(element_2[0])
 
@@ -16,11 +16,6 @@ def dental_exactitud_tiempo_exposicion_2(element_1,element_2):
     else:
         tolerancia = False
 
-    resultado = [
-         {
-            "parametros":"",
-            "resultado":str(redondeo)+"%",
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":str(redondeo)+"%","condicion":tolerancia}],"tolerancia":"Desviación menor o igual que ± 10%"}
+
     return resultado

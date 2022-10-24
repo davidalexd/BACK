@@ -840,7 +840,7 @@ class tomografia_ruidoimagen(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = tomografia_ruido_imagen(data_entrante[0],data_entrante[0])
+            resultado = tomografia_ruido_imagen(data_entrante[0],data_entrante[1])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})

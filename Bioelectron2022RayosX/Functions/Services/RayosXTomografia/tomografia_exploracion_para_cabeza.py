@@ -2,19 +2,20 @@ from Functions.Services.promedio import promedio
 
 
 def tomografia_exploracion_para_cabeza(element_1=[0],element_2=[0],attribute=[0],attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0],element_3=[0],element_4=[0],element_5=[0],element_6=[0],opcion=[""],element_7=[0]):
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     # element_1 = Fc exploración de cabeza
     # element_2 = Espesor de corte (mm)    
-    # element_3 = Corriente (mA) 
-    # element_4 = tiempo por rotacion (seg) 
-    # element_5 = 'Numero de Cortes por rotacion:
-    # element_6 = Longitud irradiada (mm):
-    # element_7 = Pich
     # attribute = dosis Central range 3
     # attribute_1 = dosis periferia L1 range 3
     # attribute_2 = dosis periferia L2 range 3
     # attribute_3 = dosis periferia L3 range 3
     # attribute_4 = dosis periferia L4 range 3
+    # element_3 = Corriente (mA) 
+    # element_4 = tiempo por rotacion (seg) 
+    # element_5 = 'Numero de Cortes por rotacion:
+    # element_6 = Longitud irradiada (mm):
     # opcion = tipo se exploracion
+    # element_7 = Pich
 
     CDTIC = promedio(attribute)*100*float(element_1[0])/float(element_2[0])
 
@@ -38,7 +39,7 @@ def tomografia_exploracion_para_cabeza(element_1=[0],element_2=[0],attribute=[0]
         tolerancia = False
 
 
-    resultado = [{"parametros":"","resultado":redondear,"condicion":tolerancia}]
+    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"< 60 mGy. (Exploración: Cabeza adulto)"}
 
     return resultado
 

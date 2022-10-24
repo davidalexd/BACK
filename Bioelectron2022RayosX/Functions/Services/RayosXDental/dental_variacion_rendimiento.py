@@ -1,15 +1,16 @@
 
-def dental_variacion_rendimiento(element_1,element_2,element_3,element_4,element_5,element_6):
-    resultado =  [{"resultado":0}]
-    varaicion_1 = float(element_1[0])*(float(element_2[0])*2)
-    varaicion_2 = float(element_3[0])*(float(element_4[0]))
-    varaicion_3 = float(element_5[0])*(float(element_2[0])*2)
-    varaicion_4 = float(element_6[0])*(float(element_3[0]))
-    operacion_1 = (varaicion_1/varaicion_2)-varaicion_3/varaicion_4
-    operacion_2 = (varaicion_1/varaicion_2)+varaicion_3/varaicion_4
+def dental_variacion_rendimiento(element_1=[0],element_2=[0],element_3=[0],element_4=[0],element_5=[0],element_6=[0]):
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
 
+    variacion_1 = float(element_4[0])*(float(element_2[0])*2)
+    variacion_2 = float(element_3[0])*(float(element_1[0]))
+    variacion_3 = float(element_6[0])*(float(element_2[0])*2)
+    variacion_4 = float(element_5[0])*(float(element_1[0]))
+    
+    operacion_1 = (variacion_1/variacion_2)-variacion_3/variacion_4
+    operacion_2 = (variacion_1/variacion_2)+variacion_3/variacion_4
+    
     operacion = operacion_1/operacion_2
-
     redondeo = round(operacion,2)
 
     tolerancia = True
@@ -19,11 +20,6 @@ def dental_variacion_rendimiento(element_1,element_2,element_3,element_4,element
     else:
         tolerancia = False
 
-    resultado = [
-         {
-            "parametros":"",
-            "resultado":str(redondeo),
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":str(redondeo),"condicion":tolerancia}],"tolerancia":"Coeficiente de linealidad menor o igual que 0.1 entre pasos consecutivos"}
+
     return resultado

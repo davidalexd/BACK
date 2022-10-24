@@ -1,6 +1,6 @@
 from Functions.Services.promedio import promedio
-def dental_filtracion(attribute):
-    resultado =  [{"resultado":0}]
+def dental_filtracion(attribute=[0]):
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     prom = promedio(attribute)
 
     redondeo=round(prom,2)
@@ -11,11 +11,6 @@ def dental_filtracion(attribute):
     else:
         tolerancia = False
 
-    resultado = [
-         {
-            "parametros":"",
-            "resultado":str(redondeo)+" mm Al",
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":str(redondeo)+" mm Al","condicion":tolerancia}],"tolerancia":"Filtración total mayor o igual que 1.5 mm Al "}
+
     return resultado

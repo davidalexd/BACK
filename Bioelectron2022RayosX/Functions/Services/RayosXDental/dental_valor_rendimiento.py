@@ -1,9 +1,9 @@
 from Functions.Services.promedio import promedio
-def dental_valor_rendimiento(attribute,element_1,element_2,element_3):
-    resultado =  [{"resultado":0}]
+def dental_valor_rendimiento(attribute=[0],element_1=[0],element_2=[0],element_3=[0]):
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     prom = promedio(attribute)
-    variante_1 = float(element_1[0])*2
-    variante_2 = float(element_2[0])*float(element_3[0])
+    variante_1 = float(element_3[0])*2
+    variante_2 = float(element_2[0])*float(element_1[0])
 
     operacion = (prom*variante_1)/variante_2
 
@@ -16,11 +16,6 @@ def dental_valor_rendimiento(attribute,element_1,element_2,element_3):
     else:
         tolerancia = False
 
-    resultado = [
-         {
-            "parametros":"",
-            "resultado":redondeo,
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":redondeo,"condicion":tolerancia}],"tolerancia":"Superior a 25 uGy/mAs a 1 m del foco y a la tensión de disparo "}
+
     return resultado

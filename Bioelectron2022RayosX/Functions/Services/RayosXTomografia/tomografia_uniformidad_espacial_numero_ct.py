@@ -3,7 +3,7 @@ from Functions.Services.valor_maximo import valor_maximo
 from Functions.Services.valor_minimo import valor_minimo 
 
 def tomografia_uniformidad_espacial_numero_ct(element=[0], attribute=[0]):
-    resultado = [{"parametros":"","resultado":0,"condicion":True}]
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia = True
     Uc = []
 
@@ -18,12 +18,12 @@ def tomografia_uniformidad_espacial_numero_ct(element=[0], attribute=[0]):
         
     redondear = round(operacion_2,2)
 
-    if(redondear <= 5):
+    if(valor_absoluto(redondear) < 5 or valor_absoluto(redondear) < -5):
         tolerancia = True
     else:
         tolerancia = False
         
-    resultado = [{"parametros":"","resultado":redondear,"condicion":tolerancia}]
+    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"< ±5 UH."}
     
     return resultado
     

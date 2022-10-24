@@ -1,6 +1,6 @@
-def dental_minima_distancia_foco_piel(element):
+def dental_minima_distancia_foco_piel(element=[0]):
     # llama Minima distancia
-    resultado = [{"resultado":0}]
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     operacion = float(element[0])
     redondear = round(operacion,2)
 
@@ -11,11 +11,6 @@ def dental_minima_distancia_foco_piel(element):
     else:
         tolerancia = False
 
-    resultado = [
-        {
-            "parametros":"",
-            "resultado":str(redondear)+"cm",
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"cm","condicion":tolerancia}],"tolerancia":"Mayor o igual que 20 cm "}
+
     return resultado

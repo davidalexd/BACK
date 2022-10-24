@@ -1,6 +1,6 @@
-def dental_tamano_campo_extremo_localizador(element):
+def dental_tamano_campo_extremo_localizador(element=[0]):
     # llama Tamaño de Campo
-    resultado = [{"resultado":0}]
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     operacion = float(element[0])
     redondear = round(operacion,2)
 
@@ -10,12 +10,7 @@ def dental_tamano_campo_extremo_localizador(element):
         tolerancia = True
     else:
         tolerancia = False
-
-    resultado = [
-        {
-            "parametros":"",
-            "resultado":str(redondear)+"cm",
-            "condicion":tolerancia
-        }
-    ]
+        
+    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"cm","condicion":tolerancia}],"tolerancia":"Menor o igual que 6 cm "}
+    
     return resultado

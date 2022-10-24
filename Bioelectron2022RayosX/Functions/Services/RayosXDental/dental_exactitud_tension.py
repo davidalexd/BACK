@@ -1,8 +1,8 @@
 from Functions.Services.promedio import promedio
 
-def dental_exactitud_tension(element,attribute):
+def dental_exactitud_tension(element=[0],attribute=[0]):
     # llama TENSION NOMINAL  (kV) luego a TENSION PROMEDIO (kV) range (5)
-    resultado = [{"parametros":"","resultado":0,"condicion":True}]
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     prom = promedio(attribute)
     element_1 = float(element[0])
 
@@ -20,12 +20,6 @@ def dental_exactitud_tension(element,attribute):
     else:
         tolerancia = False
 
-    resultado = [
-        {
-            "parametros":"",
-            "resultado":str(redondear)+"%",
-            "condicion":tolerancia
-        }
-    ]
+    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Desviación menor o igual que ± 10% "}
     
     return resultado
