@@ -44,7 +44,7 @@ class OperacionesModel(BaseModel):
         db_table = 'operations_Operaciones'
     
     def __str__(self):
-        return str(self.id) + '-' + self.operacion_titulo + " .:: " + str(self.operacion_symbol) + " ::. " + "["+ str(self.operacion_variable) +"]"
+        return str(self.id) + '-' + self.operacion_funcion + " .:: " + str(self.operacion_symbol) + " ::. " + "["+ str(self.operacion_variable) +"]"
 
 class CategoryOperacionesModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="cat_opr_id")

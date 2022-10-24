@@ -72,5 +72,28 @@
 }
 ]
 
-
+// General 
+[
+    {
+        "opcion":"ESTABILIDAD MECANICA"
+    },
+    {
+        "opcion":"MOVIMIENTOS ADECUADOS DEL EQUIPO"
+    },
+    {
+        "opcion":"BUEN ESTADO DE LOS CABLES (ALTA TENSION Y ALIMENTACION)"
+    },
+    {
+        "opcion":"EXISTE INDICADOR DEL PUNTO FOCAL"
+    },
+    {
+        "opcion":"LOS INDICADORES DE TECNICA DE EXPOSICION EN EL PANEL DE CONTROL FUNCIONAN ADECUADAMENTE"
+    },
+    {
+        "opcion":"EXISTE SEÑAL AUDIBLE DURANTE Y/O AL FINAL DE LA EXPOSICION "
+    },
+    {
+        "opcion":"EXISTE INTERRUPTOR DE EXPOSICION TIPO HOMBRE MUERTO"
+    }
+]
 {"true": "SÍ", "false": "NO"}

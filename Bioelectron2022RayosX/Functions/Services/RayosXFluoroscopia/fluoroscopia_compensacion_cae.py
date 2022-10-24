@@ -16,7 +16,7 @@ def fluoroscopia_compensacion_cae(opcion=[""],attribute_1=[0],attribute_2=[0],at
     operacion_2 = (float(attribute_1[0])-prom_2)/float(attribute_1[0])
 
 
-    if(opcion[0]=="Medidas Indice de Exposicio"):
+    if(opcion[0]=="Medidas Indice de Exposicion"):
         operacion_3 = prom_3-prom_2
     else:
         operacion_3 = (prom_3-prom_2)*100/prom_3
@@ -30,7 +30,7 @@ def fluoroscopia_compensacion_cae(opcion=[""],attribute_1=[0],attribute_2=[0],at
     abs_2 = valor_absoluto(operacion_2)
     abs_3 = valor_absoluto(operacion_3)
 
-    if(opcion[0]=="Medidas Indice de Exposicio"):
+    if(opcion[0]=="Medidas Indice de Exposicion"):
         tolerancia_a_1 = 0.2
         tolerancia_b_1 = -0.2
         if(abs_1<=tolerancia_a_1 or abs_1<=tolerancia_b_1):
@@ -61,7 +61,7 @@ def fluoroscopia_compensacion_cae(opcion=[""],attribute_1=[0],attribute_2=[0],at
         else:
             tolerancia_3  = False
 
-
+    print(opcion)
     resultado = {"data":[
         {"parametros":"","resultado":redondear_1,"condicion":tolerancia_1},
         {"parametros":"","resultado":redondear_2,"condicion":tolerancia_2},

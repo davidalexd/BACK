@@ -1,12 +1,11 @@
 def fluoroscopia_tasa_dosis_paciente(element_1=[0],element_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
-
     tolerancia_1 = True
     tolerancia_2 = True
     operacion_1 = float(element_1[0])*60/1000
     operacion_2 = float(element_2[0])*60/1000
-    redondear_1 = round(element_1,2)
-    redondear_2 = round(element_2,2)
+    redondear_1 = round(operacion_1,2)
+    redondear_2 = round(operacion_2,2)
 
     if(redondear_1<=50):
         tolerancia_1 = True

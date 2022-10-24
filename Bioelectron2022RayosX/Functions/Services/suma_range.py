@@ -1,4 +1,4 @@
 def suma_range(attributes):
     resultado = 0
-    resultado = {"valor":sum(attributes)}
+    resultado = sum(attributes)
     return resultado
