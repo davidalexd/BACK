@@ -1,3 +1,4 @@
+from email.headerregistry import Group
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import User
@@ -6,9 +7,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     pass
 
 class CustomUserSerializer(serializers.ModelSerializer):
+    groups = Group
     class Meta:
         model = User
-        fields = ('username','email','name','last_name')
+        fields = ('username','email','name','last_name','groups')
+    
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
