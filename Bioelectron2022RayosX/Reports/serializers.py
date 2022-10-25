@@ -63,11 +63,12 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
                     "id":x.id,
                     "posicion":x.posicion,
                     "sub_posicion":x.sub_posicion,
-                    "variable":x.variable.id,
-                    "nombre_variable":x.variable.nombre_variable
+                    "identificador_variable":x.variable.id,
+                    "nombre_variable":x.variable.nombre_variable,
+                    "range":x.variable.range_variable,
+                    "valor":x.variable.valor_defecto
                 }
             )
-        print(Uc)
         # print(self)
         return Uc
    

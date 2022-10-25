@@ -1,5 +1,6 @@
 from Functions.Services.promedio import promedio
 def dental_valor_rendimiento(attribute=[0],element_1=[0],element_2=[0],element_3=[0]):
+    print(attribute)
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     prom = promedio(attribute)
     variante_1 = float(element_3[0])*2

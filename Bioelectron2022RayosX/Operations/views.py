@@ -166,11 +166,9 @@ from Functions.Services.RayosXFluoroscopia.fluoroscopia_exactitud_tension import
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector import fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_tamano_campo_entrada_detector_imagen import fluoroscopia_tamano_campo_entrada_detector_imagen
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen import fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen
-
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_integral
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_del_tipo_s
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_distorsion_geometrica import fluoroscopia_distorsion_cojinete
-
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_alineacion_rayos_x_haz_luminoso import fluoroscopia_alineacion_rayos_x_haz_luminoso
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_tiempo_exposicion import fluoroscopia_repetibilidad_tiempo_exposicion
 from Functions.Services.RayosXFluoroscopia.fluoroscopia_repetibilidad_rendimiento import fluoroscopia_repetibilidad_rendimiento
@@ -572,6 +570,7 @@ view_dental_variacion_rendimiento= dental_variacionrendimiento.as_view()
 
 
 # General
+from Functions.Services.RayosXGeneral.general_alineación_rayos_X_haz_luminoso import general_alineación_rayos_X_haz_luminoso
 from Functions.Services.RayosXGeneral.general_dosis_superficie_paciente import general_dosis_superficie_paciente
 from Functions.Services.RayosXGeneral.general_exactitud_tension_1 import general_exactitud_tension_1
 from Functions.Services.RayosXGeneral.general_exactitud_tension_2 import general_exactitud_tension_2
@@ -580,6 +579,10 @@ from Functions.Services.RayosXGeneral.general_exactitud_tiempo_exposicion_1 impo
 from Functions.Services.RayosXGeneral.general_exactitud_tiempo_exposicion_2 import general_exactitud_tiempo_exposicion_2
 from Functions.Services.RayosXGeneral.general_exactitud_tiempo_exposicion_3 import general_exactitud_tiempo_exposicion_3
 from Functions.Services.RayosXGeneral.general_filtracion import general_filtracion
+from Functions.Services.RayosXGeneral.general_ortogonalidad_haz_rayos_X_receptor_imagen import general_ortogonalidad_haz_rayos_X_receptor_imagen
+from Functions.Services.RayosXGeneral.general_repetibilidad_cae import general_repetibilidad_cae
+from Functions.Services.RayosXGeneral.general_repetibilidad_cae_1 import general_repetibilidad_cae_1
+from Functions.Services.RayosXGeneral.general_repetibilidad_cae_2 import general_repetibilidad_cae_2
 from Functions.Services.RayosXGeneral.general_repetibilidad_rendimiento import general_repetibilidad_rendimiento
 from Functions.Services.RayosXGeneral.general_repetibilidad_tension import general_repetibilidad_tension
 from Functions.Services.RayosXGeneral.general_repetibilidad_tiempo_exposicion import general_repetibilidad_tiempo_exposicion
@@ -717,6 +720,57 @@ class general_variacionrendimientocarga(View):
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_general_variacion_rendimiento_carga= general_variacionrendimientocarga.as_view()
 
+class general_alineaciónrayosXhazluminoso(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_alineación_rayos_X_haz_luminoso(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_alineación_rayos_X_haz_luminoso = general_alineaciónrayosXhazluminoso.as_view()
+
+class general_ortogonalidadhazrayosXreceptorimagen(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_ortogonalidad_haz_rayos_X_receptor_imagen(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_ortogonalidad_haz_rayos_X_receptor_imagen = general_ortogonalidadhazrayosXreceptorimagen.as_view()
+
+class general_repetibilidadcae(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_repetibilidad_cae(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_repetibilidad_cae = general_repetibilidadcae.as_view()
+
+
+class general_repetibilidadcae1(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_repetibilidad_cae_1(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_repetibilidad_cae_1 = general_repetibilidadcae1.as_view()
+
+
+class general_repetibilidadcae2(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = general_repetibilidad_cae_2(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_general_repetibilidad_cae_2 = general_repetibilidadcae2.as_view()
 
 from Functions.Services.RayosXTomografia.tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado import tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado
 from Functions.Services.RayosXTomografia.tomografia_exactitud_incremento_desplazamiento_de_mesa import tomografia_exactitud_incremento_desplazamiento_de_mesa

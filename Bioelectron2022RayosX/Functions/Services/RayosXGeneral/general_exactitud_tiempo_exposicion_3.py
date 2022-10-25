@@ -1,14 +1,13 @@
-def general_exactitud_tiempo_exposicion_3(element_1,element_2):
-    resultado = [{"resultado":0}]
+def general_exactitud_tiempo_exposicion_3(element_1=[0],element_2=[0]):
+    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     operacion = (float(element_1[0])-float(element_2[0]))/float(element_2[0])
     redondear = round(operacion,2)
     tolerancia=True
     
-    resultado = [
-        {
-            "parametros":"",
-            "resultado":str(redondear)+"%",
-            "condicion":tolerancia
-        }
-    ]
+    if(redondear<10 or redondear<-10):
+        tolerancia=True
+    else:
+        tolerancia=False
+        
+    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":": Desviaciones con respecto al valor nominal < ± 10% para tiempos > 20 ms "}
     return resultado

@@ -1,7 +1,7 @@
 from Functions.Services.suma_range import suma_range
 
 
-def general__alineación_rayos_X_haz_luminoso(attribute=[0],element=[0]):
+def general_alineación_rayos_X_haz_luminoso(attribute=[0],element=[0]):
     # attribute = Diferencia entre bordes (cm):
     # element = Distancia al Foco-Sistema de colimacion (cm):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}

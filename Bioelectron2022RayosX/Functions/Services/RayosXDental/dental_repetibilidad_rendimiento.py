@@ -5,6 +5,7 @@ def dental_repetibilidad_rendimiento(attribute=[0],element_1=[0],element_2=[0],e
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     
     dvr = dental_valor_rendimiento(attribute,element_1,element_2,element_3)["data"][0]["resultado"]
+    print(attribute)
     desvm = desviacion_estandar_m(attribute)
     variante_1 = float(element_1[0])*2
 

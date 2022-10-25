@@ -69,6 +69,11 @@ urlpatterns = [
     path('OperacionGeneralRepetibilidadTiempoExposicion/<global>',views.view_general_repetibilidad_tiempo_exposicion,name='general_repetibilidad_tiempo_exposicion'),
     path('OperacionGeneralValorRendimiento/<global>',views.view_general_valor_rendimiento,name='general_valor_rendimiento'),
     path('OperacionGeneralVariacionRendimientoCarga/<global>',views.view_general_variacion_rendimiento_carga,name='general_variacion_rendimiento_carga'),
+    path('OperacionGeneralAlineaciónRayosXHazLuminoso/<global>',views.view_general_alineación_rayos_X_haz_luminoso,name='general_alineación_rayos_X_haz_luminoso'),
+    path('OperacionGeneralOrtogonalidadHazRayosXReceptorImagen/<global>',views.view_general_ortogonalidad_haz_rayos_X_receptor_imagen,name='general_ortogonalidad_haz_rayos_X_receptor_imagen'),
+    path('OperacionGeneralRepetibilidadCae/<global>',views.view_general_repetibilidad_cae,name='general_repetibilidad_cae'),
+    path('OperacionGeneralRepetibilidadCae1/<global>',views.view_general_repetibilidad_cae_1,name='general_repetibilidad_cae_1'),
+    path('OperacionGeneralRepetibilidadCae2/<global>',views.view_general_repetibilidad_cae_2,name='general_repetibilidad_cae_2'),
 
     path('OperacionTomografiaCoincidenciaindicadoresluminososplanoexternointernoirradiado/<global>',views.view_tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado,name='tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado'),
     path('OperacionTomografiaExactitudincrementodesplazamientodemesa/<global>',views.view_tomografia_exactitud_incremento_desplazamiento_de_mesa,name='tomografia_exactitud_incremento_desplazamiento_de_mesa'),

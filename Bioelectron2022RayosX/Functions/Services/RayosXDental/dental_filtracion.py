@@ -6,7 +6,7 @@ def dental_filtracion(attribute=[0]):
     redondeo=round(prom,2)
 
     tolerancia = True
-    if (redondeo >= 10):
+    if (redondeo >= 1.5):
         tolerancia = True
     else:
         tolerancia = False
