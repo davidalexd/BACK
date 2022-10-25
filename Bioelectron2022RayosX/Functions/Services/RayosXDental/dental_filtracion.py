@@ -2,7 +2,6 @@ from Functions.Services.promedio import promedio
 def dental_filtracion(attribute=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     prom = promedio(attribute)
-
     redondeo=round(prom,2)
 
     tolerancia = True

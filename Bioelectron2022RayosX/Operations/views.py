@@ -462,7 +462,7 @@ class dental_exactitudtiempoexposicion_1(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = dental_exactitud_tiempo_exposicion_1(data_entrante[0],data_entrante[1])
+            resultado = dental_exactitud_tiempo_exposicion_1(data_entrante[0],data_entrante[1],data_entrante[2])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -472,7 +472,7 @@ class dental_exactitudtiempoexposicion_2(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = dental_exactitud_tiempo_exposicion_2(data_entrante[0],data_entrante[1])
+            resultado = dental_exactitud_tiempo_exposicion_2(data_entrante[0],data_entrante[1],data_entrante[2])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -550,6 +550,7 @@ view_dental_tamano_campo_extremo_localizador= dental_tamanocampoextremolocalizad
 
 class dental_valorrendimiento(View):
     def get(self, request,**kwargs):
+        print(kwargs['global'])
         try:
             data_entrante = json.loads(kwargs['global'])
             resultado = dental_valor_rendimiento(data_entrante[0],data_entrante[1],(data_entrante[2]),(data_entrante[3]))
@@ -940,6 +941,7 @@ class tomografia_verificacionausenciaartefactosimagen(View):
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 
 view_tomografia_verificacion_ausencia_artefactos_imagen = tomografia_verificacionausenciaartefactosimagen.as_view()
+
 class tomografia_exactitudseleccionposicioncorteradiografiaplanificacion(View):
     def get(self, request,**kwargs):
         try:
