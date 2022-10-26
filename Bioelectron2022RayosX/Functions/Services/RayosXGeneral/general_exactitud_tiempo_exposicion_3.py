@@ -1,7 +1,7 @@
 def general_exactitud_tiempo_exposicion_3(element_1=[0],element_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     operacion = (float(element_1[0])-float(element_2[0]))/float(element_2[0])
-    redondear = round(operacion,2)
+    redondear = round(operacion*100,2)
     tolerancia=True
     
     if(redondear<10 or redondear<-10):

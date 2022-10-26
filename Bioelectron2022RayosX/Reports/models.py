@@ -90,8 +90,9 @@ class ReportsCategoryModel(BaseModel):
 
 class Rpt_Varr_Model(models.Model):
     id= models.BigAutoField(primary_key=True,db_column="RptVar_id")
-    formato = models.ForeignKey(ReportsFormatsModel,on_delete=models.CASCADE)
-    variable = models.ForeignKey(VariablesModel,on_delete=models.CASCADE)
+    subtitle_posicion = models.TextField("Title Seccion", null=True,blank=True,db_column="rpt_varr_seccion_title")
+    formato = models.ForeignKey(ReportsFormatsModel,on_delete=models.CASCADE, null=True,blank=True,)
+    variable = models.ForeignKey(VariablesModel,on_delete=models.CASCADE, null=True,blank=True,)
     posicion = models.IntegerField("Contenedor de Variable en reporte", null=False,blank=False,db_column="rpt_varr_posicion")
     sub_posicion = models.IntegerField("Posicion de variable en contenedor",null=False,blank=False,db_column="rpt_varr_sub_posicion")
     created_at = models.DateTimeField(default=timezone.now,editable=False,null=False,blank=False)

@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from dataclasses import fields
 from pyexpat import model
 from Operations.models import VariablesModel
@@ -58,17 +59,28 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
         request = Rpt_Varr_Model.objects.filter(formato = obj.id)
         Uc = []
         for x in request:
-            Uc.append(
-                {
-                    "id":x.id,
-                    "posicion":x.posicion,
-                    "sub_posicion":x.sub_posicion,
-                    "identificador_variable":x.variable.id,
-                    "nombre_variable":x.variable.nombre_variable,
-                    "range":x.variable.range_variable,
-                    "valor":x.variable.valor_defecto
-                }
-            )
+            print(x.variable!=NULL)
+            if(x.variable):
+                Uc.append(
+                    {
+                        "id":x.id,
+                        "posicion":x.posicion,
+                        "sub_posicion":x.sub_posicion,
+                        "identificador_variable":x.variable.id,
+                        "nombre_variable":x.variable.nombre_variable,
+                        "range":x.variable.range_variable,
+                        "valor":x.variable.valor_defecto
+                    }
+                )
+            else:
+                Uc.append(
+                    {
+                        "id":x.id,
+                        "posicion":x.posicion,
+                        "sub_posicion":x.sub_posicion,
+                        "nombre_categoria":x.subtitle_posicion,
+                    }
+                )
         # print(self)
         return Uc
    

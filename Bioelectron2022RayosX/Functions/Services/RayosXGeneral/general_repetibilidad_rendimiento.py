@@ -6,7 +6,7 @@ def general_repetibilidad_rendimiento(attribute=[0]):
     desv = desviacion_estandar_m(attribute)
     prom = promedio(attribute)
     operacion = desv/prom
-    redondear = round(operacion,2)
+    redondear = round(operacion*100,2)
     tolerancia=True
 
     if(redondear<10):

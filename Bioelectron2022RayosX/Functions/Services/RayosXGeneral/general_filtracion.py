@@ -12,6 +12,6 @@ def general_filtracion(attributes=[0]):
     else:
         tolerancia=False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Filtración > 2.5 mm equivalentes de aluminio"}
+    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"mmAl","condicion":tolerancia}],"tolerancia":"Filtración > 2.5 mm equivalentes de aluminio"}
 
     return resultado

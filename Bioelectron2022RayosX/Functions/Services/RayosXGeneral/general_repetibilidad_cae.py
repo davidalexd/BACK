@@ -11,6 +11,11 @@ def general_repetibilidad_cae(attribute=[0]):
 
     redondear = round(operacion,2)
     
-    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":""}
+    if(redondear < 10):
+        tolerancia = True
+    else:
+        tolerancia = False
+    
+    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"Ceificiente de variación <10"}
 
     return resultado

@@ -17,7 +17,7 @@ def general_alineación_rayos_X_haz_luminoso(attribute=[0],element=[0]):
     else:
         tolerancia_1 = False
 
-    if(float(attribute[0])>2*float(element[0])/100 and float(attribute[1])>2*float(element[0])/100 and float(attribute[2])>2*float(element[0])/100 and float(attribute[3])>2*float(element[0])/100):
+    if(redondear< 2 or redondear<-2):
         tolerancia_2 = True
     else:
         tolerancia_2 = False
