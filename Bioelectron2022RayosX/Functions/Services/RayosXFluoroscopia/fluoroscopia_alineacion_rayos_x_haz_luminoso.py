@@ -1,15 +1,13 @@
 def fluoroscopia_alineacion_rayos_x_haz_luminoso(attribute=[0],element=[0]):
+    print(attribute)
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
-    datos_suma = [0]
-    datos_suma = [float(attribute[0]),float(attribute[1]),float(attribute[2]),float(attribute[3])]
     parametro = ("L1 - "+str(attribute[0])+"% , L2 - "+str(attribute[1])+"%, L3 - "+str(attribute[2])+"% , L4 - "+str(attribute[3])+"%")
-    operacion = sum(datos_suma)
+    operacion = sum(attribute)
     redondear = round(operacion,2)
 
     tolerancia = True
     tolerancia_1 = (3*float(element[0])/100)
     tolerancia_2 = (2*float(element[0])/100)
-
     if (redondear <= tolerancia_1 and redondear <= tolerancia_2):
         tolerancia = True
     else:

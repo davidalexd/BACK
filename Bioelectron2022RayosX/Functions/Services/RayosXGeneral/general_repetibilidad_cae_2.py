@@ -6,7 +6,7 @@ def general_repetibilidad_cae_2(element_1=[0],element_2=[0]):
 
     tolerancia = True
 
-    operacion = float(element_1[0])-float(element_2[0])/float(element_1[0])
+    operacion = (float(element_1[0])-float(element_2[0]))/float(element_1[0])
 
     redondear = round(operacion,2)
 

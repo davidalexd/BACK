@@ -66,7 +66,6 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
                         "id":x.id,
                         "posicion":x.posicion,
                         "sub_posicion":x.sub_posicion,
-                        "nombre_categoria":x.subtitle_posicion,
                         "identificador_variable":x.variable.id,
                         "nombre_variable":x.variable.nombre_variable,
                         "range":x.variable.range_variable,

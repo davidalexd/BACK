@@ -603,6 +603,7 @@ view_general_dosis_superficie_paciente= general_dosissuperficiepaciente.as_view(
 
 class general_exactitudtension1(View):
     def get(self, request,**kwargs):
+        print(kwargs['global'])
         try:
             data_entrante = json.loads(kwargs['global'])
             resultado = general_exactitud_tension_1(data_entrante[0],data_entrante[1])

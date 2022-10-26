@@ -8,7 +8,7 @@ def dental_repetibilidad_tiempo_exposicion(attribute=[0]):
     prom = promedio(attribute)
 
     operacion = desvm/prom
-    redondear = round(operacion,2)
+    redondear = round(operacion*100,2)
     tolerancia = True
     
 

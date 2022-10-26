@@ -6,12 +6,12 @@ def fluoroscopia_distorsion_integral(element_1=[0],element_2=[0],element_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     div = ((float(element_1[0])/(float(element_2[0])*float(element_3[0])))-1)*100
     redondear = round(div,2)
-    tolerancia = true
+    tolerancia = True
 
     if(redondear<=10):
-        tolerancia = true
+        tolerancia = True
     else:
-        tolerancia = false
+        tolerancia = False
 
     resultado = {"data":[
             {

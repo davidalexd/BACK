@@ -5,6 +5,8 @@ def dental_variacion_rendimiento(element_1=[0],element_2=[0],element_3=[0],eleme
     variacion_2 = float(element_3[0])*(float(element_1[0]))
     variacion_3 = float(element_6[0])*(float(element_2[0])*2)
     variacion_4 = float(element_5[0])*(float(element_1[0]))
+
+    print(variacion_1,variacion_2,variacion_3,variacion_4,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     
     operacion_1 = (variacion_1/variacion_2)-variacion_3/variacion_4
     operacion_2 = (variacion_1/variacion_2)+variacion_3/variacion_4

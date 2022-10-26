@@ -3,9 +3,9 @@ from Functions.Services.promedio import promedio
 
 def general_exactitud_tiempo_exposicion_2(element_1=[0],attribute=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
-    prom = promedio(attribute)
+    prom = promedio(attribute[0])
     operacion = (prom-float(element_1[0]))/float(element_1[0])
-    redondear = round(operacion,2)
+    redondear = round(operacion*100,2)
     tolerancia=True
 
     if(redondear<10 or redondear<-10):

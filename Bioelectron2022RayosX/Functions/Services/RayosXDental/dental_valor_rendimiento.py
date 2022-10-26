@@ -4,9 +4,7 @@ def dental_valor_rendimiento(attribute=[0],element_1=[0],element_2=[0],element_3
     prom = promedio(attribute)
     variante_1 = float(element_3[0])*2
     variante_2 = float(element_2[0])*float(element_1[0])
-
     operacion = (prom*variante_1)/variante_2
-
     redondeo = round(operacion,2)
 
     tolerancia = True

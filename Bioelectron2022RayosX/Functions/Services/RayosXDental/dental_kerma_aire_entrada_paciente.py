@@ -14,6 +14,6 @@ def dental_kerma_aire_entrada_paciente(attribute=[0]):
     else:
         tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondeo),"condicion":tolerancia}],"tolerancia":"Deberá ser inferior a 4 mGy "}
+    resultado = {"data":[{"parametros":"","resultado":str(redondeo)+" mGy","condicion":tolerancia}],"tolerancia":"Deberá ser inferior a 4 mGy "}
 
     return resultado

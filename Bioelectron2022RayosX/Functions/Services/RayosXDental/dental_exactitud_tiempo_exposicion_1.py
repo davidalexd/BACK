@@ -9,7 +9,7 @@ def dental_exactitud_tiempo_exposicion_1(element=[0],attribute=[0],opcion=[""]):
     else:
         operacion = (element_1-prom)/element_1
 
-    redondeo = round(operacion,2)
+    redondeo = round(operacion*100,2)
     tolerancia = True
     if(opcion[0]=="EQUIPO MONOFÁSICO"):
         tolerancia_1 = 20
