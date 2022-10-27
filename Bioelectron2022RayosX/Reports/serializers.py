@@ -1,12 +1,10 @@
-from asyncio.windows_events import NULL
-from dataclasses import fields
-from pyexpat import model
+from urllib import request
 from Operations.models import VariablesModel
 from Operations.serializers import VariablesSerializer
 from CompanyMachine.models import MedidoresModel
 from Machine.models import SistemaModel, TuboModel
 from Customer.models import AreasModel,DepartamentoModel,OrganizacionModel
-from .models import ReportsCategoryModel, ReportsFormatsModel,PruebaCalculoModel,PruebaOpcionesModel, ReportsReporteModel, Rpt_Varr_Model,SeccionesModel
+from .models import Frt_Cat_Model, ReportsCategoryModel, ReportsFormatsModel,PruebaCalculoModel,PruebaOpcionesModel, ReportsReporteModel, Rpt_Prt_Model, Rpt_Varr_Model,SeccionesModel
 from Protocol.serializers import ProtocolosSerializer,SeccionesSerializer,PruebaCalculoSerializer,PruebaOpcionesSerializer
 from Protocol.models import ProtocolsModel
 from rest_framework import serializers
@@ -18,7 +16,7 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
 
-    protocolo = ProtocolosSerializer(many=True,read_only=True)
+    protocolo = serializers.SerializerMethodField(read_only = True)
     protocolos_id = serializers.PrimaryKeyRelatedField(
         source='protocolo',
         write_only=True,
@@ -36,6 +34,8 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
         write_only=True,
         many=True,
         queryset=VariablesModel.objects.filter(is_enabled = True))
+
+    categorias = serializers.SerializerMethodField(read_only = True)
         
     class Meta:
         model = ReportsFormatsModel
@@ -53,13 +53,39 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
             "protocolos_id",
             "secciones_id",
             "variables",
+            "categorias",
             "variables_formato_ids")
     
+    def get_categorias(self,obj):
+        request = Frt_Cat_Model.objects.filter(formatos = obj.id)
+        Uc = []
+        for x in request:
+                Uc.append(
+                    {
+                        "identificador":x.id,
+                        "id":x.categoria.id,
+                        "nombre_categoria":x.categoria.nombre_categoria,
+                        "abreviatura_categoria":x.categoria.abreviatura_categoria,
+                    }
+                )
+        return Uc
+    def get_protocolo(self,obj):
+        request = Rpt_Prt_Model.objects.filter(formato = obj.id)
+        Uc = []
+        for x in request:
+                Uc.append(
+                    {
+                        "id":x.id,
+                        "protocolo_detalles":x.protocolo_detalles,
+                        "protocolo":x.protocolo.id,
+                        "protocolo_titulo":x.protocolo.protocolo_titulo,
+                    }
+                )
+        return Uc
     def get_variables(self,obj):
         request = Rpt_Varr_Model.objects.filter(formato = obj.id)
         Uc = []
         for x in request:
-            print(x.variable!=NULL)
             if(x.variable):
                 Uc.append(
                     {
@@ -81,7 +107,6 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
                         "nombre_categoria":x.subtitle_posicion,
                     }
                 )
-        # print(self)
         return Uc
    
     def get_edit_url(self,obj):
@@ -140,7 +165,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
 
-    formato = ProtocolosSerializer(many=True,read_only=True)
+    formato = FormatosReportesSerializer(many=True,read_only=True)
     formato_id = serializers.PrimaryKeyRelatedField(
         source='formato',
         write_only=True,
@@ -151,14 +176,17 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
         model = ReportsReporteModel
         fields = (
             "id",
+            "nombre_reporte",
             "numero_de_ot",
             "fecha_control_calidad",
+            "observacion",
             "datos_del_cliente",
             "sistema",
             "componente",
             "machine",
             "valores_operaciones",
             "formato",
+            "pruebas",
             "is_enabled",
             "created_at",
             "url",

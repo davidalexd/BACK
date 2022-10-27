@@ -706,7 +706,7 @@ class general_valorrendimiento(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = general_valor_rendimiento(data_entrante[0],data_entrante[1])
+            resultado = general_valor_rendimiento(data_entrante[0],data_entrante[1],data_entrante[2])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})

@@ -44,6 +44,7 @@ class ReportsReportesModel(admin.ModelAdmin):
         "id",
         "numero_de_ot",
         "fecha_control_calidad",
+        "pruebas",
         "datos_del_cliente",
         "sistema",
         "componente",
