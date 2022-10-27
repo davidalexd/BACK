@@ -38,22 +38,22 @@ class ReportsFormatsModel(BaseModel):
 
 class ReportsReporteModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="rpt_id")
-    nombre_reporte = models.CharField("Report name",max_length=255,null=False,blank=False,db_column="rpt_name_reporte")
+    nombre_reporte = models.CharField("Report name",max_length=255,null=True,blank=True,db_column="rpt_name_reporte")
 
-    numero_de_ot = models.CharField("Ot number",max_length=255,null=False,blank=False,db_column="rpt_numero_orden_trabajo")
+    numero_de_ot = models.CharField("Ot number",max_length=255,null=True,blank=True,db_column="rpt_numero_orden_trabajo")
     fecha_control_calidad = models.DateField("QC date",auto_now_add=True,null=False,blank=False,db_column="rpt_fecha_control_calidad")
     
-    observacion = models.TextField("Report observacion",null=False,blank=False,db_column="rpt_observacion_reporte")
+    observacion = models.TextField("Report observacion",null=True,blank=True,db_column="rpt_observacion_reporte")
 
-    datos_del_cliente = models.JSONField("Data for clients",null=False,blank=False,db_column="rpt_data_clientes")
+    datos_del_cliente = models.JSONField("Data for clients",null=True,blank=True,db_column="rpt_data_clientes")
 
-    sistema = models.JSONField("Data for system",null=False,blank=False,db_column="rpt_data_sistema")
+    sistema = models.JSONField("Data for system",null=True,blank=True,db_column="rpt_data_sistema")
  
-    componente = models.JSONField("Data for component",null=False,blank=False,db_column="rpt_data_component")
+    componente = models.JSONField("Data for component",null=True,blank=True,db_column="rpt_data_component")
     
-    machine = models.JSONField("Values for machine",null=False,blank=False,db_column="rpt_data_maquina")
+    machine = models.JSONField("Values for machine",null=True,blank=True,db_column="rpt_data_maquina")
     
-    valores_operaciones = models.JSONField("Values for operations",null=False,blank=False,db_column="rpt_valores_operaciones")
+    valores_operaciones = models.JSONField("Values for operations",null=True,blank=True,db_column="rpt_valores_operaciones")
     
     pruebas = models.JSONField("Values for Pruebas",null=True,blank=True,db_column="rpt_pruebas")
 

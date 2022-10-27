@@ -4,7 +4,7 @@ from User.models import User
 
 class BaseModel(models.Model):
     id = models.AutoField(primary_key=True)
-    is_enabled = models.BooleanField('Estado',default=True)
+    is_enabled = models.BooleanField('Estado',default=True,null=False)
     created_at = models.DateField('Fecha de Creación',auto_now=False, auto_now_add = True)
     updated_at = models.DateField('Fecha de Modificacion',auto_now=True, auto_now_add = False)
     deleted_at = models.DateField('Fecha de Eliminación',auto_now=True, auto_now_add = False)
