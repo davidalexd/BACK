@@ -1,4 +1,5 @@
 from Functions.Services.promedio import promedio
+from Functions.Services.validacion import validacion
 def dental_exactitud_tiempo_exposicion_1(element=[0],attribute=[0],opcion=[""]):
     # llama TIEMPO DE EXPOSICIÓN (s) y luego a tiempo en rango de 5
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -11,6 +12,7 @@ def dental_exactitud_tiempo_exposicion_1(element=[0],attribute=[0],opcion=[""]):
 
     redondeo = round(operacion*100,2)
     tolerancia = True
+
     if(opcion[0]=="EQUIPO MONOFÁSICO"):
         tolerancia_1 = 20
         tolerancia_2 = -20
@@ -26,5 +28,18 @@ def dental_exactitud_tiempo_exposicion_1(element=[0],attribute=[0],opcion=[""]):
         else:
             tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondeo)+"%","condicion":tolerancia}],"tolerancia":"Desviación menor o igual que ± 10% "}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "data":[
+            {
+                "condicion":"Tiempo "+str(element_1)+" s",
+                "parametros":"",
+                "resultado":"Desviación "+str(redondeo)+"%",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Desviación ≤± "+str(tolerancia_1)+"% ",
+        "estado":estado
+    }
     return resultado

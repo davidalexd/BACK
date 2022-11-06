@@ -1,3 +1,5 @@
+from Functions.Services.validacion import validacion
+
 def dental_minima_distancia_foco_piel(element=[0]):
     # llama Minima distancia
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -11,6 +13,19 @@ def dental_minima_distancia_foco_piel(element=[0]):
     else:
         tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"cm","condicion":tolerancia}],"tolerancia":"Mayor o igual que 20 cm "}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "data":[
+            {
+                "condicion":"",
+                "parametros":"",
+                "resultado":str(redondear)+"cm",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"≥20 cm",
+        "estado":estado
+        }
 
     return resultado

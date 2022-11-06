@@ -1,4 +1,5 @@
 from Functions.Services.promedio import promedio
+from Functions.Services.validacion import validacion
 
 def dental_exactitud_tension(element=[0],attribute=[0]):
     # llama TENSION NOMINAL  (kV) luego a TENSION PROMEDIO (kV) range (5)
@@ -20,6 +21,19 @@ def dental_exactitud_tension(element=[0],attribute=[0]):
     else:
         tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Desviación menor o igual que ± 10% "}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "data":[
+            {
+                "condicion":"Tensión "+str(element_1)+" kV",
+                "parametros":"",
+                "resultado":str(redondear)+"%",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Desviación <±10%",
+        "estado":estado
+        }
     
     return resultado
