@@ -1,8 +1,10 @@
 from Functions.Services.promedio import promedio
+from Functions.Services.validacion import validacion
 
 
-def tomografia_exploracion_para_cabeza(element_1=[0],element_2=[0],attribute=[0],attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0],element_3=[0],element_4=[0],element_5=[0],element_6=[0],opcion=[""],element_7=[0]):
+def tomografia_exploracion_para_cabeza(element=[0],element_1=[0],element_2=[0],attribute=[0],attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0],element_3=[0],element_4=[0],element_5=[0],element_6=[0],opcion=[""],element_7=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
+    # element = Tensión Kv
     # element_1 = Fc exploración de cabeza
     # element_2 = Espesor de corte (mm)    
     # attribute = dosis Central range 3
@@ -16,6 +18,8 @@ def tomografia_exploracion_para_cabeza(element_1=[0],element_2=[0],attribute=[0]
     # element_6 = Longitud irradiada (mm):
     # opcion = tipo se exploracion
     # element_7 = Pich
+
+    kv = element[0]
 
     CDTIC = promedio(attribute)*100*float(element_1[0])/float(element_2[0])
 
@@ -38,8 +42,20 @@ def tomografia_exploracion_para_cabeza(element_1=[0],element_2=[0],attribute=[0]
     else:
         tolerancia = False
 
+    estado = validacion([tolerancia])
 
-    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"< 60 mGy. (Exploración: Cabeza adulto)"}
+    resultado = {
+        "condicion":"Modo Helicoidal / "+kv+" kV / "+element_3[0]+" mAs / "+element_2[0]+" mm de espesor de corte",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear+" mGy",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"< 60 mGy. (Exploración: Cabeza adulto)",
+        "estado":estado
+        }
 
     return resultado
 

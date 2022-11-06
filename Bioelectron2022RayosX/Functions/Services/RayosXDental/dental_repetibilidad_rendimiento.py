@@ -22,9 +22,9 @@ def dental_repetibilidad_rendimiento(element,attribute=[0],element_1=[0],element
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"Tensión "+str(variante)+" kV",
         "data":[
             {
-                "condicion":"Tensión "+str(variante)+" kV",
                 "parametros":"",
                 "resultado":"Coeficiente de variación "+str(redondeo)+" %",
                 "estado":tolerancia

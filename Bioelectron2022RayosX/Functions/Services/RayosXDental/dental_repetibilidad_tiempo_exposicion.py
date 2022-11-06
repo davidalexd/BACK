@@ -22,9 +22,9 @@ def dental_repetibilidad_tiempo_exposicion(element,attribute=[0]):
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"Tiempo "+str(element_1)+" s",
         "data":[
             {
-                "condicion":"Tiempo "+str(element_1)+" s",
                 "parametros":"",
                 "resultado":"Coeficiente de variación "+str(redondear)+"%",
                 "estado":tolerancia

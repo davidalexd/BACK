@@ -20,9 +20,9 @@ def dental_valor_rendimiento(element,attribute=[0],element_1=[0],element_2=[0],e
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"Tensión "+str(variante)+" kV",
         "data":[
             {
-                "condicion":"Tensión "+str(variante)+" kV",
                 "parametros":"",
                 "resultado":str(redondeo)+" uGy/mAs a 1 m del foco",
                 "estado":tolerancia

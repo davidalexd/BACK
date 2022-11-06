@@ -1,6 +1,7 @@
 from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.valor_maximo import valor_maximo 
 from Functions.Services.valor_minimo import valor_minimo 
+from Functions.Services.validacion import validacion
 
 def tomografia_uniformidad_espacial_numero_ct(element=[0], attribute=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -23,7 +24,20 @@ def tomografia_uniformidad_espacial_numero_ct(element=[0], attribute=[0]):
     else:
         tolerancia = False
         
-    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"< ±5 UH."}
+    estado = validacion([tolerancia])
+    
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear + " UH",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"< ±5 UH.",
+        "estado":estado
+        }
     
     return resultado
     

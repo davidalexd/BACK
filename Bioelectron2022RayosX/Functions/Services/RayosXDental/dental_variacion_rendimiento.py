@@ -25,9 +25,9 @@ def dental_variacion_rendimiento(element_1=[0],element_2=[0],element_3=[0],eleme
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"",
         "data":[
             {
-                "condicion":"",
                 "parametros":"",
                 "resultado":"Coeficiente de linealidad "+str(redondeo),
                 "estado":tolerancia

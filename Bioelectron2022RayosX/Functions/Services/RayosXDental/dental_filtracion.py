@@ -17,9 +17,9 @@ def dental_filtracion(element,attribute=[0]):
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"Tensión "+str(element_1)+" kV",
         "data":[
             {
-                "condicion":"Tensión "+str(element_1)+" kV",
                 "parametros":"",
                 "resultado":"Filtración total "+str(redondeo)+" mm Al",
                 "estado":tolerancia

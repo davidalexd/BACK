@@ -16,9 +16,9 @@ def dental_minima_distancia_foco_piel(element=[0]):
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"",
         "data":[
             {
-                "condicion":"",
                 "parametros":"",
                 "resultado":str(redondear)+"cm",
                 "estado":tolerancia

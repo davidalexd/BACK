@@ -1,4 +1,5 @@
 from Functions.Services.valor_absoluto import valor_absoluto
+from Functions.Services.validacion import validacion
 
 def tomografia_exactitud_indicador_posicion_mesa(element_1=[0],element_2=[0],element_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -13,6 +14,19 @@ def tomografia_exactitud_indicador_posicion_mesa(element_1=[0],element_2=[0],ele
     else:
         tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Desviación ≤ ±2 mm"}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+" mm",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Desviación ≤ ±2 mm",
+        "estado":estado
+        }
 
     return resultado

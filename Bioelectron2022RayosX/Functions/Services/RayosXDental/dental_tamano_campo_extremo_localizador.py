@@ -16,9 +16,9 @@ def dental_tamano_campo_extremo_localizador(element=[0]):
     estado = validacion([tolerancia])
         
     resultado = {
+        "condicion":"",
         "data":[
             {
-                "condicion":"",
                 "parametros":"",
                 "resultado":str(redondear)+"cm",
                 "estado":tolerancia

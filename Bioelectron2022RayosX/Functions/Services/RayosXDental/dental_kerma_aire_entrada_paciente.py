@@ -19,9 +19,9 @@ def dental_kerma_aire_entrada_paciente(attribute=[0]):
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"Exploración molar superior adulto ",
         "data":[
             {
-                "condicion":"Exploración molar superior adulto ",
                 "parametros":"",
                 "resultado":str(redondeo)+" mGy",
                 "estado":tolerancia

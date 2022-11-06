@@ -24,9 +24,9 @@ def dental_exactitud_tension(element=[0],attribute=[0]):
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"Tensión "+str(element_1)+" kV",
         "data":[
             {
-                "condicion":"Tensión "+str(element_1)+" kV",
                 "parametros":"",
                 "resultado":str(redondear)+"%",
                 "estado":tolerancia

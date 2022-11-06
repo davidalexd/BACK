@@ -31,9 +31,9 @@ def dental_exactitud_tiempo_exposicion_1(element=[0],attribute=[0],opcion=[""]):
     estado = validacion([tolerancia])
 
     resultado = {
+        "condicion":"Tiempo "+str(element_1)+" s",
         "data":[
             {
-                "condicion":"Tiempo "+str(element_1)+" s",
                 "parametros":"",
                 "resultado":"Desviación "+str(redondeo)+"%",
                 "estado":tolerancia

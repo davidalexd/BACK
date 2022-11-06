@@ -1,4 +1,5 @@
 from Functions.Services.valor_absoluto import valor_absoluto
+from Functions.Services.validacion import validacion
 
 def tomografia_valor_medio_numero_ct(element_1=[0],element_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -25,10 +26,24 @@ def tomografia_valor_medio_numero_ct(element_1=[0],element_2=[0]):
     else:
         tolerancia_2 = False
 
-    resultado = {"data":[
-        {"parametros":"","resultado":redondear_1,"condicion":tolerancia_1},
-        {"parametros":"","resultado":redondear_2,"condicion":tolerancia_2}
-        ],"tolerancia":"Aire (-1000 ± 4) UH.  Aire (-1000 ± 4) UH. "}
+    estado = validacion([tolerancia_1,tolerancia_2])
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":"Agua: "+redondear_1+" UH",
+                "estado":tolerancia_1
+            },
+            {
+                "parametros":"",
+                "resultado":"Aire: "+redondear_2+" UH",
+                "estado":tolerancia_2
+            }
+        ],
+        "tolerancia":"Agua (0 ± 4) UH / Aire (-1000 ± 4) UH.",
+        "estado":estado
+        }
 
     return resultado
     
