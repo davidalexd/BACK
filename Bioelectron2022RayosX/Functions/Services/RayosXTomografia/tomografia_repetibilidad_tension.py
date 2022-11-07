@@ -3,6 +3,7 @@ from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.valor_maximo import valor_maximo 
 from Functions.Services.valor_minimo import valor_minimo 
+from Functions.Services.validacion import validacion
 
 def tomografia_repetibilidad_tension(attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -32,7 +33,20 @@ def tomografia_repetibilidad_tension(attribute_1=[0],attribute_2=[0],attribute_3
     else:
         tolerancia = False
         
-    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"Coeficiente de variación ≤ 3%."}
+    estado = validacion([tolerancia])
+        
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear+" %",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Coeficiente de variación ≤ 3%.",
+        "estado":estado
+        }
 
     
     return resultado

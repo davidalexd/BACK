@@ -1,4 +1,6 @@
 from Functions.Services.promedio import promedio
+from Functions.Services.validacion import validacion
+
 def dental_kerma_aire_entrada_paciente(attribute=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     prom = promedio(attribute)
@@ -14,6 +16,19 @@ def dental_kerma_aire_entrada_paciente(attribute=[0]):
     else:
         tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondeo)+" mGy","condicion":tolerancia}],"tolerancia":"Deberá ser inferior a 4 mGy "}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"Exploración molar superior adulto ",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondeo)+" mGy",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Deberá ser inferior a 4 mGy",
+        "estado":estado
+        }
 
     return resultado

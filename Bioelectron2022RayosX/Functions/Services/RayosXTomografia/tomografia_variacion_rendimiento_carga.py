@@ -1,6 +1,7 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.valor_maximo import valor_maximo 
 from Functions.Services.valor_minimo import valor_minimo 
+from Functions.Services.validacion import validacion
 
 def tomografia_variacion_rendimiento_carga(attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0],attribute_5=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -28,7 +29,20 @@ def tomografia_variacion_rendimiento_carga(attribute_1=[0],attribute_2=[0],attri
     else:
         tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"≤ 0.1 (Coeficiente de Linealidad)."}
+    estado = validacion([tolerancia]) 
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+"%",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"≤ 0.1 (Coeficiente de Linealidad).",
+        "estado":estado
+        }
 
     
     return resultado

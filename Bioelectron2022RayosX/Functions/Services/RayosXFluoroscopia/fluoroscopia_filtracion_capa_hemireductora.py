@@ -1,5 +1,5 @@
 from Functions.Services.promedio import promedio
-
+from Functions.Services.validacion import validacion
 
 def fluoroscopia_filtracion_capa_hemireductora(attributes=[0],element=[0]):
         resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -17,8 +17,19 @@ def fluoroscopia_filtracion_capa_hemireductora(attributes=[0],element=[0]):
                 tolerancia=True
         else:
                 tolerancia=False
-
-
-        resultado = {"data":[{"parametros":"","resultado":str(redondear)+"mmAl","condicion":tolerancia}],"tolerancia":"> 2.5 mmAl (a 70 kVp) y >2.9 mmAl (a 80 kVp)"}
+                
+        estado = validacion([tolerancia])
+        resultado = {
+                "condicion":"",
+                "data":[
+                        {
+                                "parametros":"",
+                                "resultado":str(redondear)+"mmAl",
+                                "estado":tolerancia
+                        }
+                ],
+                        "tolerancia":"> 2.5 mmAl (a 70 kVp) y >2.9 mmAl (a 80 kVp)",
+                        "estado":estado
+                }
         
         return resultado

@@ -6,5 +6,5 @@ def coeficiente_variacion(attributes):
     desviacion_estandar = desviacion_estandar_m(attributes)
 
     coeficiente_variacion = desviacion_estandar/promedio
-    resultado = {"valor":coeficiente_variacion}
+    resultado = coeficiente_variacion
     return resultado

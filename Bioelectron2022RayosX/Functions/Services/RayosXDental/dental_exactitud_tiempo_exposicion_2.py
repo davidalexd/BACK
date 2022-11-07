@@ -1,3 +1,5 @@
+from Functions.Services.validacion import validacion
+
 def dental_exactitud_tiempo_exposicion_2(element_1=[0],element_2=[0],opcion=[""]):
     # llama a TIEMPO DE EXPOSICIÓN (s) y luego a TIEMPO (s) in range 1
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -23,6 +25,19 @@ def dental_exactitud_tiempo_exposicion_2(element_1=[0],element_2=[0],opcion=[""]
         else:
             tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondeo)+"%","condicion":tolerancia}],"tolerancia":"Desviación menor o igual que ± 10%"}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"Tiempo "+str(element_1)+" s",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":"Desviación "+str(redondeo)+"%",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Desviación ≤± "+str(tolerancia_1)+"% ",
+        "estado":estado
+        }
 
     return resultado

@@ -1,7 +1,7 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.valor_absoluto import valor_absoluto
-
+from Functions.Services.validacion import validacion
 
 def fluoroscopia_compensacion_cae(opcion=[""],attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -61,12 +61,29 @@ def fluoroscopia_compensacion_cae(opcion=[""],attribute_1=[0],attribute_2=[0],at
         else:
             tolerancia_3  = False
 
-    print(opcion)
-    resultado = {"data":[
-        {"parametros":"","resultado":redondear_1,"condicion":tolerancia_1},
-        {"parametros":"","resultado":redondear_2,"condicion":tolerancia_2},
-        {"parametros":"","resultado":redondear_3,"condicion":tolerancia_3}
+    estado = validacion([tolerancia_1,tolerancia_2,tolerancia_3])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear_1,
+                "estado":tolerancia_1
+            },
+            {
+                "parametros":"",
+                "resultado":redondear_2,
+                "estado":tolerancia_2
+            },
+            {
+                "parametros":"",
+                "resultado":redondear_3,
+                "estado":tolerancia_3
+            }
         ],
-        "tolerancia":"Desviación ± "+tolerancia_a_1+"%"}
+        "tolerancia":"Desviación ± "+tolerancia_a_1+"%",
+        "estado":estado
+        }
 
     return resultado

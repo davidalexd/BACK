@@ -1,3 +1,5 @@
+from Functions.Services.validacion import validacion
+
 def dental_tamano_campo_extremo_localizador(element=[0]):
     # llama Tamaño de Campo
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -10,7 +12,20 @@ def dental_tamano_campo_extremo_localizador(element=[0]):
         tolerancia = True
     else:
         tolerancia = False
+
+    estado = validacion([tolerancia])
         
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"cm","condicion":tolerancia}],"tolerancia":"Menor o igual que 6 cm "}
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+"cm",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"≤6 cm",
+        "estado":estado
+        }
     
     return resultado
