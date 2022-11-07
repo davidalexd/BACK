@@ -13,7 +13,6 @@ def fluoroscopia_repetibilidad_tension(attribute_1=[0],attribute_2=[0],attribute
         operacion = des_v/prom   
 
     redondear = round(operacion,2)
-
     if(redondear < 5):
         tolerancia = True
     else:
@@ -26,7 +25,7 @@ def fluoroscopia_repetibilidad_tension(attribute_1=[0],attribute_2=[0],attribute
         "data":[
             {
                 "parametros":"",
-                "resultado":redondear+" %",
+                "resultado":str(redondear)+" %",
                 "estado":tolerancia
             }
         ],

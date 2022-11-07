@@ -5,7 +5,6 @@ def fluoroscopia_alineacion_rayos_x_haz_luminoso(attribute=[0],element=[0]):
     
     parametro = ["L1 - "+str(attribute[0])+"% , L2 - "+str(attribute[1])+"%, L3 - "+str(attribute[2])+"% , L4 - "+str(attribute[3])+"%"]
     variante = element[0]
-
     operacion = sum(attribute)
     redondear = round(operacion,2)
     tolerancia = True
@@ -19,11 +18,11 @@ def fluoroscopia_alineacion_rayos_x_haz_luminoso(attribute=[0],element=[0]):
     estado = validacion([tolerancia])
 
     resultado = {
-        "condicion":variante+" cm al foco",
+        "condicion":str(variante)+" cm al foco",
         "data":[
             {
                 "parametros":parametro,
-                "resultado":"Suma total = "+str(redondear)+"%",
+                "resultado":"Suma total = "+str(redondear)+"cm",
                 "estado":tolerancia
                 }
         ],

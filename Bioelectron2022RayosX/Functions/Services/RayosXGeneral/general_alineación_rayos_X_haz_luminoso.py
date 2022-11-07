@@ -1,5 +1,5 @@
 from Functions.Services.suma_range import suma_range
-
+from Functions.Services.validacion import validacion
 
 def general_alineación_rayos_X_haz_luminoso(attribute=[0],element=[0]):
     # attribute = Diferencia entre bordes (cm):
@@ -25,10 +25,24 @@ def general_alineación_rayos_X_haz_luminoso(attribute=[0],element=[0]):
     else:
         tolerancia_2 = False
 
-    resultado = {"data":[
-        {"parametros":"","resultado":redondear,"tolerancia":"≤"+ str(tolerancia_respuesta_1)+" cm","condicion":tolerancia_1},
-        {"parametros":"","resultado":redondear,"tolerancia":"≤"+ str(tolerancia_respuesta_2)+" cm","condicion":tolerancia_2}
-        ]
-        ,"tolerancia":"Suma de las desviaciones absolutas en los bordes inferiores al ± 2% de la distancia entre el foco y el maniquí de colimación para cada dirección principal. La suma total de las desviaciones absolutas no excederá, por otra parte, el 3% de la distancia entre el foco y maniquí de colimación."}
+    estado = validacion([tolerancia_1,tolerancia_2])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear,
+                "estado":tolerancia_1
+            },
+            {
+                "parametros":"",
+                "resultado":redondear,
+                "estado":tolerancia_2
+            }
+        ],
+        "tolerancia":"Suma de las desviaciones absolutas en los bordes inferiores al ± 2% de la distancia entre el foco y el maniquí de colimación para cada dirección principal. La suma total de las desviaciones absolutas no excederá, por otra parte, el 3% de la distancia entre el foco y maniquí de colimación.",
+        "estado":estado
+        }
     
     return resultado

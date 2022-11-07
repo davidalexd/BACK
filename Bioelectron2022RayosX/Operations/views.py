@@ -188,7 +188,7 @@ class fluoroscopia_alineacionrayosxhazluminoso(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_alineacion_rayos_x_haz_luminoso((data_entrante[0]),(data_entrante[1]))
+            resultado = fluoroscopia_alineacion_rayos_x_haz_luminoso(data_entrante[0],data_entrante[1])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -521,7 +521,7 @@ view_dental_repetibilidad_rendimiento= dental_repetibilidadrendimiento.as_view()
 class dental_repetibilidadtension(View):
     def get(self, request,**kwargs):
         try:
-            data_entrante = json.loads(kwargs['global'])
+            data_entrante = json.loads(kwargs['global']) 
             resultado = dental_repetibilidad_tension(data_entrante[0],data_entrante[1])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
@@ -550,7 +550,6 @@ view_dental_tamano_campo_extremo_localizador= dental_tamanocampoextremolocalizad
 
 class dental_valorrendimiento(View):
     def get(self, request,**kwargs):
-        print(kwargs['global'])
         try:
             data_entrante = json.loads(kwargs['global'])
             resultado = dental_valor_rendimiento(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4])
@@ -603,7 +602,6 @@ view_general_dosis_superficie_paciente= general_dosissuperficiepaciente.as_view(
 
 class general_exactitudtension1(View):
     def get(self, request,**kwargs):
-        print(kwargs['global'])
         try:
             data_entrante = json.loads(kwargs['global'])
             resultado = general_exactitud_tension_1(data_entrante[0],data_entrante[1])
