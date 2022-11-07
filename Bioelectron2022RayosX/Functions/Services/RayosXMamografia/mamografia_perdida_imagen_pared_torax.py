@@ -1,12 +1,18 @@
 from Functions.Services.valor_absoluto import valor_absoluto
+from Functions.Services.valor_maximo import valor_maximo
 from Functions.Services.validacion import validacion
 
-def mamografia_coincidencia_campo_radiacion_receptor_imagen(attribute=[0]):
+def mamografia_perdida_imagen_pared_torax(attribute_1=[0],attribute_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
-    tolerancia = True
-    abs = valor_absoluto(int(attribute[3]))
+    Uc = []
 
-    if(abs<=5 or abs<=-5):
+    for x in range(len(attribute_1)):
+        operacion = attribute_1[x]-attribute_2[x]
+        Uc.append(operacion)
+    
+    max = valor_maximo(Uc)
+
+    if(max<=20 or max<=-20):
         tolerancia = True
     else:
         tolerancia = False
@@ -18,13 +24,15 @@ def mamografia_coincidencia_campo_radiacion_receptor_imagen(attribute=[0]):
         "data":[
             {
                 "parametros":"",
-                "resultado":"El campo de radiación cubre todo el área del detector sobrepasando "+attribute[3]+" mm el lado que corresponde a la pared del tórax",
+                "resultado":max+"N",
                 "estado":tolerancia
             },
         ]
-        ,"tolerancia":"≤±5mm",
+        ,"tolerancia":"≤±20N",
         "estado":estado
         }
+        
+    return resultado 
     
 
-    return resultado
+    

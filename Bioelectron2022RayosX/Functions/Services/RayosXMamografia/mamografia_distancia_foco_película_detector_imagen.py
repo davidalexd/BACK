@@ -1,3 +1,5 @@
+from Functions.Services.validacion import validacion
+
 def mamografia_distancia_foco_película_detector_imagen(element=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
 
@@ -10,9 +12,20 @@ def mamografia_distancia_foco_película_detector_imagen(element=[0]):
         tolerancia= False
 
 
-    resultado = {"data":[
-        {"parametros":"","resultado":redondear+" cm","tolerancia":"≥60 cm","condicion":tolerancia},
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear+" cm",
+                "estado":tolerancia
+            },
         ]
-        ,"tolerancia":""}
+        ,
+        "tolerancia":"≥60 cm",
+        "estado":estado
+        }
     
     return resultado

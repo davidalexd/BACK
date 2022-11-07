@@ -1,6 +1,8 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.valor_maximo import valor_maximo
 from Functions.Services.valor_absoluto import valor_absoluto
+from Functions.Services.validacion import validacion
+
 def mamografia_exactitud_tension(attribute=[0],attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia = True
@@ -19,9 +21,19 @@ def mamografia_exactitud_tension(attribute=[0],attribute_1=[0],attribute_2=[0],a
     else:
         tolerancia = False
 
-    resultado = {"data":[
-        {"parametros":"","resultado":val_max,"tolerancia":"≤±1kV","condicion":tolerancia},
-        ]
-        ,"tolerancia":""}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":val_max+" kV",
+                "estado":tolerancia
+            },
+        ],
+        "tolerancia":"≤±1kV",
+        "estado":estado
+        }
 
     return  resultado
