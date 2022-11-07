@@ -1,4 +1,5 @@
 from Functions.Services.promedio import promedio
+from Functions.Services.validacion import validacion
 
 def fluoroscopia_variacion_rendimiento_carga(attributes_1=[0],attributes_2=[0],attributes_3=[0],element_1=[0],attributes_4=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -23,7 +24,19 @@ def fluoroscopia_variacion_rendimiento_carga(attributes_1=[0],attributes_2=[0],a
     else:
         tolerancia = False
 
-    
-    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"Coeficiente de linealidad   0.1"}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear+"%",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Coeficiente de linealidad 0.1",
+        "estado":estado
+        }
 
     return resultado

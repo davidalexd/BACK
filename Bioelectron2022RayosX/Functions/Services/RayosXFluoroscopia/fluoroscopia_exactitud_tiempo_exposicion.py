@@ -1,5 +1,6 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.valor_absoluto import valor_absoluto
+from Functions.Services.validacion import validacion
 
 def fluoroscopia_exactitud_tiempo_exposicion(attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0]):
         resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -11,11 +12,24 @@ def fluoroscopia_exactitud_tiempo_exposicion(attribute_1=[0],attribute_2=[0],att
         tolerancia_1 = 10
         tolerancia_2 = -10
 
-        if(redondear < tolerancia_1 or redondear < tolerancia_2):
+        if(abs < tolerancia_1 or abs < tolerancia_2):
                 tolerancia=True
         else:
                 tolerancia=False
-            
-        resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Desviación con respecto al valor nominal < ±10% para tiempos > 20 ms y lo especificado por el fabricante para tiempos ≤ 20 ms."}    
+
+        estado = validacion([tolerancia])   
+
+        resultado = {
+                "condicion":"",
+                "data":[
+                        {
+                                "parametros":"",
+                                "resultado":str(redondear)+"%",
+                                "condicion":tolerancia
+                        }
+                ],
+                        "tolerancia":"Desviación con respecto al valor nominal < ±10% para tiempos > 20 ms y lo especificado por el fabricante para tiempos ≤ 20 ms.",
+                        "estado":estado
+                }    
 
         return resultado

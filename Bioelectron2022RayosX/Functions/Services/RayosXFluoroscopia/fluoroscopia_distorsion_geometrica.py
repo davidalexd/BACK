@@ -1,9 +1,8 @@
-
-
-
+from Functions.Services.validacion import validacion
 
 def fluoroscopia_distorsion_integral(element_1=[0],element_2=[0],element_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
+
     div = ((float(element_1[0])/(float(element_2[0])*float(element_3[0])))-1)*100
     redondear = round(div,2)
     tolerancia = True
@@ -13,14 +12,19 @@ def fluoroscopia_distorsion_integral(element_1=[0],element_2=[0],element_3=[0]):
     else:
         tolerancia = False
 
-    resultado = {"data":[
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
             {
                 "parametros":"",
                 "resultado":str(redondear)+'%',
-                "condicion":tolerancia
+                "estado":tolerancia
             }
-            ],
-            "tolerancia":"≤10%"
+        ],
+        "tolerancia":"≤10%",
+        "estado":estado
         }
     return resultado
 
@@ -28,23 +32,28 @@ def fluoroscopia_distorsion_del_tipo_s(opcion=[""]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     
     reslt = "ACEPTABLE"
-    tolerancia = true
+    tolerancia = True
 
     if(opcion[0]=="No Existe"):
-        tolerancia = true
+        tolerancia = True
         reslt = "ACEPTABLE"
     else:
-        tolerancia = false
+        tolerancia = False
         reslt = "NO ACEPTABLE"
 
-    resultado = {"data":[
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
             {
                 "parametros":"",
                 "resultado":reslt,
-                "condicion":tolerancia
+                "estado":tolerancia
             }
-            ],
-            "tolerancia":reslt
+        ],
+            "tolerancia":"Aceptable",
+            "estado":estado
         }
 
     return resultado
@@ -53,23 +62,28 @@ def fluoroscopia_distorsion_cojinete(opcion=[""]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     
     reslt = "ACEPTABLE"
-    tolerancia = true
+    tolerancia = True
 
     if(opcion[0]=="Si"):
-        tolerancia = true
+        tolerancia = True
         reslt = "ACEPTABLE"
     else:
-        tolerancia = false
+        tolerancia = False
         reslt = "NO ACEPTABLE"
 
-    resultado = {"data":[
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
             {
                 "parametros":"",
                 "resultado":reslt,
-                "condicion":tolerancia
+                "estado":tolerancia
             }
-            ],
-            "tolerancia":reslt
+        ],
+            "tolerancia":"Aceptable",
+            "estado":estado
         }
 
     return resultado

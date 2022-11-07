@@ -1,5 +1,7 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.valor_absoluto import valor_absoluto
+from Functions.Services.validacion import validacion
+
 def fluoroscopia_exactitud_tension(attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0]):
         resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
         prom = promedio([attribute_2[1],attribute_3[1],attribute_4[1]])
@@ -14,9 +16,20 @@ def fluoroscopia_exactitud_tension(attribute_1=[0],attribute_2=[0],attribute_3=[
                 tolerancia = True
         else:
                 tolerancia = False
-        
-        resultado = {"data":[
-                {"parametros":"","resultado":redondear,"condicion":tolerancia}
-        ],"tolerancia":"Desviación con respecto al valor nominal < ±10%"}
+                
+        estado = validacion([tolerancia])
+
+        resultado = {
+                "condicion":attribute_1[1]+" kV",
+                "data":[
+                        {
+                                "parametros":"",
+                                "resultado":redondear+" %",
+                                "estado":tolerancia
+                        }
+                ],
+                "tolerancia":"Desviación con respecto al valor nominal < ±10%",
+                "estado":estado
+                }
 
         return resultado

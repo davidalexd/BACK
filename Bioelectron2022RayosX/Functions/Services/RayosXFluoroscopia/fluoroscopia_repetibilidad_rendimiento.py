@@ -1,5 +1,6 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
+from Functions.Services.validacion import validacion
 
 def fluoroscopia_repetibilidad_rendimiento(attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -16,7 +17,20 @@ def fluoroscopia_repetibilidad_rendimiento(attribute_1=[0],attribute_2=[0],attri
         tolerancia = True
     else:
         tolerancia = False   
-    
-    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":tolerancia}],"tolerancia":"Coeficiente de variación < 10%."}
+
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear+" %",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Coeficiente de variación < 10%.",
+        "estado":estado
+        }
 
     return resultado

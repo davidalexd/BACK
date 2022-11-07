@@ -1,3 +1,4 @@
+from Functions.Services.validacion import validacion
 def fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector(element_1,element_2):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     operacion=(float(element_1[0])**2)/(float(element_2[0])**2)
@@ -8,10 +9,19 @@ def fluoroscopia_coincidencia_campo_radiacion_area_visualizada_detector(element_
     else:
         tolerancia = False
         
-    
-    resultado = {"data":[
-        {"parametros":"","resultado":redondear,"condicion":tolerancia}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear,
+                "estado":tolerancia
+            }
         ],
-        "tolerancia":"La relación entre el área del campo de radiación y el área visualizada en la superficie de entrada del detector de imagen debe ser ≤ 1.15"}
+        "tolerancia":"La relación entre el área del campo de radiación y el área visualizada en la superficie de entrada del detector de imagen debe ser ≤ 1.15",
+        "estado":estado
+        }
 
     return resultado

@@ -1,3 +1,5 @@
+from Functions.Services.validacion import validacion
+
 def fluoroscopia_tasa_dosis_paciente(element_1=[0],element_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia_1 = True
@@ -16,18 +18,25 @@ def fluoroscopia_tasa_dosis_paciente(element_1=[0],element_2=[0]):
     else:
         tolerancia_2 = False
     
-    resultado = {"data":[
-        {
-            "parametros":"",
-            "resultado":str(redondear_1),
-            "condicion":tolerancia_1
-        },
-        {
-            "parametros":"",
-            "resultado":str(redondear_2),
-            "condicion":tolerancia_2
+    estado = validacion([tolerancia_1,tolerancia_2])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear_1)+" mGy/min",
+                "estado":tolerancia_1
+            },
+            {
+                "parametros":"",
+                "resultado":str(redondear_2)+" mGy/min",
+                "estado":tolerancia_2
+            }
+        ],
+        "tolerancia":"≤ 50 mGy/min. y ≤ 100 mGy/min.",
+        "estado":estado
         }
-        ],"tolerancia":"≤ 50 mGy/min. y ≤ 100 mGy/min."}
 
 
     return resultado
