@@ -7,7 +7,7 @@ def mamografia_visibilidad_pequenos_objetos_microcalcificaciones(element=[0],ele
     tolerancia = True
     suma = suma_range([element_1[0],element_2[0],element_3[0]])
 
-    operacion = desviacion_estandar_m([element[0],element_3[0]])
+    operacion = desviacion_estandar_m([element[0],suma])
 
     if(operacion<=10,operacion<=-10):
         tolerancia = True
@@ -26,7 +26,7 @@ def mamografia_visibilidad_pequenos_objetos_microcalcificaciones(element=[0],ele
                 "estado":tolerancia
             },
         ]
-        ,"tolerancia":"≤±10%",
+        ,"tolerancia":"Desviación con respecto al valor de referencia: ≤±10%",
         "estado":estado
         }
     

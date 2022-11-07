@@ -1,7 +1,8 @@
-from Functions.Services.coeficiente_linealidad import coeficiente_linealidad
+from Functions.Services.valor_maximo import valor_maximo
+from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
 
-def mamografia_control_automatico_exposicion_sistemas_digitales(attribute=[0],attribute_1=[0],attribute_2=[0],attribute_3=[0]):
+def mamografia_almacen(attribute=[0],attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia = True
     Uc = []
@@ -11,29 +12,24 @@ def mamografia_control_automatico_exposicion_sistemas_digitales(attribute=[0],at
         valor = float(attribute[x])/prom
         Uc.append(valor)
     
-    coeLin = coeficiente_linealidad(Uc)
+    max = valor_maximo(Uc)
+
+    redondear = round(max,2)
+   
+    estado = validacion([tolerancia]) 
+
     
-    redondear = round(coeLin,2)
-
-    if(redondear<=0.1):
-        tolerancia = True
-    else:
-        tolerancia = False
-
-    estado = validacion([tolerancia])
-
     resultado = {
         "condicion":"",
         "data":[
             {
                 "parametros":"",
-                "resultado":redondear,
+                "resultado":str(redondear)+" µGy/mAs",
                 "estado":tolerancia
-            },
-        ]
-        ,"tolerancia":"≤0.1",
+            }
+        ],
+        "tolerancia":"",
         "estado":estado
         }
-    
 
     return resultado

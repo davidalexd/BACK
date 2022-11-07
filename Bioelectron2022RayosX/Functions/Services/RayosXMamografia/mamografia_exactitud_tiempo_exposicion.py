@@ -3,7 +3,7 @@ from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.valor_maximo import valor_maximo
 from Functions.Services.valor_absoluto import valor_absoluto
 
-def mamografia_exactitud_tiempo_exposición(attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0],opcion=[0]):
+def mamografia_exactitud_tiempo_exposicion(attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0],opcion=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia = True
     Uc = []

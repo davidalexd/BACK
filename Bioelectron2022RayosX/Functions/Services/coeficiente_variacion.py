@@ -1,5 +1,5 @@
-from desviacion_estandar_m import desviacion_estandar_m
-from promedio import promedio as prom
+from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
+from Functions.Services.promedio import promedio as prom
 
 def coeficiente_variacion(attributes):
     promedio = prom(attributes)

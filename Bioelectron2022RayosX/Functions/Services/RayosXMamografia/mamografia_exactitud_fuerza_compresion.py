@@ -2,7 +2,7 @@ from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.valor_maximo import valor_maximo
 from Functions.Services.validacion import validacion
 
-def mamografia_perdida_imagen_pared_torax(attribute_1=[0],attribute_2=[0]):
+def mamografia_exactitud_fuerza_compresion(attribute_1=[0],attribute_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     Uc = []
 

@@ -954,6 +954,250 @@ class tomografia_exactitudseleccionposicioncorteradiografiaplanificacion(View):
 
 view_tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion = tomografia_exactitudseleccionposicioncorteradiografiaplanificacion.as_view()
 
+
+
+from Functions.Services.RayosXMamografia.mamografia_distancia_foco_película_detector_imagen import mamografia_distancia_foco_película_detector_imagen
+from Functions.Services.RayosXMamografia.mamografia_coincidencia_campo_radiacion_receptor_imagen import mamografia_coincidencia_campo_radiacion_receptor_imagen
+from Functions.Services.RayosXMamografia.mamografia_exactitud_tension import mamografia_exactitud_tension
+from Functions.Services.RayosXMamografia.mamografia_repetibilidad_tension import mamografia_repetibilidad_tension
+from Functions.Services.RayosXMamografia.mamografia_filtracion_capa_hemirreductora import mamografia_filtracion_capa_hemirreductora
+from Functions.Services.RayosXMamografia.mamografia_exactitud_tiempo_exposicion import mamografia_exactitud_tiempo_exposicion
+from Functions.Services.RayosXMamografia.mamografia_repetibilidad_tiempo_exposicion import mamografia_repetibilidad_tiempo_exposicion
+from Functions.Services.RayosXMamografia.mamografia_repetibilidad_cae import mamografia_repetibilidad_cae
+from Functions.Services.RayosXMamografia.mamografia_compensacion_cae_espesor_composición_mama import mamografia_compensacion_cae_espesor_composición_mama
+from Functions.Services.RayosXMamografia.mamografia_repetibilidad_rendimiento import mamografia_repetibilidad_rendimiento
+from Functions.Services.RayosXMamografia.mamografia_linealidad_rendimiento_carga_tubo import mamografia_linealidad_rendimiento_carga_tubo
+from Functions.Services.RayosXMamografia.mamografia_fuerza_compresion_atenuacion_compresor import mamografia_fuerza_compresion_atenuacion_compresor
+from Functions.Services.RayosXMamografia.mamografia_exactitud_fuerza_compresion import mamografia_exactitud_fuerza_compresion
+from Functions.Services.RayosXMamografia.mamografia_resolucion_espacial import mamografia_resolucion_espacial
+from Functions.Services.RayosXMamografia.mamografia_visibilidad_pequenos_objetos_microcalcificaciones import mamografia_visibilidad_pequenos_objetos_microcalcificaciones
+from Functions.Services.RayosXMamografia.mamografia_perdida_imagen_pared_tórax import mamografia_perdida_imagen_pared_torax
+from Functions.Services.RayosXMamografia.mamografia_uniformidad_imagen import mamografia_uniformidad_imagen
+from Functions.Services.RayosXMamografia.mamografia_artefactos_cr import mamografia_artefactos_cr
+from Functions.Services.RayosXMamografia.mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr import mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr
+from Functions.Services.RayosXMamografia.mamografia_dosis_superficie_mama import mamografia_dosis_superficie_mama
+
+class mamografia_distanciafocopelículadetectorimagen(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_distancia_foco_película_detector_imagen(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_distancia_foco_película_detector_imagen = mamografia_distanciafocopelículadetectorimagen.as_view()
+
+class mamografia_coincidenciacamporadiacionreceptorimagen(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_coincidencia_campo_radiacion_receptor_imagen(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_coincidencia_campo_radiacion_receptor_imagen = mamografia_coincidenciacamporadiacionreceptorimagen.as_view()
+
+class mamografia_exactitudtension(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_exactitud_tension(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_exactitud_tension = mamografia_exactitudtension.as_view()
+
+class mamografia_repetibilidadtension(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_repetibilidad_tension(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_repetibilidad_tension = mamografia_repetibilidadtension.as_view()
+
+class mamografia_filtracioncapahemirreductora(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_filtracion_capa_hemirreductora(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_filtracion_capa_hemirreductora = mamografia_filtracioncapahemirreductora.as_view()
+
+class mamografia_exactitudtiempoexposicion(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_exactitud_tiempo_exposicion(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_exactitud_tiempo_exposicion = mamografia_exactitudtiempoexposicion.as_view()
+
+class mamografia_repetibilidadtiempoexposicion(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_repetibilidad_tiempo_exposicion(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_repetibilidad_tiempo_exposicion = mamografia_repetibilidadtiempoexposicion.as_view()
+
+class mamografia_repetibilidadcae(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_repetibilidad_cae(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6],data_entrante[7],data_entrante[8])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_repetibilidad_cae = mamografia_repetibilidadcae.as_view()
+
+class mamografia_compensacioncaeespesorcomposiciónmama(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_compensacion_cae_espesor_composición_mama(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_compensacion_cae_espesor_composición_mama = mamografia_compensacioncaeespesorcomposiciónmama.as_view()
+
+class mamografiarepetibilidadrendimiento(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_repetibilidad_rendimiento(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_repetibilidad_rendimiento = mamografiarepetibilidadrendimiento.as_view()
+
+class mamografia_linealidadrendimientocargatubo(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_linealidad_rendimiento_carga_tubo(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_linealidad_rendimiento_carga_tubo = mamografia_linealidadrendimientocargatubo.as_view()
+
+class mamografia_fuerzacompresipnatenuacipncompresor(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_fuerza_compresion_atenuacion_compresor(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_fuerza_compresion_atenuacion_compresor = mamografia_fuerzacompresipnatenuacipncompresor.as_view()
+
+class mamografia_exactitudfuerzacompresion(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_exactitud_fuerza_compresion(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_exactitud_fuerza_compresion = mamografia_exactitudfuerzacompresion.as_view()
+
+class mamografia_resolucionespacial(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_resolucion_espacial(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_resolucion_espacial = mamografia_resolucionespacial.as_view()
+
+class mamografia_visibilidadpequenosobjetosmicrocalcificaciones(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_visibilidad_pequenos_objetos_microcalcificaciones(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_visibilidad_pequenos_objetos_microcalcificaciones = mamografia_visibilidadpequenosobjetosmicrocalcificaciones.as_view()
+
+class mamografia_perdidaimagenparedtorax(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_perdida_imagen_pared_torax(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_perdida_imagen_pared_torax = mamografia_perdidaimagenparedtorax.as_view()
+
+class mamografia_uniformidadimagen(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_uniformidad_imagen(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_uniformidad_imagen = mamografia_uniformidadimagen.as_view()
+
+class mamografia_artefactoscr(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_artefactos_cr(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_artefactos_cr = mamografia_artefactoscr.as_view()
+
+class mamografia_artefactosverificacionelementosdefectuososdetectordr(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr = mamografia_artefactosverificacionelementosdefectuososdetectordr.as_view()
+
+class mamografia_dosissuperficiemama(View):
+    def get(self, request,**kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = mamografia_dosis_superficie_mama(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+
+view_mamografia_dosis_superficie_mama = mamografia_dosissuperficiemama.as_view()
+
+
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND
     default_detail = ({ 'response_code': '404', 'response': status_code, 'message': 'No se encontraron registros', })

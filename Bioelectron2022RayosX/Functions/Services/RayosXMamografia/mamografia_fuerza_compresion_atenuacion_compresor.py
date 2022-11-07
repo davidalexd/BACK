@@ -1,6 +1,7 @@
 from Functions.Services.valor_absoluto import valor_absoluto
+from Functions.Services.validacion import validacion
 
-def mamografia_fuerza_compresión_atenuación_compresor(element_1=[0],element_2=[0]):
+def mamografia_fuerza_compresion_atenuacion_compresor(element_1=[0],element_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia_1 = True
     tolerancia_2 = True
@@ -10,7 +11,7 @@ def mamografia_fuerza_compresión_atenuación_compresor(element_1=[0],element_2=
     else:
         tolerancia_1 = False
 
-    if(element_2[0]>150 and element_2[0]<200
+    if(element_2[0]>150 and element_2[0]<200):
         tolerancia_2 = True
     else:
         tolerancia_2 = False
@@ -35,4 +36,5 @@ def mamografia_fuerza_compresión_atenuación_compresor(element_1=[0],element_2=
         ,"tolerancia":"",
         "estado":estado
         }
+    return resultado
     
