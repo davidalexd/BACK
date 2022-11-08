@@ -18,7 +18,7 @@ def general_dosis_superficie_paciente(element_1=[0],element_2=[0]):
             {
                 "parametros":"",
                 "resultado":str(redondear)+" mGy",
-                "condicion":tolerancia
+                "estado":tolerancia
             }
         ],
         "tolerancia":"0.4 mGy ",

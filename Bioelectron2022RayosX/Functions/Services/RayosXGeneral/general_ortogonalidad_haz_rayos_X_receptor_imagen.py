@@ -1,3 +1,5 @@
+from Functions.Services.validacion import validacion
+
 def general_ortogonalidad_haz_rayos_X_receptor_imagen(element=[0]):
     # element = Valor de Angulación: 
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -10,6 +12,18 @@ def general_ortogonalidad_haz_rayos_X_receptor_imagen(element=[0]):
     else:
         toleracia  = False
 
-    resultado = {"data":[{"parametros":"","resultado":redondear,"condicion":toleracia},],"tolerancia":"El ángulo que forman el eje central del haz de rayos X y el plano del receptor de imagen no deberá desviarse de los 90° más de 1.5°"}
+    estado = validacion([toleracia])
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":redondear,
+                "estado":toleracia
+            }
+        ],
+        "tolerancia":"El ángulo que forman el eje central del haz de rayos X y el plano del receptor de imagen no deberá desviarse de los 90° más de 1.5°",
+        "estado":estado
+        }
     
     return resultado

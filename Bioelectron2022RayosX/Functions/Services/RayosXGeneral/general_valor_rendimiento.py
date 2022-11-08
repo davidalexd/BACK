@@ -1,4 +1,5 @@
 from Functions.Services.promedio import promedio
+from Functions.Services.validacion import validacion
 
 def general_valor_rendimiento(element_1=[0],attributes=[0],element_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -13,6 +14,18 @@ def general_valor_rendimiento(element_1=[0],attributes=[0],element_2=[0]):
     else:
         tolerancia = False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+" mGy/mAs","condicion":tolerancia,"tolerancia":"De modo orientativo, a 80 kV y con una filtración estimada entre 2.5 y 5 mmAl, el rendimiento estará entre 30 y 65 uGy/mAs a 1 m del foco"}],"tolerancia":"De modo orientativo, a 80 kV y con una filtración estimada entre 2.5 y 5 mmAl, el rendimiento estará entre 30 y 65 uGy/mAs a 1 m del foco"}
+    estado = validacion([tolerancia])
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+" mGy/mAs",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"De modo orientativo, a 80 kV y con una filtración estimada entre 2.5 y 5 mmAl, el rendimiento estará entre 30 y 65 uGy/mAs a 1 m del foco",
+        "estado":estado
+        }
 
     return resultado

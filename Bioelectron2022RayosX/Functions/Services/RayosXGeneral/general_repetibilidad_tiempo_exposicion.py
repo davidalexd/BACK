@@ -1,5 +1,6 @@
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.promedio import promedio
+from Functions.Services.validacion import validacion
 
 
 def general_repetibilidad_tiempo_exposicion(attributes=[0]):
@@ -10,6 +11,18 @@ def general_repetibilidad_tiempo_exposicion(attributes=[0]):
     redondear = round(operacion*100,2)
     tolerancia=True
     
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Coeficiente de variación < 10% "}
+    estado = validacion([tolerancia])
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+"%",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Coeficiente de variación < 10% ",
+        "estado":estado
+        }
 
     return resultado
