@@ -3,9 +3,10 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
+from rest_framework import generics
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-from User.serializer import CustomTokenObtainPairSerializer, CustomUserSerializer
+from User.serializer import CustomTokenObtainPairSerializer, CustomUserSerializer,UserSerializer
 from User.models import User
 
 class Login(TokenObtainPairView):
@@ -32,6 +33,10 @@ class Login(TokenObtainPairView):
             return Response({'error': 'Contraseña o nombre de usuario incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'error': 'Contraseña o nombre de usuario incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
 
+class ProfileView(generics.RetrieveAPIView):
+    serializer_class = CustomUserSerializer
+    def get_object(self):
+        return self.request.user
 
 class Logout(GenericAPIView):
     def post(self, request, *args, **kwargs):
