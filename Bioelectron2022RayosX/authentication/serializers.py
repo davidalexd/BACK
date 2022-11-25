@@ -18,10 +18,10 @@ class LogoutSerializer(serializers.Serializer):
 
     def save(self,**kwargs):
         try:
-            # RefreshToken(self.token).blacklist()
-            access_token = OutstandingToken.objects.filter(token=self.token)
-            access_token[0].expires_at = timezone.now()
-            access_token[0].save()
+            RefreshToken(self.token).blacklist()
+            # access_token = OutstandingToken.objects.filter(token=self.token)
+            # access_token[0].expires_at = timezone.now()
+            # access_token[0].save()
         except TokenError:
             return self.fail('bad_token')
             
