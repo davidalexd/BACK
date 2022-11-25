@@ -14,6 +14,7 @@ def fluoroscopia_distorsion_integral(element_1=[0],element_2=[0],element_3=[0]):
 
     estado = validacion([tolerancia])
 
+
     resultado = {
         "condicion":"",
         "data":[

@@ -15,6 +15,7 @@ def fluoroscopia_alineacion_rayos_x_haz_luminoso(attribute=[0],element=[0]):
     else:
         tolerancia = False
 
+
     estado = validacion([tolerancia])
 
     resultado = {

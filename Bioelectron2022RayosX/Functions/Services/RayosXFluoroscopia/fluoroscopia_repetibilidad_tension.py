@@ -18,6 +18,7 @@ def fluoroscopia_repetibilidad_tension(attribute_1=[0],attribute_2=[0],attribute
     else:
         tolerancia = False
 
+
     estado = validacion([tolerancia])
 
     resultado = {

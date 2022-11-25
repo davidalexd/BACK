@@ -16,6 +16,7 @@ def fluoroscopia_tamano_campo_entrada_detector_imagen(attributes_1=[0],attribute
         else:
             tolerancia = False
 
+
         redondear = round(valor_resultante,2)
         validar.append(tolerancia)
         Uc.append({

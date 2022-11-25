@@ -31,7 +31,7 @@ def fluoroscopia_variacion_rendimiento_carga(attributes_1=[0],attributes_2=[0],a
         "data":[
             {
                 "parametros":"",
-                "resultado":redondear+"%",
+                "resultado":str(redondear)+"%",
                 "estado":tolerancia
             }
         ],

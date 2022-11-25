@@ -12,7 +12,7 @@ def fluoroscopia_kerma_aire_entrada_paciente(attribute_1=[0],attribute_2=[0],att
         tolerancia = True
     else:
         tolerancia = False
-
+            
     estado = validacion([tolerancia])
 
     resultado = {
@@ -21,11 +21,11 @@ def fluoroscopia_kerma_aire_entrada_paciente(attribute_1=[0],attribute_2=[0],att
         "data":[
             {
                 "parametros":"",
-                "resultado":redondeo+"mGy",
+                "resultado":str(redondeo)+"mGy",
                 "estado":tolerancia
             }
         ],
-        "tolerancia":"<"+opcion[0]+"mGy",
+        "tolerancia":"<"+str(opcion[0])+"mGy",
         "estado":estado
         }
 

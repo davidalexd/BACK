@@ -25,7 +25,7 @@ def fluoroscopia_repetibilidad_rendimiento(attribute_1=[0],attribute_2=[0],attri
         "data":[
             {
                 "parametros":"",
-                "resultado":redondear+" %",
+                "resultado":str(redondear)+" %",
                 "estado":tolerancia
             }
         ],

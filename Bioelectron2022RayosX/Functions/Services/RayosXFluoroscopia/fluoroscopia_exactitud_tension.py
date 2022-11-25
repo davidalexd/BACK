@@ -16,6 +16,7 @@ def fluoroscopia_exactitud_tension(attribute_1=[0],attribute_2=[0],attribute_3=[
                 tolerancia = True
         else:
                 tolerancia = False
+           
                 
         estado = validacion([tolerancia])
 

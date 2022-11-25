@@ -5,22 +5,30 @@ from Functions.Services.validacion import validacion
 
 def fluoroscopia_compensacion_cae(opcion=[""],attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
-
+    operacion_3 = 0
     prom_3 = promedio([attribute_1[0],attribute_2[0],attribute_3[0]])
 
-
+            
     prom_1= promedio([attribute_1[1],attribute_2[1],attribute_3[1]])
-    operacion_1 = (float(attribute_1[0])-prom_1)/float(attribute_1[0])
-
     prom_2 = promedio([attribute_1[2],attribute_2[2],attribute_3[2]])
-    operacion_2 = (float(attribute_1[0])-prom_2)/float(attribute_1[0])
+
+    if(float(attribute_1[0])==0):
+        operacion_1 = 0
+        operacion_2 = 0
+    else:
+        operacion_1 = (float(attribute_1[0])-prom_1)/float(attribute_1[0])
+        operacion_2 = (float(attribute_1[0])-prom_2)/float(attribute_1[0])
 
 
+    
     if(opcion[0]=="Medidas Indice de Exposicion"):
         operacion_3 = prom_3-prom_2
     else:
-        operacion_3 = (prom_3-prom_2)*100/prom_3
-
+        if(prom_3==0):
+            operacion_3=0
+        else:
+            operacion_3 = (prom_3-prom_2)*100/prom_3
+        
     redondear_1 = round(operacion_1,2)
     redondear_2 = round(operacion_2,2)
     redondear_3 = round(operacion_3,2)
@@ -82,7 +90,7 @@ def fluoroscopia_compensacion_cae(opcion=[""],attribute_1=[0],attribute_2=[0],at
                 "estado":tolerancia_3
             }
         ],
-        "tolerancia":"Desviación ± "+tolerancia_a_1+"%",
+        "tolerancia":"Desviación ± "+str(tolerancia_a_1)+"%",
         "estado":estado
         }
 
