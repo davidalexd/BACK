@@ -1,5 +1,5 @@
 from Functions.Services.maxima_desviacion_absoluta_procentual import maxima_desviacion_absoluta_procentual
-from Functions.Services.maxima_desviacion_absoluta_procentual import maxima_desviacion_absoluta_procentual
+from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.validacion import validacion
 
 def mamografia_uniformidad_imagen(attribute_1=[0],attribute_2=[0],attribute_3=[0]):
@@ -21,23 +21,23 @@ def mamografia_uniformidad_imagen(attribute_1=[0],attribute_2=[0],attribute_3=[0
         tolerancia_2 = False
 
             
-    estado = validacion([tolerancia])
+    estado = validacion([tolerancia_1,tolerancia_2])
 
     resultado = {
         "condicion":"",
         "data":[
             {
                 "parametros":"",
-                "resultado":maxDesbPrc_1+" %",
-                "estado":tolerancia
+                "resultado":"VMP = "+maxDesbPrc_1+" %",
+                "estado":tolerancia_1
             },
             {
                 "parametros":"",
-                "resultado":maxDesbPrc_2+" %",
-                "estado":tolerancia
+                "resultado":"RSR = "+maxDesbPrc_2+" %",
+                "estado":tolerancia_2
             },
         ]
-        ,"tolerancia":"",
+        ,"tolerancia":"Desviación máxima VMP ≤ ±15%, Desviación máxima RSR ≤ ±20%.",
         "estado":estado
         }
     

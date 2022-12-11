@@ -12,6 +12,7 @@ def fluoroscopia_ortogonalidad_haz_rayos_x_receptor_imagen(element):
         
     estado = validacion([tolerancia])
 
+
     resultado = {
         "condicion":"",
         "data":[

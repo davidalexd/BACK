@@ -1,6 +1,6 @@
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.promedio import promedio
-
+from Functions.Services.validacion import validacion
 
 def general_repetibilidad_tension(attributes=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -15,6 +15,18 @@ def general_repetibilidad_tension(attributes=[0]):
     else:
         tolerancia=False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Coeficiente de variación < 5%. "}
+    estado = validacion([tolerancia])
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+"%",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Coeficiente de variación < 5%. ",
+        "estado":estado
+        }
 
     return resultado

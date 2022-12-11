@@ -23,4 +23,5 @@ def mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr(opcion=
         ,"tolerancia":"SIN ARTEFACTOS",
         "estado":estado
         }
-    
+        
+    return resultado

@@ -14,12 +14,13 @@ def mamografia_distancia_foco_película_detector_imagen(element=[0]):
 
     estado = validacion([tolerancia])
 
+    print(tolerancia)
     resultado = {
         "condicion":"",
         "data":[
             {
                 "parametros":"",
-                "resultado":redondear+" cm",
+                "resultado":str(redondear)+" cm",
                 "estado":tolerancia
             },
         ]
@@ -27,5 +28,4 @@ def mamografia_distancia_foco_película_detector_imagen(element=[0]):
         "tolerancia":"≥60 cm",
         "estado":estado
         }
-    
     return resultado

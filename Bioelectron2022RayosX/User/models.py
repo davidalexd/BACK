@@ -5,25 +5,27 @@ from simple_history.models import HistoricalRecords
 from django.contrib.auth.models import Group
 
 class UserManager(BaseUserManager):
-    def _create_user(self, username, email, name,last_name, password, is_staff, is_superuser, **extra_fields):
-        user = self.model(
-            username = username,
-            email = email,
-            name = name,
-            last_name = last_name,
-            is_staff = is_staff,
-            is_superuser = is_superuser,
-            **extra_fields
-        )
+
+    def create_user(self, username, email, password=None):
+        if username is None:
+            raise TypeError('Users should have a username')
+        if email is None:
+            raise TypeError('Users should have a Email')
+
+        user = self.model(username=username, email=self.normalize_email(email))
         user.set_password(password)
-        user.save(using=self.db)
+        user.save()
+        return 
+
+    def create_superuser(self, username, email, password=None):
+        if password is None:
+            raise TypeError('Password should not be none')
+
+        user = self.create_user(username, email, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
         return user
-
-    def create_user(self, username, email, name,last_name, password=None, **extra_fields):
-        return self._create_user(username, email, name,last_name, password, False, False, **extra_fields)
-
-    def create_superuser(self, username, email, name,last_name, password=None, **extra_fields):
-        return self._create_user(username, email, name,last_name, password, True, True, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length = 255, unique = True)
@@ -32,7 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField('Apellidos', max_length = 255, blank = True, null = True)
     image = models.ImageField('Imagen de perfil', upload_to='perfil/', max_length=255, null=True, blank = True)
     is_active = models.BooleanField(default = True)
-    is_staff = models.BooleanField(default = False)
+    is_staff = models.BooleanField(default = True)
     historical = HistoricalRecords()
     objects = UserManager()
 

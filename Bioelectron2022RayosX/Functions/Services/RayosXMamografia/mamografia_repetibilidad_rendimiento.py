@@ -1,20 +1,25 @@
-from Functions.Services.valor_maximo import valor_maximo
+from Functions.Services.maxima_desviacion_absoluta_procentual import maxima_desviacion_absoluta_procentual
+from Functions.Services.maxima_desviacion_absoluta import maxima_desviacion_absoluta
 from Functions.Services.validacion import validacion
 
-def mamografia_repetibilidad_rendimiento(attribute=[0],attribute_1=[0],attribute_2=[0],attribute_3=[0]):
+def mamografia_repetibilidad_rendimiento(attribute_1=[0],attribute_2=[0],attribute_3=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia = True
     Uc = []
 
-    for x in range(len(attribute)):
-        prom = promedio([attribute_1[x],attribute_2[x],attribute_3[x]])
-        valor = float(attribute[x])/prom
-        Uc.append(valor)
+    for x in range(len(attribute_1)):
+        devPrc = maxima_desviacion_absoluta_procentual([attribute_1[x],attribute_2[x],attribute_3[x]])
+        Uc.append(devPrc)
     
-    max = valor_maximo(Uc)
+    maxDesvAbs = maxima_desviacion_absoluta(Uc)
 
-    redondear = round(max,2)
-   
+    redondear = round(maxDesvAbs,2)
+
+    if(redondear<=5):
+        tolerancia = True
+    else:
+        tolerancia= False
+
     estado = validacion([tolerancia]) 
 
     
@@ -23,11 +28,11 @@ def mamografia_repetibilidad_rendimiento(attribute=[0],attribute_1=[0],attribute
         "data":[
             {
                 "parametros":"",
-                "resultado":str(redondear)+" µGy/mAs",
+                "resultado":str(redondear)+" %",
                 "estado":tolerancia
             }
         ],
-        "tolerancia":"",
+        "tolerancia":"≤5%",
         "estado":estado
         }
 

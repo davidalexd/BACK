@@ -1,5 +1,7 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.valor_absoluto import valor_absoluto
+from Functions.Services.validacion import validacion
+
 def general_repetibilidad_cae_1(attribute=[0],element=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     prom = promedio(attribute)
@@ -14,6 +16,18 @@ def general_repetibilidad_cae_1(attribute=[0],element=[0]):
     else:
         tolerancia = False
     
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"≤± 20"}
+    estado = validacion([tolerancia])
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+"%",
+                "condicion":tolerancia
+            } 
+        ],
+        "tolerancia":"≤± 20",
+        "estado":estado
+        }
 
     return resultado

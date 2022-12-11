@@ -1,12 +1,11 @@
 from django.contrib.auth import authenticate
-from rest_framework import status
-from rest_framework.generics import GenericAPIView
+from rest_framework import status,permissions
 from rest_framework.response import Response
+from .serializers import LogoutSerializer
 
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import generics
 from rest_framework_simplejwt.views import TokenObtainPairView
 from User.serializer import CustomTokenObtainPairSerializer, CustomUserSerializer
-from User.models import User
 
 class Login(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
@@ -32,11 +31,19 @@ class Login(TokenObtainPairView):
             return Response({'error': 'Contraseña o nombre de usuario incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'error': 'Contraseña o nombre de usuario incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
 
+class ProfileView(generics.RetrieveAPIView):
+    serializer_class = CustomUserSerializer
+    def get_object(self):
+        return self.request.user
 
-class Logout(GenericAPIView):
+class Logout(generics.GenericAPIView):
+    serializer_class = LogoutSerializer
+    permission_classes = (permissions.IsAuthenticated,)
     def post(self, request, *args, **kwargs):
-        user = User.objects.filter(id=request.data.get('user', 0))
-        if user.exists():
-            RefreshToken.for_user(user.first())
+        try:
+            serializer = self.serializer_class(data=request.data)
+            serializer.is_valid(raise_exception = True)
+            serializer.save()
             return Response({'message': 'Sesión cerrada correctamente.'}, status=status.HTTP_200_OK)
-        return Response({'error': 'No existe este usuario.'}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({'error': 'No existe este usuario.'}, status=status.HTTP_400_BAD_REQUEST)

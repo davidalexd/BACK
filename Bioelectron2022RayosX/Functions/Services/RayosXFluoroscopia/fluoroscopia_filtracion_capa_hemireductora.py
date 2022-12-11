@@ -18,6 +18,7 @@ def fluoroscopia_filtracion_capa_hemireductora(attributes=[0],element=[0]):
         else:
                 tolerancia=False
                 
+                
         estado = validacion([tolerancia])
         resultado = {
                 "condicion":"",

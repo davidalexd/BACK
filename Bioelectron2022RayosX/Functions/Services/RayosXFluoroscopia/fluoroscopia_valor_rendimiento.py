@@ -4,6 +4,7 @@ from Functions.Services.validacion import validacion
 
 def fluoroscopia_valor_rendimiento(attribute_1=[0],attribute_2=[0],attribute_3=[0],element_1=[0],attribute_4=[0]):
         resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
+
         tolerancia = True
         prom = promedio([attribute_1[0],attribute_2[0],attribute_3[0]])
         operacion = ((prom)*(float(element_1[0])**2))/float(attribute_4[0])

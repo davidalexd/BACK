@@ -115,7 +115,7 @@ departamentos_eliminar_view = DepartamentosEliminarAPIView.as_view()
 
 class AreasListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
     serializer_class = AreasSerializer
-    def get_queryset(self):        
+    def get_queryset(self):
         queryset = AreasModel.objects.all()
         if not queryset:
             raise ValidationError

@@ -6,6 +6,10 @@ from django import template
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
+def error(request):
+    context = {'segment': 'error'}
+    html_template = loader.get_template('home/page-403.html')
+    return HttpResponse(html_template.render(context, request))
 
 def index(request):
     context = {'segment': 'index'}

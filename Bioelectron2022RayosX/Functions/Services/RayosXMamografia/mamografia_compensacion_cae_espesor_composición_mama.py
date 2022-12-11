@@ -1,6 +1,7 @@
 from Functions.Services.validacion import validacion
 from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.mediciones import mediciones
+from Functions.Services.raiz import raiz
 
 def mamografia_compensacion_cae_espesor_composición_mama(element_1=[0],element_2=[0],attribute=[0],attribute_1=[0],attribute_2=[0],attribute_3=[0],attribute_4=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -35,7 +36,7 @@ def mamografia_compensacion_cae_espesor_composición_mama(element_1=[0],element_
     resultado = {
         "condicion":"",
         "data":Uc,
-        ,"tolerancia":"",
+        "tolerancia":"Para cada espesor, desviación entre la RCR medida y la obtenida en las pruebas iniciales < 10%.",
         "estado":estado
         }
     

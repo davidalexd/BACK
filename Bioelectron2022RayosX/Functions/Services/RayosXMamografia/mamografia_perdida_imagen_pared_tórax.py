@@ -1,6 +1,6 @@
 from Functions.Services.validacion import validacion
 
-def mamografia_perdida_imagen_pared_tórax(element=[0]):
+def mamografia_perdida_imagen_pared_torax(element=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     tolerancia = True
 
@@ -17,11 +17,11 @@ def mamografia_perdida_imagen_pared_tórax(element=[0]):
         "data":[
             {
                 "parametros":"",
-                "resultado":float(element[0])+" ,,",
+                "resultado":element[0]+"mm",
                 "estado":tolerancia
             },
         ]
-        ,"tolerancia":"≤±5%",
+        ,"tolerancia":"Anchura de la imagen perdida ≤±5mm",
         "estado":estado
         }
     

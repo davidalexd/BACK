@@ -1,6 +1,6 @@
 from Functions.Services.validacion import validacion
 
-def fluoroscopia_tamano_campo_entrada_detector_imagen(attributes_1,attributes_2):
+def fluoroscopia_tamano_campo_entrada_detector_imagen(attributes_1=[0],attributes_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":"El ángulo que forman el eje central del haz de rayos X y el plano del receptor de imagen no deberá desviarse de los 90° más de 1.5°."}
     Uc = []
     validar = []
@@ -16,10 +16,11 @@ def fluoroscopia_tamano_campo_entrada_detector_imagen(attributes_1,attributes_2)
         else:
             tolerancia = False
 
+
         redondear = round(valor_resultante,2)
         validar.append(tolerancia)
         Uc.append({
-            "parametros":attributes_1[x]+" cm",
+            "parametros":str(attributes_1[x])+" cm",
             "resultado":redondear,
             "estado":tolerancia
         })

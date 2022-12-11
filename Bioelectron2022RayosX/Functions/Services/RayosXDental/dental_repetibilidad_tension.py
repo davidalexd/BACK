@@ -2,8 +2,8 @@ from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
 
-def dental_repetibilidad_tension(element,attribute=[0]):
-    # llama a TENSION PROMEDIO (kV)
+def dental_repetibilidad_tension(element=[0],attribute=[0]):
+    # llama a TENSION PROMEDIO (kV)   
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     desvm = desviacion_estandar_m(attribute)
     prom = promedio(attribute)

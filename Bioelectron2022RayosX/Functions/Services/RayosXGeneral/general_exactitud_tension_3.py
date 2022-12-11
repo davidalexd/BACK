@@ -1,3 +1,5 @@
+
+from Functions.Services.validacion import validacion
 def general_exactitud_tension_3(element_1=[0],element_2=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
     operacion = (float(element_2[0])-float(element_1[0]))/float(element_1[0])
@@ -9,6 +11,19 @@ def general_exactitud_tension_3(element_1=[0],element_2=[0]):
     else:
         tolerancia=False
         
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"%","condicion":tolerancia}],"tolerancia":"Desviaciones con respecto al valor nominal < ± 10% "}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+"%",
+                "estado":tolerancia
+            }
+        ],"tolerancia":"Desviaciones con respecto al valor nominal < ± 10% ",
+        "estado":estado
+        }
+
 
     return resultado

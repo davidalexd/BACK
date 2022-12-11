@@ -1,14 +1,14 @@
 from rest_framework import status, authentication, exceptions
 from rest_framework.authentication import get_authorization_header
 from .authentication import ExpiringTokenAuthentication
-from rest_framework import permissions
+from rest_framework.permissions import IsAdminUser
 from authentication.permissions import IsStaffEditorPermission
 
 # from rest_framework import permissions
 
 class StaffEditorPermissionMixin(authentication.BaseAuthentication):
     user = None
-    permission_classes = [permissions.IsAdminUser,IsStaffEditorPermission]
+    permission_classes = [IsAdminUser,IsStaffEditorPermission]
     def get_user(self,request):
         token = get_authorization_header(request).split()
         if token:
@@ -16,14 +16,12 @@ class StaffEditorPermissionMixin(authentication.BaseAuthentication):
                 token = token[1].decode()
             except:
                 return None            
-        
             token_expire = ExpiringTokenAuthentication()
+
             user = token_expire.authenticate_credentials(token)
-            
             if user != None:
                 self.user = user
                 return user
-        
         return None
 
     def authenticate(self, request):

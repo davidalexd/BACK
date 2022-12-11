@@ -1,5 +1,5 @@
 from Functions.Services.promedio import promedio
-
+from Functions.Services.validacion import validacion
 
 def general_filtracion(attributes=[0]):
     resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
@@ -12,6 +12,19 @@ def general_filtracion(attributes=[0]):
     else:
         tolerancia=False
 
-    resultado = {"data":[{"parametros":"","resultado":str(redondear)+"mmAl","condicion":tolerancia}],"tolerancia":"Filtración > 2.5 mm equivalentes de aluminio"}
+    estado = validacion([tolerancia])
+
+    resultado = {
+        "condicion":"",
+        "data":[
+            {
+                "parametros":"",
+                "resultado":str(redondear)+"mmAl",
+                "estado":tolerancia
+            }
+        ],
+        "tolerancia":"Filtración > 2.5 mm equivalentes de aluminio",
+        "estado":estado
+        }
 
     return resultado
