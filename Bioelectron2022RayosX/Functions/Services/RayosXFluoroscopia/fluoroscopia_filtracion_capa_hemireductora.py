@@ -1,36 +1,51 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
 
-def fluoroscopia_filtracion_capa_hemireductora(attributes=[0],element=[0]):
-        resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
-        prom = promedio(attributes)
-        redondear = round(prom,2)
-        tolerancia=True
-        tolerancia_1=2.9
-
-        if(float(element[0])==70):
-                tolerancia_1=2.5
-        else:
+def fluoroscopia_filtracion_capa_hemireductora(attributes,element):
+        try:    
+                resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
+                prom = promedio(attributes)
+                redondear = round(prom,2)
+                tolerancia=True
                 tolerancia_1=2.9
 
-        if(redondear>tolerancia_1):
-                tolerancia=True
-        else:
-                tolerancia=False
+                if(float(element[0])==70):
+                        tolerancia_1=2.5
+                else:
+                        tolerancia_1=2.9
+
+                if(redondear>tolerancia_1):
+                        tolerancia=True
+                else:
+                        tolerancia=False
+                        
+                        
+                estado = validacion([tolerancia])
+                resultado = {
+                        "condicion":"",
+                        "data":[
+                                {
+                                        "parametros":"",
+                                        "resultado":str(redondear)+"mmAl",
+                                        "estado":tolerancia
+                                }
+                        ],
+                                "tolerancia":"> 2.5 mmAl (a 70 kVp) y >2.9 mmAl (a 80 kVp)",
+                                "estado":estado
+                        }
                 
-                
-        estado = validacion([tolerancia])
-        resultado = {
+                return resultado
+        except Exception as e:
+                resultado = {
                 "condicion":"",
                 "data":[
                         {
-                                "parametros":"",
-                                "resultado":str(redondear)+"mmAl",
-                                "estado":tolerancia
+                        "parametros":"",
+                        "resultado":"",
+                        "estado":""
                         }
                 ],
-                        "tolerancia":"> 2.5 mmAl (a 70 kVp) y >2.9 mmAl (a 80 kVp)",
-                        "estado":estado
+                "tolerancia":"",
+                "estado":"No Aplica"
                 }
-        
-        return resultado
+                return resultado

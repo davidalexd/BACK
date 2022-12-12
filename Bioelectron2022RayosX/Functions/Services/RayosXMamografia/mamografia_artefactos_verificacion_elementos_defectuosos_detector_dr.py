@@ -1,27 +1,41 @@
 from Functions.Services.validacion import validacion
 
-def mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr(opcion=[""]):
-    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
-    tolerancia = True
-
-    if(opcion[0] == "SIN ARTEFACTOS"):
+def mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr(opcion):
+    try:
         tolerancia = True
-    else:
-        tolerancia = False
 
-    estado = validacion([tolerancia])
+        if(opcion[0] == "SIN ARTEFACTOS"):
+            tolerancia = True
+        else:
+            tolerancia = False
 
-    resultado = {
-        "condicion":"",
-        "data":[
-            {
-                "parametros":"",
-                "resultado":opcion[0],
-                "estado":tolerancia
-            },
-        ]
-        ,"tolerancia":"SIN ARTEFACTOS",
-        "estado":estado
-        }
-        
-    return resultado
+        estado = validacion([tolerancia])
+
+        resultado = {
+            "condicion":"",
+            "data":[
+                {
+                    "parametros":"",
+                    "resultado":opcion[0],
+                    "estado":tolerancia
+                },
+            ]
+            ,"tolerancia":"SIN ARTEFACTOS",
+            "estado":estado
+            }
+            
+        return resultado
+    except Exception as e:
+                        resultado = {
+                        "condicion":"",
+                        "data":[
+                                {
+                                "parametros":"",
+                                "resultado":"",
+                                "estado":""
+                                }
+                        ],
+                        "tolerancia":"",
+                        "estado":"No Aplica"
+                        }
+                        return resultado

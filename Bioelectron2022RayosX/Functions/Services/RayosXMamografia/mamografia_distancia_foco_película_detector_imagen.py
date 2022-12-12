@@ -1,31 +1,45 @@
 from Functions.Services.validacion import validacion
 
-def mamografia_distancia_foco_película_detector_imagen(element=[0]):
-    resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
+def mamografia_distancia_foco_película_detector_imagen(element):
+    try:
 
-    redondear = round(float(element[0]),2)
-    tolerancia = True
-    
-    if(redondear>=60):
+        redondear = round(float(element[0]),2)
         tolerancia = True
-    else:
-        tolerancia= False
+        
+        if(redondear>=60):
+            tolerancia = True
+        else:
+            tolerancia= False
 
 
-    estado = validacion([tolerancia])
+        estado = validacion([tolerancia])
 
-    print(tolerancia)
-    resultado = {
-        "condicion":"",
-        "data":[
-            {
-                "parametros":"",
-                "resultado":str(redondear)+" cm",
-                "estado":tolerancia
-            },
-        ]
-        ,
-        "tolerancia":"≥60 cm",
-        "estado":estado
-        }
-    return resultado
+        print(tolerancia)
+        resultado = {
+            "condicion":"",
+            "data":[
+                {
+                    "parametros":"",
+                    "resultado":str(redondear)+" cm",
+                    "estado":tolerancia
+                },
+            ]
+            ,
+            "tolerancia":"≥60 cm",
+            "estado":estado
+            }
+        return resultado
+    except Exception as e:
+                        resultado = {
+                        "condicion":"",
+                        "data":[
+                                {
+                                "parametros":"",
+                                "resultado":"",
+                                "estado":""
+                                }
+                        ],
+                        "tolerancia":"",
+                        "estado":"No Aplica"
+                        }
+                        return resultado
