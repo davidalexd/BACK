@@ -210,12 +210,8 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-
-STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
-STATIC_URL = 'static/'
-
-STATICFILES_DIRS = (
-    os.path.join(CORE_DIR, 'apps/static'),
-)
+STATIC_URL = '/static/'
+MEDIA_URL = "/storage/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'storage')
 
 

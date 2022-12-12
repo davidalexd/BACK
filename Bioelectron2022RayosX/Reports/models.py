@@ -59,6 +59,10 @@ class ReportsReporteModel(BaseModel):
 
     formato = models.ManyToManyField(ReportsFormatsModel,through="Rpt_Frt_Model",through_fields=('reporte', 'formato'))
 
+    image_1 = models.ImageField(upload_to="reports/",blank='',default='');
+    image_2 = models.ImageField(upload_to="reports/",blank='',default='');
+    image_3 = models.ImageField(upload_to="reports/",blank='',default='');
+    
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        

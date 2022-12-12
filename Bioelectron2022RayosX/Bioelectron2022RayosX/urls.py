@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include,re_path
-from django.conf import settings
 from django.views.static import serve
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -48,20 +49,8 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     # path('', admin.site.urls),
-    
-
-
-
-
-
     # path('', views.index),
     # path('report_create/', views.report_create),
     # path('login/', views.login),
     
-]
-
-urlpatterns += [
-    re_path(r'^media/(?P<path>.*)$', serve, {
-        'document_root': settings.MEDIA_ROOT,
-    }),
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
