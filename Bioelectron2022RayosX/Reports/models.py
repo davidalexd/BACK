@@ -59,8 +59,11 @@ class ReportsReporteModel(BaseModel):
 
     formato = models.ManyToManyField(ReportsFormatsModel,through="Rpt_Frt_Model",through_fields=('reporte', 'formato'))
 
+    title_image_1 = models.CharField("Title image 1", max_length=255,null=True,db_column="rpt_title_image_1");
     image_1 = models.ImageField(upload_to="reports/",blank='',default='');
+    title_image_2 = models.CharField("Title image 2", max_length=255,null=True,db_column="rpt_title_image_2");
     image_2 = models.ImageField(upload_to="reports/",blank='',default='');
+    title_image_3 = models.CharField("Title image 3", max_length=255,null=True,db_column="rpt_title_image_3");
     image_3 = models.ImageField(upload_to="reports/",blank='',default='');
     
     def save(self, *args, **kwargs):
