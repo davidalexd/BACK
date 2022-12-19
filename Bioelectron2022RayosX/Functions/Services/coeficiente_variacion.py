@@ -7,4 +7,4 @@ def coeficiente_variacion(attributes):
 
     coeficiente_variacion = desviacion_estandar/promedio
     resultado = coeficiente_variacion
-    return resultado
+    return resultadopyth
