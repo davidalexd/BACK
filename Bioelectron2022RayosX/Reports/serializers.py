@@ -224,6 +224,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
 
 
 class CertificadoReportesSerializer(serializers.ModelSerializer):
+    InformeID = serializers.IntegerField(write_only=True)
     url = serializers.HyperlinkedIdentityField(view_name='certificado-reporte-detail',lookup_field='pk')   
     detalles = serializers.SerializerMethodField(read_only = True)     
     class Meta:
@@ -232,6 +233,7 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
             'id',            
             'detalles',
             'is_enabled',
+            'InformeID',
             'created_at',
             'url',
         )
@@ -248,7 +250,13 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
         }
         return data    
 
-    def create(self, data):
-        print(data)
+    # def validate(self, attrs):
+    #     informe = attrs.get('InformeID', '')
+    #     status = attrs.get('is_enabled', '')
+    #     return attrs
 
-        
+    def create(self, validated_data):
+        obj = ReportsReporteModel.objects.get(id= validated_data['InformeID'])
+        obj.certificado = self.id
+        obj.save()
+

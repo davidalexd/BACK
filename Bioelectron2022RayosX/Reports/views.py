@@ -163,8 +163,10 @@ class CertificadosCreateApiView(StaffEditorPermissionMixin,generics.CreateAPIVie
         if not queryset:
             raise ValidationError
         return queryset
+    
     def perform_create(self, serializer):
-        instance = serializer.save()
+        data = self.request.data
+        serializer.save()
 certificados_create_view = CertificadosCreateApiView.as_view()
 
 class ValidationError(APIException):
