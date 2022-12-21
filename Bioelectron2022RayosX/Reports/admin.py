@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ReportsFormatsModel,ReportsCategoryModel,ReportsReporteModel,Frt_Cat_Model,Rpt_Frt_Model, Rpt_Secc_Model,Rpt_Prt_Model, Rpt_Varr_Model
+from .models import ReportsFormatsModel,ReportsCategoryModel,ReportsReporteModel,Frt_Cat_Model,Rpt_Frt_Model, Rpt_Secc_Model,Rpt_Prt_Model, Rpt_Varr_Model,ReportsCertificadoModel
 
 class FormatoCategoria(admin.TabularInline):
     model = Frt_Cat_Model
@@ -60,4 +60,8 @@ class ReportsReportesModel(admin.ModelAdmin):
     list_filter = ('id','formato',)
     filter_horizontal = ['formato']
 
+
+@admin.register(ReportsCertificadoModel)
+class ReportsInformesModel(admin.ModelAdmin):
+    list_display = ("id","is_enabled","created_at")
 

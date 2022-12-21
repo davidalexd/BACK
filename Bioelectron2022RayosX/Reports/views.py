@@ -1,7 +1,7 @@
 from rest_framework.exceptions import APIException,status
 
-from .models import ReportsCategoryModel, ReportsFormatsModel,ReportsReporteModel
-from .serializers import FormatosReportesSerializer,CategoriaReportesSerializer,ReporteReportesSerializer
+from .models import ReportsCategoryModel, ReportsFormatsModel,ReportsReporteModel,ReportsCertificadoModel
+from .serializers import FormatosReportesSerializer,CategoriaReportesSerializer,ReporteReportesSerializer,CertificadoReportesSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 from rest_framework import generics
 
@@ -52,8 +52,6 @@ class FormatosEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestro
         super().perform_destroy(instance)
 formatos_eliminar_view = FormatosEliminarAPIView.as_view()
 
-
-
 class CategoriasListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
     serializer_class = CategoriaReportesSerializer    
     def get_queryset(self):        
@@ -100,8 +98,6 @@ class CategoriasEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDest
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
 categorias_eliminar_view = CategoriasEliminarAPIView.as_view()
-
-
 
 class ReportesListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
     serializer_class = ReporteReportesSerializer    
@@ -150,7 +146,26 @@ class ReportesEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestro
         super().perform_destroy(instance)
 reportes_eliminar_view = ReportesEliminarAPIView.as_view()
 
+class CertificadosDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
+    serializer_class = CertificadoReportesSerializer
+    lookup_field = 'pk'
+    def get_queryset(self):
+        queryset = ReportsCertificadoModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+certificados_list_view = CertificadosDetallesAPIView.as_view()
 
+class CertificadosCreateApiView(StaffEditorPermissionMixin,generics.CreateAPIView):
+    serializer_class = CertificadoReportesSerializer  
+    def get_queryset(self):     
+        queryset = ReportsCertificadoModel.objects.all()
+        if not queryset:
+            raise ValidationError
+        return queryset
+    def perform_create(self, serializer):
+        instance = serializer.save()
+certificados_create_view = CertificadosCreateApiView.as_view()
 
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND

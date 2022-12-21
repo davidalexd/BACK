@@ -43,6 +43,7 @@ class ReportesFormatosGenericViewSet(StaffEditorPermissionMixin,mixins.ListModel
         instance = serializer.save()
     def perform_update(self, serializer):
         instance =serializer.save()
+
         
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND

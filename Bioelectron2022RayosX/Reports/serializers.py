@@ -4,12 +4,13 @@ from Operations.serializers import VariablesSerializer
 from CompanyMachine.models import MedidoresModel
 from Machine.models import SistemaModel, TuboModel
 from Customer.models import AreasModel,DepartamentoModel,OrganizacionModel
-from .models import Frt_Cat_Model, ReportsCategoryModel, ReportsFormatsModel,PruebaCalculoModel,PruebaOpcionesModel, ReportsReporteModel, Rpt_Prt_Model, Rpt_Varr_Model,SeccionesModel
+from .models import Frt_Cat_Model, ReportsCategoryModel, ReportsFormatsModel,PruebaCalculoModel,PruebaOpcionesModel, ReportsReporteModel, Rpt_Prt_Model, Rpt_Varr_Model,SeccionesModel,ReportsCertificadoModel
 from Protocol.serializers import ProtocolosSerializer,SeccionesSerializer,PruebaCalculoSerializer,PruebaOpcionesSerializer
 from Protocol.models import ProtocolsModel
 from rest_framework import serializers
 from rest_framework.reverse import reverse
-
+from datetime import timedelta
+from datetime import datetime
 
 class FormatosReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='formato-reporte-detail',lookup_field='pk')
@@ -121,7 +122,6 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
             return None
         return reverse('formato-reporte-delete',kwargs={"pk":obj.id},request=request)
 
-
 class CategoriaReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='categoria-reporte-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)
@@ -164,6 +164,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='reporte-reporte-detail',lookup_field='pk')
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
+    certificado_url = serializers.SerializerMethodField(read_only = True)
 
     formato = FormatosReportesSerializer(many=True,read_only=True)
     formato_id = serializers.PrimaryKeyRelatedField(
@@ -198,7 +199,8 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             "url",
             "edit_url",
             "delete_url",
-            "formato_id")
+            "formato_id",
+            "certificado_url")
 
     def get_edit_url(self,obj):
         request = self.context.get('request')
@@ -211,3 +213,42 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
         if request is None:
             return None
         return reverse('reporte-reporte-delete',kwargs={"pk":obj.id},request=request)
+    
+    def get_certificado_url(self,obj):
+        request = self.context.get('request')
+        if request is None:
+            return None
+        if obj.certificado is None:
+            return {'message':'Informe no evaluado','data':None,'status':False}
+        return {'message':'Certificado Aprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
+
+
+class CertificadoReportesSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='certificado-reporte-detail',lookup_field='pk')   
+    detalles = serializers.SerializerMethodField(read_only = True)     
+    class Meta:
+        model = ReportsCertificadoModel
+        fields = (
+            'id',            
+            'detalles',
+            'is_enabled',
+            'created_at',
+            'url',
+        )
+
+    def get_detalles(self,obj):
+        request = ReportsReporteModel.objects.filter(certificado = obj.id)[0]
+        data = {
+            "certificado": "Certificado Nº " + str(obj.id)+"-BIO",
+            "informe":"Informe Nº"+str(request.id)+"-"+str(request.nombre_reporte),
+            "fecha_control_calidad":request.fecha_control_calidad,
+            "ubicacion":request.datos_del_cliente['instalacion_direccion']+","+request.datos_del_cliente['instalacion_distrito']+","+request.datos_del_cliente['instalacion_provincia']+","+request.datos_del_cliente['instalacion_region']+","+request.datos_del_cliente['instalacion_ambiente'],
+            "vigencia":"Válido hasta el "+str(request.fecha_control_calidad+timedelta(days=360))+" o hasta que se realice un mantenimiento correctivo",
+            "equipo":{"sistema":request.sistema,"componente":request.componente},
+        }
+        return data    
+
+    def create(self, data):
+        print(data)
+
+        

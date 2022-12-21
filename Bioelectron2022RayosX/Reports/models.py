@@ -36,6 +36,23 @@ class ReportsFormatsModel(BaseModel):
     def __str__(self):
         return str(self.codigo_formato) + '-' + str(self.nombre_formato)
 
+
+class ReportsCertificadoModel(BaseModel):
+    id = models.BigAutoField(primary_key=True,db_column="rpi_id")
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created_at = timezone.now()        
+        return super(ReportsCertificadoModel, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ["id"]
+        db_table = 'reports_Certificado'
+    
+    def __str__(self):
+        return ' CERTIFICADO -' + str(self.id)
+
+
 class ReportsReporteModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="rpt_id")
     nombre_reporte = models.CharField("Report name",max_length=255,null=True,blank=True,db_column="rpt_name_reporte")
@@ -66,6 +83,8 @@ class ReportsReporteModel(BaseModel):
     title_image_3 = models.CharField("Title image 3", max_length=255,null=True,db_column="rpt_title_image_3")
     image_3 = models.ImageField(upload_to="reports/",blank='',default='')
     
+    certificado = models.ForeignKey(ReportsCertificadoModel,null=True,on_delete=models.CASCADE)
+
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()        
@@ -74,6 +93,13 @@ class ReportsReporteModel(BaseModel):
     class Meta:
         ordering = ["id"]
         db_table = 'reports_Reportes'
+
+
+
+
+
+
+
 
 class ReportsCategoryModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="rep_cat_id")

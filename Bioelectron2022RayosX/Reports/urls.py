@@ -15,5 +15,8 @@ urlpatterns = [
     path('ReportFormats/',views.reportes_create_view,name='reporte-reporte-list'),
     path('ReportFormats/<int:pk>/',views.reportes_list_view,name='reporte-reporte-detail'),
     path('ReportFormats/<int:pk>/update/',views.reportes_actualizar_view,name='reporte-reporte-update'),
-    path('ReportFormats/<int:pk>/delete/',views.reportes_eliminar_view,name='reporte-reporte-delete')
+    path('ReportFormats/<int:pk>/delete/',views.reportes_eliminar_view,name='reporte-reporte-delete'),
+
+    path('CertificadoFormats/created/',views.certificados_create_view,name='certificado-reporte-create'),
+    path('CertificadoFormats/<int:pk>/',views.certificados_list_view,name='certificado-reporte-detail'),
 ]
