@@ -37,6 +37,7 @@ class ReportsFormatsModel(BaseModel):
         return str(self.codigo_formato) + '-' + str(self.nombre_formato)
 
 
+
 class ReportsCertificadoModel(BaseModel):
     id = models.BigAutoField(primary_key=True,db_column="rpi_id")
 
@@ -83,7 +84,7 @@ class ReportsReporteModel(BaseModel):
     title_image_3 = models.CharField("Title image 3", max_length=255,null=True,db_column="rpt_title_image_3")
     image_3 = models.ImageField(upload_to="reports/",blank='',default='')
     
-    certificado = models.ForeignKey(ReportsCertificadoModel,null=True,on_delete=models.CASCADE)
+    certificado = models.ForeignKey(ReportsCertificadoModel,null=True,on_delete=models.CASCADE,unique=True)
 
     def save(self, *args, **kwargs):
         if not self.id:

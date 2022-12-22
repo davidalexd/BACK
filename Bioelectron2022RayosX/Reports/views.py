@@ -4,6 +4,7 @@ from .models import ReportsCategoryModel, ReportsFormatsModel,ReportsReporteMode
 from .serializers import FormatosReportesSerializer,CategoriaReportesSerializer,ReporteReportesSerializer,CertificadoReportesSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 from rest_framework import generics
+from rest_framework.response import Response
 
 class FormatosListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
     serializer_class = FormatosReportesSerializer    
@@ -156,17 +157,16 @@ class CertificadosDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAP
         return queryset
 certificados_list_view = CertificadosDetallesAPIView.as_view()
 
-class CertificadosCreateApiView(StaffEditorPermissionMixin,generics.CreateAPIView):
+class CertificadosCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIView):
     serializer_class = CertificadoReportesSerializer  
-    def get_queryset(self):     
+    def get_queryset(self):        
         queryset = ReportsCertificadoModel.objects.all()
         if not queryset:
             raise ValidationError
         return queryset
     
-    def perform_create(self, serializer):
-        data = self.request.data
-        serializer.save()
+
+
 certificados_create_view = CertificadosCreateApiView.as_view()
 
 class ValidationError(APIException):

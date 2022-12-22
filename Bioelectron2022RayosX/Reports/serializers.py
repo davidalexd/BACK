@@ -227,19 +227,9 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
     InformeID = serializers.IntegerField(write_only=True)
     url = serializers.HyperlinkedIdentityField(view_name='certificado-reporte-detail',lookup_field='pk')   
     detalles = serializers.SerializerMethodField(read_only = True)     
-    class Meta:
-        model = ReportsCertificadoModel
-        fields = (
-            'id',            
-            'detalles',
-            'is_enabled',
-            'InformeID',
-            'created_at',
-            'url',
-        )
 
     def get_detalles(self,obj):
-        request = ReportsReporteModel.objects.filter(certificado = obj.id)[0]
+        request = ReportsReporteModel.objects.get(certificado = obj.id)
         data = {
             "certificado": "Certificado Nº " + str(obj.id)+"-BIO",
             "informe":"Informe Nº"+str(request.id)+"-"+str(request.nombre_reporte),
@@ -248,15 +238,26 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
             "vigencia":"Válido hasta el "+str(request.fecha_control_calidad+timedelta(days=360))+" o hasta que se realice un mantenimiento correctivo",
             "equipo":{"sistema":request.sistema,"componente":request.componente},
         }
-        return data    
-
-    # def validate(self, attrs):
-    #     informe = attrs.get('InformeID', '')
-    #     status = attrs.get('is_enabled', '')
-    #     return attrs
+        return data  
+    
+    class Meta:
+        model = ReportsCertificadoModel
+        fields = (
+            'id',            
+            'detalles',
+            'is_enabled',
+            'created_at',
+            'url',
+            'InformeID',
+        )
 
     def create(self, validated_data):
-        obj = ReportsReporteModel.objects.get(id= validated_data['InformeID'])
-        obj.certificado = self.id
-        obj.save()
+        status = validated_data['is_enabled']
+        informe = validated_data['InformeID']        
+        certificado = ReportsCertificadoModel.objects.create(is_enabled=status)
+        obj = ReportsReporteModel.objects.get(id=informe)
+        obj.certificado = certificado
+        obj.save()  
+        return certificado   
+
 

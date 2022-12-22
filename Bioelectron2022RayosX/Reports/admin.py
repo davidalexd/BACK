@@ -43,6 +43,7 @@ class ReportsReportesModel(admin.ModelAdmin):
     list_display = (
         "id",
         "numero_de_ot",
+        "certificado",
         "fecha_control_calidad",
         "pruebas",
         "datos_del_cliente",
