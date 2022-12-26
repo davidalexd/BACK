@@ -220,8 +220,11 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             return None
         if obj.certificado is None:
             return {'message':'Informe no evaluado','data':None,'status':False}
-        return {'message':'Certificado Aprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
-
+        else:
+            if obj.certificado.is_enable is True:
+                return {'message':'Certificado Aprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
+            else:
+                return {'message':'Certificado Deshaprobado','data':None,'status':True}
 
 class CertificadoReportesSerializer(serializers.ModelSerializer):
     InformeID = serializers.IntegerField(write_only=True)
