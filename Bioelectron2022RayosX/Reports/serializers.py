@@ -226,22 +226,28 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             else:
                 return {'message':'Certificado Deshaprobado','data':None,'status':True}
 
+def json_respuestas(data):
+    return False == data[0]['resultados'][0]['resultados']['resultado']['estado']
+
 class CertificadoReportesSerializer(serializers.ModelSerializer):
     InformeID = serializers.IntegerField(write_only=True)
     url = serializers.HyperlinkedIdentityField(view_name='certificado-reporte-detail',lookup_field='pk')   
     detalles = serializers.SerializerMethodField(read_only = True)     
 
     def get_detalles(self,obj):
-        request = ReportsReporteModel.objects.get(certificado = obj.id)
-        data = {
-            "certificado": "Certificado Nº " + str(obj.id)+"-BIO",
-            "informe":"Informe Nº"+str(request.id)+"-"+str(request.nombre_reporte),
-            "fecha_control_calidad":request.fecha_control_calidad,
-            "ubicacion":request.datos_del_cliente['instalacion_direccion']+","+request.datos_del_cliente['instalacion_distrito']+","+request.datos_del_cliente['instalacion_provincia']+","+request.datos_del_cliente['instalacion_region']+","+request.datos_del_cliente['instalacion_ambiente'],
-            "vigencia":"Válido hasta el "+str(request.fecha_control_calidad+timedelta(days=360))+" o hasta que se realice un mantenimiento correctivo",
-            "equipo":{"sistema":request.sistema,"componente":request.componente},
-        }
-        return data  
+        if obj.is_enabled == True:
+            request = ReportsReporteModel.objects.get(certificado = obj.id)
+            data = {
+                "certificado": "Certificado Nº " + str(obj.id)+"-BIO",
+                "informe":"Informe Nº"+str(request.id)+"-"+str(request.nombre_reporte),
+                "fecha_control_calidad":request.fecha_control_calidad,
+                "ubicacion":request.datos_del_cliente['instalacion_direccion']+","+request.datos_del_cliente['instalacion_distrito']+","+request.datos_del_cliente['instalacion_provincia']+","+request.datos_del_cliente['instalacion_region']+","+request.datos_del_cliente['instalacion_ambiente'],
+                "vigencia":"Válido hasta el "+str(request.fecha_control_calidad+timedelta(days=360))+" o hasta que se realice un mantenimiento correctivo",
+                "equipo":{"sistema":request.sistema,"componente":request.componente},
+            }
+            return data  
+        else:
+            data = None
     
     class Meta:
         model = ReportsCertificadoModel
@@ -254,13 +260,21 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
             'InformeID',
         )
 
+
     def create(self, validated_data):
-        status = validated_data['is_enabled']
         informe = validated_data['InformeID']        
-        certificado = ReportsCertificadoModel.objects.create(is_enabled=status)
+        
         obj = ReportsReporteModel.objects.get(id=informe)
+        Uc = list(filter(json_respuestas,obj.pruebas[1]))
+        if(len(Uc)>0):
+            status = False
+        else:
+            status = True
+        certificado = ReportsCertificadoModel.objects.create(is_enabled=status)
+
+
         obj.certificado = certificado
         obj.save()  
-        return certificado   
+        return certificado  
 
 
