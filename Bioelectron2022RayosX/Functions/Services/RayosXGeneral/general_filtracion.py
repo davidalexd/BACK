@@ -19,7 +19,7 @@ def general_filtracion(attributes):
             "data":[
                 {
                     "parametros":"",
-                    "resultado":str(redondear)+"mmAl",
+                    "resultado":str(redondear)+" mmAl",
                     "estado":tolerancia
                 }
             ],

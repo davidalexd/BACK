@@ -4,9 +4,13 @@ from Functions.Services.validacion import validacion
 def dental_valor_rendimiento(element,attribute,element_1,element_2,element_3):
     try: 
         prom = promedio(attribute)
+        # dosis
         variante = float(element[0])
+        
         variante_1 = float(element_3[0])**2
+        # distancia foco detector 
         variante_2 = float(element_2[0])*float(element_1[0])
+        # corriente + tiempo de exposicion
         operacion = (prom*variante_1)/variante_2
         redondeo = round(operacion,2)
         tolerancia = True

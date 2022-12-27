@@ -21,7 +21,7 @@ def general_exactitud_tiempo_exposicion_1(element_1,element_2):
                     "estado":tolerancia
                 }
             ],
-            "tolerancia":": Desviaciones con respecto al valor nominal < ± 10% para tiempos > 20 ms ",
+            "tolerancia":"Desviaciones con respecto al valor nominal < ± 10% para tiempos > 20 ms ",
             "estado":estado
             }
 
