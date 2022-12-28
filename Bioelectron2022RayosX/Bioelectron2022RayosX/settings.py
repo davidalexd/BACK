@@ -161,7 +161,9 @@ AUTH_USER_MODEL = 'User.User'
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
+    "http://localhost:3001",
     "http://192.168.1.14:3000",
+    "http://192.168.1.14:3001",
     "http://192.168.1.249:3000",
 ]
 

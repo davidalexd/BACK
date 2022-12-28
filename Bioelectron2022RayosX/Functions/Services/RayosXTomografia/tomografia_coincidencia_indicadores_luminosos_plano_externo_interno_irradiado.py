@@ -1,6 +1,6 @@
 from Functions.Services.validacion import validacion
 
-def tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado(element_1=[0],element_2=[0]):
+def tomografia_coincidencia_indicadores_luminosos_plano_externo_interno_irradiado(element_1,element_2):
     try:
         operacion = float(element_1[0])+float(element_2[0])
         tolerancia =True
