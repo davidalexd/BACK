@@ -28,7 +28,11 @@ SECRET_KEY = 'django-insecure-8p4**!2++q*ys&cg8fh(^2pk3@_1ui#2x0un3xa!*$6t9d^@0g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['localhost', '127.0.0.1','192.168.1.14', config('SERVER', default='127.0.0.1')]
+=======
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','192.168.1.221','192.168.56.1','192.168.1.14','192.168.18.6', config('SERVER', default='127.0.0.1')]
+>>>>>>> 5206e931631c0374a547b2d69b582e1b9bf8cc86
 
 
 # Application definition
@@ -161,9 +165,14 @@ AUTH_USER_MODEL = 'User.User'
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
+<<<<<<< HEAD
     "http://192.168.1.14:3000",
+=======
+    "http://localhost:5173",
+    "http://192.168.1.221:5173",
+    "http://192.168.18.6:8000",
+>>>>>>> 5206e931631c0374a547b2d69b582e1b9bf8cc86
 ]
-
 
 DATABASES = {
     'default': {
@@ -180,7 +189,6 @@ DATABASES = {
         }
     }
 }
-
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),

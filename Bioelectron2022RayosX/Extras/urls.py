@@ -7,3 +7,4 @@ urlpatterns = [
     path('FILTERWITHDISTRITO/<request>',views.APIS_REGIONAL.get_dist_list_view,name='dpts-list'),
     path('FILTERWITHPROVINCIA/<request>',views.APIS_REGIONAL.get_prov_list_view,name='dpts-list'),
 ]
+
