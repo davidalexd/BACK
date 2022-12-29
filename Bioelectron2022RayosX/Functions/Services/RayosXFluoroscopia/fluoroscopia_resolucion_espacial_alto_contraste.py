@@ -1,6 +1,6 @@
 from Functions.Services.validacion import validacion
 
-def fluoroscopia_resolucion_espacial_alto_contraste(attribute=[0]):
+def fluoroscopia_resolucion_espacial_alto_contraste(attribute):
     try: 
         ordenador = [0,1,2,3]
         tolerancia = True

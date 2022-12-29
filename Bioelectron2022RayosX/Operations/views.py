@@ -305,7 +305,7 @@ class fluoroscopia_repetibilidadtiempoexposicion(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_repetibilidad_tiempo_exposicion((data_entrante[0]),(data_entrante[1]),(data_entrante[2]))
+            resultado = fluoroscopia_repetibilidad_tiempo_exposicion(data_entrante[0],data_entrante[1],data_entrante[2])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -335,7 +335,7 @@ class fluoroscopia_variacionrendimientocarga(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = fluoroscopia_variacion_rendimiento_carga(data_entrante[0],data_entrante[1],(data_entrante[2]),(data_entrante[3]),(data_entrante[4]))
+            resultado = fluoroscopia_variacion_rendimiento_carga(data_entrante[0],data_entrante[1],data_entrante[2])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -834,7 +834,7 @@ class tomografia_exploracionparaabdomen(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = tomografia_exploracion_para_abdomen(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6],data_entrante[7],data_entrante[8],data_entrante[9],data_entrante[10],data_entrante[11],data_entrante[12])
+            resultado = tomografia_exploracion_para_abdomen(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6],data_entrante[7],data_entrante[8],data_entrante[9],data_entrante[10],data_entrante[11],data_entrante[12],data_entrante[13])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
@@ -844,7 +844,7 @@ class tomografia_exploracionparacabeza(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = tomografia_exploracion_para_cabeza(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6],data_entrante[7],data_entrante[8],data_entrante[9],data_entrante[10],data_entrante[11],data_entrante[12])
+            resultado = tomografia_exploracion_para_cabeza(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6],data_entrante[7],data_entrante[8],data_entrante[9],data_entrante[10],data_entrante[11],data_entrante[12],data_entrante[13])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
