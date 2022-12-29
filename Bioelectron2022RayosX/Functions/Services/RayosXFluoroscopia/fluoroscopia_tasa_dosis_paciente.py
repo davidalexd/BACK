@@ -2,6 +2,7 @@ from Functions.Services.validacion import validacion
 
 def fluoroscopia_tasa_dosis_paciente(element_1,element_2):
     try:
+        resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
         tolerancia_1 = True
         tolerancia_2 = True
         operacion_1 = float(element_1[0])*60/1000

@@ -21,7 +21,7 @@ def fluoroscopia_umbral_sensibilidad_bajo_contraste(attribute_1,attribute_2):
 
             Uc.append({
                 "parametros":"",
-                "resultado":redondear+" %",
+                "resultado":str(redondear)+" %",
                 "estado":tolerancia
             })
         

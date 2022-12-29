@@ -90,7 +90,7 @@ def fluoroscopia_distorsion_cojinete(opcion):
         reslt = "ACEPTABLE"
         tolerancia = True
 
-        if(opcion[0]=="Si"):
+        if(opcion[0]=="No"):
             tolerancia = True
             reslt = "ACEPTABLE"
         else:

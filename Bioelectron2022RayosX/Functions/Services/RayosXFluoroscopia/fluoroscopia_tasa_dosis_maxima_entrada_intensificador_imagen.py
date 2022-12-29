@@ -5,7 +5,8 @@ def fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen(attribute_1,att
     try:
         tolerancia = True
         prom=promedio([attribute_2[0],attribute_3[0],attribute_4[0]])
-        operacion = ((prom-float(attribute_1[0]))/prom)*100
+        print(prom)
+        operacion = ((prom-float(attribute_1[0]))/float(attribute_1[0]))*100
         redondeo = round(operacion,2)
 
         tolerancia_1 = 20*float(attribute_1[0])/100
@@ -23,7 +24,7 @@ def fluoroscopia_tasa_dosis_maxima_entrada_intensificador_imagen(attribute_1,att
             "data":[
                 {
                     "parametros":"",
-                    "resultado":redondeo+" %",
+                    "resultado":str(redondeo)+" %",
                     "estado":tolerancia
                 }
             ],

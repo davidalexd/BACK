@@ -1,8 +1,9 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
 
-def fluoroscopia_filtracion_capa_hemireductora(element,attributes):
+def fluoroscopia_filtracion_capa_hemireductora(attributes,element):
         try:    
+                resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
                 prom = promedio(attributes)
                 redondear = round(prom,2)
                 tolerancia=True

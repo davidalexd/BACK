@@ -23,7 +23,7 @@ def fluoroscopia_compensacion_diferentes_espesores(attribute_1,attribute_2,attri
             validar.append(tolerancia)
             Uc.append({
                 "parametros":"",
-                "resultado":redondeo+" %",
+                "resultado":str(redondeo)+" %",
                 "estado":tolerancia
             })
 

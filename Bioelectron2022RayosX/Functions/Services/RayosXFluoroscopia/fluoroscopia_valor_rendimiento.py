@@ -2,16 +2,17 @@ from Functions.Services.promedio import promedio
 from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.validacion import validacion
 
-def fluoroscopia_valor_rendimiento(attribute_1,attribute_2,attribute_3,element_1,attribute_4):
+def fluoroscopia_valor_rendimiento(element_1,attribute_1,attribute_2,attribute_3,attribute_4):
+        print(attribute_1,attribute_2,attribute_3,element_1,attribute_4)
         try:
                 tolerancia = True
-                prom = promedio([attribute_1[0],attribute_2[0],attribute_3[0]])
-                operacion = ((prom)*(float(element_1[0])**2))/float(attribute_4[0])
+                prom = promedio([attribute_2[0],attribute_3[0],attribute_4[0]])
+                operacion = ((prom)*(float(element_1[0])**2))/float(attribute_1[0])
                 redondear = round(operacion,2)
                 abs = valor_absoluto(redondear)
                 
 
-                if(float(attribute_1[0])>=2.5 and float(attribute_1[0])<5):
+                if(float(attribute_2[0])>=2.5 and float(attribute_2[0])<5):
                         if(redondear<=65 and redondear>=30):
                                 tolerancia = True
                         else:
@@ -29,7 +30,7 @@ def fluoroscopia_valor_rendimiento(attribute_1,attribute_2,attribute_3,element_1
                         "data":[
                                 {
                                         "parametros":"",
-                                        "resultado":str(redondear)+" µGy/mAs",
+                                        "resultado":str(redondear)+" %",
                                         "estado":tolerancia
                                 }
                         ],

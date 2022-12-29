@@ -1,6 +1,6 @@
 from Functions.Services.validacion import validacion
 
-def fluoroscopia_resolucion_espacial_alto_contraste(attribute):
+def fluoroscopia_resolucion_espacial_alto_contraste(attribute=[0]):
     try: 
         ordenador = [0,1,2,3]
         tolerancia = True
@@ -20,7 +20,7 @@ def fluoroscopia_resolucion_espacial_alto_contraste(attribute):
 
             Uc.append({
                 "parametros":"",
-                "resultado":redondear+" pl/mm",
+                "resultado":str(redondear)+" pl/mm",
                 "estado":tolerancia
             })
 

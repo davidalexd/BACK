@@ -12,7 +12,7 @@ def fluoroscopia_repetibilidad_cai(attribute_1,attribute_2,attribute_3):
             else:
                 operacion = desv/prom
                 
-            redondear = round(operacion,2)
+            redondear = round(operacion*100,2)
             
             if(redondear<=10):
                 tolerancia = True
