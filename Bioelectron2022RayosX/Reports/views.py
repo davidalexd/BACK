@@ -161,10 +161,7 @@ class CertificadosCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAP
     serializer_class = CertificadoReportesSerializer  
     def get_queryset(self):        
         queryset = ReportsCertificadoModel.objects.all()
-        if not queryset:
-            raise ValidationError
-        return queryset
-    
+        return queryset   
 
 
 certificados_create_view = CertificadosCreateApiView.as_view()

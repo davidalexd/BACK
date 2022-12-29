@@ -9,9 +9,6 @@ class OrganizacionesListaCreateApiView(StaffEditorPermissionMixin,generics.ListC
     serializer_class = OrganizacionSerializer
     def get_queryset(self):        
         queryset = OrganizacionModel.objects.all()
-        
-        if not queryset:
-            raise ValidationError
         return queryset
 
     def perform_create(self, serializer):
@@ -66,8 +63,6 @@ class DepartamentosListaCreateApiView(StaffEditorPermissionMixin,generics.ListCr
     serializer_class = DepartamentoSerializer
     def get_queryset(self):        
         queryset = DepartamentoModel.objects.all()
-        if not queryset:
-            raise ValidationError
         return queryset
 
     def perform_create(self, serializer):
@@ -117,8 +112,6 @@ class AreasListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAPIV
     serializer_class = AreasSerializer
     def get_queryset(self):
         queryset = AreasModel.objects.all()
-        if not queryset:
-            raise ValidationError
         return queryset
 
     def perform_create(self, serializer):
@@ -167,8 +160,6 @@ class ContactosListaCreateApiView(StaffEditorPermissionMixin,generics.ListCreate
     serializer_class = ContactosSerialezer
     def get_queryset(self):        
         queryset = ContactosModel.objects.all()
-        if not queryset:
-            raise ValidationError
         return queryset
 
     def perform_create(self, serializer):

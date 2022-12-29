@@ -36,8 +36,6 @@ class ReportesFormatosGenericViewSet(StaffEditorPermissionMixin,mixins.ListModel
     lookup_field = 'pk'
     def get_queryset(self):        
         queryset = ReportsReporteModel.objects.all()
-        if not queryset:
-            raise ValidationError
         return queryset
     def perform_create(self, serializer):
         instance = serializer.save()

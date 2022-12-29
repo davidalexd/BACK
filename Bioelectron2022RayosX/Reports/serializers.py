@@ -217,14 +217,15 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
     def get_certificado_url(self,obj):
         request = self.context.get('request')
         if request is None:
-            return None
+            return None  
+  
         if obj.certificado is None:
             return {'message':'Informe no evaluado','data':None,'status':False}
         else:
-            if obj.certificado.is_enable is True:
+            if obj.certificado.is_enabled is True:
                 return {'message':'Certificado Aprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
             else:
-                return {'message':'Certificado Deshaprobado','data':None,'status':True}
+                return {'message':'Certificado Deshaprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
 
 def json_respuestas(data):
     return False == data[0]['resultados'][0]['resultados']['resultado']['estado']
@@ -265,16 +266,19 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
         informe = validated_data['InformeID']        
         
         obj = ReportsReporteModel.objects.get(id=informe)
-        Uc = list(filter(json_respuestas,obj.pruebas[1]))
-        if(len(Uc)>0):
-            status = False
+        if obj.certificado is None:
+            Uc = list(filter(json_respuestas,obj.pruebas[1]))
+            if(len(Uc)>0):
+                status = False
+            else:
+                status = True
+            certificado = ReportsCertificadoModel.objects.create(is_enabled=status)
+
+
+            obj.certificado = certificado
+            obj.save()  
+            return certificado  
         else:
-            status = True
-        certificado = ReportsCertificadoModel.objects.create(is_enabled=status)
-
-
-        obj.certificado = certificado
-        obj.save()  
-        return certificado  
+            return
 
 
