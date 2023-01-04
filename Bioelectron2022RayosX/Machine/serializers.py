@@ -52,8 +52,8 @@ class SistemaSerializer(serializers.ModelSerializer):
             return None
         return reverse('sistema-delete',kwargs={"pk":obj.id},request=request)
     
-    def update(self, instance, validated_data):
-        if 'members' in validated_data:
-            instance.members.set(validated_data['members'])
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     if 'members' in validated_data:
+    #         instance.members.set(validated_data['members'])
+    #     instance.save()
+    #     return instance

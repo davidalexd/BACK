@@ -67,13 +67,13 @@ class AreasSerializer(serializers.ModelSerializer):
         return reverse('area-delete',kwargs={"pk":obj.id},request=request)
 
     
-    def update(self, instance, validated_data):
-        if 'members' in validated_data:
-            instance.members.set(validated_data['members'])
-        if 'contactos' in validated_data:
-            instance.contactos.set(validated_data['contactos'])
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     if 'members' in validated_data:
+    #         instance.members.set(validated_data['members'])
+    #     if 'contactos' in validated_data:
+    #         instance.contactos.set(validated_data['contactos'])
+    #     instance.save()
+    #     return instance
 
 class DepartamentoSerializer(serializers.ModelSerializer): 
     members = AreasSerializer(many=True,read_only=True)
@@ -126,13 +126,13 @@ class DepartamentoSerializer(serializers.ModelSerializer):
             return None
         return reverse('departamento-delete',kwargs={"pk":obj.id},request=request)
 
-    def update(self, instance, validated_data):
-        if 'members' in validated_data:
-            instance.members.set(validated_data['members'])
-        if 'contactos' in validated_data:
-            instance.contactos.set(validated_data['contactos'])
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     if 'members' in validated_data:
+    #         instance.members.set(validated_data['members'])
+    #     if 'contactos' in validated_data:
+    #         instance.contactos.set(validated_data['contactos'])
+    #     instance.save()
+    #     return instance
 
 
 class OrganizacionSerializer(serializers.ModelSerializer): 
@@ -182,9 +182,11 @@ class OrganizacionSerializer(serializers.ModelSerializer):
         if request is None:
             return None
         return reverse('organizacion-delete',kwargs={"pk":obj.id},request=request)
-
-    def update(self, instance, validated_data):
-        if 'members' in validated_data:
-            instance.members.set(validated_data['members'])
-        instance.save()
-        return instance
+        
+    # def update(self, instance, validated_data):
+    #     print(self)
+    #     if 'members' in validated_data:
+    #         instance.members.set(validated_data['members'])
+        
+    #     instance.save()
+    #     return instance

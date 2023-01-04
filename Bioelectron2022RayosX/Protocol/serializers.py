@@ -31,11 +31,11 @@ class PruebaCalculoSerializer(serializers.ModelSerializer):
             return None
         return reverse('prueba-calculo-delete',kwargs={"pk":obj.id},request=request)
 
-    def update(self, instance, validated_data):
-        if 'operacion' in validated_data:
-            instance.operacion.set(validated_data['operacion'])
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     if 'operacion' in validated_data:
+    #         instance.operacion.set(validated_data['operacion'])
+    #     instance.save()
+    #     return instance
 
 class PruebaOpcionesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='prueba-opcion-detail',lookup_field='pk')
@@ -91,13 +91,13 @@ class SeccionesSerializer(serializers.ModelSerializer):
             return None
         return reverse('seccion-delete',kwargs={"pk":obj.id},request=request)
 
-    def update(self, instance, validated_data):
-        if 'calculo' in validated_data:
-            instance.calculo.set(validated_data['calculo'])
-        if 'opcion' in validated_data:
-            instance.opcion.set(validated_data['opcion'])
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     if 'calculo' in validated_data:
+    #         instance.calculo.set(validated_data['calculo'])
+    #     if 'opcion' in validated_data:
+    #         instance.opcion.set(validated_data['opcion'])
+    #     instance.save()
+    #     return instance
 
 class ProtocolosSerializer(serializers.ModelSerializer):
     secciones = SeccionesSerializer(many=True,read_only=True)
@@ -126,8 +126,8 @@ class ProtocolosSerializer(serializers.ModelSerializer):
             return None
         return reverse('protocolo-delete',kwargs={"pk":obj.id},request=request)
 
-    def update(self, instance, validated_data):
-        if 'secciones' in validated_data:
-            instance.secciones.set(validated_data['secciones'])
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     if 'secciones' in validated_data:
+    #         instance.secciones.set(validated_data['secciones'])
+    #     instance.save()
+    #     return instance

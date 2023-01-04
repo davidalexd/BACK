@@ -37,7 +37,9 @@ class OrganizacionesAztualizacionAPIView(StaffEditorPermissionMixin,generics.Ret
         return queryset
 
     def perform_update(self, serializer):
-        instance = serializer.save()
+        instance = self.get_object()
+        updated_instance = serializer.save()
+        
 organzizaciones_actualizar_view = OrganizacionesAztualizacionAPIView.as_view()
 
 class OrganizacionesEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestroyAPIView):
