@@ -256,7 +256,6 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
         fields = (
             'id',            
             'detalles',
-            'is_enabled',
             'created_at',
             'url',
             'InformeID',
@@ -264,7 +263,7 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        informe = validated_data['InformeID']        
+        informe = validated_data['InformeID']       
         
         obj = ReportsReporteModel.objects.get(id=informe)
         if obj.certificado is None:
@@ -277,10 +276,12 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
 
 
             obj.certificado = certificado
+            obj.is_enabled = True
             obj.save()  
-            return certificado  
+            return certificado
         else:
-            return
+            return obj.certificado
+
 
 
 
