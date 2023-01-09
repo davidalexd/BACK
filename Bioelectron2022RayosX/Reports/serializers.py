@@ -11,6 +11,7 @@ from rest_framework import serializers
 from rest_framework.reverse import reverse
 from datetime import timedelta
 from datetime import datetime
+from rest_framework.response import Response
 
 class FormatosReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='formato-reporte-detail',lookup_field='pk')
@@ -281,4 +282,109 @@ class CertificadoReportesSerializer(serializers.ModelSerializer):
         else:
             return
 
+
+
+class ReporteReportesClienteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReportsReporteModel
+        fields = (
+            "id",
+            "numero_de_ot",
+            "observacion",
+            "datos_del_cliente",
+        )
+    
+    def update(self, instance, validated_data): 
+        instance.numero_de_ot = validated_data['numero_de_ot'],
+        instance.observacion = validated_data['observacion'],
+        instance.datos_del_cliente = {
+            "razon_social":validated_data['datos_del_cliente']['razon_social'],
+            "ruc":validated_data['datos_del_cliente']['ruc'],
+            "direccion":validated_data['datos_del_cliente']['direccion'],
+            "distrito":validated_data['datos_del_cliente']['distrito'],
+            "provincia":validated_data['datos_del_cliente']['provincia'],
+            "region":validated_data['datos_del_cliente']['region'],
+            "contactos": instance.datos_del_cliente['contactos'],
+            "instalacion_direccion":validated_data['datos_del_cliente']['instalacion_direccion'],
+            "instalacion_distrito":validated_data['datos_del_cliente']['instalacion_distrito'],
+            "instalacion_provincia":validated_data['datos_del_cliente']['instalacion_provincia'],
+            "instalacion_region":validated_data['datos_del_cliente']['instalacion_region'],
+            "instalacion_ambiente":validated_data['datos_del_cliente']['instalacion_ambiente'],
+        }     
+        instance.save()
+        return instance
+
+class ReporteReportesSistemaControlCalidadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReportsReporteModel
+        fields = (
+            "id",
+            "sistema",
+            "componente",
+        )
+
+class ReporteReportesMaquinaControlCalidadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReportsReporteModel
+        fields = (
+            "id",
+            "machine"
+        )
+
+
+class ReporteReportesOpcionesSerializer(serializers.ModelSerializer):
+    opciones_pruebas = serializers.SerializerMethodField(read_only = True)
+    opciones = serializers.JSONField(write_only=True)
+    class Meta:
+        model = ReportsReporteModel
+        fields = (
+            "id",
+            "opciones_pruebas",
+            "opciones"
+        )
+
+    def update(self, instance, validated_data):
+        opciones = instance.pruebas[0]
+        for x in range(len(validated_data['opciones'])):
+            opciones[x]['valor'] = validated_data['opciones'][x]
+        instance.save()        
+        return instance
+
+    def get_opciones_pruebas(self,obj):
+        return obj.pruebas[0]
+
+
+class ReporteReportesPruebasSerializer(serializers.ModelSerializer):
+    operaciones_pruebas = serializers.SerializerMethodField(read_only = True)
+    posicion = serializers.IntegerField(write_only=True)
+    criterio = serializers.JSONField(write_only=True)
+    class Meta:
+        model = ReportsReporteModel
+        fields = (
+            "id",
+            "operaciones_pruebas",
+            "posicion",
+            "criterio",
+        )
+
+    def update(self, instance, validated_data):
+        operaciones = instance.pruebas[1]
+        posición_operador =  operaciones[validated_data['posicion']][0]['resultados'][0]['resultados']['resultado']
+
+        for x in range(len(validated_data['criterio'])):
+            posición_operador['data'][x]['resultado'] = validated_data['criterio'][x]
+            posición_operador['data'][x]['estado'] = True
+        
+        if (len(validated_data['criterio']) == len(posición_operador['data'])):
+            posición_operador['estado'] = True
+
+        instance.save()
+        return instance
+
+    
+    def get_operaciones_pruebas(self,obj):
+        return obj.pruebas[1]
+    
+
+        
 

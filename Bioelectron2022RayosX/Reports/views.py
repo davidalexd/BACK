@@ -1,7 +1,7 @@
 from rest_framework.exceptions import APIException,status
 
 from .models import ReportsCategoryModel, ReportsFormatsModel,ReportsReporteModel,ReportsCertificadoModel
-from .serializers import FormatosReportesSerializer,CategoriaReportesSerializer,ReporteReportesSerializer,CertificadoReportesSerializer
+from .serializers import FormatosReportesSerializer,ReporteReportesOpcionesSerializer,CategoriaReportesSerializer,ReporteReportesSerializer,ReporteReportesPruebasSerializer,ReporteReportesClienteSerializer,ReporteReportesSistemaControlCalidadSerializer,ReporteReportesMaquinaControlCalidadSerializer,CertificadoReportesSerializer
 from authentication.mixins import StaffEditorPermissionMixin
 from rest_framework import generics
 from rest_framework.response import Response
@@ -147,6 +147,64 @@ class ReportesEliminarAPIView(StaffEditorPermissionMixin,generics.RetrieveDestro
         super().perform_destroy(instance)
 reportes_eliminar_view = ReportesEliminarAPIView.as_view()
 
+
+
+
+class ReportesAztualizacionClienteAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
+    serializer_class = ReporteReportesClienteSerializer
+    lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = ReportsReporteModel.objects.all()
+        if not queryset:
+            return ValidationError
+        return queryset
+reportes_actualizar_cliente_view = ReportesAztualizacionClienteAPIView.as_view()
+
+class ReportesAztualizacionSistemaControlCalidadAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
+    serializer_class = ReporteReportesSistemaControlCalidadSerializer
+    lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = ReportsReporteModel.objects.all()
+        if not queryset:
+            return ValidationError
+        return queryset
+reportes_actualizar_sistema_control_calidad_view = ReportesAztualizacionSistemaControlCalidadAPIView.as_view()
+
+class ReportesAztualizacionMaquinaControlCalidadAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
+    serializer_class = ReporteReportesMaquinaControlCalidadSerializer
+    lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = ReportsReporteModel.objects.all()
+        if not queryset:
+            return ValidationError
+        return queryset
+reportes_actualizar_maquina_control_calidad_view = ReportesAztualizacionMaquinaControlCalidadAPIView.as_view()
+
+
+
+class ReportesAztualizacionOpcionesAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
+    serializer_class = ReporteReportesOpcionesSerializer
+    lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = ReportsReporteModel.objects.all()
+        if not queryset:
+            return ValidationError
+        return queryset
+reportes_actualizar_opciones_view = ReportesAztualizacionOpcionesAPIView.as_view()
+
+class ReportesAztualizacionPruebasAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
+    serializer_class = ReporteReportesPruebasSerializer
+    lookup_field = 'pk'
+    def get_queryset(self):        
+        queryset = ReportsReporteModel.objects.all()
+        if not queryset:
+            return ValidationError
+        return queryset
+reportes_actualizar_pruebas_view = ReportesAztualizacionPruebasAPIView.as_view()
+
+
+
+
 class CertificadosDetallesAPIView(StaffEditorPermissionMixin,generics.RetrieveAPIView):
     serializer_class = CertificadoReportesSerializer
     lookup_field = 'pk'
@@ -162,7 +220,6 @@ class CertificadosCreateApiView(StaffEditorPermissionMixin,generics.ListCreateAP
     def get_queryset(self):        
         queryset = ReportsCertificadoModel.objects.all()
         return queryset   
-
 
 certificados_create_view = CertificadosCreateApiView.as_view()
 
