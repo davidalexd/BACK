@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\MARCELLO\Desktop\Back-End-RayosX\env"
+VIRTUAL_ENV="C:\Users\wronk\OneDrive\Desktop\Back-End-RayosX\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

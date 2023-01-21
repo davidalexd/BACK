@@ -59,7 +59,8 @@ class ReportsReporteModel(BaseModel):
     nombre_reporte = models.CharField("Report name",max_length=255,null=True,blank=True,db_column="rpt_name_reporte")
 
     numero_de_ot = models.CharField("Ot number",max_length=255,null=True,blank=True,db_column="rpt_numero_orden_trabajo")
-    fecha_control_calidad = models.DateField("QC date",auto_now_add=True,null=False,blank=False,db_column="rpt_fecha_control_calidad")
+    
+    fecha_control_calidad = models.DateField("QC date",null=False,blank=False,db_column="rpt_fecha_control_calidad")
     
     observacion = models.TextField("Report observacion",null=True,blank=True,db_column="rpt_observacion_reporte")
 
@@ -82,7 +83,7 @@ class ReportsReporteModel(BaseModel):
     title_image_2 = models.CharField("Title image 2", max_length=255,null=True,db_column="rpt_title_image_2")
     image_2 = models.ImageField(upload_to="reports/",blank='',default='')
     title_image_3 = models.CharField("Title image 3", max_length=255,null=True,db_column="rpt_title_image_3")
-    image_3 = models.ImageField(upload_to="reports/",blank='',default='')
+    image_3 = models.ImageField(upload_to="reports/",blank='',default='',null=True)
     
     certificado = models.OneToOneField(ReportsCertificadoModel,null=True,on_delete=models.CASCADE,unique=True)
 

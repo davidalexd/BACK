@@ -8,10 +8,8 @@ from .models import Frt_Cat_Model, ReportsCategoryModel, ReportsFormatsModel,Pru
 from Protocol.serializers import ProtocolosSerializer,SeccionesSerializer,PruebaCalculoSerializer,PruebaOpcionesSerializer
 from Protocol.models import ProtocolsModel
 from rest_framework import serializers
-from rest_framework.reverse import reverse
 from datetime import timedelta
-from datetime import datetime
-from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
 class FormatosReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='formato-reporte-detail',lookup_field='pk')
@@ -226,7 +224,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             if obj.certificado.is_enabled is True:
                 return {'message':'Certificado Aprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
             else:
-                return {'message':'Certificado Deshaprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
+                return {'message':'Certificado Desaprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
 
 def json_respuestas(data):
     return False == data[0]['resultados'][0]['resultados']['resultado']['estado']
@@ -291,29 +289,31 @@ class ReporteReportesClienteSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "numero_de_ot",
+            "fecha_control_calidad",
             "observacion",
             "datos_del_cliente",
         )
     
-    def update(self, instance, validated_data): 
-        instance.numero_de_ot = validated_data['numero_de_ot'],
-        instance.observacion = validated_data['observacion'],
-        instance.datos_del_cliente = {
-            "razon_social":validated_data['datos_del_cliente']['razon_social'],
-            "ruc":validated_data['datos_del_cliente']['ruc'],
-            "direccion":validated_data['datos_del_cliente']['direccion'],
-            "distrito":validated_data['datos_del_cliente']['distrito'],
-            "provincia":validated_data['datos_del_cliente']['provincia'],
-            "region":validated_data['datos_del_cliente']['region'],
-            "contactos": instance.datos_del_cliente['contactos'],
-            "instalacion_direccion":validated_data['datos_del_cliente']['instalacion_direccion'],
-            "instalacion_distrito":validated_data['datos_del_cliente']['instalacion_distrito'],
-            "instalacion_provincia":validated_data['datos_del_cliente']['instalacion_provincia'],
-            "instalacion_region":validated_data['datos_del_cliente']['instalacion_region'],
-            "instalacion_ambiente":validated_data['datos_del_cliente']['instalacion_ambiente'],
-        }     
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data): 
+    #     instance.numero_de_ot =  validated_data['numero_de_ot'],
+    #     instance.observacion = validated_data['observacion'],       
+    #     instance.fecha_control_calidad = validated_data['fecha_control_calidad'],
+    #     instance.datos_del_cliente = {
+    #         "razon_social":validated_data['datos_del_cliente']['razon_social'],
+    #         "ruc":validated_data['datos_del_cliente']['ruc'],
+    #         "direccion":validated_data['datos_del_cliente']['direccion'],
+    #         "distrito":validated_data['datos_del_cliente']['distrito'],
+    #         "provincia":validated_data['datos_del_cliente']['provincia'],
+    #         "region":validated_data['datos_del_cliente']['region'],
+    #         "contactos": instance.datos_del_cliente['contactos'],
+    #         "instalacion_direccion":validated_data['datos_del_cliente']['instalacion_direccion'],
+    #         "instalacion_distrito":validated_data['datos_del_cliente']['instalacion_distrito'],
+    #         "instalacion_provincia":validated_data['datos_del_cliente']['instalacion_provincia'],
+    #         "instalacion_region":validated_data['datos_del_cliente']['instalacion_region'],
+    #         "instalacion_ambiente":validated_data['datos_del_cliente']['instalacion_ambiente'],
+    #     }     
+    #     instance.save()
+    #     return instance
 
 class ReporteReportesSistemaControlCalidadSerializer(serializers.ModelSerializer):
     class Meta:
