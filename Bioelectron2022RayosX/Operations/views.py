@@ -1196,6 +1196,137 @@ class mamografia_dosissuperficiemama(View):
 view_mamografia_dosis_superficie_mama = mamografia_dosissuperficiemama.as_view()
 
 
+
+
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_alineamiento_receptor_imagen import dental_panoramico_alineamiento_receptor_imagen
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_cfalometrico_2 import dental_panoramico_cfalometrico_2
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_cfalometrico import dental_panoramico_cfalometrico
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_exactitud_tension import dental_panoramico_exactitud_tension
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_filtracion import dental_panoramico_filtracion
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_panoramico_2 import dental_panoramico_panoramico_2
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_panoramico import dental_panoramico_panoramico
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_repetibilidad_rendimiento import dental_panoramico_repetibilidad_rendimiento
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_repetibilidad_tension import dental_panoramico_repetibilidad_tension
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_tamano_campo_radiacion import dental_panoramico_tamano_campo_radiacion
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_valor_rendimiento import dental_panoramico_valor_rendimiento
+from Functions.Services.DentalPanoramicoCefalometrico.dental_panoramico_variacion_rendimiento import dental_panoramico_variacion_rendimiento
+
+
+class dental_panoramicoalineamientoreceptorimagen(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_alineamiento_receptor_imagen(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_alineamiento_receptor_imagen = dental_panoramicoalineamientoreceptorimagen.as_view()
+class dental_panoramicocfalometrico2(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_cfalometrico_2(data_entrante[0],data_entrante[1],data_entrante[2])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_cfalometrico_2 = dental_panoramicocfalometrico2.as_view()
+class dental_panoramicocfalometrico(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_cfalometrico(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_cfalometrico = dental_panoramicocfalometrico.as_view()
+class dental_panoramicoexactitudtension(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_exactitud_tension(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_exactitud_tension = dental_panoramicoexactitudtension.as_view()
+class dental_panoramicofiltracion(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_filtracion(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_filtracion = dental_panoramicofiltracion.as_view()
+class dental_panoramicopanoramico2(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_panoramico_2(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_panoramico_2 = dental_panoramicopanoramico2.as_view()
+class dental_panoramicopanoramico(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_panoramico(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_panoramico = dental_panoramicopanoramico.as_view()
+class dental_panoramicorepetibilidadrendimiento(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_repetibilidad_rendimiento(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_repetibilidad_rendimiento = dental_panoramicorepetibilidadrendimiento.as_view()
+class dental_panoramicorepetibilidadtension(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_repetibilidad_tension(data_entrante[0],data_entrante[1])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_repetibilidad_tension = dental_panoramicorepetibilidadtension.as_view()
+class dental_panoramicotamanocamporadiacion(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_tamano_campo_radiacion(data_entrante[0])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_tamano_campo_radiacion = dental_panoramicotamanocamporadiacion.as_view()
+class dental_panoramicovalorrendimiento(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_valor_rendimiento(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_valor_rendimiento = dental_panoramicovalorrendimiento.as_view()
+class dental_panoramicovariacionrendimiento(View):
+    def get(self, request, **kwargs):
+        try:
+            data_entrante = json.loads(kwargs['global'])
+            resultado = dental_panoramico_variacion_rendimiento(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6])
+            return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
+view_dental_panoramico_variacion_rendimiento = dental_panoramicovariacionrendimiento.as_view()
+
+
+
+
+
+
+
 class ValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND
     default_detail = ({ 'response_code': '404', 'response': status_code, 'message': 'No se encontraron registros', })

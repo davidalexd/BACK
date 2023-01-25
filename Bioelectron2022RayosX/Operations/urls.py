@@ -112,5 +112,19 @@ urlpatterns = [
     path('OperacionMamografiaArtefactosCr/<global>',views.view_mamografia_artefactos_cr,name='mamografia_artefactos_cr'),   
     path('OperacionMamografiaArtefactosVerificacionElementosDefectuososDetectorDr/<global>',views.view_mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr,name='mamografia_artefactos_verificacion_elementos_defectuosos_detector_dr'),   
     path('OperacionMamografiaDosisSuperficieMama/<global>',views.view_mamografia_dosis_superficie_mama,name='mamografia_dosis_superficie_mama'),   
-
+    
+    
+    path('OperacionDentalPanoramicoAlineamientoReceptorImagen/<global>',views.view_dental_panoramico_alineamiento_receptor_imagen,name='dental_panoramico_alineamiento_receptor_imagen'),
+    path('OperacionDentalPanoramicoCfalometrico2/<global>',views.view_dental_panoramico_cfalometrico_2,name='dental_panoramico_cfalometrico_2'),
+    path('OperacionDentalPanoramicoCfalometrico/<global>',views.view_dental_panoramico_cfalometrico,name='dental_panoramico_cfalometrico'),
+    path('OperacionDentalPanoramicoExactitudTension/<global>',views.view_dental_panoramico_exactitud_tension,name='dental_panoramico_exactitud_tension'),
+    path('OperacionDentalPanoramicoFiltracion/<global>',views.view_dental_panoramico_filtracion,name='dental_panoramico_filtracion'),
+    path('OperacionDentalPanoramicoPanoramico2/<global>',views.view_dental_panoramico_panoramico_2,name='dental_panoramico_panoramico_2'),
+    path('OperacionDentalPanoramicoPanoramico/<global>',views.view_dental_panoramico_panoramico,name='dental_panoramico_panoramico'),
+    path('OperacionDentalPanoramicoRepetibilidadRendimiento/<global>',views.view_dental_panoramico_repetibilidad_rendimiento,name='dental_panoramico_repetibilidad_rendimiento'),
+    path('OperacionDentalPanoramicoRepetibilidadTension/<global>',views.view_dental_panoramico_repetibilidad_tension,name='dental_panoramico_repetibilidad_tension'),
+    path('OperacionDentalPanoramicoTamanoCampoRadicacion/<global>',views.view_dental_panoramico_tamano_campo_radiacion,name='dental_panoramico_tamano_campo_radiacion'),
+    path('OperacionDentalPanoramicoValorRendimiento/<global>',views.view_dental_panoramico_valor_rendimiento,name='dental_panoramico_valor_rendimiento'),
+    path('OperacionDentalPanoramicoVariacionRendimiento/<global>',views.view_dental_panoramico_variacion_rendimiento,name='dental_panoramico_variacion_rendimiento'),
+    
 ]
