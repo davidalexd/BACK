@@ -2,8 +2,6 @@ from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
 
 def dental_panoramico_valor_rendimiento(element,element_1,element_2,attribute):
-    print(element,element_1,element_2,attribute,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    
     try: 
         prom = promedio(attribute)
         # dosis

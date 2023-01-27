@@ -3,15 +3,15 @@ from Functions.Services.validacion import validacion
 
 def dental_panoramico_exactitud_tension(element,attribute):
     try:
-        # llama TENSION NOMINAL  (kV) luego a TENSION PROMEDIO (kV) range (5)
         prom = promedio(attribute)
         element_1 = float(element[0])
 
         if(element_1 <= 0):
-            operacion=0*100
+            operacion=0
         else:
-            operacion = ((element_1-prom)/element_1)*100
-        redondear = round(operacion,2)
+            operacion = ((element_1-prom)/element_1)
+
+        redondear = round(operacion*100,2)
 
         tolerancia_1 = 10
         tolerancia_2 = -10

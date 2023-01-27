@@ -18,7 +18,7 @@ def dental_panoramico_alineamiento_receptor_imagen(opcion):
             "data":[
                 {
                     "parametros":"",
-                    "resultado":opcion,
+                    "resultado":opcion[0],
                     "estado":tolerancia
                 }
             ],
