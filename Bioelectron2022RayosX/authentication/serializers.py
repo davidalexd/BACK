@@ -31,7 +31,7 @@ class LogoutSerializer(serializers.Serializer):
 class SesionSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='sesiones-details',lookup_field='pk')
     user_data = CustomUserSerializer( source="user",read_only = True)
-    ubicacion = serializers.SerializerMethodField(read_only = True)
+    # data_ubicacion = serializers.SerializerMethodField(read_only = True)
     class Meta:
         model = SesionesModel
         fields = (
@@ -39,15 +39,16 @@ class SesionSerializer(serializers.ModelSerializer):
             'user',
             'user_data',
             'ubicacion',
+            # 'data_ubicacion',
             'is_enabled',
             'created_at',
             'url'
         )
 
-    def get_ubicacion(self,obj):
-        latitud = ''
-        longitud = ''
-        if(obj.ubicacion==None):
-            return {'latitud':latitud,'longitud':longitud}
-        else:
-            return {'latitud':obj.ubicacion['latitud'],'longitud':obj.ubicacion['longitud']}
+    # def get_data_ubicacion(self,obj):
+    #     latitud = ''
+    #     longitud = ''
+    #     if(obj.ubicacion==None):
+    #         return {'latitud':latitud,'longitud':longitud}
+    #     else:
+    #         return {'latitud':obj.ubicacion['latitud'],'longitud':obj.ubicacion['longitud']}
