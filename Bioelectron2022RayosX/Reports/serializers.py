@@ -173,7 +173,8 @@ class sHistory(serializers.ModelSerializer):
 
 class ReporteReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='reporte-reporte-detail',lookup_field='pk')    
-    author = serializers.SerializerMethodField(read_only = True)
+    author = serializers.SerializerMethodField(read_only = True) 
+    gerente = serializers.SerializerMethodField(read_only = True)
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
     certificado_url = serializers.SerializerMethodField(read_only = True)
@@ -190,6 +191,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "author",
+            "gerente",
             "nombre_reporte",
             "numero_de_ot",
             "fecha_control_calidad",
@@ -248,9 +250,22 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             serializer = sHistory(model, obj.historical.all(), fields=fields, many=True)
             serializer.is_valid()
             author = User.objects.get(id=serializer.data[0]['history_user'])
-            return CustomAuthorSerializer(author).data
+            usuario =  CustomAuthorSerializer(author).data
+            return {"author_numero":usuario['numero'],"author_nombre":usuario['name'],"author_apellido":usuario['last_name'],"author_firma":usuario['firma']}
         except Exception as e:
-            return {"numero":"","name":"","last_name":"","firma":""}
+            return {"author_numero":"","author_nombre":"","author_apellido":"","author_firma":""}
+        
+    def get_gerente(self, obj):
+        try:
+            model = obj.historical.__dict__['model']
+            fields = '__all__'
+            serializer = sHistory(model, obj.historical.all(), fields=fields, many=True)
+            serializer.is_valid()
+            author = User.objects.get(id=3)
+            usuario =  CustomAuthorSerializer(author).data
+            return {"gerente_numero":usuario['numero'],"gerente_nombre":usuario['name'],"gerente_apellido":usuario['last_name'],"gerente_firma":usuario['firma']}
+        except Exception as e:
+            return {"gerente_numero":"","gerente_nombre":"","gerente_apellido":"","gerente_firma":""}
     
 def json_respuestas(data):
     return False == data[0]['resultados'][0]['resultados']['resultado']['estado']
