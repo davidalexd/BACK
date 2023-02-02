@@ -10,6 +10,8 @@ from Protocol.models import ProtocolsModel
 from rest_framework import serializers
 from datetime import timedelta
 from rest_framework.reverse import reverse
+from User.serializer import CustomAuthorSerializer
+from User.models import User
 
 class FormatosReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='formato-reporte-detail',lookup_field='pk')
@@ -159,13 +161,24 @@ class CategoriaReportesSerializer(serializers.ModelSerializer):
             return None
         return reverse('categoria-reporte-delete',kwargs={"pk":obj.id},request=request)
 
+
+class sHistory(serializers.ModelSerializer):
+    def __init__(self, model, *args, fields='__all__', **kwargs):
+        self.Meta.model = model
+        self.Meta.fields = fields
+        super().__init__()
+
+    class Meta:
+        pass
+
 class ReporteReportesSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='reporte-reporte-detail',lookup_field='pk')
+    url = serializers.HyperlinkedIdentityField(view_name='reporte-reporte-detail',lookup_field='pk')    
+    author = serializers.SerializerMethodField(read_only = True)
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
     certificado_url = serializers.SerializerMethodField(read_only = True)
 
-    formato = FormatosReportesSerializer(many=True,read_only=True)
+    # formato = FormatosReportesSerializer(many=True,read_only=True)
     formato_id = serializers.PrimaryKeyRelatedField(
         source='formato',
         write_only=True,
@@ -176,6 +189,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
         model = ReportsReporteModel
         fields = (
             "id",
+            "author",
             "nombre_reporte",
             "numero_de_ot",
             "fecha_control_calidad",
@@ -199,7 +213,8 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             "edit_url",
             "delete_url",
             "formato_id",
-            "certificado_url")
+            "certificado_url"
+            )
 
     def get_edit_url(self,obj):
         request = self.context.get('request')
@@ -226,6 +241,17 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             else:
                 return {'message':'Certificado Desaprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
 
+    def get_author(self, obj):
+        try:
+            model = obj.historical.__dict__['model']
+            fields = '__all__'
+            serializer = sHistory(model, obj.historical.all(), fields=fields, many=True)
+            serializer.is_valid()
+            author = User.objects.get(id=serializer.data[0]['history_user'])
+            return CustomAuthorSerializer(author).data
+        except Exception as e:
+            return {"numero":"","name":"","last_name":"","firma":""}
+    
 def json_respuestas(data):
     return False == data[0]['resultados'][0]['resultados']['resultado']['estado']
 

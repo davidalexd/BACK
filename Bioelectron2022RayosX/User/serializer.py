@@ -12,7 +12,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id','username','email','name','last_name','groups')
     
-
+class CustomAuthorSerializer(serializers.ModelSerializer):
+    groups = Group
+    class Meta:
+        model = User
+        fields = ('numero','name','last_name','firma')
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         max_length=68, min_length=6, write_only=True)
