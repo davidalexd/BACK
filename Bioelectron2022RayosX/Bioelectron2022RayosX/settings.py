@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-8p4**!2++q*ys&cg8fh(^2pk3@_1ui#2x0un3xa!*$6t9d^@0g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1','192.168.1.249','192.168.18.19', config('SERVER', default='127.0.0.1')]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','192.168.1.249','192.168.18.19','192.168.0.100', config('SERVER', default='127.0.0.1')]
 
 
 # Application definition
@@ -161,7 +161,9 @@ AUTH_USER_MODEL = 'User.User'
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
-    "http://192.168.18.19:3000"
+    "http://192.168.18.19:3000",
+    "http://192.168.0.100:3000",
+    "http://192.168.0.120:3000"
 ]
 
 DATABASES = {
