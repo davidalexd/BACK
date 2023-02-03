@@ -12,6 +12,7 @@ from datetime import timedelta
 from rest_framework.reverse import reverse
 from User.serializer import CustomAuthorSerializer
 from User.models import User
+from django.contrib.sites.shortcuts import get_current_site
 
 class FormatosReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='formato-reporte-detail',lookup_field='pk')
@@ -242,7 +243,10 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
                 return {'message':'Certificado Aprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
             else:
                 return {'message':'Certificado Desaprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
-
+    @property
+    def base_url(self):
+        return "http://" + get_current_site(self.context.get('request')).domain
+    
     def get_autor(self, obj):
         try:
             model = obj.historical.__dict__['model']
@@ -251,10 +255,11 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             serializer.is_valid()
             author = User.objects.get(id=serializer.data[0]['history_user'])
             usuario =  CustomAuthorSerializer(author).data
-            return {"autor_numero":usuario['numero'],"autor_nombre":usuario['name'],"autor_apellido":usuario['last_name'],"autor_firma":usuario['firma']}
+            return {"autor_numero":usuario['numero'],"autor_nombre":usuario['name'],"autor_apellido":usuario['last_name'],"autor_firma":self.base_url+usuario['firma']}
         except Exception as e:
-            return {"autor_numero":"","autor_nombre":"","autor_apellido":"","autor_firma":""}
+            return {"autor_numero":"","autor_nombre":"","aut    or_apellido":"","autor_firma":""}
         
+
     def get_gerente(self, obj):
         try:
             model = obj.historical.__dict__['model']
@@ -263,10 +268,11 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             serializer.is_valid()
             author = User.objects.get(id=3)
             usuario =  CustomAuthorSerializer(author).data
-            return {"gerente_numero":usuario['numero'],"gerente_nombre":usuario['name'],"gerente_apellido":usuario['last_name'],"gerente_firma":usuario['firma']}
+            return {"gerente_numero":usuario['numero'],"gerente_nombre":usuario['name'],"gerente_apellido":usuario['last_name'],"gerente_firma":self.base_url+usuario['firma']}
         except Exception as e:
             return {"gerente_numero":"","gerente_nombre":"","gerente_apellido":"","gerente_firma":""}
     
+
 def json_respuestas(data):
     return False == data[0]['resultados'][0]['resultados']['resultado']['estado']
 

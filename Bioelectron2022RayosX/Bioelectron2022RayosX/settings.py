@@ -42,6 +42,7 @@ BASE_APPS = [
     'django.contrib.staticfiles',
 ]
 
+
 LOCAL_APPS = [
     'User',
     'Base',
@@ -208,7 +209,7 @@ SIMPLE_JWT = {
 }
 
 STATIC_URL = '/static/'
-MEDIA_URL = "/storage/"
+MEDIA_URL = '/storage/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'storage')
 
 
