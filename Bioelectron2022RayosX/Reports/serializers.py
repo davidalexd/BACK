@@ -257,7 +257,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             usuario =  CustomAuthorSerializer(author).data
             return {"autor_numero":usuario['numero'],"autor_nombre":usuario['name'],"autor_apellido":usuario['last_name'],"autor_firma":self.base_url+usuario['firma']}
         except Exception as e:
-            return {"autor_numero":"","autor_nombre":"","aut    or_apellido":"","autor_firma":""}
+            return {"autor_numero":"","autor_nombre":"","autor_apellido":"","autor_firma":""}
         
 
     def get_gerente(self, obj):
