@@ -173,13 +173,13 @@ class sHistory(serializers.ModelSerializer):
 
 class ReporteReportesSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='reporte-reporte-detail',lookup_field='pk')    
-    author = serializers.SerializerMethodField(read_only = True) 
+    autor = serializers.SerializerMethodField(read_only = True) 
     gerente = serializers.SerializerMethodField(read_only = True)
     edit_url = serializers.SerializerMethodField(read_only = True)
     delete_url = serializers.SerializerMethodField(read_only = True)
     certificado_url = serializers.SerializerMethodField(read_only = True)
 
-    # formato = FormatosReportesSerializer(many=True,read_only=True)
+    formato = FormatosReportesSerializer(many=True,read_only=True)
     formato_id = serializers.PrimaryKeyRelatedField(
         source='formato',
         write_only=True,
@@ -190,7 +190,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
         model = ReportsReporteModel
         fields = (
             "id",
-            "author",
+            "autor",
             "gerente",
             "nombre_reporte",
             "numero_de_ot",
@@ -243,7 +243,7 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             else:
                 return {'message':'Certificado Desaprobado','data':reverse('certificado-reporte-detail',kwargs={"pk":obj.certificado.id},request=request),'status':True}
 
-    def get_author(self, obj):
+    def get_autor(self, obj):
         try:
             model = obj.historical.__dict__['model']
             fields = '__all__'
@@ -251,9 +251,9 @@ class ReporteReportesSerializer(serializers.ModelSerializer):
             serializer.is_valid()
             author = User.objects.get(id=serializer.data[0]['history_user'])
             usuario =  CustomAuthorSerializer(author).data
-            return {"author_numero":usuario['numero'],"author_nombre":usuario['name'],"author_apellido":usuario['last_name'],"author_firma":usuario['firma']}
+            return {"autor_numero":usuario['numero'],"autor_nombre":usuario['name'],"autor_apellido":usuario['last_name'],"autor_firma":usuario['firma']}
         except Exception as e:
-            return {"author_numero":"","author_nombre":"","author_apellido":"","author_firma":""}
+            return {"autor_numero":"","autor_nombre":"","autor_apellido":"","autor_firma":""}
         
     def get_gerente(self, obj):
         try:
