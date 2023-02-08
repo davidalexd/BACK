@@ -92,7 +92,8 @@ urlpatterns = [
     path('OperacionTomografiaVerificacionausenciaartefactosimagen/<global>',views.view_tomografia_verificacion_ausencia_artefactos_imagen,name='tomografia_verificacion_ausencia_artefactos_imagen'),
     path('OperacionTomografiaExactitudseleccionposicioncorteradiografiaplanificacion/<global>',views.view_tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion,name='tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion'),
 
-    path('OperacionMamografiaDistanciaFocoPelículaDetectorImagen/<global>',views.view_mamografia_distancia_foco_película_detector_imagen,name='mamografia_distancia_foco_película_detector_imagen'),
+    path('OperacionMamografiaDistanciaFocoDetectorImagen/<global>',views.view_mamografia_distancia_foto_detector_imagen,name='mamografia_distancia_foto_detector_imagen'),
+    path('OperacionMamografiaCoincidenciaCampoRadiacionDetector/<global>',views.view_mamografia_coincidencia_campo_radiación_detector,name='mamografia_coincidencia_campo_radiación_detector'),
     path('OperacionMamografiaCoincidenciaCampoRadiacionReceptorImagen/<global>',views.view_mamografia_coincidencia_campo_radiacion_receptor_imagen,name='mamografia_coincidencia_campo_radiacion_receptor_imagen'),
     path('OperacionMamografiaExactitudTension/<global>',views.view_mamografia_exactitud_tension,name='mamografia_exactitud_tension'),
     path('OperacionMamografiaRepetibilidadTension/<global>',views.view_mamografia_repetibilidad_tension,name='mamografia_repetibilidad_tension'),   

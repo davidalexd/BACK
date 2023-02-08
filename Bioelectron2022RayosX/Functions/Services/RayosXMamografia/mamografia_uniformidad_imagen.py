@@ -2,7 +2,7 @@ from Functions.Services.maxima_desviacion_absoluta_procentual import maxima_desv
 from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.validacion import validacion
 
-def mamografia_uniformidad_imagen(attribute_1,attribute_2,attribute_3):
+def mamografia_uniformidad_imagen(attribute_1,attribute_3):
     try:
         tolerancia_1 = True
         tolerancia_2 = True

@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-8p4**!2++q*ys&cg8fh(^2pk3@_1ui#2x0un3xa!*$6t9d^@0g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1','192.168.1.249','192.168.18.19','192.168.0.100', config('SERVER', default='127.0.0.1')]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','192.168.1.249','192.168.18.19','192.168.0.100','192.168.1.62', config('SERVER', default='127.0.0.1')]
 
 
 # Application definition
@@ -164,7 +164,9 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://192.168.18.19:3000",
     "http://192.168.0.100:3000",
-    "http://192.168.0.120:3000"
+    "http://192.168.0.120:3000",
+    "http://192.168.1.62:3000",
+    "http://192.168.1.55:3000"1
 ]
 
 DATABASES = {
@@ -172,7 +174,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'Bioelectron#2022RayosX',
         # 'NAME':'ProyectoRayosX',
-        # 'NAME':'bio-cc-ri/rni',        
+        # 'NAME':'bio-cc-ri/rni', 
+        # 'NAME':'testing_rx', 
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',

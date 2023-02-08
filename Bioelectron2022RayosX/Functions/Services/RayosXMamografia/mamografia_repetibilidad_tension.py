@@ -36,16 +36,16 @@ def mamografia_repetibilidad_tension(attributes_1,attributes_2,attributes_3):
 
         return resultado
     except Exception as e:
-                        resultado = {
-                        "condicion":"",
-                        "data":[
-                                {
-                                "parametros":"",
-                                "resultado":"",
-                                "estado":""
-                                }
-                        ],
-                        "tolerancia":"",
-                        "estado":"No Aplica"
-                        }
-                        return resultado
+        resultado = {
+            "condicion":"",
+            "data":[
+                {
+                    "parametros":"",
+                    "resultado":"",
+                    "estado":""
+                }
+            ],
+            "tolerancia":"",
+            "estado":"No Aplica"
+            }
+        return resultado

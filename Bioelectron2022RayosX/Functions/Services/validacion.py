@@ -1,5 +1,4 @@
-def validacion(attributes=[True]):
-    validacion = True
+def validacion(attributes):
     if False in attributes:
         validacion = False
     else:

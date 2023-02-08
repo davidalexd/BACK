@@ -1,50 +1,56 @@
 from Functions.Services.validacion import validacion
 
-def fluoroscopia_resolucion_espacial_alto_contraste(attribute=[0]):
+def fluoroscopia_resolucion_espacial_alto_contraste(attribute):
     try: 
-        ordenador = [0,1,2,3]
-        tolerancia = True
-        tolerancias = [0.9,1.12,1.2,1.6]
-        Uc = []
-        validar = []
-        for x in ordenador:
-            operacion = float(attribute[x])
-            redondear = round(operacion,2)
+        if (attribute[0]!=None):
+            reversed_data = []
+            for i in reversed(attribute):
+                reversed_data.append(i)
 
-            if(redondear >= tolerancias[x]):
-                tolerancia = True
-            else:
-                tolerancia = False
+            tolerancia = True
+            tolerancias = [0.9,1.12,1.2,1.6]
+            Uc = []
+            validar = []
+            for x in range(len(reversed_data)):
+                    operacion = float(reversed_data[x])
+                    redondear = round(operacion,2)
 
-            validar.append(tolerancia)
+                    if(redondear >= tolerancias[x]):
+                        tolerancia = True
+                    else:
+                        tolerancia = False
 
-            Uc.append({
-                "parametros":"",
-                "resultado":str(redondear)+" pl/mm",
-                "estado":tolerancia
-            })
+                    validar.append(tolerancia)
 
-        estado = validacion(validar)
+                    Uc.append({
+                        "parametros":"",
+                        "resultado":str(redondear)+" pl/mm",
+                        "estado":tolerancia
+                    })
 
-        resultado = {
-            "condicion":"",
-            "data":Uc,
-            "tolerancia":"Tamaño de campo de 36 cm ≥ 0,9-1 pl/mm; de 30 cm ≥ 1,12 pl/mm; de 23 cm ≥ 1,2 pl/mm; de 15 cm o inferiores ≥ 1,6 pl/mm",
-            "estado":estado
-            }
-        
-        return resultado
+
+            estado = validacion(validar)
+            print(estado)
+
+            resultado = {
+                "condicion":"",
+                "data":Uc,
+                "tolerancia":"Tamaño de campo de 36 cm ≥ 0,9-1 pl/mm; de 30 cm ≥ 1,12 pl/mm; de 23 cm ≥ 1,2 pl/mm; de 15 cm o inferiores ≥ 1,6 pl/mm",
+                "estado":estado
+                }
+            
+            return resultado
     except Exception as e:
-                        resultado = {
-                        "condicion":"",
-                        "data":[
-                                {
-                                "parametros":"",
-                                "resultado":"",
-                                "estado":""
-                                }
-                        ],
-                        "tolerancia":"",
-                        "estado":"No Aplica"
-                        }
-                        return resultado
+        resultado = {
+              "condicion":"",
+              "data":[
+              {
+              "parametros":"",
+              "resultado":"",
+              "estado":""
+              }
+              ],
+              "tolerancia":"",
+              "estado":"No Aplica"
+              }
+        return resultado

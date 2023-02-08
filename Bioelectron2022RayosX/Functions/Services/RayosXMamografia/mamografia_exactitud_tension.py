@@ -28,7 +28,7 @@ def mamografia_exactitud_tension(attribute,attribute_1,attribute_2,attribute_3):
             "data":[
                 {
                     "parametros":"",
-                    "resultado":str(val_max)+" kV",
+                    "resultado":str(round(val_max,2))+" kV",
                     "estado":tolerancia
                 },
             ],
@@ -38,16 +38,16 @@ def mamografia_exactitud_tension(attribute,attribute_1,attribute_2,attribute_3):
 
         return  resultado
     except Exception as e:
-                        resultado = {
-                        "condicion":"",
-                        "data":[
-                                {
-                                "parametros":"",
-                                "resultado":"",
-                                "estado":""
-                                }
-                        ],
-                        "tolerancia":"",
-                        "estado":"No Aplica"
-                        }
-                        return resultado
+        resultado = {
+              "condicion":"",
+              "data":[
+              {
+              "parametros":"",
+              "resultado":"",
+              "estado":""
+              }
+              ],
+              "tolerancia":"",
+              "estado":"No Aplica"
+              }
+        return resultado

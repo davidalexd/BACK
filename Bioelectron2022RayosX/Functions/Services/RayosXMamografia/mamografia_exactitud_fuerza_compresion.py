@@ -34,19 +34,19 @@ def mamografia_exactitud_fuerza_compresion(attribute_1,attribute_2):
             
         return resultado 
     except Exception as e:
-                        resultado = {
-                        "condicion":"",
-                        "data":[
-                                {
-                                "parametros":"",
-                                "resultado":"",
-                                "estado":""
-                                }
-                        ],
-                        "tolerancia":"",
-                        "estado":"No Aplica"
-                        }
-                        return resultado
+        resultado = {
+              "condicion":"",
+              "data":[
+              {
+              "parametros":"",
+              "resultado":"",
+              "estado":""
+              }
+              ],
+              "tolerancia":"",
+              "estado":"No Aplica"
+              }
+        return resultado
     
 
     

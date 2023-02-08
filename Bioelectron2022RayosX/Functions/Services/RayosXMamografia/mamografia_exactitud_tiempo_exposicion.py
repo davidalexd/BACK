@@ -3,7 +3,7 @@ from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.valor_maximo import valor_maximo
 from Functions.Services.valor_absoluto import valor_absoluto
 
-def mamografia_exactitud_tiempo_exposicion(attribute_1,attribute_2,attribute_3,attribute_4,opcion):
+def mamografia_exactitud_tiempo_exposicion(attribute_1,attribute_2,attribute_3,attribute_4):
     try:
         tolerancia = True
         Uc = []
@@ -17,13 +17,13 @@ def mamografia_exactitud_tiempo_exposicion(attribute_1,attribute_2,attribute_3,a
 
         redondear = round(max,2)
 
-        if(float(opcion[0])>=200):
-            tolerancia_valor = 10
-        else:
-            tolerancia_valor = 15
+        # if(float(opcion[0])>=200):
+        tolerancia_valor = 10
+        # else:
+        #     tolerancia_valor = 15
 
 
-        if (abs<tolerancia_valor):
+        if (abs<tolerancia_valor or abs<-tolerancia_valor):
             tolerancia = True
         else:
             tolerancia = False

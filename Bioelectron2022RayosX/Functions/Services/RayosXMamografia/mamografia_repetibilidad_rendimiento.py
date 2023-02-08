@@ -38,16 +38,16 @@ def mamografia_repetibilidad_rendimiento(attribute_1,attribute_2,attribute_3):
 
         return resultado
     except Exception as e:
-                        resultado = {
-                        "condicion":"",
-                        "data":[
-                                {
-                                "parametros":"",
-                                "resultado":"",
-                                "estado":""
-                                }
-                        ],
-                        "tolerancia":"",
-                        "estado":"No Aplica"
-                        }
-                        return resultado
+        resultado = {
+              "condicion":"",
+              "data":[
+              {
+              "parametros":"",
+              "resultado":"",
+              "estado":""
+              }
+              ],
+              "tolerancia":"",
+              "estado":"No Aplica"
+              }
+        return resultado

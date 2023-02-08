@@ -39,16 +39,16 @@ def mamografia_linealidad_rendimiento_carga_tubo(attribute,attribute_1,attribute
 
         return resultado
     except Exception as e:
-                        resultado = {
-                        "condicion":"",
-                        "data":[
-                                {
-                                "parametros":"",
-                                "resultado":"",
-                                "estado":""
-                                }
-                        ],
-                        "tolerancia":"",
-                        "estado":"No Aplica"
-                        }
-                        return resultado
+        resultado = {
+              "condicion":"",
+              "data":[
+              {
+              "parametros":"",
+              "resultado":"",
+              "estado":""
+              }
+              ],
+              "tolerancia":"",
+              "estado":"No Aplica"
+              }
+        return resultado

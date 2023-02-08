@@ -37,16 +37,16 @@ def mamografia_repetibilidad_tiempo_exposicion(attributes_1,attributes_2,attribu
 
         return resultado
     except Exception as e:
-                        resultado = {
-                        "condicion":"",
-                        "data":[
-                                {
-                                "parametros":"",
-                                "resultado":"",
-                                "estado":""
-                                }
-                        ],
-                        "tolerancia":"",
-                        "estado":"No Aplica"
-                        }
-                        return resultado
+        resultado = {
+            "condicion":"",
+            "data":[
+                {
+                "parametros":"",
+                "resultado":"",
+                "estado":""
+                }
+            ],
+            "tolerancia":"",
+            "estado":"No Aplica"
+            }
+        return resultado
