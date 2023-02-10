@@ -1,9 +1,10 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def dental_valor_rendimiento(element,attribute,element_1,element_2,element_3):
     try: 
-        prom = promedio(attribute)
+        prom = promedio(validacion_null_array(attribute))
         # dosis
         variante = float(element[0])
         

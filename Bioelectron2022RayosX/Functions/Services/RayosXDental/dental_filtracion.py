@@ -1,10 +1,11 @@
 
 from Functions.Services.validacion import validacion
 from Functions.Services.promedio import promedio
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def dental_filtracion(element,attribute):
     try:
-        prom = promedio(attribute)
+        prom = promedio(validacion_null_array(attribute))
         redondeo=round(prom,2)
         element_1 = float(element[0])
 

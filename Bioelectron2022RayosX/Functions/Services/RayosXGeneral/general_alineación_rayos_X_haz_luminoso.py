@@ -29,12 +29,12 @@ def general_alineación_rayos_X_haz_luminoso(attribute,element):
             "data":[
                 {
                     "parametros":"",
-                    "resultado":redondear,
+                    "resultado":str(redondear),
                     "estado":tolerancia_1
                 },
                 {
                     "parametros":"",
-                    "resultado":redondear,
+                    "resultado":str(redondear),
                     "estado":tolerancia_2
                 }
             ],

@@ -1,4 +1,5 @@
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def dental_exactitud_tiempo_exposicion_2(element_1,element_2,opcion):
     try:
@@ -7,7 +8,11 @@ def dental_exactitud_tiempo_exposicion_2(element_1,element_2,opcion):
         element_a = float(element_1[0])
         element_b = float(element_2[0])
 
-        operacion = ((element_a-element_b)/element_a)*100
+        if(element_a==0):
+            operacion = (0*100)
+        else:
+            operacion = ((element_a-element_b)/element_a)*100
+
         redondeo = round(operacion,2)
         tolerancia = True
 
@@ -29,11 +34,11 @@ def dental_exactitud_tiempo_exposicion_2(element_1,element_2,opcion):
         estado = validacion([tolerancia])
 
         resultado = {
-            "condicion":"Tiempo "+str(element_1)+" s",
+            "condicion":"Tiempo "+str(element_1[0])+" s",
             "data":[
                 {
                     "parametros":"",
-                    "resultado":"Desviación "+str(redondeo)+"%",
+                    "resultado":"Desviación "+str(redondeo)+" %",
                     "estado":tolerancia
                 }
             ],

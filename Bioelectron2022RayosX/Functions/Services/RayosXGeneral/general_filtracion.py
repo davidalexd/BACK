@@ -1,9 +1,10 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def general_filtracion(attributes):
     try:
-        prom = promedio(attributes)
+        prom = promedio(validacion_null_array(attributes))
         redondear = round(prom,2)
         tolerancia=True
 

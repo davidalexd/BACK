@@ -1,9 +1,10 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def dental_kerma_aire_entrada_paciente(attribute):
     try:
-        prom = promedio(attribute)
+        prom = promedio(validacion_null_array(attribute))
 
         operacion = (prom/1000)*1.1
 

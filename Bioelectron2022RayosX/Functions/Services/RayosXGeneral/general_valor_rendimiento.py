@@ -1,11 +1,14 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def general_valor_rendimiento(element_1,attributes,element_2):
     try:
-        prom = promedio(attributes)
-        operacion = prom/float(element_1[0])*float(element_2[0])**2
-        print(operacion)
+        prom = promedio(validacion_null_array(attributes))
+        if(float(element_1[0])*float(element_2[0])**2 == 0 ):
+               operacion = 0
+        else:
+            operacion = prom/float(element_1[0])*float(element_2[0])**2
         redondear = round(operacion,2)
         tolerancia=True
 

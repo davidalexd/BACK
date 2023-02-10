@@ -1,10 +1,12 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
+
 def dental_exactitud_tiempo_exposicion_1(element,attribute,opcion):
     try:
         # llama TIEMPO DE EXPOSICIÓN (s) y luego a tiempo en rango de 5
         element_1 = float(element[0])
-        prom = promedio(attribute)
+        prom = promedio(validacion_null_array(attribute))
         if element_1 == 0:
             operacion = 0
         else:

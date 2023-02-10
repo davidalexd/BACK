@@ -1,10 +1,14 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def general_exactitud_tiempo_exposicion_2(element_1,attribute):
     try:
-        prom = promedio(attribute[0])
-        operacion = (prom-float(element_1[0]))/float(element_1[0])
+        prom = promedio(validacion_null_array(attribute[0]))
+        if(float(element_1[0])==0):
+            operacion = 0
+        else:  
+            operacion = (prom-float(element_1[0]))/float(element_1[0])
         redondear = round(operacion*100,2)
         tolerancia=True
 

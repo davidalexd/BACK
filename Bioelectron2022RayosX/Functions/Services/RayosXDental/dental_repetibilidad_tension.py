@@ -1,12 +1,13 @@
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def dental_repetibilidad_tension(element,attribute):
     try:
         # llama a TENSION PROMEDIO (kV)   
-        desvm = desviacion_estandar_m(attribute)
-        prom = promedio(attribute)
+        desvm = desviacion_estandar_m(validacion_null_array(attribute))
+        prom = promedio(validacion_null_array(attribute))
         element_1 = float(element[0])
 
         operacion = desvm/prom

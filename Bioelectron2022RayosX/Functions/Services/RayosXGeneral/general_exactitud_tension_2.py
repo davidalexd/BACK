@@ -1,10 +1,15 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def general_exactitud_tension_2(element_1,attribute):
     try:
-        prom = promedio(attribute)
-        operacion = (prom-float(element_1[0]))/prom
+        prom = promedio(validacion_null_array(attribute))
+        if(prom==0):
+            operacion = 0
+        else:
+            operacion = (prom-float(element_1[0]))/prom
+               
         redondear = round(operacion*100,2)
         tolerancia=True
         

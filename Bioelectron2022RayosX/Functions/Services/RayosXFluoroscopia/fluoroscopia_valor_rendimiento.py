@@ -3,7 +3,6 @@ from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.validacion import validacion
 
 def fluoroscopia_valor_rendimiento(element_1,attribute_1,attribute_2,attribute_3,attribute_4):
-        print(attribute_1,attribute_2,attribute_3,element_1,attribute_4)
         try:
                 tolerancia = True
                 prom = promedio([attribute_2[0],attribute_3[0],attribute_4[0]])

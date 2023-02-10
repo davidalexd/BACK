@@ -2,7 +2,10 @@ from Functions.Services.validacion import validacion
 
 def general_exactitud_tiempo_exposicion_3(element_1,element_2):
     try:
-        operacion = (float(element_1[0])-float(element_2[0]))/float(element_2[0])
+        if(float(element_2[0])==0):
+            operacion = 0
+        else:  
+            operacion = (float(element_1[0])-float(element_2[0]))/float(element_2[0])
         redondear = round(operacion*100,2)
         tolerancia=True
         

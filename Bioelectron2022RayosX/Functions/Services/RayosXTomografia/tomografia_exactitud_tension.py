@@ -6,23 +6,40 @@ from Functions.Services.validacion import validacion
 
 
 def tomografia_exactitud_tension(attribute_1,attribute_2,attribute_3,attribute_4):
+    print(attribute_1,attribute_2,attribute_3,attribute_4,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     try:
         tolerancia = True
         Uc = []
+        proms = []
 
         for x in range(len(attribute_1)):
-            prom = promedio([attribute_2[x],attribute_3[x],attribute_4[x]])
+            try:
+                element_2 = attribute_2[x]
+            except Exception as e:
+                element_2 = 0
+            try:
+                element_3 = attribute_3[x]
+            except Exception as e:
+                element_3 = 0
+            try:
+                element_4 = attribute_4[x]
+            except Exception as e:
+                element_4 = 0
+
+            prom = promedio([element_2,element_3,element_4])
             correcion = prom
             operacion = (float(attribute_1[x])-correcion)*100/float(attribute_1[x])
 
             redondear = round(operacion,2)
             
+            proms.append([element_2,element_3,element_4])
             Uc.append(redondear)
-        
+
         if(valor_absoluto(valor_maximo(Uc))>=valor_absoluto(valor_minimo(Uc))):
             operacion_2 = valor_maximo(Uc)
         else:
             operacion_2 = valor_minimo(Uc)
+
 
         redondear_2 = round(valor_absoluto(operacion_2),2)
         tolerancia_1 = 5
@@ -36,15 +53,15 @@ def tomografia_exactitud_tension(attribute_1,attribute_2,attribute_3,attribute_4
         estado = validacion([tolerancia])
 
         resultado = {
-            "condicion":attribute_1[0]+" kV",
+            "condicion":str(attribute_1[0])+" kV",
             "data":[
                 {
                     "parametros":"",
-                    "resultado":redondear_2+" %",
+                    "resultado":str(redondear_2)+" %",
                     "estado":tolerancia
                 }
             ],
-            "tolerancia":"Desviación ≤ ±5% (entre "+attribute_1[0]+" y "+attribute_1[-1]+" kVp).",
+            "tolerancia":"Desviación ≤ ±5% (entre "+str(attribute_1[0])+" y "+str(attribute_1[-1])+" kVp).",
             "estado":estado
             }
         return resultado

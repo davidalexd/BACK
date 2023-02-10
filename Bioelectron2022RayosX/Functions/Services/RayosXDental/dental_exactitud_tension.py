@@ -1,10 +1,11 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def dental_exactitud_tension(element,attribute):
     try:
         # llama TENSION NOMINAL  (kV) luego a TENSION PROMEDIO (kV) range (5)
-        prom = promedio(attribute)
+        prom = promedio(validacion_null_array(attribute))
         element_1 = float(element[0])
 
         if(element_1 <= 0):
@@ -28,7 +29,7 @@ def dental_exactitud_tension(element,attribute):
             "data":[
                 {
                     "parametros":"",
-                    "resultado":str(redondear)+"%",
+                    "resultado":str(redondear)+" %",
                     "estado":tolerancia
                 }
             ],

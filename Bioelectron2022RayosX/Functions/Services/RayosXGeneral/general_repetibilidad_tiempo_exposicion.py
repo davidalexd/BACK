@@ -1,13 +1,17 @@
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 
 def general_repetibilidad_tiempo_exposicion(attributes):
     try:
-        prom = promedio(attributes)
-        desv = desviacion_estandar_m(attributes)
-        operacion = desv/prom
+        prom = promedio(validacion_null_array(attributes))
+        desv = desviacion_estandar_m(validacion_null_array(attributes))
+        if(prom==0):
+            operacion = 0
+        else:
+            operacion = desv/prom
         redondear = round(operacion*100,2)
         tolerancia=True
         
