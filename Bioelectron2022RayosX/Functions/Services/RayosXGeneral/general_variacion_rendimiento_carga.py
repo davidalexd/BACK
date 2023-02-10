@@ -1,9 +1,10 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def general_variacion_rendimiento_carga(element_1,attributes,element_2,element_3):
     try:
-        prom = promedio(attributes)
+        prom = promedio(validacion_null_array(attributes))
         variante_1 = prom/float(element_1[0])
         operacion = (variante_1-float(element_3[0])/float(element_2[0]))/(variante_1+float(element_3[0])/float(element_2[0]))
         redondear = round(operacion,2)
