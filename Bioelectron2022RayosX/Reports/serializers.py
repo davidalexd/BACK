@@ -47,6 +47,7 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
             "codigo_formato",
             "nombre_formato",
             "protocolo",
+            "variables",
             "secciones",
             "is_enabled",
             "created_at",
@@ -55,7 +56,6 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
             "delete_url",
             "protocolos_id",
             "secciones_id",
-            "variables",
             "categorias",
             "variables_formato_ids")
     
@@ -90,6 +90,15 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
         Uc = []
         for x in request:
             if(x.variable):
+                rv = []
+                for r in range(x.variable.range_variable):
+
+                    rv.append({
+                        'name':str(r+1)+'-'+str(x.variable.nombre_variable)+'-'+str(x.variable.id),
+                        'valor_defecto':"Null",
+                        'valor_opciones':x.variable.valor_defecto
+                    })
+
                 Uc.append(
                     {
                         "id":x.id,
@@ -97,8 +106,7 @@ class FormatosReportesSerializer(serializers.ModelSerializer):
                         "sub_posicion":x.sub_posicion,
                         "identificador_variable":x.variable.id,
                         "nombre_variable":x.variable.nombre_variable,
-                        "range":x.variable.range_variable,
-                        "valor":x.variable.valor_defecto
+                        "range":rv,
                     }
                 )
             else:

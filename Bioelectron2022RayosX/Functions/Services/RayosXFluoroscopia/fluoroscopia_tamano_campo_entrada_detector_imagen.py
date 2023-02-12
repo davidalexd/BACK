@@ -7,27 +7,27 @@ def fluoroscopia_tamano_campo_entrada_detector_imagen(attributes_1,attributes_2)
             validar = []
             tolerancia = True
             for x in range(len(attributes_1)):
-                if (float(attributes_1[x])==0.0):
-                    valor_resultante = 0
-                else:
-                    valor_resultante = float(attributes_2[x])/float(attributes_1[x])
-                
-                if (valor_resultante >= 0.85):
-                    tolerancia = True
-                else:
-                    tolerancia = False
+                if(attributes_2[x] != "Null" and attributes_1[x] != "Null"):
+                    if (float(attributes_1[x])==0):
+                        valor_resultante = 0
+                    else:
+                        valor_resultante = float(attributes_2[x])/float(attributes_1[x])
+                    
+                    if (valor_resultante >= 0.85):
+                        tolerancia = True
+                    else:
+                        tolerancia = False
 
 
-                redondear = round(valor_resultante,2)
-                validar.append(tolerancia)
-                Uc.append({
-                    "parametros":str(attributes_1[x])+" cm",
-                    "resultado":redondear,
-                    "estado":tolerancia
-                })
-
+                    redondear = round(valor_resultante,2)
+                    validar.append(tolerancia)
+                    Uc.append({
+                        "parametros":str(attributes_1[x])+" cm",
+                        "resultado":redondear,
+                        "estado":tolerancia
+                    })
+                      
             estado = validacion(validar) 
-
             resultado = {
                 "condicion":"",
                 "data":Uc,

@@ -2,7 +2,11 @@ from Functions.Services.validacion import validacion
 
 def fluoroscopia_distorsion_integral(element_1,element_2,element_3):
     try:
-        div = ((float(element_1[0])/(float(element_2[0])*float(element_3[0])))-1)*100
+        if(float(element_2[0])*float(element_3[0]) == 0 ):
+            div = 0
+        else:
+            div = ((float(element_1[0])/(float(element_2[0])*float(element_3[0])))-1)*100
+            
         redondear = round(div,2)
         tolerancia = True
 

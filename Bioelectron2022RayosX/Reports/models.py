@@ -85,7 +85,7 @@ class ReportsReporteModel(BaseModel):
     title_image_3 = models.CharField("Title image 3", max_length=255,null=True,db_column="rpt_title_image_3")
     image_3 = models.ImageField(upload_to="reports/",blank='',default='',null=True)
     
-    certificado = models.OneToOneField(ReportsCertificadoModel,null=True,on_delete=models.CASCADE,unique=True)
+    certificado = models.OneToOneField(ReportsCertificadoModel,null=True,on_delete=models.CASCADE,unique=True,blank=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
