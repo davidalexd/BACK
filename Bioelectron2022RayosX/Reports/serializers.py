@@ -414,35 +414,34 @@ class ReporteReportesOpcionesSerializer(serializers.ModelSerializer):
 
 
 class ReporteReportesPruebasSerializer(serializers.ModelSerializer):
-    operaciones_pruebas = serializers.SerializerMethodField(read_only = True)
-    posicion = serializers.IntegerField(write_only=True)
-    criterio = serializers.JSONField(write_only=True)
+    resultados_pruebas = serializers.JSONField(write_only=True)
     class Meta:
         model = ReportsReporteModel
         fields = (
             "id",
-            "operaciones_pruebas",
-            "posicion",
-            "criterio",
+            "resultados_pruebas",
         )
 
     def update(self, instance, validated_data):
-        operaciones = instance.pruebas[1]
-        posición_operador =  operaciones[validated_data['posicion']][0]['resultados'][0]['resultados']['resultado']
+        print(self)
+        return 
+    #     operaciones = instance.pruebas[1]
+    #     posición_operador =  operaciones[validated_data['posicion']][0]['resultados'][0]['resultados']['resultado']
 
-        for x in range(len(validated_data['criterio'])):
-            posición_operador['data'][x]['resultado'] = validated_data['criterio'][x]
-            posición_operador['data'][x]['estado'] = True
+    #     for x in range(len(validated_data['criterio'])):
+    #         posición_operador['data'][x]['resultado'] = validated_data['criterio'][x]
+    #         posición_operador['data'][x]['estado'] = True
         
-        if (len(validated_data['criterio']) == len(posición_operador['data'])):
-            posición_operador['estado'] = True
+    #     if (len(validated_data['criterio']) == len(posición_operador['data'])):
+    #         posición_operador['estado'] = True
 
-        instance.save()
-        return instance
+    #     instance.save()
+    #     return instance
 
     
-    def get_operaciones_pruebas(self,obj):
-        return obj.pruebas[1]
+    # def get_resultado_pruebas(self,obj):
+    #     print(self)
+    #     return
     
 
         

@@ -1,12 +1,14 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.desviacion_estandar_m import desviacion_estandar_m
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def fluoroscopia_repetibilidad_tension(attribute_1,attribute_2,attribute_3):
     try:
         tolerancia = True
-        prom = promedio([attribute_1[1],attribute_2[1],attribute_3[1]])
-        des_v = desviacion_estandar_m([attribute_1[1],attribute_2[1],attribute_3[1]])
+        prom = promedio(validacion_null_array([attribute_1[1],attribute_2[1],attribute_3[1]]))
+        des_v = desviacion_estandar_m(validacion_null_array([attribute_1[1],attribute_2[1],attribute_3[1]]))
+        
         if (prom == 0):
             operacion = 0
         else:

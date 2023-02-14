@@ -1,11 +1,16 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def fluoroscopia_exactitud_tiempo_exposicion(attribute_1,attribute_2,attribute_3,attribute_4):
         try:
-                prom = promedio([attribute_2[1],attribute_3[1],attribute_4[1]])
-                operacion = ((float(attribute_1[1])-prom)/float(attribute_1[1]))
+                prom = promedio(validacion_null_array([attribute_2[1],attribute_3[1],attribute_4[1]]))
+                if(float(attribute_1[1])==0):
+                        operacion = 0
+                else:
+                        operacion = (float(attribute_1[1])-prom)/float(attribute_1[1])
+                        
                 abs = valor_absoluto(operacion) 
                 redondear = round(abs*100,2)
                 tolerancia = True

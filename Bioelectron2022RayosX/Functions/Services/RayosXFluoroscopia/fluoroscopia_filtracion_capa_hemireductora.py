@@ -1,10 +1,12 @@
 from Functions.Services.promedio import promedio
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
-def fluoroscopia_filtracion_capa_hemireductora(attributes,element):
+def fluoroscopia_filtracion_capa_hemireductora(element,attributes):
         try:    
                 resultado = {"data":[{"parametros":"","resultado":0,"condicion":""}],"tolerancia":""}
-                prom = promedio(attributes)
+
+                prom = promedio(validacion_null_array(attributes))
                 redondear = round(prom,2)
                 tolerancia=True
                 tolerancia_1=2.9
@@ -26,7 +28,7 @@ def fluoroscopia_filtracion_capa_hemireductora(attributes,element):
                         "data":[
                                 {
                                         "parametros":"",
-                                        "resultado":str(redondear)+"mmAl",
+                                        "resultado":str(redondear)+" mmAl",
                                         "estado":tolerancia
                                 }
                         ],

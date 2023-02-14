@@ -195,7 +195,7 @@ reportes_actualizar_opciones_view = ReportesAztualizacionOpcionesAPIView.as_view
 class ReportesAztualizacionPruebasAPIView(StaffEditorPermissionMixin,generics.RetrieveUpdateAPIView):
     serializer_class = ReporteReportesPruebasSerializer
     lookup_field = 'pk'
-    def get_queryset(self):        
+    def get_queryset(self): 
         queryset = ReportsReporteModel.objects.all()
         if not queryset:
             return ValidationError
