@@ -414,27 +414,17 @@ class ReporteReportesOpcionesSerializer(serializers.ModelSerializer):
 
 
 class ReporteReportesPruebasSerializer(serializers.ModelSerializer):
-    resultados_pruebas = serializers.JSONField(write_only=True)
+    # respuestas_pruebas = serializers.JSONField(write_only=True)
     class Meta:
         model = ReportsReporteModel
         fields = (
             "id",
-            "resultados_pruebas",
+            "valores_operaciones",
+            "pruebas"
         )
 
-    def update(self, instance, validated_data):
-        print(self)
-        return 
-    #     operaciones = instance.pruebas[1]
-    #     posición_operador =  operaciones[validated_data['posicion']][0]['resultados'][0]['resultados']['resultado']
-
-    #     for x in range(len(validated_data['criterio'])):
-    #         posición_operador['data'][x]['resultado'] = validated_data['criterio'][x]
-    #         posición_operador['data'][x]['estado'] = True
-        
-    #     if (len(validated_data['criterio']) == len(posición_operador['data'])):
-    #         posición_operador['estado'] = True
-
+    # def update(self, instance, validated_data):
+    #     instance.pruebas[1] = validated_data['respuestas_pruebas']
     #     instance.save()
     #     return instance
 

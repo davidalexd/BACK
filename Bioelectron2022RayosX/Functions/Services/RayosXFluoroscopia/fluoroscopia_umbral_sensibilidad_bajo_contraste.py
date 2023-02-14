@@ -1,5 +1,5 @@
 from Functions.Services.validacion import validacion
-
+from Functions.Services.validacion_null_array import validacion_null_array
 def fluoroscopia_umbral_sensibilidad_bajo_contraste(attribute_1,attribute_2):
     try:
         if (attribute_1[0]!=None or attribute_2[0]!=None):
@@ -7,8 +7,8 @@ def fluoroscopia_umbral_sensibilidad_bajo_contraste(attribute_1,attribute_2):
             tolerancias = [4,3.5,2.7,1.9]
             Uc = []
             validar = []
+            attribute_1 = validacion_null_array(attribute_1)
             for x in range(len(attribute_1)):
-                if (attribute_1[x]!=None or attribute_2[x]!=None):
                     if(float(attribute_2[x])==0):
                         operacion = 0
                     else:  

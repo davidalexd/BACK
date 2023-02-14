@@ -1,11 +1,13 @@
 from Functions.Services.validacion import validacion
+from Functions.Services.validacion_null_array import validacion_null_array
 
 def fluoroscopia_resolucion_espacial_alto_contraste(attribute):
+    print(attribute,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     try: 
         if (attribute[0]!=None):
-            reversed_data = []
-            for i in reversed(attribute):
-                reversed_data.append(i)
+            reversed_data = validacion_null_array(attribute)
+            # for i in reversed(attribute):
+            #     reversed_data.append(i)
 
             tolerancia = True
             tolerancias = [0.9,1.12,1.2,1.6]
