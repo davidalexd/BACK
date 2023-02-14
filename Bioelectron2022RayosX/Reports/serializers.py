@@ -414,7 +414,8 @@ class ReporteReportesOpcionesSerializer(serializers.ModelSerializer):
 
 
 class ReporteReportesPruebasSerializer(serializers.ModelSerializer):
-    # respuestas_pruebas = serializers.JSONField(write_only=True)
+    pruebas = serializers.JSONField(write_only=True)
+    valores_operaciones = serializers.JSONField(write_only=True)
     class Meta:
         model = ReportsReporteModel
         fields = (
@@ -423,10 +424,11 @@ class ReporteReportesPruebasSerializer(serializers.ModelSerializer):
             "pruebas"
         )
 
-    # def update(self, instance, validated_data):
-    #     instance.pruebas[1] = validated_data['respuestas_pruebas']
-    #     instance.save()
-    #     return instance
+    def update(self, instance, validated_data):
+        instance.pruebas[1] = validated_data['pruebas']
+        instance.valores_operaciones = validated_data['valores_operaciones']
+        instance.save()
+        return instance
 
     
     # def get_resultado_pruebas(self,obj):
