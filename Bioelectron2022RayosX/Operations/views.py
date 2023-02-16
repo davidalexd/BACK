@@ -962,7 +962,7 @@ from Functions.Services.RayosXMamografia.mamografia_filtracion_capa_hemirreducto
 from Functions.Services.RayosXMamografia.mamografia_exactitud_tiempo_exposicion import mamografia_exactitud_tiempo_exposicion
 from Functions.Services.RayosXMamografia.mamografia_repetibilidad_tiempo_exposicion import mamografia_repetibilidad_tiempo_exposicion
 from Functions.Services.RayosXMamografia.mamografia_repetibilidad_cae import mamografia_repetibilidad_cae
-from Functions.Services.RayosXMamografia.mamografia_compensacion_cae_espesor_composición_mama import mamografia_compensacion_cae_espesor_composición_mama
+from Functions.Services.RayosXMamografia.mamografia_compensacion_cae_espesor_composicion_mama import mamografia_compensacion_cae_espesor_composicion_mama
 from Functions.Services.RayosXMamografia.mamografia_repetibilidad_rendimiento import mamografia_repetibilidad_rendimiento
 from Functions.Services.RayosXMamografia.mamografia_linealidad_rendimiento_carga_tubo import mamografia_linealidad_rendimiento_carga_tubo
 from Functions.Services.RayosXMamografia.mamografia_fuerza_compresion_atenuacion_compresor import mamografia_fuerza_compresion_atenuacion_compresor
@@ -1067,16 +1067,16 @@ class mamografia_repetibilidadcae(View):
 
 view_mamografia_repetibilidad_cae = mamografia_repetibilidadcae.as_view()
 
-class mamografia_compensacioncaeespesorcomposiciónmama(View):
+class mamografia_compensacioncaeespesorcomposicionmama(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = mamografia_compensacion_cae_espesor_composición_mama(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6])
+            resultado = mamografia_compensacion_cae_espesor_composicion_mama(data_entrante[0],data_entrante[1],data_entrante[2],data_entrante[3],data_entrante[4],data_entrante[5],data_entrante[6])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 
-view_mamografia_compensacion_cae_espesor_composición_mama = mamografia_compensacioncaeespesorcomposiciónmama.as_view()
+view_mamografia_compensacion_cae_espesor_composicion_mama = mamografia_compensacioncaeespesorcomposicionmama.as_view()
 
 class mamografiarepetibilidadrendimiento(View):
     def get(self, request,**kwargs):

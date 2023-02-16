@@ -3,7 +3,7 @@ from Functions.Services.valor_absoluto import valor_absoluto
 from Functions.Services.mediciones import mediciones
 from Functions.Services.raiz import raiz
 
-def mamografia_compensacion_cae_espesor_composición_mama(element_1,element_2,attribute,attribute_1,attribute_2,attribute_3):
+def mamografia_compensacion_cae_espesor_composicion_mama(element_1,element_2,attribute,attribute_1,attribute_2,attribute_3):
     try:
         tolerancia = True
         Uc = []
