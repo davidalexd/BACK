@@ -570,7 +570,7 @@ view_dental_variacion_rendimiento= dental_variacionrendimiento.as_view()
 
 
 # General
-from Functions.Services.RayosXGeneral.general_alineación_rayos_X_haz_luminoso import general_alineación_rayos_X_haz_luminoso
+from Functions.Services.RayosXGeneral.general_alineacion_rayos_X_haz_luminoso import general_alineacion_rayos_X_haz_luminoso
 from Functions.Services.RayosXGeneral.general_dosis_superficie_paciente import general_dosis_superficie_paciente
 from Functions.Services.RayosXGeneral.general_exactitud_tension_1 import general_exactitud_tension_1
 from Functions.Services.RayosXGeneral.general_exactitud_tension_2 import general_exactitud_tension_2
@@ -720,15 +720,15 @@ class general_variacionrendimientocarga(View):
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_general_variacion_rendimiento_carga= general_variacionrendimientocarga.as_view()
 
-class general_alineaciónrayosXhazluminoso(View):
+class general_alineacionrayosXhazluminoso(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = general_alineación_rayos_X_haz_luminoso(data_entrante[0],data_entrante[1])
+            resultado = general_alineacion_rayos_X_haz_luminoso(data_entrante[0],data_entrante[1])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
-view_general_alineación_rayos_X_haz_luminoso = general_alineaciónrayosXhazluminoso.as_view()
+view_general_alineacion_rayos_X_haz_luminoso = general_alineacionrayosXhazluminoso.as_view()
 
 class general_ortogonalidadhazrayosXreceptorimagen(View):
     def get(self, request,**kwargs):
@@ -954,7 +954,7 @@ view_tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion = t
 
 
 from Functions.Services.RayosXMamografia.mamografia_distancia_foto_detector_imagen import mamografia_distancia_foto_detector_imagen
-from Functions.Services.RayosXMamografia.mamografia_coincidencia_campo_radiación_detector import mamografia_coincidencia_campo_radiación_detector
+from Functions.Services.RayosXMamografia.mamografia_coincidencia_campo_radiacion_detector import mamografia_coincidencia_campo_radiacion_detector
 from Functions.Services.RayosXMamografia.mamografia_coincidencia_campo_radiacion_receptor_imagen import mamografia_coincidencia_campo_radiacion_receptor_imagen
 from Functions.Services.RayosXMamografia.mamografia_exactitud_tension import mamografia_exactitud_tension
 from Functions.Services.RayosXMamografia.mamografia_repetibilidad_tension import mamografia_repetibilidad_tension
@@ -985,15 +985,15 @@ class mamografia_distanciafotodetectorimagen(View):
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
 view_mamografia_distancia_foto_detector_imagen = mamografia_distanciafotodetectorimagen.as_view()
 
-class mamografia_coincidenciacamporadiacióndetector(View):
+class mamografia_coincidenciacamporadiaciondetector(View):
     def get(self, request,**kwargs):
         try:
             data_entrante = json.loads(kwargs['global'])
-            resultado = mamografia_coincidencia_campo_radiación_detector(data_entrante[0])
+            resultado = mamografia_coincidencia_campo_radiacion_detector(data_entrante[0])
             return JsonResponse({'resultado':resultado}, status=status.HTTP_200_OK)
         except:
             return JsonResponse({ 'response_code': '404', 'response': status.HTTP_404_NOT_FOUND, 'message': 'Proporcionar valores válidos para la operación'})
-view_mamografia_coincidencia_campo_radiación_detector= mamografia_coincidenciacamporadiacióndetector.as_view()
+view_mamografia_coincidencia_campo_radiacion_detector= mamografia_coincidenciacamporadiaciondetector.as_view()
 
 class mamografia_coincidenciacamporadiacionreceptorimagen(View):
     def get(self, request,**kwargs):

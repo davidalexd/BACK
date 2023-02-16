@@ -1,6 +1,6 @@
 from Functions.Services.validacion import validacion
 
-def mamografia_coincidencia_campo_radiación_detector(element):
+def mamografia_coincidencia_campo_radiacion_detector(element):
     try:
 
         redondear = round(float(element[0]),2)

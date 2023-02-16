@@ -32,7 +32,7 @@ urlpatterns = [
     path('OperacionGeneralRepetibilidadTiempoExposicion/<global>',views.view_general_repetibilidad_tiempo_exposicion,name='general_repetibilidad_tiempo_exposicion'),
     path('OperacionGeneralValorRendimiento/<global>',views.view_general_valor_rendimiento,name='general_valor_rendimiento'),
     path('OperacionGeneralVariacionRendimientoCarga/<global>',views.view_general_variacion_rendimiento_carga,name='general_variacion_rendimiento_carga'),
-    path('OperacionGeneralAlineaciónRayosXHazLuminoso/<global>',views.view_general_alineación_rayos_X_haz_luminoso,name='general_alineación_rayos_X_haz_luminoso'),
+    path('OperacionGeneralAlineaciónRayosXHazLuminoso/<global>',views.view_general_alineacion_rayos_X_haz_luminoso,name='general_alineación_rayos_X_haz_luminoso'),
     path('OperacionGeneralOrtogonalidadHazRayosXReceptorImagen/<global>',views.view_general_ortogonalidad_haz_rayos_X_receptor_imagen,name='general_ortogonalidad_haz_rayos_X_receptor_imagen'),
     path('OperacionGeneralRepetibilidadCae/<global>',views.view_general_repetibilidad_cae,name='general_repetibilidad_cae'),
     ############################################################################################################################################################################
@@ -104,7 +104,7 @@ urlpatterns = [
     path('OperacionTomografiaExactitudseleccionposicioncorteradiografiaplanificacion/<global>',views.view_tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion,name='tomografia_exactitud_seleccion_posicion_corte_radiografia_planificacion'),
 
     path('OperacionMamografiaDistanciaFocoDetectorImagen/<global>',views.view_mamografia_distancia_foto_detector_imagen,name='mamografia_distancia_foto_detector_imagen'),
-    path('OperacionMamografiaCoincidenciaCampoRadiacionDetector/<global>',views.view_mamografia_coincidencia_campo_radiación_detector,name='mamografia_coincidencia_campo_radiación_detector'),
+    path('OperacionMamografiaCoincidenciaCampoRadiacionDetector/<global>',views.view_mamografia_coincidencia_campo_radiacion_detector,name='mamografia_coincidencia_campo_radiación_detector'),
     path('OperacionMamografiaCoincidenciaCampoRadiacionReceptorImagen/<global>',views.view_mamografia_coincidencia_campo_radiacion_receptor_imagen,name='mamografia_coincidencia_campo_radiacion_receptor_imagen'),
     path('OperacionMamografiaExactitudTension/<global>',views.view_mamografia_exactitud_tension,name='mamografia_exactitud_tension'),
     path('OperacionMamografiaRepetibilidadTension/<global>',views.view_mamografia_repetibilidad_tension,name='mamografia_repetibilidad_tension'),   

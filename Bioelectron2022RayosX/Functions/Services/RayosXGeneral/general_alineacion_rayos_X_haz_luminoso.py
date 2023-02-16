@@ -1,7 +1,7 @@
 from Functions.Services.suma_range import suma_range
 from Functions.Services.validacion import validacion
 
-def general_alineación_rayos_X_haz_luminoso(attribute,element):
+def general_alineacion_rayos_X_haz_luminoso(attribute,element):
     # attribute = Diferencia entre bordes (cm):
     # element = Distancia al Foco-Sistema de colimacion (cm):
     try:
