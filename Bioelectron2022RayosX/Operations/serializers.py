@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from .models import CategoryOperacionesModel, OperacionesModel, Opr_Operacion_Variables, VariablesModel
 from rest_framework import serializers
 from rest_framework.reverse import reverse
